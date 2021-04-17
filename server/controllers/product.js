@@ -9,6 +9,21 @@ export const getProduct = async (req, res) => {
     }
 }
 
+
+export const getProductByID = async (req, res) => {
+    try {
+        console.log(`ID ${req.params.id}`);
+        const product = await Product.find({id: req.params.id});
+        if (product.length !== 0)
+            res.status(200).json(product)
+        else
+            res.status(200).json({message: "NOT FOUND"})
+            
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 export const createProduct = async (req, res) => {
     const product = req.body;
     
@@ -19,7 +34,5 @@ export const createProduct = async (req, res) => {
         res.status(201).json(newProduct);
     } catch (error) {
         res.status(409).json({ message: error.message })
-
-
     }
 }
