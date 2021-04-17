@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const productSchema = mongoose.Schema({
-    _id: Number,
+    id: Number,
     id_category: Number,
     sku: String,
     name: String,
@@ -14,12 +14,11 @@ const productSchema = mongoose.Schema({
     review_count: Number,
     thumbnail_url: String,
     has_ebook: Boolean,
-    invetory_status: String,
+    inventory_status: String,
     publisher: String,
     author_name: String,
-
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('products', productSchema);
 
 export default Product;
