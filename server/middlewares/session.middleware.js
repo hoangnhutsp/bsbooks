@@ -3,6 +3,8 @@ import Session from '../models/session.js';
 export const sessionMiddleware = async (req, res, next) => {
 
     let _sessionId = null;
+
+   
     if (!req.signedCookies.sessionId) {
 
         const newSession = new Session();

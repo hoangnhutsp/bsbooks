@@ -13,7 +13,7 @@ export const getProduct = async (req, res) => {
 export const getProductByID = async (req, res) => {
     try {
         console.log(`ID ${req.params.id}`);
-        const product = await Product.find({id: req.params.id});
+        const product = await Product.find({_id: req.params.id});
         if (product.length !== 0)
             res.status(200).json(product)
         else
