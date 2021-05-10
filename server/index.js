@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser'
 
 // middleware
 import { sessionMiddleware } from "./middlewares/session.middleware.js";
+
+
 // router
 import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
