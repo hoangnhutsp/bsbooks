@@ -1,23 +1,59 @@
+"use strict";
 import React from 'react'
-import { useState } from 'react';
-import { WelcomePage } from './page/WelcomePage';
-import { PageChangerContext } from './_contexts';
-import { NavBar } from './components/navbar';
-import './App.scss';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function App() {
-    const [page, setPage] = useState(<WelcomePage />);
-    return (
-        <div id='App' className='flex-container'>
-        <PageChangerContext.Provider value={{ changePage: newPage => setPage(newPage) }}>
-          <div className='flex-row'>
-            <NavBar />
-          </div>
-          <div id='PageContent'>{page}</div>
-        </PageChangerContext.Provider>
-      </div>
-    )
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
+
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+
+import Home from './page/Home'
+import User from './page/User'
+import Search from './page/Search'
+import PageNotFound from './page/PageNotFound'
+import Product from './page/Product'
+const App = () => {
+
+  return (
+    <>
+      <Router>
+        <div>
+          <Navbar></Navbar>
+
+          <hr />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/user">
+              <User />
+            </Route>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/product">
+              <Product />
+            </Route>
+            
+            <Route path="*">
+              <PageNotFound />
+            </Route>
+          </Switch>
+
+
+          <hr />
+          <Footer></Footer>
+        </div>
+      </Router>
+    </>
+  )
 }
+
 
 export default App
