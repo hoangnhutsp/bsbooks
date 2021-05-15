@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
+app.use(cors({credentials: true, origin: '*'}))
 const PORT = process.env.PORT || 5000;
 
 const CONNECTION_URL = 'mongodb://localhost:27017/bsbooks';
