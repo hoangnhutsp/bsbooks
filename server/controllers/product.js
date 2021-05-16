@@ -2,6 +2,10 @@ import Product from '../models/product.js';
 
 export const getProduct = async (req, res) => {
     try {
+        const query = req.query;
+
+        console.log(query);
+        
         const product = await Product.find();
         res.status(200).json(product)
     } catch (error) {
@@ -12,7 +16,6 @@ export const getProduct = async (req, res) => {
 
 export const getProductByID = async (req, res) => {
     try {
-        console.log(`ID ${req.params.id}`);
         const product = await Product.find({_id: req.params.id});
         if (product.length !== 0)
             res.status(200).json(product)
