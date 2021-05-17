@@ -48,7 +48,7 @@ export const getProduct = async (req, res) => {
         const queryString = initQuery(query);
         const sortString = initSort(query);
 
-        console.log(queryString);
+        console.log(query.q);
         const product = await Product.find(queryString).sort(sortString);
         res.status(200).json(product)
     } catch (error) {
@@ -70,15 +70,45 @@ export const getProductByID = async (req, res) => {
     }
 }
 
+const checkInfoProduct = (product) => {
+
+
+    return true;
+}
+
 export const createProduct = async (req, res) => {
     const product = req.body;
-    
+    if (!checkInfoProduct(product)) {
+        res.status(500).json({message: "Info not valid!!!"})
+    }
     const newProduct = new Product(product);
     try {
         await newProduct.save();
 
         res.status(201).json(newProduct);
     } catch (error) {
-        res.status(409).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
+}
+
+export const updateProduct = async (req, res) => {
+    const product = req.body;
+    if (!product){
+        return res.status(400).send({message: "Data update can not empty"})
+    }
+
+    const _id = req.params.id;
+
+    try {
+        await Product.findByIdAndUpdate(_id, product, {useFindAndModify: false });
+        res.status(201).json({message: "sussessfully!!!"})
+    } catch (error) {
+        res.status(500).json({message: "Error Update user information"});
+    }
+
+}
+
+export const searchProduct = (req, res) => {
+
+    res.status(200).json({message: "OK"})
 }
