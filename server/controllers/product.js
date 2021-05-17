@@ -108,7 +108,31 @@ export const updateProduct = async (req, res) => {
 
 }
 
-export const searchProduct = (req, res) => {
+export const searchProduct = async (req, res) => {
+    try {
+        const query = req.query;
 
-    res.status(200).json({message: "OK"})
+        let q = query.q;
+
+        console.log(`SEARCH: ${q}`);
+
+        const product = await Product
+        .find({
+            $text:
+              {
+                $search: q,
+                $caseSensitive: false,
+                $diacriticSensitive: true
+              }
+            }, { score: { $meta: "textScore" } })
+            .sort({score:{$meta:"textScore"}})
+  
+        product.forEach(element => {
+            let np = element.toJSON();
+            console.log(`${np.score} -- ${np.name}`);
+        });
+        res.status(200).json(product)
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
 }
