@@ -12,6 +12,7 @@ import {
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import EditProfile from './components/Test'
 
 import Home from './page/Home'
 import User from './page/User'
@@ -40,7 +41,6 @@ const App = () => {
             <Route path="/product">
               <Product />
             </Route>
-            
             <Route path="*">
               <PageNotFound />
             </Route>
@@ -49,6 +49,7 @@ const App = () => {
 
           <hr />
           <Footer></Footer>
+          <EditProfile></EditProfile>
         </div>
       </Router>
     </>

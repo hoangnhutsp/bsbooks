@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import session from 'express-session'
 import MongoStore from 'connect-mongo';
+import cookieParser from 'cookie-parser';
+
 
 
 // middleware
@@ -13,10 +15,16 @@ import { sessionMiddleware } from "./middlewares/session.middleware.js";
 import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import searchRoutes from './routes/search.js'
+import userRouters from './routes/user.js'
 const app = express();
+
+//app.use(express.static('./middleware/upload'));
+app.use('./middleware/upload', express.static('upload'));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 const PORT = process.env.PORT || 5000;
@@ -41,6 +49,7 @@ app.use(session({
 app.use(sessionMiddleware)
 app.use('/product', productRoutes)
 app.use('/search', searchRoutes)
+app.use('/user', userRouters)
 app.use('/', (req, res) => {
     console.log(req.sessionID);
     res.status(200).send('ok')
