@@ -2,12 +2,13 @@
 
 import Product from '../models/product.js';
 
-const DEFAULT_Q         = "";
-const DEFAULT_PAGE      = 1;
-const DEFAULT_PRICE     = "0,100000000";
-const DEFAULT_RATING    = 1;
-const DEFAULT_SORT      = "review_count,desc";
-const DEFAULT_CRITERIA  = "desc";
+const DEFAULT_Q = "";
+const DEFAULT_PAGE = 1;
+const SIZE_PAGE = 20;
+const DEFAULT_PRICE = "0,100000000";
+const DEFAULT_RATING = 1;
+const DEFAULT_SORT = "review_count,desc";
+const DEFAULT_CRITERIA = "desc";
 
 const initQuery = (query) => {
     let price = query.price || DEFAULT_PRICE;
@@ -16,9 +17,11 @@ const initQuery = (query) => {
     let maxPrice = price[1];
 
     let rating = query.rating || DEFAULT_RATING;
+
+
     const queryString = {
-        price: { $gt: minPrice, $lt: maxPrice},
-        rating_average: {$gt : rating - 1},
+        price: { $gt: minPrice, $lt: maxPrice },
+        rating_average: { $gt: rating - 1 },
     }
 
     return queryString;
@@ -26,12 +29,12 @@ const initQuery = (query) => {
 
 const trans = {
     default: 'view_count',
-    price : 'price',
+    price: 'price',
     newest: 'date',
 }
 
 const initSort = (query) => {
-    
+
     let sort = String(query.sort || DEFAULT_SORT).split(',');
     let type = sort[0];
     let criteria = sort[1] || DEFAULT_CRITERIA;
@@ -41,45 +44,59 @@ const initSort = (query) => {
 
     return queryString;
 }
+
+const slicePage = (page, product) => {
+    let len = product.length;
+    page = page || DEFAULT_PAGE;
+    if (page > (len - 1) / SIZE_PAGE + 1)
+        page = 1;
+    let start = (page - 1) * SIZE_PAGE;
+    let end = Math.min(page * SIZE_PAGE, len);
+    product = product.slice(start, end);
+    //console.log("SLICE PAGE: ", start, end, page);
+    return product;
+}
 export const getProduct = async (req, res) => {
     try {
         const query = req.query;
-
         const queryString = initQuery(query);
         const sortString = initSort(query);
+        let q = query.q;
+        let product = await Product.find(queryString).sort(sortString);
 
-        console.log(query.q);
-        const product = await Product.find(queryString).sort(sortString);
+        product = slicePage(query.page, product)
+
+        //console.log(product.length);
+
+
         res.status(200).json(product)
     } catch (error) {
-        res.status(404).json({message: error.message});
+        res.status(404).json({ message: error.message });
     }
 }
 
 
 export const getProductByID = async (req, res) => {
     try {
-        const product = await Product.find({_id: req.params.id});
+        const product = await Product.find({ _id: req.params.id });
         if (product.length !== 0)
             res.status(200).json(product)
         else
-            res.status(200).json({message: "NOT FOUND"})
-            
+            res.status(200).json({ message: "NOT FOUND" })
+
     } catch (error) {
-        res.status(404).json({message: error.message});
+        res.status(404).json({ message: error.message });
     }
 }
 
 const checkInfoProduct = (product) => {
-
-
     return true;
 }
 
 export const createProduct = async (req, res) => {
     const product = req.body;
     if (!checkInfoProduct(product)) {
-        res.status(500).json({message: "Info not valid!!!"})
+        res.status(500).json({ message: "Info not valid!!!" })
     }
     const newProduct = new Product(product);
     try {
@@ -93,17 +110,15 @@ export const createProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     const product = req.body;
-    if (!product){
-        return res.status(400).send({message: "Data update can not empty"})
+    if (!product) {
+        return res.status(400).send({ message: "Data update can not empty" })
     }
-
     const _id = req.params.id;
-
     try {
-        await Product.findByIdAndUpdate(_id, product, {useFindAndModify: false });
-        res.status(201).json({message: "sussessfully!!!"})
+        await Product.findByIdAndUpdate(_id, product, { useFindAndModify: false });
+        res.status(201).json({ message: "sussessfully!!!" })
     } catch (error) {
-        res.status(500).json({message: "Error Update user information"});
+        res.status(500).json({ message: "Error Update user information" });
     }
 
 }
@@ -117,22 +132,22 @@ export const searchProduct = async (req, res) => {
         console.log(`SEARCH: ${q}`);
 
         const product = await Product
-        .find({
-            $text:
-              {
-                $search: q,
-                $caseSensitive: false,
-                $diacriticSensitive: true
-              }
+            .find({
+                $text:
+                {
+                    $search: q,
+                    $caseSensitive: false,
+                    $diacriticSensitive: true
+                }
             }, { score: { $meta: "textScore" } })
-            .sort({score:{$meta:"textScore"}})
-  
+            .sort({ score: { $meta: "textScore" } })
+
         product.forEach(element => {
             let np = element.toJSON();
             console.log(`${np.score} -- ${np.name}`);
         });
         res.status(200).json(product)
     } catch (error) {
-        res.status(404).json({message: error.message});
+        res.status(404).json({ message: error.message });
     }
 }
