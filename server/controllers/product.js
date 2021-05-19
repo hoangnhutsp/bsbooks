@@ -1,7 +1,7 @@
 "use strict";
 
 import Product from '../models/product.js';
-
+import Category from '../models/category.js'
 const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
 const SIZE_PAGE = 20;
@@ -9,8 +9,26 @@ const DEFAULT_PRICE = "0,100000000";
 const DEFAULT_RATING = 1;
 const DEFAULT_SORT = "review_count,desc";
 const DEFAULT_CRITERIA = "desc";
+const DEFAULT_CATEGORY  = "0";
+const SIZE_OF_SUGGESTION = 6;
 
-const initQuery = (query) => {
+
+const getListCate = async (query) => {
+    let category = query.category || DEFAULT_CATEGORY;
+    if (category > 40) category = DEFAULT_CATEGORY;
+    category = await Category.find({id: category})
+    let id_path = category[0]["id_path"];
+    console.log(id_path);
+    let cate = await Category.find({id_path: { $regex: RegExp(`^${id_path}`)}})
+    let arrCate = [];
+    //cate.forEach(e => console.log(e["id_path"]));
+    cate.forEach(element => arrCate.push(element["id"]));
+
+    return arrCate;
+}
+const initQuery = async (query) => {
+    let category = await getListCate(query);
+    console.log(category);
     let price = query.price || DEFAULT_PRICE;
     price = String(price).split(',');
     let minPrice = price[0];
@@ -18,10 +36,10 @@ const initQuery = (query) => {
 
     let rating = query.rating || DEFAULT_RATING;
 
-
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
+        id_category: { $in : category}
     }
 
     return queryString;
@@ -39,7 +57,7 @@ const initSort = (query) => {
     let type = sort[0];
     let criteria = sort[1] || DEFAULT_CRITERIA;
     const queryString = {
-        [type]: criteria
+        [type]: criteria,
     }
 
     return queryString;
@@ -53,21 +71,15 @@ const slicePage = (page, product) => {
     let start = (page - 1) * SIZE_PAGE;
     let end = Math.min(page * SIZE_PAGE, len);
     product = product.slice(start, end);
-    //console.log("SLICE PAGE: ", start, end, page);
     return product;
 }
 export const getProduct = async (req, res) => {
     try {
         const query = req.query;
-        const queryString = initQuery(query);
+        const queryString = await initQuery(query);
         const sortString = initSort(query);
-        let q = query.q;
         let product = await Product.find(queryString).sort(sortString);
-
         product = slicePage(query.page, product)
-
-        //console.log(product.length);
-
 
         res.status(200).json(product)
     } catch (error) {
@@ -131,7 +143,7 @@ export const searchProduct = async (req, res) => {
 
         console.log(`SEARCH: ${q}`);
 
-        const product = await Product
+        let product = await Product
             .find({
                 $text:
                 {
@@ -141,13 +153,27 @@ export const searchProduct = async (req, res) => {
                 }
             }, { score: { $meta: "textScore" } })
             .sort({ score: { $meta: "textScore" } })
+        product = slicePage(query.page, product)
 
-        product.forEach(element => {
-            let np = element.toJSON();
-            console.log(`${np.score} -- ${np.name}`);
-        });
+        console.log(product.length);
         res.status(200).json(product)
     } catch (error) {
         res.status(404).json({ message: error.message });
+    }
+}
+
+
+export const suggestionProduct = async (req, res) => {
+    let query = req.query;
+    let regex = new RegExp(query.q, 'i');
+
+    console.log(`regex: ${regex}`);
+
+    try {
+        const product = await Product.find({name: regex}, {'name': 1}).limit(SIZE_OF_SUGGESTION);
+        res.status(200).json(product)
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });  
     }
 }

@@ -13,6 +13,7 @@ import { sessionMiddleware } from "./middlewares/session.middleware.js";
 import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import searchRoutes from './routes/search.js'
+import categoryRoutes from './routes/category.js'
 const app = express();
 
 app.use(express.json());
@@ -39,10 +40,18 @@ app.use(session({
 }))
 
 app.use(sessionMiddleware)
-app.use('/product', productRoutes)
-app.use('/search', searchRoutes)
+app.use('/product', productRoutes);
+app.use('/search', searchRoutes);
+app.use('/category', categoryRoutes);
 app.use('/', (req, res) => {
+    const session = req.session;
+
+    console.log(session);
     console.log(req.sessionID);
+    if (!session.viewCount){
+        session.viewCount = 0;
+    }
+    session.viewCount++;
     res.status(200).send('ok')
 })
 mongoose.connect(CONNECTION_URL, dbOptions)
