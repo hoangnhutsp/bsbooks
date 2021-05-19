@@ -1,7 +1,15 @@
 import express from 'express';
 
 
-import {getProduct, createProduct, getProductByID, updateProduct, searchProduct, suggestionProduct} from '../controllers/product.js';
+import {
+    getProduct, 
+    createProduct, 
+    getProductByID, 
+    updateProduct, 
+    searchProduct, 
+    suggestionProduct
+} from '../controllers/product.js';
+
 const router = express.Router();
 
 router.get('/search', searchProduct);
