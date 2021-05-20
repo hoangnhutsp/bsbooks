@@ -13,9 +13,9 @@ import { sessionMiddleware } from "./middlewares/session.middleware.js";
 
 // router
 import productRoutes from './routes/product.js';
-import cartRoutes from './routes/cart.js';
-import searchRoutes from './routes/search.js'
 import userRouters from './routes/user.js'
+import categoryRoutes from './routes/category.js'
+
 const app = express();
 
 //app.use(express.static('./middleware/upload'));
@@ -47,13 +47,10 @@ app.use(session({
 }))
 
 app.use(sessionMiddleware)
-app.use('/product', productRoutes)
-app.use('/search', searchRoutes)
 app.use('/user', userRouters)
-app.use('/', (req, res) => {
-    console.log(req.sessionID);
-    res.status(200).send('ok')
-})
+app.use('/product', productRoutes);
+app.use('/category', categoryRoutes);
+
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
         app.listen(PORT, () => {
