@@ -9,7 +9,7 @@ const DEFAULT_PRICE = "0,100000000";
 const DEFAULT_RATING = 1;
 const DEFAULT_SORT = "review_count,desc";
 const DEFAULT_CRITERIA = "desc";
-const DEFAULT_CATEGORY  = "0";
+const DEFAULT_CATEGORY  = 1;
 const SIZE_OF_SUGGESTION = 6;
 
 
