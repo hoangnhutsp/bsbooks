@@ -2,6 +2,8 @@
 
 import Product from '../models/product.js';
 import Category from '../models/category.js'
+import ProductDetail from '../models/product_detail.js'
+
 const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
 const SIZE_PAGE = 20;
@@ -87,14 +89,48 @@ export const getProduct = async (req, res) => {
     }
 }
 
+const attributeProductDetails = [
+    "id",
+    "id_category",
+    "sku",
+    "name",
+    "url_key",
+    "short_description",
+    "price",
+    "discount",
+    "discount_rate",
+    "rating_average",
+    "review_count",
+    "thumbnail_url",
+    "has_ebook",
+    "inventory_status",
+    "publisher",
+    "author_name",
+    "description", 
+    "specifications", 
+    "id_author", 
+    "images"
+];
 
 export const getProductByID = async (req, res) => {
     try {
-        const product = await Product.find({ _id: req.params.id });
-        if (product.length !== 0)
-            res.status(200).json(product)
-        else
-            res.status(200).json({ message: "NOT FOUND" })
+        let _id = req.params.id;
+        
+        let product = await Product.findOne({_id});
+        let id = product["id"];
+        let productDetail = await ProductDetail.findOne({id});
+
+        let data = {};
+        for (let x of attributeProductDetails){
+            if (x in product){
+                data[x] = product[x];
+            } else
+            if (x in productDetail){
+                data[x] = productDetail[x];
+            }
+        }
+        res.status(200).json(data);
+        
 
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -113,7 +149,6 @@ export const createProduct = async (req, res) => {
     const newProduct = new Product(product);
     try {
         await newProduct.save();
-
         res.status(201).json(newProduct);
     } catch (error) {
         res.status(500).json({ message: error.message })
