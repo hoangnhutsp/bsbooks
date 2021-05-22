@@ -18,7 +18,7 @@ import searchRoutes from './routes/search.js'
 import userRouters from './routes/user.js'
 const app = express();
 
-//app.use(express.static('./middleware/upload'));
+app.use(express.static('./public'));
 app.use('./middleware/upload', express.static('upload'));
 
 
