@@ -4,6 +4,8 @@ const SECRET = 'bsbooksToken';
 
 const Auth = async (req, res, next) => {
     try {
+        if (!req.headers.authorization)
+            res.status(200).json({message: 'Token not exist'});
         if (req.headers.authorization.split(" ")[1] === 'undefined')
             res.status(200).json({ message: 'Bạn cần đăng nhập' });
         else {

@@ -28,12 +28,13 @@ function EditProfile() {
   const onSubmitHandler = () => {
     const data = Image
     fetch(
-      `http://localhost:5000/user/updateavatar/60a3cf6613eb114e1c03462b`,
+      `http://localhost:5000/user/updateavatar`,
       {
         method: "POST",
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`,
         },
         body: JSON.stringify(data),
       }
@@ -92,7 +93,7 @@ function EditProfile() {
 
   const onSubmitHandler3 = () => {
     fetch(
-      `http://localhost:5000/user/60a3ce5413eb114e1c03462a`,
+      `http://localhost:5000/user/profile`,
       {
         method: "GET",
         headers: {

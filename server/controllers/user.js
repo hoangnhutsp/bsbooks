@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
+import saveBase64ToImg from '../middlewares/saveBase64ToImg.middleware.js';
 
 const SECRET = 'bsbooksToken';
 
@@ -8,10 +9,10 @@ const createToken = (id) => {
     return jwt.sign({ id }, SECRET, {})
 };
 
+
 export const addUser = async (req, res) => {
 
     try {
-        console.log(req.body.password)
         //check missing infornation
         if (!req.body.email || !req.body.password || !req.body.name || !req.body.phone || !req.body.address || !req.body.gender || !req.body.birthday)
             res.status(200).json({ message: "Please fill in all the information" })
@@ -22,12 +23,10 @@ export const addUser = async (req, res) => {
         else {
             //new user
             const user = req.body;
-            console.log('tạo user mới')
             const newUser = new User(user);
             await newUser.save();
             const curentlyUser = await User.find({ email: newUser.email })
             const token = createToken(curentlyUser._id);
-            console.log(token);
             res.status(200).json({ result: newUser, token });
 
         }
@@ -58,8 +57,7 @@ export const Login = async (req, res) => {
 
 export const getProfileUser = async (req, res) => {
     try {
-        const user = await User.find({ _id: req.params.id });
-        //console.log(req.userId);
+        const user = await User.find({ _id: req.userId.id });
         if (user.length !== 0)
             res.status(200).json(user);
         else
@@ -73,12 +71,12 @@ export const getProfileUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         //check user already
-        const user_find = await User.find({ _id: req.params.id });
+        const user_find = await User.find({ _id: req.userId.id });
         if (user_find.length == 0)
             res.status(200).json({ message: "User is't already" })
 
         //Update profile
-        const user = await User.findByIdAndUpdate(req.params.id, {
+        const user = await User.findByIdAndUpdate(req.userId.id, {
             name: req.body.name,
             phone: req.body.phone,
             address: req.body.address,
@@ -93,14 +91,18 @@ export const updateUser = async (req, res) => {
 
 export const updateImage = async (req, res) => {
     try {
-        const user_find = await User.find({ _id: req.params.id });
-        if (user_find.length == 0)
+        const user_find = await User.find({ _id: req.userId.id });
+        if (user_find.length === 0)
             res.status(200).json({ message: "User isn't already" })
-
-        const user = await User.findByIdAndUpdate(req.params.id, {
-            avatar: req.body.avatar,
+        const imgData = req.body.avatar;
+        const id = req.userId.id;
+        const folder = '../client/public/avatar'
+        const imgName = id + '_avatar'
+        const saveImg = saveBase64ToImg(folder, imgName, imgData);
+        const user = await User.findByIdAndUpdate(req.userId.id, {
+            avatar: imgName,
         }, function (err, docs) { });
-        res.status(200).json(user);
+        res.status(200).json(saveImg);
 
     } catch (error) {
         res.status(409).json({ message: error.message })

@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     birthday: Date,
     avatar: {
         type: String,
-        default: base64_encode('./public/default-avatar-profile.jpg'),
+        default: "default-avatar-profile.jpg",
     },
     role: {
         type: String,

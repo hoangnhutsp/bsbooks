@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.post('/register', addUser);
 router.post('/login', Login)
-router.get('/:id', authMiddleware, getProfileUser);
-router.post('/update/:id', updateUser);
-router.post('/updateavatar/:id', updateImage)
+router.get('/profile', authMiddleware, getProfileUser);
+router.post('/update',authMiddleware, updateUser);
+router.post('/updateavatar', authMiddleware, updateImage);
 
 export default router;

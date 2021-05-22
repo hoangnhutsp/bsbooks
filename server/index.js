@@ -18,7 +18,7 @@ import categoryRoutes from './routes/category.js'
 
 const app = express();
 
-//app.use(express.static('./middleware/upload'));
+app.use(express.static('./public'));
 app.use('./middleware/upload', express.static('upload'));
 
 
