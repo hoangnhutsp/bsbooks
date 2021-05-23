@@ -10,12 +10,16 @@ import {
     suggestionProduct
 } from '../controllers/product.js';
 
+import {
+    updateRecentlyViewed
+} from '../controllers/recently_viewed.js';
+
 const router = express.Router();
 
 router.get('/search', searchProduct);
 router.get('/search/suggestion', suggestionProduct)
 router.get('/', getProduct);
-router.get('/:id', getProductByID);
+router.get('/:id', updateRecentlyViewed, getProductByID);
 router.post('/', createProduct)
 router.put('/:id', updateProduct);
 

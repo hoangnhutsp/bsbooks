@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 const recentlyViewedSchema = mongoose.Schema({
-    id_user: mongoose.Types.ObjectId,
-    id_session: mongoose.Types.ObjectId,
-    id_product: mongoose.Types.ObjectId,
+    id_user: String,
+    id_session: String,
+    id_product: String,
     createdAt: {
         type: Date,
         default: Date.now,

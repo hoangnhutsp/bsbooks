@@ -7,3 +7,5 @@ import {
 
 const router = express.Router();
 router.get('/', getRecentlyViewed);
+
+export default router;

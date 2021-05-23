@@ -4,6 +4,7 @@ import Product from '../models/product.js';
 import Category from '../models/category.js'
 import ProductDetail from '../models/product_detail.js'
 
+
 const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
 const SIZE_PAGE = 20;

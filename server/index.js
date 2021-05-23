@@ -15,6 +15,7 @@ import { sessionMiddleware } from "./middlewares/session.middleware.js";
 import productRoutes from './routes/product.js';
 import userRouters from './routes/user.js'
 import categoryRoutes from './routes/category.js'
+import recentlyViewd from './routes/recently_viewed.js'
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use(sessionMiddleware)
 app.use('/user', userRouters)
 app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
+app.use('/recently_viewd', recentlyViewd)
 
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
