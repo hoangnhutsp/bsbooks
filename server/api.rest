@@ -1,3 +1,15 @@
 
 
 GET http://localhost:5000/product/
+
+
+### upload images
+POST http://localhost:5000/upload_image/
+Content-Type: application/json
+
+{
+    "images" : [
+        ""
+        
+    ]
+}

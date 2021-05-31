@@ -16,16 +16,18 @@ import productRoutes from './routes/product.js';
 import userRouters from './routes/user.js'
 import categoryRoutes from './routes/category.js'
 import recentlyViewd from './routes/recently_viewed.js'
+import uploadImageRoutes from './routes/upload_image.js'
 
 const app = express();
 
 app.use(express.static('./public'));
-app.use('./middleware/upload', express.static('upload'));
+//app.use('./middleware/upload', express.static('upload'));
 
 
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+
 
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 const PORT = process.env.PORT || 5000;
@@ -48,10 +50,12 @@ app.use(session({
 }))
 
 app.use(sessionMiddleware)
+
 app.use('/user', userRouters)
 app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
 app.use('/recently_viewd', recentlyViewd)
+app.use('/upload_image', uploadImageRoutes);
 
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
