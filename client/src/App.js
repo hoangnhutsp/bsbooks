@@ -49,7 +49,6 @@ const App = () => {
 
           <hr />
           <Footer></Footer>
-          <EditProfile></EditProfile>
         </div>
       </Router>
     </>
