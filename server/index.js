@@ -16,7 +16,9 @@ import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import searchRoutes from './routes/search.js'
 import userRouters from './routes/user.js'
+import evaluateRouters from './routes/evaluate.js'
 const app = express();
+
 
 app.use(express.static('./public'));
 app.use('./middleware/upload', express.static('upload'));
@@ -50,6 +52,8 @@ app.use(sessionMiddleware)
 app.use('/product', productRoutes)
 app.use('/search', searchRoutes)
 app.use('/user', userRouters)
+app.use('/cart', cartRoutes)
+app.use ('/evaluate', evaluateRouters)
 app.use('/', (req, res) => {
     console.log(req.sessionID);
     res.status(200).send('ok')
