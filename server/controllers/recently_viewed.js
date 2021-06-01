@@ -44,7 +44,6 @@ export const updateRecentlyViewed = async (req, res, next) => {
         },
             { createdAt: new Date() }
         )
-        console.log(re);
         if (!re) {
             const newRecentlyViewed = new RecentlyViewed(recentlyView);
             await newRecentlyViewed.save();

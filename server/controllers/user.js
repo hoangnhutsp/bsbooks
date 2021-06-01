@@ -16,6 +16,8 @@ export const addUser = async (req, res) => {
         if (!req.body.email || !req.body.password || !req.body.name || !req.body.phone || !req.body.address || !req.body.gender || !req.body.birthday)
             res.status(200).json({ message: "Please fill in all the information" })
         //check user already???
+
+        
         const find_user = await User.find({ email: req.body.email })
         if (find_user.length !== 0)
             res.status(200).json({ message: "User Already" })

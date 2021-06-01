@@ -9,29 +9,26 @@ const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
 const SIZE_PAGE = 20;
 const DEFAULT_PRICE = "0,100000000";
-const DEFAULT_RATING = 1;
+const DEFAULT_RATING = 0;
 const DEFAULT_SORT = "review_count,desc";
 const DEFAULT_CRITERIA = "desc";
-const DEFAULT_CATEGORY  = 1;
+const DEFAULT_CATEGORY = 1;
 const SIZE_OF_SUGGESTION = 6;
 
 
 const getListCate = async (query) => {
     let category = query.category || DEFAULT_CATEGORY;
     if (category > 40) category = DEFAULT_CATEGORY;
-    category = await Category.find({id: category})
+    category = await Category.find({ id: category })
     let id_path = category[0]["id_path"];
-    console.log(id_path);
-    let cate = await Category.find({id_path: { $regex: RegExp(`^${id_path}`)}})
+    let cate = await Category.find({ id_path: { $regex: RegExp(`^${id_path}`) } })
     let arrCate = [];
-    //cate.forEach(e => console.log(e["id_path"]));
     cate.forEach(element => arrCate.push(element["id"]));
 
     return arrCate;
 }
 const initQuery = async (query) => {
     let category = await getListCate(query);
-    console.log(category);
     let price = query.price || DEFAULT_PRICE;
     price = String(price).split(',');
     let minPrice = price[0];
@@ -42,7 +39,7 @@ const initQuery = async (query) => {
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
-        id_category: { $in : category}
+        id_category: { $in: category }
     }
 
     return queryString;
@@ -68,7 +65,6 @@ const initSort = (query) => {
 
 const slicePage = (page, product) => {
     let len = product.length;
-    page = page || DEFAULT_PAGE;
     if (page > (len - 1) / SIZE_PAGE + 1)
         page = 1;
     let start = (page - 1) * SIZE_PAGE;
@@ -82,9 +78,14 @@ export const getProduct = async (req, res) => {
         const queryString = await initQuery(query);
         const sortString = initSort(query);
         let product = await Product.find(queryString).sort(sortString);
-        product = slicePage(query.page, product)
 
-        res.status(200).json(product)
+        const page = query.page;
+
+        if (page)
+            product = slicePage(page, product)
+
+        res.status(200).json({ size: product.length, product })
+
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -107,31 +108,31 @@ const attributeProductDetails = [
     "inventory_status",
     "publisher",
     "author_name",
-    "description", 
-    "specifications", 
-    "id_author", 
+    "description",
+    "specifications",
+    "id_author",
     "images"
 ];
 
 export const getProductByID = async (req, res) => {
     try {
         let _id = req.params.id;
-        
-        let product = await Product.findOne({_id});
+
+        let product = await Product.findOne({ _id });
         let id = product["id"];
-        let productDetail = await ProductDetail.findOne({id});
+        let productDetail = await ProductDetail.findOne({ id });
 
         let data = {};
-        for (let x of attributeProductDetails){
-            if (x in product){
+        for (let x of attributeProductDetails) {
+            if (x in product) {
                 data[x] = product[x];
             } else
-            if (x in productDetail){
-                data[x] = productDetail[x];
-            }
+                if (x in productDetail) {
+                    data[x] = productDetail[x];
+                }
         }
         res.status(200).json(data);
-        
+
 
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -177,8 +178,6 @@ export const searchProduct = async (req, res) => {
 
         let q = query.q;
 
-        console.log(`SEARCH: ${q}`);
-
         let product = await Product
             .find({
                 $text:
@@ -191,7 +190,6 @@ export const searchProduct = async (req, res) => {
             .sort({ score: { $meta: "textScore" } })
         product = slicePage(query.page, product)
 
-        console.log(product.length);
         res.status(200).json(product)
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -200,16 +198,14 @@ export const searchProduct = async (req, res) => {
 
 
 export const suggestionProduct = async (req, res) => {
-    let query = req.query;
-    let regex = new RegExp(query.q, 'i');
-
-    console.log(`regex: ${regex}`);
-
     try {
-        const product = await Product.find({name: regex}, {'name': 1}).limit(SIZE_OF_SUGGESTION);
-        res.status(200).json(product)
+        let q = req.query.q;
+        console.log(q);
+        let regex = new RegExp(q, 'i');
+        const product = await Product.find({ index_name: regex }, { 'name': 1 }).limit(SIZE_OF_SUGGESTION);
+        res.status(200).json({ size: product.length, product })
 
     } catch (error) {
-        res.status(404).json({ message: error.message });  
+        res.status(404).json({ message: error.message });
     }
 }
