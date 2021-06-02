@@ -1,11 +1,11 @@
 import React from 'react'
 
-function User() {
+function Order() {
     return (
         <div>
-            USER
+            Thong  bao: Don hang
         </div>
     )
 }
 
-export default User
+export default Order

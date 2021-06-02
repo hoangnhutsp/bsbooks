@@ -1,0 +1,49 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+.container-user-address{
+    display: block;
+    background-color: #fff;
+}
+.container-user-address hr{
+    margin: 0px;
+}
+
+.container-user-address .container-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-user-address .container-title .user-title {
+    flex-grow: 1;
+}
+
+.address-title h1{
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    color: #333;
+}
+
+.container-user-address hr{
+
+    color: #fff;
+    outline: none;
+}
+
+.btn-add-new-address button {
+    background-color: #228999;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-size: 1.2rem;
+    
+}
+.btn-add-new-address button:hover {
+    background-color: #00ddff;
+    color: azure;
+}

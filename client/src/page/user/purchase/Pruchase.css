@@ -1,0 +1,22 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+.container-user-purchase{
+    display: block;
+    background-color: #fff;
+}
+
+.container-user-purchase .user-title h1{
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    text-transform: capitalize;
+    color: #333;
+}
+
+.container-user-purchase hr{
+    color: #333;
+    outline: none;
+}

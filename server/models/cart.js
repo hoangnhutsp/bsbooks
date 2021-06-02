@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const cartSchema = mongoose.Schema({
-    sessionId: {
+    idUser: {
         type: mongoose.Types.ObjectId
     },
     products: [
