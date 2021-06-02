@@ -17,7 +17,6 @@ import EditProfile from './components/Test'
 import Home from './page/Home'
 import Checkout from './page/Checkout'
 import Cart from './page/Cart'
-import User from './page/User'
 import User from './page/user/User'
 import Search from './page/Search'
 import PageNotFound from './page/PageNotFound'
@@ -29,7 +28,6 @@ const App = () => {
       <Router>
         <div>
           <Navbar></Navbar>
-
           <hr />
           <Switch>
             <Route exact path="/">
@@ -51,12 +49,7 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-
-
-          <hr />
           <Footer></Footer>
-          <Cart></Cart>
-          <Checkout></Checkout>
         </div>
       </Router>
     </>
