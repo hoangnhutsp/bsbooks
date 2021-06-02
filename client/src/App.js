@@ -15,6 +15,7 @@ import Footer from './components/Footer'
 import EditProfile from './components/Test'
 
 import Home from './page/Home'
+import Checkout from './page/Checkout'
 import Cart from './page/Cart'
 import User from './page/User'
 import Search from './page/Search'
@@ -52,6 +53,7 @@ const App = () => {
           <Footer></Footer>
           <EditProfile></EditProfile>
           <Cart></Cart>
+          <Checkout></Checkout>
         </div>
       </Router>
     </>
