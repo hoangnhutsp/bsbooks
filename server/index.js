@@ -8,7 +8,8 @@ import cookieParser from 'cookie-parser';
 
 
 // middleware
-import { sessionMiddleware } from "./middlewares/session.middleware.js";
+import { sessionMiddleware } from "./middlewares/session.middleware.js"
+import { refreshTokenMiddleware } from "./middlewares/refreshToken.middleware.js"
 
 
 // router
@@ -23,7 +24,7 @@ const app = express();
 
 
 app.use(express.static('./public'));
-//app.use('./middleware/upload', express.static('upload'));
+app.use('./middleware/upload', express.static('upload'));
 
 
 app.use(express.json({limit: '50mb'}));
@@ -51,7 +52,8 @@ app.use(session({
     }
 }))
 
-app.use(sessionMiddleware)
+app.use(sessionMiddleware);
+app.use(refreshTokenMiddleware);
 
 app.use('/user', userRouters)
 app.use('/cart', cartRoutes)
