@@ -15,7 +15,7 @@ import Footer from './components/Footer'
 import EditProfile from './components/Test'
 
 import Home from './page/Home'
-import User from './page/User'
+import User from './page/user/User'
 import Search from './page/Search'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
@@ -40,6 +40,9 @@ const App = () => {
             </Route>
             <Route path="/product">
               <Product />
+            </Route>
+            <Route path="/user">
+              <User />
             </Route>
             <Route path="*">
               <PageNotFound />
