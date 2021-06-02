@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     birthday: Date,
     avatar: {
         type: String,
-        default: "default-avatar-profile.jpg",
+        default: "http://localhost:5000/default/images/default-avatar-profile.jpg",
     },
     role: {
         type: String,

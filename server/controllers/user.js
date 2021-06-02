@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
-import saveBase64ToImg from '../middlewares/saveBase64ToImg.middleware.js';
 
 const SECRET = 'bsbooksToken';
 
@@ -17,6 +16,8 @@ export const addUser = async (req, res) => {
         if (!req.body.email || !req.body.password || !req.body.name || !req.body.phone || !req.body.address || !req.body.gender || !req.body.birthday)
             res.status(200).json({ message: "Please fill in all the information" })
         //check user already???
+
+        
         const find_user = await User.find({ email: req.body.email })
         if (find_user.length !== 0)
             res.status(200).json({ message: "User Already" })
@@ -83,26 +84,6 @@ export const updateUser = async (req, res) => {
             birthday: req.body.birthday,
         }, function (err, docs) { });
         res.status(200).json(user)
-
-    } catch (error) {
-        res.status(409).json({ message: error.message })
-    }
-}
-
-export const updateImage = async (req, res) => {
-    try {
-        const user_find = await User.find({ _id: req.userId.id });
-        if (user_find.length === 0)
-            res.status(200).json({ message: "User isn't already" })
-        const imgData = req.body.avatar;
-        const id = req.userId.id;
-        const folder = '../client/public/avatar'
-        const imgName = id + '_avatar'
-        const saveImg = saveBase64ToImg(folder, imgName, imgData);
-        const user = await User.findByIdAndUpdate(req.userId.id, {
-            avatar: imgName,
-        }, function (err, docs) { });
-        res.status(200).json(saveImg);
 
     } catch (error) {
         res.status(409).json({ message: error.message })
