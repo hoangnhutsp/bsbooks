@@ -28,7 +28,6 @@ const App = () => {
       <Router>
         <div>
           <Navbar></Navbar>
-          <hr />
           <Switch>
             <Route exact path="/">
               <Home />

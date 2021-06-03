@@ -13,6 +13,7 @@ import { refreshTokenMiddleware } from "./middlewares/refreshToken.middleware.js
 
 
 // router
+import cartRoutes from './routes/cart.js'
 import productRoutes from './routes/product.js';
 import userRouters from './routes/user.js'
 import evaluateRouters from './routes/evaluate.js'
