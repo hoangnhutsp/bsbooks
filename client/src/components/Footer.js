@@ -31,8 +31,6 @@ function Footer() {
               <h4>liên hệ</h4>
               <ul>
                 <li><a href="#">+ (028) 999 999</a></li>
-                <li><a href="#">+ (028) 888 999</a></li>
-                <li><a href="#">sweetheartuit.com</a></li>
                 <li><a href="#">bsbookuit@gmail.com</a></li>
               </ul>
             </div>

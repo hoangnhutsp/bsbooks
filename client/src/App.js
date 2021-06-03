@@ -49,6 +49,8 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
+          <Cart></Cart>
+          <Checkout></Checkout>
           <Footer></Footer>
         </div>
       </Router>
