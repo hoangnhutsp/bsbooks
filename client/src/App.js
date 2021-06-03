@@ -13,8 +13,6 @@ import {
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import EditProfile from './components/Test'
-import Login from './components/Login.js'
-import Register from './components/Register.js'
 
 import Home from './page/Home'
 import Checkout from './page/Checkout'
@@ -23,6 +21,8 @@ import User from './page/user/User'
 import Search from './page/Search'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
+import Login from './page/login/Login'
+import Signup from './page/login/Signup'
 const App = () => {
 
   return (
@@ -45,6 +45,12 @@ const App = () => {
             </Route>
             <Route path="/user">
               <User />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Signup />
             </Route>
             <Route path="*">
               <PageNotFound />

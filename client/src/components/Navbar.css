@@ -35,9 +35,12 @@
     padding: 0rem 8rem;
     justify-content: space-between;
     align-items: center;
-    height: 16vh;
+    height: 10vh;
+    margin-bottom: 2rem;
 }
-
+.container-navbar-brand {
+    width: 10vw;
+}
 .container-navbar-brand a{
     color: rgba(0,0,0,.8);
     text-decoration: none;
@@ -48,7 +51,9 @@
     color: teal;
     margin-left: 0.5rem;
 }
-
+.container-navbar-cart{
+    width: 10vw;
+}
 .container-navbar-cart a{
     color: rgba(0,0,0,.8);
     text-decoration: none;
