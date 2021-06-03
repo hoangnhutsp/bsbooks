@@ -13,7 +13,8 @@ import {
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import EditProfile from './components/Test'
-import RegisterForm from './components/FormSigup.js'
+import Login from './components/Login.js'
+import Register from './components/Register.js'
 
 import Home from './page/Home'
 import User from './page/User'
@@ -50,7 +51,8 @@ const App = () => {
 
           <hr />
           <Footer></Footer>
-          <RegisterForm></RegisterForm>
+          <Login></Login>
+          <Register></Register>
           <EditProfile></EditProfile>
         </div>
       </Router>
