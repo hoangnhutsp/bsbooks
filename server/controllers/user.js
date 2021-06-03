@@ -10,43 +10,44 @@ const createToken = (id) => {
 };
 
 
+const checkInfo = (info) => {
+    if (!req.body.email || !req.body.password || !req.body.name ||
+        !req.body.phone || !req.body.address || !req.body.gender ||
+        !req.body.birthday) return 0;
+
+    return 1;
+}
+
 export const addUser = async (req, res) => {
 
     try {
-        //check missing infornation
-        if (!req.body.email || !req.body.password || !req.body.name ||
-            !req.body.phone || !req.body.address || !req.body.gender ||
-            !req.body.birthday || !req.body.confirmPassWord)
+
+        console.log(`INFO: ${info}`);
+        let info = req.body;
+        if (!checkInfo(info)) {
             res.status(200).json({ message: "Please fill in all the information" })
-        //check password and confirmPassWord
-        if (req.body.confirmPassWord !== req.body.password)
-            res.status(200).json({ message: 'confirmPassWord not same password' });
-        //check user already???
-        const find_user = await User.find({ email: req.body.email })
+        }
+
+        let email = info.email;
+        const find_user = await User.find({ email })
         if (find_user.length !== 0)
             res.status(200).json({ message: "User Already" })
         else {
-            const hashPassword = await bcrypt.hash(req.body.password, 12);
+            const hashPassword = await bcrypt.hash(info.password, 12);
             //new user
-            const userInf = {
-                name: req.body.name,
-                phone: req.body.phone,
-                email: req.body.email,
-                password: hashPassword,
-                address: req.body.address,
-                gender: req.body.gender,
-                birthday: req.body.birthday,
-                token: []
-            }
-            const newUser = new User(userInf);
-            await newUser.save();
-            console.log(newUser._id);
-            const creaToken = createToken(newUser._id);
-            let token = newUser.token;
-            token.push(creaToken);
-            const user = await User.findByIdAndUpdate(newUser._id, { token: token }, { new: true });
-            res.status(200).json({ result: user, token });
 
+            info.password = hashPassword;
+            info.token = [];
+
+            //const newUser = new User(userInf);
+            //await newUser.save();
+            //console.log(newUser._id);
+            //const creaToken = createToken(newUser._id);
+            //let token = newUser.token;
+            ///token.push(creaToken);
+            //const user = await User.findByIdAndUpdate(newUser._id, { token: token }, { new: true });
+            //res.status(200).json({ result: user, token });
+            res.status(200).json({status: 'success'})
         }
     } catch (error) {
         res.status(409).json({ message: error.message })
