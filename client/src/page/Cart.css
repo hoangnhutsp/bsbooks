@@ -1,0 +1,234 @@
+/*nội dung sản phẩm trong giỏ hàng*/
+.product-cart{
+    margin-top: 4rem;
+}
+
+.page-banner-sm{
+    font-size: 1.2rem;
+    color: #333;
+    background: rgb(247, 243, 243);
+    padding: 1rem;
+}
+
+.cart-conllection{
+    margin-top: 0rem;
+}
+
+.cart-item form{
+    display: grid;
+    grid-template-columns: 100%;
+    border: 1px solid #efefef;
+    margin-bottom: 1.2rem;
+    border-radius: 7px 7px 0px 0px;
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2),
+                inset -2px -2px 2px #efefef;
+}
+
+.cart-product{
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-gap: 0rem 1.3rem;
+    padding: 1rem 0rem;
+    border-bottom: 1px solid #efefef;
+}
+
+.cart-image{
+    height: 75px;
+    border-radius: 7px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cart-quantity-md, 
+.cart-unit-price,
+.cart-product-total{
+    display: none;
+}
+
+.cart-controls-sm{
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem .8rem;
+}
+
+.remove{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #505050;
+}
+
+.cart-quantity-controls-sm,
+.cart-quantity-controls{
+    display: flex;
+}
+
+.cart-quantity-controls-sm button,
+.cart-quantity-controls-sm input,
+.cart-quantity-controls button,
+.cart-quantity-controls input{
+    height: 25px;
+    width: 25px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #505050;
+    margin-left: .3rem;
+}
+
+.cart-quantity-controls-sm button,
+.cart-quantity-controls button{
+    background-color: rgb(252, 52, 52);
+    color: #fff;
+    border-radius: 50%;
+}
+
+.cart-product-name{
+    font-weight: bold;
+    color: #505050;
+    margin-bottom: .3rem;
+}
+
+.cart-price-sm{
+    color: rgb(252, 52, 52);
+    font-weight: bold;
+    margin-bottom: .3rem;
+}
+
+.cart-product-info small{
+    font-weight: bold;
+    color: #333;
+}
+
+/*bảng tổng kết*/
+.cart-total-holder{
+    margin-top: 2rem;
+}
+
+.cart-total{
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-total p{
+    font-weight: bold;
+}
+
+.cart-action-button{
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-action-button a {
+    display: block;
+    text-align: center;
+    padding: .7rem;
+    margin-bottom: .5rem;
+    text-decoration: none;
+    background: rgb(245, 84, 84);
+    color: #333;
+}
+
+.cart-action-button a:first-child{
+    order: 1;
+    background: #333;
+    color: #fff;
+}
+
+.cart-header{
+    display: none;
+}
+
+/*RESPONSIVE*/
+@media only screen and (min-width: 786px) {
+    .cart-quantity-md, 
+    .cart-unit-price,
+    .cart-product-total{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 15%;
+    }
+
+    .cart-item form:first-child{
+        border-bottom: 1px solid #efefef;
+    }
+
+    .cart-item form{
+        box-shadow: none;
+        border: none;
+        display: flex;
+        border-bottom: 1px solid #efefef;
+    }
+
+    .cart-controls-sm{
+        display: none;
+    }
+
+    .cart-product{
+        border: none;
+        flex: 1;
+        align-items: center;
+    }
+
+    .cart-product small{
+        display: none;
+    }
+
+    .product-cart{
+        margin-top: 0rem;
+        padding-bottom: 2rem;
+    }
+
+    .cart-conllection{
+        margin-top: 1rem;
+    }
+
+    .cart-header{
+        display: flex;
+        padding: 1rem 0rem;
+    }
+
+    .cart-header p{
+        font-weight: bold;
+        color: #505050;
+        width: 15%;
+        text-align: center;
+    }
+
+    .cart-header p:first-child{
+        width: auto;
+        flex: 1;
+        text-align: left;
+    }
+
+    .cart-total,
+    .cart-action-button{
+        justify-content: flex-end;
+        flex-direction: row;
+    }
+
+    .cart-total p:first-child{
+        margin-right: 1rem;
+    }
+
+    .cart-action-button a{
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    .cart-action-button a:first-child{
+        margin-right: 1.2rem;
+        order: 0;
+    }
+    
+}
+/*
+@media only screen and (min-width: 960px){
+    .page-banner-sm{
+        display: none;
+    }
+
+}*/

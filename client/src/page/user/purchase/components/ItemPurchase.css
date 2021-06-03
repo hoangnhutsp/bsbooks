@@ -1,0 +1,62 @@
+.title-item-purchase{
+    display: flex;
+    flex-direction: row;
+}
+
+.date-item-purchase {
+    display: block;
+    flex-grow: 1;
+    font-weight: 600;
+}
+.container-product-purchase {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-item-purchase .hr-break-purchase{
+    border: solid 2px #228999;
+
+}
+
+.hr-break-items{
+    background-color: mintcream;
+    border: solid 1px #F5F5F5;
+}
+
+.container-product-purchase img{
+    object-fit: cover;
+    height: 4rem;
+    width: 4rem;
+    border: solid 1px rgb(206, 206, 206);
+    margin: 1rem
+}
+
+.container-product-purchase .price-product-purchase{
+    color: #228999;
+}
+
+.info-product-purchase {
+    flex-grow: 1;
+}
+
+.container-item-purchase {
+    margin-top: 2rem;
+}
+
+.container-item-purchase .total-lable{
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.container-item-purchase .total-lable .price{
+    color: #228999;
+    font-size: 1.6rem;
+    margin-left: 1rem;
+}
+
+

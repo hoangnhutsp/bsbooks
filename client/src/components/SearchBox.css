@@ -1,0 +1,19 @@
+
+.navbar-searchbox input {
+    width: 30rem;
+    padding: 0.8rem;
+    background-color: #EFF3F6;
+    border: none;
+    border-right: solid 1px #999;
+}
+.navbar-searchbox input:focus {
+    outline: none;
+}
+.btn-icon-search {
+    padding: 0.8rem;
+    border: none;
+    background-color: #EFF3F6;
+}
+.btn-icon-search:hover {
+    cursor: pointer;
+}

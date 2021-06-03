@@ -17,7 +17,9 @@ import Login from './components/Login.js'
 import Register from './components/Register.js'
 
 import Home from './page/Home'
-import User from './page/User'
+import Checkout from './page/Checkout'
+import Cart from './page/Cart'
+import User from './page/user/User'
 import Search from './page/Search'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
@@ -28,8 +30,6 @@ const App = () => {
       <Router>
         <div>
           <Navbar></Navbar>
-
-          <hr />
           <Switch>
             <Route exact path="/">
               <Home />
@@ -43,17 +43,14 @@ const App = () => {
             <Route path="/product">
               <Product />
             </Route>
+            <Route path="/user">
+              <User />
+            </Route>
             <Route path="*">
               <PageNotFound />
             </Route>
           </Switch>
-
-
-          <hr />
           <Footer></Footer>
-          <Login></Login>
-          <Register></Register>
-          <EditProfile></EditProfile>
         </div>
       </Router>
     </>

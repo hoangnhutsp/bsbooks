@@ -1,0 +1,60 @@
+
+.container-mini-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 8rem;
+    margin: 0.5rem;
+}
+.navbar-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-user-avatar {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.narbar-signup {
+    margin-left: 0.5rem;
+}
+.navbar-login-signup a {
+    text-decoration: none;
+}
+.navbar-login-signup a:hover {
+    color: rgba(51, 51, 51, 0.6);
+}
+
+.container-main-navbar{
+    display: flex;
+    flex-direction: row;
+    padding: 0rem 8rem;
+    justify-content: space-between;
+    align-items: center;
+    height: 16vh;
+}
+
+.container-navbar-brand a{
+    color: rgba(0,0,0,.8);
+    text-decoration: none;
+    font-size: 2rem ;
+}
+
+.navbar-cart-number {
+    color: teal;
+    margin-left: 0.5rem;
+}
+
+.container-navbar-cart a{
+    color: rgba(0,0,0,.8);
+    text-decoration: none;
+}
+
+.navbar-icon-shopping-cart {
+    width: 2rem;
+    height: 2rem;
+}
