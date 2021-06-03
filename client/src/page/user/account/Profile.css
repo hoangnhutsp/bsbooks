@@ -16,6 +16,8 @@
 }
 
 .container-user-profile hr{
+    margin: 2rem 0rem;
+
     color: #333;
     outline: none;
 }

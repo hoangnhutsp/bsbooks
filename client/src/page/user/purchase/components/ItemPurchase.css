@@ -46,6 +46,7 @@
 }
 
 .container-item-purchase .total-lable{
+    padding: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

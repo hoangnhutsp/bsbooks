@@ -1,6 +1,6 @@
 * {
     font-family: 'Roboto', sans-serif;
-    color: #333;
+    color: #555;
 }
 
 .container-user-purchase{
@@ -16,7 +16,25 @@
     color: #333;
 }
 
-.container-user-purchase hr{
+.container-user-purchase .break-title-and-info{
+    margin: 2rem 0rem;
     color: #333;
     outline: none;
 }
+
+.purchase-list-item-purchase-is-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+.purchase-list-item-purchase-is-empty .icons-shopping-cart{
+    width: 6rem;
+    height: 6rem;
+    margin: 2rem;
+}
+.purchase-list-item-purchase-is-empty .content{
+    font-weight: 600;
+}
+
