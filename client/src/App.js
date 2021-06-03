@@ -13,6 +13,7 @@ import {
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import EditProfile from './components/Test'
+import RegisterForm from './components/FormSigup.js'
 
 import Home from './page/Home'
 import User from './page/User'
@@ -49,6 +50,7 @@ const App = () => {
 
           <hr />
           <Footer></Footer>
+          <RegisterForm></RegisterForm>
           <EditProfile></EditProfile>
         </div>
       </Router>
