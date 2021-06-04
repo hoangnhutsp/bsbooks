@@ -205,14 +205,14 @@ function Register() {
                             <div className='form-group-register'>
                                 <input name='gioitinh'
                                     type='radio' value='male'
-                                    checked={registerData.gender == 'male'}
+                                    checked={registerData.gender === 'male'}
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nam
                             <input name='gioitinh'
                                     type='radio'
                                     value='female'
-                                    checked={registerData.gender == 'female'}
+                                    checked={registerData.gender === 'female'}
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nữ

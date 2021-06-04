@@ -9,8 +9,6 @@ import {
   useHistory,
 } from 'react-router-dom'
 
-import {useRouteMatch, matchPath} from 'react-router'
-
 import {getSearchSuggestion} from '../api/search/suggesstion'
 
 export default function SearchBox() {

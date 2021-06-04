@@ -140,20 +140,20 @@ function Profile() {
                                     <td>
                                         <input
                                             name="gender" type="radio" value="male"
-                                            checked={profile.gender == "male"}
+                                            checked={profile.gender === "male"}
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                         />
                                         <span>Nam</span>
 
                                         <input
                                             name="gender" type="radio" value="female"
-                                            checked={profile.gender == "female"}
+                                            checked={profile.gender === "female"}
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                         />
                                         <span>Nu</span>
                                         <input
                                             name="gender" type="radio" value="other"
-                                            checked={profile.gender == "other"}
+                                            checked={profile.gender === "other"}
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                         />
                                         <span>Khac</span>
