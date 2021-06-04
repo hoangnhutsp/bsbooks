@@ -39,7 +39,6 @@ function Login() {
         setError({...error, error: err});
     }
     const submitHandler = (e) => {
-        
         let err = ''
         e.preventDefault();
         dispatch(userLogin(loginData, setErrRes))
