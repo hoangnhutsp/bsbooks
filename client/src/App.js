@@ -28,7 +28,7 @@ import {
 
 const App = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   // useEffect(() => {
   //     dispatch(getProfile())
