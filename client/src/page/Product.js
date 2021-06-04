@@ -8,6 +8,7 @@ function Product() {
     const { id } = useParams();
     const [data, setData] = useState() // Data product detals
     const [count, setCount] = useState(1) // count
+    const [shouldFullPara, setShouldFullPara] = useState(false) // is readmore needed
 
     useEffect(async () => { // Fetch product details
         if (!id) {
@@ -25,7 +26,7 @@ function Product() {
                     {data.images && <ImgShowcase images={data.images} />}
                 </div>
                 <div className='col-6'>
-                    <p>Tác giả: {data.id_author}</p>
+                    <p>Tác giả: {data.author_name}</p>
                     <p>{data.name}</p>
                     <div className='row price-view'>
                         <p className='big-text bold child'>{data.discount.format(0, 3)}</p>
@@ -46,11 +47,30 @@ function Product() {
                             <p>+</p>
                         </div>
                     </div>
-                    <div className='addToCard center hover' > 
+                    <div className='addToCard center hover' >
                         <p className='white'>Chọn mua</p>
                     </div>
+
+                </div>
+                <div className="col-12">
+                    <br></br>
+                    <p className="big-text bold">Thông tin chung:</p>
+                    {data.specifications[0].attributes.map(item => {
+                        return (
+                            <div>
+                                <p>{item.name} : {item.value}</p>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className="col-12">
+                    <br></br>
+                    <p className="big-text bold">Mô tả:</p>
+                    <div className={shouldFullPara ? "" : "less"} dangerouslySetInnerHTML={{ __html: data.description }} />
+                    <p className="readmore hover" onClick={() => setShouldFullPara(!shouldFullPara)}>{!shouldFullPara ? "Đọc thêm" : "Thu gọn"}</p>
                 </div>
             </div >
+
         </div>
     ) : null
 }

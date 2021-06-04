@@ -34,10 +34,8 @@ function Login() {
 
 
     const submitHandler = (e) => {
-        
         e.preventDefault();
         dispatch(userLogin(loginData))
-        
     }
 
 

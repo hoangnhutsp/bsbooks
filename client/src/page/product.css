@@ -1,8 +1,9 @@
-.product {
+.product .container {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 20px 0;
+    flex-wrap: wrap;
 }
 
 .product  .price-view {
@@ -123,4 +124,15 @@
 
 .col-8 {
     width: 66.66666%;
+}
+
+.product .less {
+    height: 200px;
+    overflow: hidden;
+    
+}
+ 
+.product .readmore {
+    margin-bottom: 100px;
+    color: blue;
 }
