@@ -17,28 +17,6 @@
     justify-items: center;
 }
 
-.product  .big-text {
-    font-size: 20px;
-}
-
-
-.product  .med-text {
-    font-size: 16px;
-}
-
-
-.product .sml-text {
-    font-size: 12px;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.line-through {
-    text-decoration-line: line-through;
-}
-
 .product .child {
     padding: 0 20px;
 }
@@ -103,7 +81,7 @@
     text-align: center;
 }
 
-.product .white {
+ .white {
     color: white
 }
 

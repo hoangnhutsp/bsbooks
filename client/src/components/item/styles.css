@@ -1,0 +1,22 @@
+.item {
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.thumnail {
+    width: 100%;
+    text-align: center
+}
+
+.item-name {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0px 0px 4px;
+    line-height: 20px;
+    word-break: break-word;
+}
+
+.item:hover {
+    box-shadow: 0px 0px 15px 2px #18141C20    ;
+}

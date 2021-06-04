@@ -18,6 +18,7 @@ import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
 import Signup from './page/login/Signup'
+import ProductPage from './page/productPage'
 
 
 import {getProfile} from './redux/actions/user';
@@ -47,7 +48,10 @@ const App = () => {
             <Route path="/search">
               <Search />
             </Route>
-            <Route path="/product/:id">
+            <Route path="/product">
+              <ProductPage />
+            </Route>
+            <Route path="/product-details/:id">
               <Product />
             </Route>
             <Route path="/user">
