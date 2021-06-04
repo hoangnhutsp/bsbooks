@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Checkout.css';
 import './Cart.css';
 
@@ -39,6 +39,17 @@ function Checkout() {
         return ((index % 3) ? next : (next + ',')) + prev
     })
 }
+  const [payment, setPayment] = useState(false)
+  const clickShip = () =>{
+    let temp = payment;
+    if(temp === true)
+    {
+      setPayment(false);
+    }
+    else{
+      setPayment(true);
+    }
+  }
   return (
     <div className="CheckoutContainer">
       <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
@@ -63,8 +74,8 @@ function Checkout() {
                   <input className="input-checkout" type="text" id="city" name="city" value={usercurrent.phone} readOnly/>
                 </div>
                 <label>
-                  <input type="checkbox" name="sameadr" />Giao hàng nhanh trong vòng 2 giờ
-                      </label>
+                  <input type="checkbox" name="sameadr" onChange={() => clickShip(payment)}/>Giao hàng nhanh trong vòng 2 giờ
+                </label>
               </div>
             </form>
           </div>
@@ -91,7 +102,7 @@ function Checkout() {
                 </form>
               </div>
             ))}
-            <div>Phí vận chuyển</div>
+            <div>Phí vận chuyển <span>{formatCash(String(payment ? 30000 : 12000))}</span></div>
             <br/>
             <div>Tổng tiền</div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Cart.css';
 
 function Cart() {
@@ -52,13 +52,29 @@ function Cart() {
 
    //thêm vào danh sách sản phẩm được chọn trong giỏ hàng
    const [listPurchase, setListPurchase] = useState([])
-   
-   const pushList = (item) =>{
-        let temp = listPurchase;
-        temp.push(item);
-        setListPurchase (temp);
-        console.log(listPurchase)
-   }
+
+   const updatePurchaseList = eventItem => {
+      if (!listPurchase.some(item => item.id === eventItem.id))
+      setListPurchase(l => l.concat(eventItem));
+      else setListPurchase(l => Array(...l.filter(i => i.id !== eventItem.id)));
+      console.log(listPurchase);
+    }
+    //tong tien
+    const [sum, setSum] = useState(0)
+    useEffect(() => {
+       let temp = 0;
+       listPurchase.map((item,key) =>{
+           temp = temp + item.price*item.count})
+        setSum(temp);
+        console.log(temp);
+      }, [listPurchase]);
+    //remove
+    const [remove, setRemove] = useState([])
+    const removeProduct = (item) =>{
+        let temp = item;
+        setRemove (temp);
+        console.log(remove)
+    }
 
     return (
       <div className='CartContainer'>
@@ -101,11 +117,11 @@ function Cart() {
                                 <div className="cart-product-join">
                                     <input
                                         type='checkbox'
-                                        onChange = {()=>pushList(item)}
+                                        onChange = {()=>updatePurchaseList(item)}
                                     />
                                 </div>
                                 <div className="cart-product-remove">
-                                    <button>x</button>
+                                    <button onClick={()=>removeProduct(item)}>x</button>
                                 </div>
                                 <div className="cart-controls-sm">
                                     <div className="remove">
@@ -122,11 +138,11 @@ function Cart() {
                         </div>
                     ))}
                 </div>
-                
+                <div>{remove.id}</div>
                 <div className="cart-total-holder">
                     <div className="cart-total">
                         <p>Tổng cộng</p>
-                        <p>80</p>
+                        <p>{sum}</p>
                     </div>
                     <div className="cart-action-button">
                         <a href="">Tiếp tục mua sắm</a>
@@ -138,5 +154,7 @@ function Cart() {
       </div>
     );
   }
+
+  
   
   export default Cart;

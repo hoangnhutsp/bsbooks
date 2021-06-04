@@ -13,7 +13,6 @@ import {
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import EditProfile from './components/Test'
-
 import Home from './page/Home'
 import Checkout from './page/Checkout'
 import Cart from './page/Cart'
