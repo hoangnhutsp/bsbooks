@@ -62,6 +62,8 @@
 }
 
 .button-submit-register {
+    padding: 0.6rem 1rem;
+    color: #fff;
     background: #23bab5;
     border-radius: 0;
     border: 2px solid #23bab5;

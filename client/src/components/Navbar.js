@@ -30,22 +30,38 @@ function Navbar() {
     );
 
     useEffect(() => {
-        if ( userStore.isLogged){
-            let status =  userStore.isLogged;
+        if (userStore.isLogged) {
+            let status = userStore.isLogged;
             let name = userStore.infoUser.name;
             let url = userStore.infoUser.avatar;
-            setUserNavbar({status, name, url})
+            setUserNavbar({ status, name, url })
         }
     }, [userStore])
+    const Logout = () => {
+        localStorage.clear();
+        window.location.reload();
 
+    }
     const UserIsLogin = () => {
-        return (   
-            <Link  to='/user'>
-                <div className='navbar-user'>
-                    <img alt="avatar user" className="navbar-user-avatar" src={userNavbar.url} />
-                    <span className="navbar-user-name">{userNavbar.name}</span>
+        return (
+                <div className='dropdown'>
+                    <div className='navbar-user'>
+                        <img alt="avatar user" className="navbar-user-avatar" src={userNavbar.url} />
+                        <span className="navbar-user-name">{userNavbar.name}</span>
+                    </div>
+                    <div className='dropdown-content'>
+                        <div className='dropdown-content-item'>
+                            <Link to='/user'>Thong tin ca nhan</Link><br/>
+                        </div>
+                        <div className='dropdown-content-item'>
+                            <Link ext to='/user/purchase'>Don hang</Link><br/>
+                        </div>
+                        <div className='dropdown-content-item' onClick={Logout}>
+                            <Link to='/'>Dang xuat</Link>
+                        </div>
+
+                    </div>
                 </div>
-            </Link>
         )
     }
 

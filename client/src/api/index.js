@@ -16,6 +16,8 @@ export const userLogin = (info) => {
     const URL = localhost + 'user/login';
     return axios.post(URL, info);
 }
+
+
 export const userUpdateInfo = (info, token) => {
     const URL = localhost + 'user/update';
     return axios.post(
@@ -26,4 +28,13 @@ export const userUpdateInfo = (info, token) => {
             'Content-Type': 'application/json',
         }},
     )
+}
+
+export const userSignup = (info) => {
+    const URL = localhost + 'user/signup';
+    return axios.post(URL, info, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
 }

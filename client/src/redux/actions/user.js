@@ -50,12 +50,33 @@ export const userUpdateInfo = (info, notiRES) => async (dispatch) =>{
     api.userUpdateInfo(info, token)
     .then(res => res.data)
     .then(data=> {
-        notiRES({status: 'succes'});
-        console.log('test --------');
-        console.log(info);
         dispatch({ type: 'UPDATE_PROFILE', payload: info})
     })
     .catch(err => {
         console.log(err);
+    })
+}
+
+export const userSignup = (info, notiRES) => async (dispatch) =>{
+    api.userSignup(info)
+    .then(res => res.data)
+    .then(data=> {
+
+        if (data.status){
+            const profile = {
+                infoUser: data.user,
+                isLogged: true,
+                isAdmin: data.user.role==='ADMIN',
+                token: data.token,
+            }
+            window.localStorage.setItem('token', data.token);
+            dispatch({type: 'SIGNUP', payload: profile})
+            notiRES({status: data.status, message:'succes'})
+        }
+        notiRES(data) 
+    })
+    .catch(err => {
+        console.log(err);
+        notiRES(err.message);
     })
 }
