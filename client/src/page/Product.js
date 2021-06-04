@@ -15,7 +15,7 @@ function Product() {
             // to do
             return
         }
-        const data = getProductDetails(id)
+        const data = await getProductDetails(id);
         setData(data)
     }, [])
 
