@@ -15,7 +15,6 @@ import {userLogin} from './../../redux/actions/user'
 
 import {validatePassWord, validateEmail} from './CheckInfo'
 
-import * as api from './../../api'
 function Login() {
     let history = useHistory();
 

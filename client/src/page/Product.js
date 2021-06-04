@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { getProductDetails } from '../api/product/product_details'
 // Custom component
 import ImgShowcase from '../components/img_showcase'
@@ -9,10 +9,11 @@ function Product() {
     const [data, setData] = useState() // Data product detals
     const [count, setCount] = useState(1) // count
     const [shouldFullPara, setShouldFullPara] = useState(false) // is readmore needed
+    const history = useHistory();
 
     useEffect(async () => { // Fetch product details
         if (!id) {
-            // to do
+            history.push('/')
             return
         }
         const data = await getProductDetails(id);

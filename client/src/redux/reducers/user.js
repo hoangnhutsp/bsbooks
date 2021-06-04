@@ -20,9 +20,8 @@ const User = (user = initUser, action) => {
                 isAdmin: data.role === 'ADMIN',
             }
             return newProfile;
-        case 'LOGOUT':
-
-            return user;
+        case 'SIGNUP':
+            return data;
         default:
             return user;
     }

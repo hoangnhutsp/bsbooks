@@ -22,18 +22,19 @@ const checkInfo = (info) => {
 
 export const addUser = async (req, res) => {
 
+    let status = 1;
     try {
-
-        // console.log(`INFO: ${info}`);
         let info = req.body;
         if (!checkInfo(info)) {
-            res.status(400).json({ message: "Please fill in all the information" })
+            status = 0;
+            res.status(200).send({status, message: 'Thong tin khong hop le'})
         }
         let email = info.email;
         const find_user = await User.find({ email })
-        if (find_user.length !== 0)
-            res.status(400).json({ message: "User Already" })
-        else {
+        if (find_user.length !== 0){
+                status = 0;
+                res.status(200).send({status, message: 'Email da duoc su dung'})
+        }else {
 
             const hashPassword = await bcrypt.hash(info.password, 12);
             info.password = hashPassword;
@@ -42,7 +43,7 @@ export const addUser = async (req, res) => {
             await newUser.save();
 
             const token = createToken(newUser._id);
-            res.status(200).json({ user: newUser, token});
+            res.status(200).json({ status, user: newUser, token});
         }
     } catch (error) {
         res.status(409).json({ message: error.message })

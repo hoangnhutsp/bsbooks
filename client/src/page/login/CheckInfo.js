@@ -45,8 +45,7 @@ export const validateName = checkingText => {
         return 'Vui lòng nhập đầy đủ Họ tên';
     }
     else {
-        if (!re.test(checkingText))
-            return 'Tên chỉ được chứa chữ cái';
+        
     }
 
     return '';
