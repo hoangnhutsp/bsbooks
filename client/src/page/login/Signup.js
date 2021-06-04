@@ -1,5 +1,6 @@
 import './Register.css';
 import React, { useState, useEffect } from "react";
+import FacebookLogin from 'react-facebook-login';
 
 import {
     validatePhoneNumber,
@@ -12,6 +13,7 @@ import {
 } from './CheckInfo'
 
 function Register() {
+    const [currentUser, setCurrentUser] = useState({})
     const [registerData, setRegisterData] = useState({
         phone: '',
         name: '',
@@ -38,6 +40,29 @@ function Register() {
         e.preventDefault();
 
         console.log(registerData);
+    }
+    const responseFacebook = (res) => {
+        console.log(res);
+        const data = {
+            accessToken: res.accessToken,
+            userID: res.userID
+        }
+        fetch(
+            `http://localhost:5000/user/login-facebook`,
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data);
+                setCurrentUser(data)
+            })
     }
 
 
@@ -181,9 +206,18 @@ function Register() {
                             }
 
                             <div className='form-group-register'>
-                                <button type='submit' className='button-submit-register'>Đăng kí</button>
+                                <button type='submit' className='button-submit-register'>ĐĂNG KÝ</button>
                             </div>
                         </form>
+                        <div className='login-facebook'>
+                            <FacebookLogin
+                                appId="964337381003622"
+                                autoLoad={false}
+                                callback={responseFacebook}
+                                icon="iconfacebook"
+                                size = "medium "  
+                                textButton = "Đăng nhập với FaceBoook"/>
+                        </div>
                     </div>
                 </div>
             </div>

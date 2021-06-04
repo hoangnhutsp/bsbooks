@@ -1,8 +1,10 @@
 import './Register.css';
 import React, { useState, useEffect } from "react";
+import FacebookLogin from 'react-facebook-login';
 
-import {validatePassWord, validateEmail} from './CheckInfo'
+import { validatePassWord, validateEmail } from './CheckInfo'
 function Login() {
+    const [currentUser, setCurrentUser] = useState({})
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
@@ -23,6 +25,31 @@ function Login() {
 
     }
 
+    //đăng nhập bằng FB
+    const responseFacebook = (res) => {
+        console.log(res);
+        const data = {
+            accessToken: res.accessToken,
+            userID: res.userID
+        }
+        fetch(
+            `http://localhost:5000/user/login-facebook`,
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        )
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data);
+                setCurrentUser(data)
+            })
+    }
+
 
     return (
         <div className='containner-register'>
@@ -38,9 +65,9 @@ function Login() {
                                     placeholder='Địa chỉ Email'
                                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                                     onBlur={
-                                        (e) => { 
+                                        (e) => {
                                             let err = validateEmail(e.target.value);
-                                            setError({...error, email: err})
+                                            setError({ ...error, email: err })
                                         }
                                     }
                                     required
@@ -48,7 +75,7 @@ function Login() {
                             </div>
 
 
-                            {(error.email=='') ? null :
+                            {(error.email == '') ? null :
                                 <div>{error.email}</div>
                             }
 
@@ -60,7 +87,7 @@ function Login() {
                                     onBlur={
                                         (e) => {
                                             let err = validatePassWord(e.target.value);
-                                            setError({...error, password: err});
+                                            setError({ ...error, password: err });
                                             console.log(err);
                                         }
                                     }
@@ -68,16 +95,28 @@ function Login() {
                                 />
                             </div>
 
-                            {(error.password=='') ? null :
+                            {(error.password == '') ? null :
                                 <div>{error.password}</div>
                             }
 
                             <div className='form-group-register'>
-                                <button type='submit' className='button-submit-register'>Đăng Nhập</button>
+                                <button type='submit' className='button-submit-register'>ĐĂNG NHẬP</button>
                             </div>
 
 
                         </form>
+                        <div className='login-facebook'>
+                            <FacebookLogin
+                                appId="964337381003622"
+                                autoLoad={false}
+                                callback={responseFacebook}
+                                icon="iconfacebook"
+                                size = "medium "  
+                                textButton = "Đăng nhập với FaceBoook"/>
+
+                        </div>
+
+
                     </div>
                 </div>
             </div>

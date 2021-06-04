@@ -54,7 +54,7 @@ app.use(session({
 }))
 
 app.use(sessionMiddleware);
-app.use(refreshTokenMiddleware);
+//app.use(refreshTokenMiddleware);
 
 app.use('/user', userRouters)
 app.use('/cart', cartRoutes)

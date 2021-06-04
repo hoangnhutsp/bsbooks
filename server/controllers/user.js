@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import fetch from 'node-fetch';
 
 const SECRET = 'bsbooksToken';
 
@@ -131,6 +132,63 @@ export const updateUser = async (req, res) => {
 
     } catch (error) {
         res.status(409).json({ message: error.message })
+    }
+}
+
+//Login with FaceBook
+export const loginFacebook = async (req, res) => {
+    let email = '';
+    let name = '';
+    const userID = req.body.userID;
+    console.log('userID', userID)
+    const accessToken = req.body.accessToken;
+    console.log('accessToken', accessToken)
+
+    let urlGraphFaceBook = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`
+    await fetch(urlGraphFaceBook,
+        {
+            method: "GET"
+        })
+        .then(resp => resp.json())
+        .then(resp => {
+            //console.log(resp.email)
+            email = resp.email
+            name = resp.name
+        })
+    try {
+        const user = await User.findOne({ email })
+        if (user) {
+            console.log('Login')
+            const token = createToken(user._id);
+            let userToken = user.token;
+            userToken.push(token);
+            const userLogin = await User.findByIdAndUpdate(user._id, { token: userToken }, { new: true });
+            res.status(200).json({ result: userLogin, token })
+        } else {
+            console.log("Register")
+            let password = email + 'Bsbooks';
+            const hashPassword = await bcrypt.hash(password, 12);
+            //new user
+            const userInf = {
+                name: name,
+                phone: '',
+                email: email,
+                password: hashPassword,
+                address: '',
+                gender: '',
+                birthday: '',
+                token: []
+            }
+            const newUser = new User(userInf);
+            await newUser.save();
+            const creaToken = createToken(newUser._id);
+            let token = newUser.token;
+            token.push(creaToken);
+            const currentUser = await User.findByIdAndUpdate(newUser._id, { token: token }, { new: true });
+            res.status(200).json({ result: currentUser, token });
+        }
+    } catch (error) {
+        res.status(404).json({ message: error.message })
     }
 }
 

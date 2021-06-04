@@ -12,17 +12,24 @@ function base64_encode(file) {
 }
 
 const userSchema = mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        require: true
+    },
     phone: String,
     email: {
         type: String,
         unique: true,
+        require: true,
         validate: value => {
             if(!validator.isEmail(value))
                 throw new Error({error: "Invalid email credentials "})
         }
     },
-    password: String,
+    password: {
+        type: String,
+        require: true
+    },
     address: String,
     gender: String,
     birthday: Date,
