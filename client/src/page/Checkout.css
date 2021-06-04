@@ -1,22 +1,31 @@
-/*body{
+.CheckoutContainer{
     font-size: 17px;
-    padding: 8px;
 }
 
-h2{
-    text-align: center;
-}*/
+.h3-checkout{
+    color: #333;
+    padding: 1rem;
+    margin-bottom: 2%;
+}
 
-/*{
+.h2-checkout{
+    font-size: 1.2rem;
+    color: #333;
+    background: rgb(247, 243, 243);
+    padding: 1rem;
+    margin-bottom: 2%;
+}
+
+*{
     box-sizing: border-box;
-}*/
+}
 
-/*.row{
+.row{
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin: 0 -10px;
+   
 }
 
 .col-25{
@@ -29,24 +38,57 @@ h2{
     flex: 25%;
 }
 
-.col-25, .col-75{
-    padding: 0 16px;
+.icon-kc{
+    margin-left: 1%;
+}
+
+.col-25, 
+.col-75{
+    padding: 0 5%;
+    margin-bottom: 3%;
 }
 
 .container{
-    background-color: #cfcccc85;
     padding: 3px 18px 13px 18px;
     border: 1px solid lightgray;
     border-radius: 3px;
+    
 }
 
-.input[type=text]{
+.input-checkout{
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid lightgray;
     border-radius: 3px;
-}*/
+    outline: none;
+}
+
+label{
+    margin-bottom: 10px;
+}
+
+
+
+span.price{
+    float: right;
+    color: gray;
+}
+
+@media (max-with:800px)
+{
+    .row{
+        flex-direction: column-reverse;
+    }
+    .col-25{
+        margin-top: 20px;
+    }
+}
+
+
+
+
+
 
 
 

@@ -50,6 +50,15 @@ function Cart() {
         })
    }
 
+   //thêm vào danh sách sản phẩm được chọn trong giỏ hàng
+   const [listPurchase, setListPurchase] = useState([])
+   
+   const pushList = (item) =>{
+        let temp = listPurchase;
+        temp.push(item);
+        setListPurchase (temp);
+        console.log(listPurchase)
+   }
 
     return (
       <div className='CartContainer'>
@@ -70,7 +79,6 @@ function Cart() {
                             <form action="">
                                 <div className="cart-product">
                                     <div className="cart-image">
-                                        {/*hi mình là quí*/}
                                         <img className="cart-image" src={item.image}></img>
                                     </div>
                                     <div className="cart-product-infor">
@@ -93,6 +101,7 @@ function Cart() {
                                 <div className="cart-product-join">
                                     <input
                                         type='checkbox'
+                                        onChange = {()=>pushList(item)}
                                     />
                                 </div>
                                 <div className="cart-product-remove">
@@ -116,12 +125,12 @@ function Cart() {
                 
                 <div className="cart-total-holder">
                     <div className="cart-total">
-                        <p>Total</p>
+                        <p>Tổng cộng</p>
                         <p>80</p>
                     </div>
                     <div className="cart-action-button">
-                        <a href="">Continue Shopping</a>
-                        <a href="" className="btn-main">Proceed to checkout</a>
+                        <a href="">Tiếp tục mua sắm</a>
+                        <a href="" className="btn-main">Chi tiết đơn hàng</a>
                     </div>
                 </div>
             </div>
