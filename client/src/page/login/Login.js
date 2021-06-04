@@ -43,7 +43,6 @@ function Login() {
         let err = ''
         e.preventDefault();
         dispatch(userLogin(loginData, setErrRes))
-
     }
 
 
