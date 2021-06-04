@@ -12,7 +12,7 @@ import Order from './notifications/Order';
 import Promotion from './notifications/Promotion';
 import Purchase from './purchase/Purchase'
 function User() {
-    let { path, url } = useRouteMatch();
+    let { path } = useRouteMatch();
 
     return (
         <div className="container-user">

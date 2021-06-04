@@ -1,11 +1,29 @@
 import './Register.css';
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { 
+    useState, 
+} from 'react'
+
+import { 
+    useDispatch 
+} from 'react-redux';
+import {
+    useHistory,
+} from 'react-router-dom'
+
+import {userLogin} from './../../redux/actions/user'
 
 import {validatePassWord, validateEmail} from './CheckInfo'
+
+import * as api from './../../api'
 function Login() {
+    let history = useHistory();
+
+    const dispatch = useDispatch();
+
     const [loginData, setLoginData] = useState({
-        email: '',
-        password: '',
+        email: 'hoangnhut@gmail.com',
+        password: 'Nhutsp240420',
     })
 
     const [error, setError] = useState({
@@ -15,12 +33,11 @@ function Login() {
     })
 
 
-    const submitHandler = e => {
+    const submitHandler = (e) => {
+        
         e.preventDefault();
-        console.log(loginData);
-
-        // sol server
-
+        dispatch(userLogin(loginData))
+        
     }
 
 
@@ -43,12 +60,13 @@ function Login() {
                                             setError({...error, email: err})
                                         }
                                     }
+                                    value={loginData.email}
                                     required
                                 />
                             </div>
 
 
-                            {(error.email=='') ? null :
+                            {(error.email==='') ? null :
                                 <div>{error.email}</div>
                             }
 
@@ -64,11 +82,13 @@ function Login() {
                                             console.log(err);
                                         }
                                     }
+                                    value={loginData.password}
+
                                     required
                                 />
                             </div>
 
-                            {(error.password=='') ? null :
+                            {(error.password==='') ? null :
                                 <div>{error.password}</div>
                             }
 

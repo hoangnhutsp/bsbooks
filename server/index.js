@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 
 // middleware
 import { sessionMiddleware } from "./middlewares/session.middleware.js"
-import { refreshTokenMiddleware } from "./middlewares/refreshToken.middleware.js"
+//import { refreshTokenMiddleware } from "./middlewares/refreshToken.middleware.js"
 
 
 // router
@@ -54,7 +54,7 @@ app.use(session({
 }))
 
 app.use(sessionMiddleware);
-app.use(refreshTokenMiddleware);
+//app.use(refreshTokenMiddleware);
 
 app.use('/user', userRouters)
 app.use('/cart', cartRoutes)

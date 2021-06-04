@@ -1,10 +1,13 @@
 import React from 'react';
 import { useState } from 'react'
 import "./Profile.css";
-
+import { useSelector} from 'react-redux'
 import axios from 'axios'
 
 function Profile() {
+
+    const stateProfile = useSelector(state => state.user)
+    console.log(stateProfile);
 
     const [profile, setProfile] = useState({
         name: "Trang Hoang Nhut",
@@ -109,20 +112,20 @@ function Profile() {
                                 <td>
                                     <input
                                         name="gender" type="radio" value="male"
-                                        defaultChecked={profile.gender == "male"}
+                                        defaultChecked={profile.gender === "male"}
                                         onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                     />
                                     <span>Nam</span>
 
                                     <input
                                         name="gender" type="radio" value="female"
-                                        defaultChecked={profile.gender == "female"}
+                                        defaultChecked={profile.gender === "female"}
                                         onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                     />
                                     <span>Nu</span>
                                     <input
                                         name="gender" type="radio" value="other"
-                                        defaultChecked={profile.gender == "other"}
+                                        defaultChecked={profile.gender === "other"}
                                         onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                     />
                                     <span>Khac</span>
@@ -145,7 +148,7 @@ function Profile() {
                         <div className="avatar-user-profile">
 
                             <div>
-                                <img id="profile-avatar-current" src={currentAvatar}></img>
+                                <img alt="profile-avatar"id="profile-avatar-current" src={currentAvatar}></img>
                             </div>
                             <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
                             <label for="upload-image">Chon Anh</label>

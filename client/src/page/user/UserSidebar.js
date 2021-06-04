@@ -7,7 +7,6 @@ import {
 
 import avt from './avt.png'
 import { SidebarData } from './UserSidebarData'
-import { Children } from 'react';
 
 
 function SideBarLink({ exact, to, children }) {
@@ -29,12 +28,12 @@ function SideBarLink({ exact, to, children }) {
     )
 }
 function UserSidebar() {
-    let { path, url } = useRouteMatch();
+    let { url } = useRouteMatch();
 
     return (
         <div className="sidebar-container">
                 <div className="sidebar-profile">
-                    <img id="sidebar-avatar" src={avt}></img>
+                    <img alt="avt-user" id="sidebar-avatar" src={avt}></img>
                     <div id="sidebar-name">Trang Hoang Nhut</div>
                 </div>
             <ul className="sidebar-list">

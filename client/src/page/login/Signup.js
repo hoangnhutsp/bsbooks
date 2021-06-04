@@ -1,5 +1,5 @@
 import './Register.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
     validatePhoneNumber,
@@ -62,7 +62,7 @@ function Register() {
                                     }}
                                     required></input>
                             </div>
-                            {(error.name == '') ? null :
+                            {(error.name === '') ? null :
                                 <div>{error.name}</div>
                             }
 
@@ -79,7 +79,7 @@ function Register() {
                                     }}
                                     required></input>
                             </div>
-                            {(error.email == '') ? null :
+                            {(error.email === '') ? null :
                                 <div>{error.email}</div>
                             }
                             <div className='form-group-register'>
@@ -96,7 +96,7 @@ function Register() {
                                     }}
                                     required></input>
                             </div>
-                            {(error.phone == '') ? null :
+                            {(error.phone === '') ? null :
                                 <div>{error.phone}</div>
                             }
                             <div className='form-group-register'>
@@ -112,7 +112,7 @@ function Register() {
                                     }}
                                     required></input>
                             </div>
-                            {(error.address == '') ? null :
+                            {(error.address === '') ? null :
                                 <div>{error.address}</div>
                             }
 
@@ -139,7 +139,7 @@ function Register() {
                                     }}>
                                 </input>
                             </div>
-                            {(error.password == '') ? null :
+                            {(error.password === '') ? null :
                                 <div>{error.password}</div>
                             }
 
@@ -157,7 +157,7 @@ function Register() {
                                     }}>
                                 </input>
                             </div>
-                            {(error.confirmPassWord == '') ? null :
+                            {(error.confirmPassWord === '') ? null :
                                 <div>{error.confirmPassWord}</div>
                             }
 
@@ -176,7 +176,7 @@ function Register() {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nữ
                         </div>
-                            {(error.gender == '') ? null :
+                            {(error.gender === '') ? null :
                                 <div>{error.gender}</div>
                             }
 
