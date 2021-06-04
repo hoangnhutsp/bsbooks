@@ -29,7 +29,6 @@ function User() {
                     <Route exact path={`${path}/profile`}>
                         <Profile />
                     </Route>
-
                     <Route exact path={`${path}/address`}>
                         <Address />
                     </Route>

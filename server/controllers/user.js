@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { lchown } from 'fs';
 
 const SECRET = 'bsbooksToken';
 
@@ -39,7 +40,7 @@ export const addUser = async (req, res) => {
             await newUser.save();
 
             const token = createToken(newUser._id);
-            res.status(200).json({ user, token});
+            res.status(200).json({ user: newUser, token});
         }
     } catch (error) {
         res.status(409).json({ message: error.message })
@@ -99,9 +100,7 @@ export const updateUser = async (req, res) => {
 
         const info = req.body;
         const user = await User.findByIdAndUpdate(req.userID, info);
-
         res.status(200).json(user);
-
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
