@@ -1,0 +1,33 @@
+
+.sub-imgs-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.selected {
+    opacity: 1 !important;
+}
+
+.main-img-view {
+    border: 1px solid #ddd;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.main-img {
+    width: 80%;
+    display: block;
+    margin: 10%;
+}
+
+
+.sm-img {
+    max-width: 100px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    opacity: 0.5;
+}

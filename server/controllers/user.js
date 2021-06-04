@@ -22,6 +22,8 @@ const checkInfo = (info) => {
 export const addUser = async (req, res) => {
 
     try {
+
+        // console.log(`INFO: ${info}`);
         let info = req.body;
         if (!checkInfo(info)) {
             res.status(400).json({ message: "Please fill in all the information" })
