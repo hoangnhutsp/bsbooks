@@ -20,7 +20,6 @@ import Login from './page/login/Login'
 import Signup from './page/login/Signup'
 
 
-//redux
 import {getProfile} from './redux/actions/user';
 import {
   useDispatch,
@@ -28,7 +27,6 @@ import {
 
 const App = () => {
 
-  // const dispatch = useDispatch()
 
   useEffect(() => {
       dispatch(getProfile())
