@@ -22,8 +22,8 @@ function Login() {
     const dispatch = useDispatch();
 
     const [loginData, setLoginData] = useState({
-        email: 'hoangnhut@gmail.com',
-        password: 'Nhutsp240420',
+        email: 'hoangnhutsp@gmail.com',
+        password: '1234',
     })
 
     const [error, setError] = useState({
@@ -33,9 +33,17 @@ function Login() {
     })
 
 
+    const setErrRes = err => {
+        console.log(err);
+        if (err === '') history.push('/'); else
+        setError({...error, error: err});
+    }
     const submitHandler = (e) => {
+
+        let err = ''
         e.preventDefault();
-        dispatch(userLogin(loginData))
+        dispatch(userLogin(loginData, setErrRes))
+
     }
 
 
@@ -45,6 +53,11 @@ function Login() {
                 <div className='col-sm-6-register'>
                     <div className='article-register'>
                         <h3 className='text-center-register'>ĐĂNG NHẬP</h3>
+
+                        {(error.error==='') ? null :
+                                <div>{error.error}</div>
+                        }
+
                         <form className='signup-register' onSubmit={submitHandler}>
                             <div className='form-group-register'>
                                 <input type='email'

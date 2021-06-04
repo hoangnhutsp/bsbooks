@@ -30,9 +30,9 @@ const App = () => {
 
   // const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //     dispatch(getProfile())
-  // }, [dispatch])
+  useEffect(() => {
+      dispatch(getProfile())
+  }, [dispatch])
 
   return (
     <>

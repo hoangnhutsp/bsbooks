@@ -16,3 +16,14 @@ export const userLogin = (info) => {
     const URL = localhost + 'user/login';
     return axios.post(URL, info);
 }
+export const userUpdateInfo = (info, token) => {
+    const URL = localhost + 'user/update';
+    return axios.post(
+        URL, 
+        info, 
+        {headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        }},
+    )
+}

@@ -10,7 +10,6 @@ const User = (user = initUser, action) => {
     let data = action.payload;
     switch (action.type) {
         case 'LOGIN': 
-            console.log(data);
             return data;
         case 'UPDATE_PROFILE':
             return data;

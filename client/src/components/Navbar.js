@@ -8,16 +8,13 @@ import {
 } from "react-router-dom";
 
 import {
-    useSelector,
+    useSelector
 } from 'react-redux';
 
 import iconShoppingCart from './../icons/shopping-cart.svg'
 function Navbar() {
 
     const userStore = useSelector(state => state.user);
-
-    console.log('user store');
-    console.log(userStore);
     let initData = {}
     initData.status = userStore.isLogged;
     if (userStore.isLogged) {
@@ -28,28 +25,27 @@ function Navbar() {
         initData.url = '';
     }
     const [countCart, setCountCart] = useState(0)
-    console.log(userStore);
     const [userNavbar, setUserNavbar] = useState(
         initData
     );
 
     useEffect(() => {
-        console.log(userNavbar);
         if ( userStore.isLogged){
             let status =  userStore.isLogged;
             let name = userStore.infoUser.name;
             let url = userStore.infoUser.avatar;
             setUserNavbar({status, name, url})
         }
-        
     }, [userStore])
 
     const UserIsLogin = () => {
-        return (
-            <div className='navbar-user'>
-                <img alt="avatar user" className="navbar-user-avatar" src={userNavbar.url} />
-                <span className="navbar-user-name">{userNavbar.name}</span>
-            </div>
+        return (   
+            <Link  to='/user'>
+                <div className='navbar-user'>
+                    <img alt="avatar user" className="navbar-user-avatar" src={userNavbar.url} />
+                    <span className="navbar-user-name">{userNavbar.name}</span>
+                </div>
+            </Link>
         )
     }
 
