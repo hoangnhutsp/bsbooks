@@ -1,0 +1,24 @@
+.Info-col ul li {
+    font-size: 1.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    
+}
+.Info-col ul li p
+{
+    color: white;
+}
+.Info-col ul p i {
+    color: white;
+}
+.InfoTransportContainer .Infocontainer {
+background-color: #363b49;
+padding: 1.5rem;
+}
+
+.InfoTransportContainer .Infocontainer {
+    margin:auto;
+}
+.InfoBold{
+    font-weight: 1000;
+}
