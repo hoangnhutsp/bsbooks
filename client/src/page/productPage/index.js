@@ -8,60 +8,44 @@ import  {getProductLists} from '../../api/product/product_list'
 import Rate from '../../components/rate'
 import Item from '../../components/item'
 
+//
+import {queryStringSortType} from './constantQuery'
 
 const ProductPage = () => {
-    const [fromValue, setFromValue] = useState()
-    const [toValue, setToValue] = useState()
+    const [fromValue, setFromValue] = useState(0)
+    const [toValue, setToValue] = useState(0)
+    const [rating, setRating] = useState(0)
     const [sortType, setSortType] = useState(0)
     const [curData, setCurData] = useState([])
     const [cache, setCache] = useState({}) // Caching data
 
+ 
+
+
     useEffect(async() => {
-        await sortByPop() // default is soft by pop
+        await sortData(sortType) // default is soft by pop
     }, [])
 
-    const sortByPop = async () => {
-        if (!cache.popular) { // load data when not load yet
-            const data = await getProductLists()
-            const newData = {
-                ...cache,
-                "popular": data.product
-            }
-            console.log({newData});
-            setCurData(data.product)
-            setCache({
-                ...cache,
-                "popular": data.product
-            })
+    useEffect(() => {
+        sortData();
+    }, [sortType])
+
+
+    const sortData = async () => {
+        let queryString = queryStringSortType[sortType].query;
+        if (toValue || fromValue) {
+            queryString += `&price=${fromValue},${toValue}`;
         }
+        if (rating) {
+            queryString += `&rating=${rating}`;
+        }
+        
+        console.log(`query: ${queryString}`);
+        const data = await getProductLists(queryString)
+        setCurData(data.product)  
     }
 
-    const sortByHeighPrice = async () => { // sort data from heigh to low
-        if (!cache.hight) { // load data when not load yet
-            const data = await getProductLists()
-            setCache({
-                ...cache,
-                "high": data
-            })
-        }
-    }
-
-    const sortByLowPrice = async () => { // sort data from heigh to low
-        if (!cache.low) { // load data when not load yet
-            const data = await getProductLists()
-            setCache({
-                ...cache,
-                "low": data
-            })
-        }
-    }
-
-    const getLowList = async() => { // sort data from heigh to low
-        if (!cache.hight) { // load data when not load yet
-            await getProductLists()
-        }
-    }
-
+   
     return (
         <div className="productPage">
             <div className="container-f90 row">
@@ -69,30 +53,50 @@ const ProductPage = () => {
                 <div className="col-2">
                     <p className="bold uppercase">Đánh giá</p>
                     <br></br>
-                    <div className="row align-center hover">
+                    <div className="row align-center hover" onClick={() => setRating(5)}>
                         <Rate number={5} />
                         <p>Từ 5 sao</p>
                     </div>
-                    <div className="row align-center hover">
+                    <div className="row align-center hover" onClick={() => setRating(4)}>
                         <Rate number={4} />
                         <p>Từ 4 sao</p>
                     </div>
-                    <div className="row align-center hover">
+                    <div className="row align-center hover" onClick={() => setRating(3)}>
                         <Rate number={3} />
                         <p>Từ 3 sao</p>
                     </div>
                     <br></br>
                     <p className="bold uppercase">Giá</p>
-                    <div className="tagItem">
+                    <div className="tagItem" 
+                        onClick={e => {
+                            setFromValue(0);
+                            setToValue(70000);
+                        }}
+                    >
                         <span className="white tag sml-text hover">Dưới 70.000</span>
                     </div>
-                    <div className="tagItem">
+                    <div className="tagItem"
+                        onClick={e => {
+                            setFromValue(70000);
+                            setToValue(110000);
+                        }}
+                    >
                         <span className="white tag sml-text hover">Từ 70.000 Đến 110.000</span>
                     </div>
-                    <div className="tagItem">
+                    <div className="tagItem"
+                        onClick={e => {
+                            setFromValue(110000);
+                            setToValue(220000);
+                        }}
+                    >
                         <span className="white tag sml-text hover">Từ 110.000 Đến 220.000</span>
                     </div>
-                    <div className="tagItem">
+                    <div className="tagItem"
+                        onClick={e => {
+                            setFromValue(220000);
+                            setToValue(0);
+                        }}
+                    >
                         <span className="white tag sml-text hover">Trên 220.000</span>
                     </div>
 

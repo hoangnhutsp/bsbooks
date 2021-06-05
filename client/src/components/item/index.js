@@ -5,7 +5,7 @@ const Item = (props) => {
     const { data } = props
     if (!data) return null
     return (
-        <Link to={'/product-details/1'}>
+        <Link to={`/product-details/${data._id}`}>
             <div className="item hover" >
                 <img className="thumnail" src={data.thumbnail_url}></img>
                 <Rate></Rate>
