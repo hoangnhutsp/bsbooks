@@ -1,22 +1,48 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import "./Profile.css";
-
+import { useDispatch, useSelector, useStore } from 'react-redux'
 import axios from 'axios'
 
+import { userUpdateInfo } from './../../../redux/actions/user'
 function Profile() {
+    const userStore = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
     const [profile, setProfile] = useState({
         name: "Trang Hoang Nhut",
         phone: "0905749010",
-        email: "hoangnhutsp@gmail.com",
-        gender: "male",
+        email: "a@gmail.com",
+        gender: "female",
         birthday: "2015-04-24",
         avatar: "http://localhost:5000/default/images/default-avatar-profile.jpg"
     })
 
+    const convertIOSDateToYMD = date => {
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let dt = date.getDate();
 
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+        let yymmdd = year + '-' + month + '-' + dt;
+        return yymmdd;
+    }
+    useEffect(() => {
+        let infoUser = userStore.infoUser;
+        if (infoUser) {
+            infoUser.birthday = convertIOSDateToYMD(new Date(infoUser.birthday))      
+            setCurrentAvatar(infoUser.avatar);      
+            setProfile(infoUser)
+        }
+
+    }, [userStore, dispatch])
     const [currentAvatar, setCurrentAvatar] = useState(profile.avatar)
+
 
     const getBase64 = file => {
         return new Promise(resolve => {
@@ -36,7 +62,6 @@ function Profile() {
         let file = e.target.files[0];
         getBase64(file)
             .then(result => {
-                // upload image to server
                 const images = [result];
                 const data = { images }
                 const url = "http://localhost:5000/upload_image";
@@ -55,10 +80,14 @@ function Profile() {
             });
 
     }
+    const notiRES = noti => {
+        console.log('in noti');
+    }
     const submitHanler = e => {
         e.preventDefault();
         profile.avatar = currentAvatar;
-        console.log(profile);
+        dispatch(userUpdateInfo(profile, notiRES))
+        window.location.reload();
     }
 
     return (
@@ -73,71 +102,75 @@ function Profile() {
                 <div className="form-user-profile">
                     <div className="container-info-user-profile">
                         <table id="table-info-user-profile">
-                            <tr className="form-group">
-                                <td>Email dang nhap</td>
-                                <td>
-                                    <p>{profile.email}</p>
-                                </td>
-                            </tr>
-                            <tr className="form-group-text">
-                                <td>Ho va ten</td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        value={profile.name}
-                                        onChange={e => setProfile({ ...profile, name: e.target.value })}
-                                    />
-                                </td>
-                            </tr>
-                            <tr className="form-group-text">
-                                <td>So dien thoai</td>
-                                <td>
-                                    <input type="tel" name="phone" id="phone"
-                                        pattern="[0-0]{1}[0-9]{9}"
-                                        required
-                                        value={profile.phone}
-                                        placeholder="0905 749 010"
-                                        onChange={e => setProfile({ ...profile, phone: e.target.value })}
-                                    />
-                                </td>
-                            </tr>
+                            <tbody>
 
-                            <tr className="form-group-radio">
-                                <td>Gioi tinh</td>
-                                <td>
-                                    <input
-                                        name="gender" type="radio" value="male"
-                                        defaultChecked={profile.gender == "male"}
-                                        onChange={e => setProfile({ ...profile, gender: e.target.value })}
-                                    />
-                                    <span>Nam</span>
+                                <tr className="form-group">
+                                    <td>Email dang nhap</td>
+                                    <td>
+                                        <p>{profile.email}</p>
+                                    </td>
+                                </tr>
+                                <tr className="form-group-text">
+                                    <td>Ho va ten</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            value={profile.name}
+                                            onChange={e => setProfile({ ...profile, name: e.target.value })}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr className="form-group-text">
+                                    <td>So dien thoai</td>
+                                    <td>
+                                        <input type="tel" name="phone" id="phone"
+                                            pattern="[0-0]{1}[0-9]{9}"
+                                            required
+                                            value={profile.phone}
+                                            placeholder="0905 749 010"
+                                            onChange={e => setProfile({ ...profile, phone: e.target.value })}
+                                        />
+                                    </td>
+                                </tr>
 
-                                    <input
-                                        name="gender" type="radio" value="female"
-                                        defaultChecked={profile.gender == "female"}
-                                        onChange={e => setProfile({ ...profile, gender: e.target.value })}
-                                    />
-                                    <span>Nu</span>
-                                    <input
-                                        name="gender" type="radio" value="other"
-                                        defaultChecked={profile.gender == "other"}
-                                        onChange={e => setProfile({ ...profile, gender: e.target.value })}
-                                    />
-                                    <span>Khac</span>
-                                </td>
-                            </tr>
-                            <tr className="form-group">
-                                <td>Ngay sinh</td>
-                                <td>
-                                    <input
-                                        type="date"
-                                        value={profile.birthday}
-                                        onChange={e => setProfile({ ...profile, birthday: e.target.value })}
-                                    />
-                                </td>
-                            </tr>
+                                <tr className="form-group-radio">
+                                    <td>Gioi tinh</td>
+                                    <td>
+                                        <input
+                                            name="gender" type="radio" value="male"
+                                            checked={profile.gender === "male"}
+                                            onChange={e => setProfile({ ...profile, gender: e.target.value })}
+                                        />
+                                        <span>Nam</span>
+
+                                        <input
+                                            name="gender" type="radio" value="female"
+                                            checked={profile.gender === "female"}
+                                            onChange={e => setProfile({ ...profile, gender: e.target.value })}
+                                        />
+                                        <span>Nu</span>
+                                        <input
+                                            name="gender" type="radio" value="other"
+                                            checked={profile.gender === "other"}
+                                            onChange={e => setProfile({ ...profile, gender: e.target.value })}
+                                        />
+                                        <span>Khac</span>
+                                    </td>
+                                </tr>
+                                <tr className="form-group">
+                                    <td>Ngay sinh</td>
+                                    <td>
+                                        <input
+                                            type="date"
+                                            value={profile.birthday}
+                                            onChange={e => setProfile({ ...profile, birthday: e.target.value })}
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+
                         </table>
                     </div>
 
@@ -145,10 +178,10 @@ function Profile() {
                         <div className="avatar-user-profile">
 
                             <div>
-                                <img id="profile-avatar-current" src={currentAvatar}></img>
+                                <img alt="profile-avatar" id="profile-avatar-current" src={currentAvatar}></img>
                             </div>
                             <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
-                            <label for="upload-image">Chon Anh</label>
+                            <label htmlFor="upload-image">Chon Anh</label>
                         </div>
 
                     </div>

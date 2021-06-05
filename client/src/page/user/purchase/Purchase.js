@@ -24,7 +24,7 @@ function Purchase() {
     const ListItemPurchaseIsEmpty = () => {
         return(
             <div className="purchase-list-item-purchase-is-empty">
-                <img className="icons-shopping-cart" src={iconShopping} />
+                <img alt="icon" className="icons-shopping-cart" src={iconShopping} />
                 <p className="content">Chưa có đơn hàng</p>
             </div>
         )

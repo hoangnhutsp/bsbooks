@@ -1,4 +1,10 @@
 import React from 'react'
+
+import {
+    useState,
+    useEffect,
+} from 'react';
+
 import "./UserSidebar.css";
 import {
     Link,
@@ -7,7 +13,11 @@ import {
 
 import avt from './avt.png'
 import { SidebarData } from './UserSidebarData'
-import { Children } from 'react';
+
+
+import {
+    useSelector
+} from 'react-redux';
 
 
 function SideBarLink({ exact, to, children }) {
@@ -17,6 +27,7 @@ function SideBarLink({ exact, to, children }) {
         path: to
     })
 
+    
     return (
         <div
             className={match ? "customize-link-active" : "customize-link-normal"}
@@ -29,13 +40,27 @@ function SideBarLink({ exact, to, children }) {
     )
 }
 function UserSidebar() {
-    let { path, url } = useRouteMatch();
+    let { url } = useRouteMatch();
+
+    const user = useSelector(state => state.user)
+    const [userSidebarData, setUserSidebarData] = useState({
+        name: '',
+        url: avt,
+    });
+
+    useEffect(() => {
+        if ( user.isLogged){
+            let name = user.infoUser.name;
+            let url = user.infoUser.avatar;
+            setUserSidebarData({name, url})
+        }
+    }, [user])
 
     return (
         <div className="sidebar-container">
                 <div className="sidebar-profile">
-                    <img id="sidebar-avatar" src={avt}></img>
-                    <div id="sidebar-name">Trang Hoang Nhut</div>
+                    <img alt="avt-user" id="sidebar-avatar" src={userSidebarData.url}></img>
+                    <div id="sidebar-name">{userSidebarData.name}</div>
                 </div>
             <ul className="sidebar-list">
                 {SidebarData.map((val, key) => {
