@@ -1,6 +1,7 @@
 import './Register.css';
 import React, { useState, useEffect } from "react";
 import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 import {
     validatePhoneNumber,
@@ -64,6 +65,28 @@ function Register() {
                 setCurrentUser(data)
             })
     }
+    const responseSuccessGoogle = (res) => {
+        console.log(res);
+        fetch(
+            `http://localhost:5000/user/login-google`,
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({tokenId: res.tokenId}),
+            }
+        )
+            .then(resp => {
+                console.log("Google login success", resp)
+            })
+    }
+
+    const responseErrorGoogle = (res) => {
+        console.log(res);
+    }
+
 
 
     return (
@@ -88,7 +111,7 @@ function Register() {
                                     required></input>
                             </div>
                             {(error.name == '') ? null :
-                                <div>{error.name}</div>
+                                <div className = 'error-text-register'>{error.name}</div>
                             }
 
                             <div className='form-group-register'>
@@ -105,7 +128,7 @@ function Register() {
                                     required></input>
                             </div>
                             {(error.email == '') ? null :
-                                <div>{error.email}</div>
+                                <div className = 'error-text-register'>{error.email}</div>
                             }
                             <div className='form-group-register'>
                                 <input
@@ -122,7 +145,7 @@ function Register() {
                                     required></input>
                             </div>
                             {(error.phone == '') ? null :
-                                <div>{error.phone}</div>
+                                <div className = 'error-text-register'>{error.phone}</div>
                             }
                             <div className='form-group-register'>
                                 <input type='text'
@@ -138,7 +161,7 @@ function Register() {
                                     required></input>
                             </div>
                             {(error.address == '') ? null :
-                                <div>{error.address}</div>
+                                <div className = 'error-text-register'>{error.address}</div>
                             }
 
                             <div className='form-group-register'>
@@ -165,7 +188,7 @@ function Register() {
                                 </input>
                             </div>
                             {(error.password == '') ? null :
-                                <div>{error.password}</div>
+                                <div className = 'error-text-register'>{error.password}</div>
                             }
 
 
@@ -183,7 +206,7 @@ function Register() {
                                 </input>
                             </div>
                             {(error.confirmPassWord == '') ? null :
-                                <div>{error.confirmPassWord}</div>
+                                <div className = 'error-text-register'>{error.confirmPassWord}</div>
                             }
 
 
@@ -202,11 +225,11 @@ function Register() {
                                     }} />Nữ
                         </div>
                             {(error.gender == '') ? null :
-                                <div>{error.gender}</div>
+                                <div className = 'error-text-register'>{error.gender}</div>
                             }
 
                             <div className='form-group-register'>
-                                <button type='submit' className='button-submit-register'>ĐĂNG KÝ</button>
+                                <button type='submit' className='button-submit-sigup'>ĐĂNG KÝ</button>
                             </div>
                         </form>
                         <div className='login-facebook'>
@@ -216,7 +239,17 @@ function Register() {
                                 callback={responseFacebook}
                                 icon="iconfacebook"
                                 size = "medium "  
-                                textButton = "Đăng nhập với FaceBoook"/>
+                                textButton = "Đăng ký với FaceBoook"/>
+                        </div>
+                        <div className='sigup-google'>
+                            <GoogleLogin
+                                className = 'login-google'
+                                clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                buttonText="ĐĂNG KÝ VỚI GOOGLE"
+                                onSuccess={responseSuccessGoogle}
+                                onFailure={responseErrorGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
                         </div>
                     </div>
                 </div>

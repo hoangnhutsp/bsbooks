@@ -41,6 +41,10 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "USER",
     },
+    resetLink: {
+        type: String,
+        default:''
+    },
     token: []
 })
 

@@ -1,8 +1,14 @@
 import './Register.css';
 import React, { useState, useEffect } from "react";
 import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 import { validatePassWord, validateEmail } from './CheckInfo'
+
+const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
+const CLIENT_SECRET = 'AC6CUSWFSQW0Zrxm7fUdwnE-';
+
+
 function Login() {
     const [currentUser, setCurrentUser] = useState({})
     const [loginData, setLoginData] = useState({
@@ -49,7 +55,28 @@ function Login() {
                 setCurrentUser(data)
             })
     }
+    //Đăng nhập với Google 
+    const responseSuccessGoogle = (res) => {
+        console.log(res);
+        fetch(
+            `http://localhost:5000/user/login-google`,
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({tokenId: res.tokenId}),
+            }
+        )
+            .then(resp => {
+                console.log("Google login success", resp)
+            })
+    }
 
+    const responseErrorGoogle = (res) => {
+        console.log(res);
+    }
 
     return (
         <div className='containner-register'>
@@ -76,7 +103,7 @@ function Login() {
 
 
                             {(error.email == '') ? null :
-                                <div>{error.email}</div>
+                                <div className = 'error-text-register'>{error.email}</div>
                             }
 
                             <div className='form-group-register'>
@@ -96,7 +123,7 @@ function Login() {
                             </div>
 
                             {(error.password == '') ? null :
-                                <div>{error.password}</div>
+                                <div className = 'error-text-register'>{error.password}</div>
                             }
 
                             <div className='form-group-register'>
@@ -110,10 +137,20 @@ function Login() {
                                 appId="964337381003622"
                                 autoLoad={false}
                                 callback={responseFacebook}
-                                icon="iconfacebook"
-                                size = "medium "  
-                                textButton = "Đăng nhập với FaceBoook"/>
+                                icon="fa-iconfacebook"
+                                size="medium "
+                                textButton="Đăng nhập với FaceBoook" />
 
+                        </div>
+                        <div className='login-google'>
+                            <GoogleLogin
+                                className = 'login-google'
+                                clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                buttonText="ĐĂNG NHẬP VỚI GOOGLE"
+                                onSuccess={responseSuccessGoogle}
+                                onFailure={responseErrorGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
                         </div>
 
 
