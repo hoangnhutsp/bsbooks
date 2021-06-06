@@ -9,12 +9,14 @@
     background: rgb(247, 243, 243);
     padding: 1rem;
 }
-
+.wrapper {
+    margin: 0rem 10rem;
+}
 .cart-conllection{
     margin-top: 0rem;
 }
 
-.cart-item form{
+.cart-item .form{
     display: grid;
     grid-template-columns: 100%;
     border: 1px solid #efefef;
@@ -171,11 +173,11 @@
          width: 15%;
     }
 
-    .cart-item form:first-child{
+    .cart-item .form:first-child{
         border-bottom: 1px solid #efefef;
     }
 
-    .cart-item form{
+    .cart-item .form{
         box-shadow: none;
         border: none;
         display: flex;
@@ -244,10 +246,3 @@
     }
     
 }
-/*
-@media only screen and (min-width: 960px){
-    .page-banner-sm{
-        display: none;
-    }
-
-}*/

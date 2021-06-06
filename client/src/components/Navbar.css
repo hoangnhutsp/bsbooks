@@ -76,8 +76,12 @@
 }
 
 .navbar-cart-number {
-    color: teal;
-    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: white;
+    padding: 0.2rem 0.4rem;
+    vertical-align: top;
+    background-color: teal;
+    border-radius: 40%;
 }
 .container-navbar-cart{
     width: 10vw;
