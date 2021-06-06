@@ -5,7 +5,6 @@ const initCart = {
 }
 
 const Cart = (cart = initCart, action) => {
-    
     switch (action.type) {
         case 'ADD_TO_CART':
             let item = action.payload;

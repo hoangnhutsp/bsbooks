@@ -1,10 +1,10 @@
 import express from 'express';
 
-import {addCart, getCartItem} from '../controllers/cart.js'
+import {addToCart, getCartItem} from '../controllers/cart.js'
 import authMiddleware from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
-router.post('/', authMiddleware, addCart);
+router.post('/', addToCart);
 
 router.get('/', getCartItem)
 
