@@ -2,10 +2,11 @@ import mongoose from 'mongoose';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import fetch from 'node-fetch';
+import axios from 'axios';
 import mailgun from 'mailgun-js';
 import { OAuth2Client } from 'google-auth-library';
 import { lchown } from 'fs';
+import { RSA_NO_PADDING } from 'constants';
 
 const DOMAIN = 'sandboxfd6f315452fe4242b1419326999c6fb1.mailgun.org';
 const API_KEY = '32fd788756cf15d67e0c41b93bc95b16-1d8af1f4-4b0568a1';
@@ -123,56 +124,50 @@ export const updateUser = async (req, res) => {
 }
 
 //Login with FaceBook
-export const loginFacebook = async (req, res) => {
-    let email = '';
-    let name = '';
-    const userID = req.body.userID;
-    console.log('userID', userID)
-    const accessToken = req.body.accessToken;
-    console.log('accessToken', accessToken)
 
+const getAvatarFacebook = async (userID, accessToken) => {
+    let urlGraphFaceBook = `https://graph.facebook.com/${userID}/photos?fields=height,width&access_token=${accessToken}`
+    axios.get(urlGraphFaceBook)
+    .then(res => res.data)
+    .then(data => console.log(data))
+    .catch(err => console.log(err.message))
+}
+export const loginFacebook = async (req, res) => {
+
+    console.log('login facebook');
+    const userID = req.body.userID;
+    const accessToken = req.body.accessToken;
     let urlGraphFaceBook = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`
-    await fetch(urlGraphFaceBook,
-        {
-            method: "GET"
-        })
-        .then(resp => resp.json())
-        .then(resp => {
-            //console.log(resp.email)
-            email = resp.email
-            name = resp.name
-        })
+    console.log(urlGraphFaceBook);
+    let email, name;
+    await axios.get(urlGraphFaceBook)
+    .then((res) => res.data)
+    .then(data => {
+        email = data.email;
+        name = data.name;
+    })
+    .catch(err => {
+        res.sendStatus(400);
+    })
+    
     try {
         const user = await User.findOne({ email })
         if (user) {
-            console.log('Login')
             const token = createToken(user._id);
-            let userToken = user.token;
-            userToken.push(token);
-            const userLogin = await User.findByIdAndUpdate(user._id, { token: userToken }, { new: true });
-            res.status(200).json({ result: userLogin, token })
+            res.status(200).json({ status: 1, user, token})
         } else {
-            console.log("Register")
-            let password = email + 'Bsbooks';
-            const hashPassword = await bcrypt.hash(password, 12);
-            //new user
+            await getAvatarFacebook(userID, accessToken);
             const userInf = {
                 name: name,
                 phone: '',
                 email: email,
-                password: hashPassword,
                 address: '',
-                gender: '',
-                birthday: '',
-                token: []
+                gender: 'male',
             }
             const newUser = new User(userInf);
             await newUser.save();
-            const creaToken = createToken(newUser._id);
-            let token = newUser.token;
-            token.push(creaToken);
-            const currentUser = await User.findByIdAndUpdate(newUser._id, { token: token }, { new: true });
-            res.status(200).json({ result: currentUser, token });
+            const token = createToken(newUser._id);
+            res.status(200).json({ status: 1, user: newUser, token });
         }
     } catch (error) {
         res.status(404).json({ message: error.message })
