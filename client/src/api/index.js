@@ -51,3 +51,13 @@ export const userLoginGoogle = (tokenId) => {
         },
     })
 }
+
+export const userLoginFacebook = ({accessToken, userID}) => {
+    const URL = localhost + 'user/login-facebook';
+    return axios.post(URL, {accessToken, userID}, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+        },
+    })
+}

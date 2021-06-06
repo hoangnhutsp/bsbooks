@@ -10,7 +10,11 @@ import {
     useHistory,
 } from 'react-router-dom'
 
-import {userLogin, userLoginGoogle} from './../../redux/actions/user'
+import {
+    userLogin, 
+    userLoginGoogle, 
+    userLoginFacebook
+} from './../../redux/actions/user'
 
 
 function Login() {
@@ -33,8 +37,8 @@ function Login() {
 
     const setErrRes = err => {
         console.log(err);
-        if (err === '') history.push('/'); else
-        setError({...error, error: err});
+        if (err.status) history.push('/'); else
+        setError({...error, error: err.message});
     }
     const submitHandler = (e) => {
         let err = ''
@@ -42,32 +46,12 @@ function Login() {
         dispatch(userLogin(loginData, setErrRes))
     }
 
-    //đăng nhập bằng FB
     const responseFacebook = (res) => {
-        const data = {
-            accessToken: res.accessToken,
-            userID: res.userID
-        }
-        console.log('data login facebook');
-        console.log(data);
-        fetch(
-            `http://localhost:5000/user/login-facebook`,
-            {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            }
-        )
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data);
-                setCurrentUser(data)
-            })
+        let accessToken = res.accessToken;
+        let userID = res.userID;
+        dispatch(userLoginFacebook({accessToken, userID} ,setErrRes))
     }
-    //Đăng nhập với Google 
+
     const responseSuccessGoogle = (res) => {
         let tokenId = res.tokenId
         dispatch(userLoginGoogle(tokenId ,setErrRes))
@@ -140,13 +124,12 @@ function Login() {
                         </form>
                         <div className='login-facebook'>
                             <FacebookLogin
-                                appId="964337381003622"
+                                appId="340793020896447"
                                 autoLoad={false}
                                 callback={responseFacebook}
                                 icon="fa-iconfacebook"
                                 size="medium "
                                 textButton="Đăng nhập với FaceBoook" />
-
                         </div>
                         <div className='login-google'>
                             <GoogleLogin
