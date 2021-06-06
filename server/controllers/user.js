@@ -264,60 +264,37 @@ export const resetPassWord = async (req, res) => {
 
 //Login with google
 export const googleLogin = async (req, res) => {
-    try {
-        let email_verified = '';
-        let name = '';
-        let email = ''
+    try {        
         const tokenId = req.body.tokenId;
-        //console.log(tokenId)
+        let payload;
         await client.verifyIdToken({ idToken: tokenId, audience: '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com' })
-            .then(resp => {
-                email_verified = resp.payload.email_verified;
-                name = resp.payload.name;
-                email = resp.payload.email;
-                console.log(resp.payload);
-
-            })
+            .then(resp => payload = resp.payload)
             .catch((error) => {
-                console.log('Error:', error);
+                res.status(400).json({status: 0, message: `idToken verify wr ${error.message}`})
             })
-        console.log(email_verified);
-        if (email_verified) {
+
+        let email = payload.email;
+        if (payload.email_verified) {
             const user = await User.findOne({ email })
-            console.log(user);
             if (user) {
-                console.log('Update user')
                 const token = createToken(user._id);
-                let userToken = user.token;
-                userToken.push(token);
-                const userLogin = await User.findByIdAndUpdate(user._id, { token: userToken }, { new: true });
-                res.status(200).json({ result: userLogin, token })
+                res.status(200).json({ status: 1, user , token })
             } else {
-                console.log("Register")
-                let password = email + 'Bsbooks';
-                const hashPassword = await bcrypt.hash(password, 12);
-                //new user
+
                 const userInf = {
-                    name: name,
-                    phone: '',
+                    name: payload.name,
                     email: email,
-                    password: hashPassword,
+                    avatar: payload.picture,
                     address: '',
-                    gender: '',
-                    birthday: '',
-                    token: []
+                    gender: 'male',
+                    phone: '',
                 }
                 const newUser = new User(userInf);
                 await newUser.save();
-                console.log(newUser)
-                const creaToken = createToken(newUser._id);
-                let token = newUser.token;
-                token.push(creaToken);
-                const currentUser = await User.findByIdAndUpdate(newUser._id, { token: token }, { new: true });
-                res.status(200).json({ result: currentUser, token })
+                const token = createToken(newUser._id);
+                res.status(200).json({ status: 1, user: newUser, token })
             }
-        }
-
+        } else res.status(400).json({status: 0, message: 'wr'})
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

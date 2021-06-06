@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { responseSuccessGoogle } from './loginFBGG';
 axios.defaults.withCredentials = true
 
 
@@ -19,7 +20,6 @@ export const userLogin = (info) => {
     return axios.post(URL, info);
 }
 
-
 export const userUpdateInfo = (info, token) => {
     const URL = localhost + 'user/update';
     return axios.post(
@@ -39,4 +39,15 @@ export const userSignup = (info) => {
             'Content-Type': 'application/json',
         }
     });
+}
+
+export const userLoginGoogle = (tokenId) => {
+    const URL = localhost + 'user/login-google';
+
+    return axios.post(URL, {tokenId}, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+        },
+    })
 }

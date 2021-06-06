@@ -86,3 +86,27 @@ export const userSignup = (info, notiRES) => async (dispatch) =>{
         notiRES(err.message);
     })
 }
+
+
+export const userLoginGoogle = (tokenId, notiRES) => async (dispatch) =>{
+    api.userLoginGoogle(tokenId)
+    .then(res => res.data)
+    .then(data=> {
+        if (data.status){
+            const profile = {
+                infoUser: data.user,
+                isLogged: true,
+                isAdmin: data.user.role==='ADMIN',
+                token: data.token,
+            }
+            window.localStorage.setItem('token', data.token);
+            dispatch({type: 'LOGIN', payload: profile})
+            notiRES('');
+        }
+        notiRES("wr") 
+    })
+    .catch(err => {
+        console.log(err);
+        notiRES(err.message);
+    })
+}

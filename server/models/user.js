@@ -23,11 +23,13 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        require: true
     },
     address: String,
     gender: String,
-    birthday: Date,
+    birthday: {
+        type: Date,
+        default: Date.now(),
+    },
     avatar: {
         type: String,
         default: "http://localhost:5000/default/images/default-avatar-profile.jpg",
@@ -36,14 +38,7 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "USER",
     },
-<<<<<<< HEAD
-    resetLink: {
-        type: String,
-        default:''
-    },
-    token: []
-=======
->>>>>>> main
+  
 })
 
 

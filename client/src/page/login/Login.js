@@ -4,20 +4,13 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 
 import { validatePassWord, validateEmail } from './CheckInfo'
+import { useDispatch } from 'react-redux';
 
-const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
-const CLIENT_SECRET = 'AC6CUSWFSQW0Zrxm7fUdwnE-';
-
-import { 
-    useDispatch 
-} from 'react-redux';
 import {
     useHistory,
 } from 'react-router-dom'
 
-import {userLogin} from './../../redux/actions/user'
-
-
+import {userLogin, userLoginGoogle} from './../../redux/actions/user'
 
 
 function Login() {
@@ -27,8 +20,8 @@ function Login() {
     const dispatch = useDispatch();
 
     const [loginData, setLoginData] = useState({
-        email: 'hoangnhutsp@gmail.com',
-        password: '1234',
+        email: '',
+        password: '',
     })
 
     const [error, setError] = useState({
@@ -44,7 +37,6 @@ function Login() {
         setError({...error, error: err});
     }
     const submitHandler = (e) => {
-
         let err = ''
         e.preventDefault();
         dispatch(userLogin(loginData, setErrRes))
@@ -52,11 +44,12 @@ function Login() {
 
     //đăng nhập bằng FB
     const responseFacebook = (res) => {
-        console.log(res);
         const data = {
             accessToken: res.accessToken,
             userID: res.userID
         }
+        console.log('data login facebook');
+        console.log(data);
         fetch(
             `http://localhost:5000/user/login-facebook`,
             {
@@ -76,21 +69,8 @@ function Login() {
     }
     //Đăng nhập với Google 
     const responseSuccessGoogle = (res) => {
-        console.log(res);
-        fetch(
-            `http://localhost:5000/user/login-google`,
-            {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({tokenId: res.tokenId}),
-            }
-        )
-            .then(resp => {
-                console.log("Google login success", resp)
-            })
+        let tokenId = res.tokenId
+        dispatch(userLoginGoogle(tokenId ,setErrRes))
     }
 
     const responseErrorGoogle = (res) => {
