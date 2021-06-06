@@ -8,14 +8,14 @@ import { OAuth2Client } from 'google-auth-library';
 import { lchown } from 'fs';
 import { RSA_NO_PADDING } from 'constants';
 
-const DOMAIN = 'sandboxfd6f315452fe4242b1419326999c6fb1.mailgun.org';
-const API_KEY = '32fd788756cf15d67e0c41b93bc95b16-1d8af1f4-4b0568a1';
+const DOMAIN = process.env.DOMAIN;
+const apiKey =  "32fd788756cf15d67e0c41b93bc95b16-1d8af1f4-4b0568a1";
 //oAuth
-const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
-const CLIENT_SECRET = 'AC6CUSWFSQW0Zrxm7fUdwnE-';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
-const client = new OAuth2Client("551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com")
+const mg = mailgun({ apiKey, domain: DOMAIN });
+const client = new OAuth2Client(CLIENT_ID)
 
 const RESET_PASSWORD = 're-pass bsbook';
 const SECRET = 'bsbooksToken';
