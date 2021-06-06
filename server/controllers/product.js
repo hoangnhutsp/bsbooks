@@ -92,6 +92,7 @@ export const getProduct = async (req, res) => {
 }
 
 const attributeProductDetails = [
+    "_id",
     "id",
     "id_category",
     "sku",
@@ -200,7 +201,6 @@ export const searchProduct = async (req, res) => {
 export const suggestionProduct = async (req, res) => {
     try {
         let q = req.query.q;
-        console.log(q);
         let regex = new RegExp(q, 'i');
         const product = await Product.find({ index_name: regex }, { 'name': 1 }).limit(SIZE_OF_SUGGESTION);
         res.status(200).json({ size: product.length, product })

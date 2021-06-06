@@ -19,7 +19,7 @@ function ItemPurchase({ data }) {
                 return (
                     <div>
                         <div className="container-product-purchase">
-                            <img src={val.url}></img>
+                            <img alt="not-found" src={val.url}></img>
                             <div className="info-product-purchase">
                                 <p>{val.name}</p>
                                 <span>x{val.quantity}</span>

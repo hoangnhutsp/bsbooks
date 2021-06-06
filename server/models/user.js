@@ -4,12 +4,7 @@ import { stringify } from 'querystring';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
-function base64_encode(file) {
-    //read binary data
-    var bitmap = fs.readFileSync(file);
-    //convert binary data to base64 encode string
-    return bitmap.toString('base64');
-}
+
 
 const userSchema = mongoose.Schema({
     name: {
@@ -41,14 +36,17 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "USER",
     },
+<<<<<<< HEAD
     resetLink: {
         type: String,
         default:''
     },
     token: []
+=======
+>>>>>>> main
 })
 
 
-const User = mongoose.model('users', userSchema);
+const User = mongoose.model('user', userSchema);
 
 export default User;

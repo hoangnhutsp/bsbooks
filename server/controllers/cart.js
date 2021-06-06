@@ -1,108 +1,89 @@
 import mongoose from 'mongoose';
 import Cart from '../models/cart.js';
-import User from '../models/user.js';
 
+
+const checkInfoCart = cart => {
+    return true;
+}
+const checkUserID = userID => {
+    return true;
+}
 export const addToCart = async (req, res) => {
     try {
-        const item = req.body;
+        let infoCart = req.body;
+        let userID = req.userID;
 
-
-        let _sessionId = req.signedCookies.sessionId;
-        if (!_sessionId) {
-            res.status(200).json({ message: "WR: Session ID not found!!!" })
+        if (!checkUserID(userID) || !checkInfoCart(infoCart)) {
+            res.status(200).json({
+                status: 0,
+                message: 'wr userID, or info cart'
+            });
         }
+        else {
+            let count = 1;
+            const cart = await Cart.findOne({ userID });
+            if (!cart) {
+                const newCart = new Cart({
+                    userID,
+                    items: infoCart,
+                    count,
+                    status: 0,
+                });
+                await newCart.save();
+            }
+            else {
+                const items = cart["items"];
+                console.log(items);
+                let indexItem = items.findIndex(q => q["_id"] == infoCart["_id"]);
+                console.log(indexItem);
+                if (indexItem !== -1) {
+                    items[indexItem]["quantity"] += infoCart["quantity"];
+                } else items.push(infoCart)
 
-        if (!mongoose.Types.ObjectId.isValid(_sessionId)) return res.status(200).send('No session with id');
-
-        const cart = await Cart.find({ sessionId: _sessionId })
-
-        if (cart.length === 0) {
-            const newCart = new Cart({ sessionId: _sessionId, products: item });
-            await newCart.save();
-        } else {
-            const products = cart[0]["products"];
-            let indexProduct = products.findIndex(q => q["_id"] == item["_id"]);
-            if (indexProduct !== -1) {
-                products[indexProduct]["quantity"] += item["quantity"];
-            } else products.push(item)
-            const updateCart = await Cart.findByIdAndUpdate(cart[0]["_id"], { products: products }, { new: true });
+                await Cart.findByIdAndUpdate(cart["_id"], { items }, { new: true });
+            }
+            res.status(200).json({ message: 'Add cart successful' });
         }
-        res.status(200).json({ message: "add to cart susscesfuly !!!" })
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
 }
 
-
-export const addCart = async (req, res) => {
+const resDataCart = {
+    count: 0,
+    items: [],
+}
+export const getCartItem = async (req, res) => {
     try {
-        let products = req.body.products;
-        let idUser = req.userId.id;
-        //check idUser và products trống
-        if (!idUser || !products) {
-            
-            res.status(200).json({ message: "idUser hoặc products rỗng" });
+        let userID = req.userID;
+        const filter = {
+            userID: {$eq : userID},
+            status: {$eq : 0},
         }
-        else {
-            //check product is arr rong
-            if (products.length === 0) {
-                res.status(200).json({ message: 'list products phải có ít nhất 1 phần tử' });
-            }
-            else {
-                //check user
-                let user = await User.findOne({ _id: idUser });
-                if (!user) {
-                    res.status(200).json({ message: "User not found" });
-                }
-                else {
-                    let index = products.length;
-                    const cart = await Cart.find({ idUser: idUser });
-                    //Cart of User null
-                    if (cart.length === 0) {
-                        const newCart = new Cart({
-                            idUser: idUser,
-                            products: products
-                        });
-                        await newCart.save();
-                    }
-                    else {
-                        for (var i = 0; i < index; i++) {
-                            let productsInCart = cart[0]["products"];
-                            let indexProduct = productsInCart.findIndex(q => q["_id"] == products[i]["_id"]);
-                            if (indexProduct !== -1) {
-                                productsInCart[indexProduct]["quantity"] += products[i]["quantity"];
-                            } else productsInCart.push(products[i])
-                            let updateCart = await Cart.findByIdAndUpdate(cart[0]["_id"], { products: productsInCart }, { new: true });
-                        }
-                    }
-                    res.status(200).json({ message: 'Add cart successful' });
-                }
-            }
+
+        let cart = await Cart.findOne(filter);
+
+        if (cart) {
+            resDataCart.items = cart.items;
+            resDataCart.count = cart.count;
         }
+
+        res.status(200).json(resDataCart)
     } catch (error) {
-        res.status(404).json({ message: message.error })
+        res.status(404).json({ message: error.message })
     }
 }
 
-
-export const getCartItem = async (req, res) => {
+export const updateCart = async (req, res) => {
     try {
-        const item = req.body;
-        let _sessionId = req.signedCookies.sessionId;
-        if (!_sessionId) {
-            res.status(200).json({ message: "WR: Session ID not found!!!" })
+        let userID = req.userID;
+        let infoCart = req.body;
+        const filter = {
+            userID: {$eq : userID},
+            status: {$eq : 0},
         }
-
-        if (!mongoose.Types.ObjectId.isValid(_sessionId)) return res.status(200).send('No session with id');
-
-        const cart = await Cart.find({ sessionId: _sessionId })
-
-        if (cart.length === 0) {
-            res.status(200).json({ messange: "CART EMPTY" })
-        } else {
-
-            res.status(200).json(cart[0]["products"])
-        }
+        const doc = await Cart.findOneAndUpdate(filter, infoCart, {new: true});
+        res.status(200).json(doc)
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

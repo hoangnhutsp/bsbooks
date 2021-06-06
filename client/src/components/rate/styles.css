@@ -1,0 +1,10 @@
+.star {
+    width: 15px;
+    height: 15px;
+    margin: 3px;
+}
+
+.yellow {
+    filter: invert(71%) sepia(93%) saturate(580%) hue-rotate(357deg) brightness(104%) contrast(107%)
+}
+

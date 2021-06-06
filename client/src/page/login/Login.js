@@ -8,12 +8,27 @@ import { validatePassWord, validateEmail } from './CheckInfo'
 const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
 const CLIENT_SECRET = 'AC6CUSWFSQW0Zrxm7fUdwnE-';
 
+import { 
+    useDispatch 
+} from 'react-redux';
+import {
+    useHistory,
+} from 'react-router-dom'
+
+import {userLogin} from './../../redux/actions/user'
+
+
+
 
 function Login() {
+    let history = useHistory();
     const [currentUser, setCurrentUser] = useState({})
+
+    const dispatch = useDispatch();
+
     const [loginData, setLoginData] = useState({
-        email: '',
-        password: '',
+        email: 'hoangnhutsp@gmail.com',
+        password: '1234',
     })
 
     const [error, setError] = useState({
@@ -23,12 +38,16 @@ function Login() {
     })
 
 
-    const submitHandler = e => {
+    const setErrRes = err => {
+        console.log(err);
+        if (err === '') history.push('/'); else
+        setError({...error, error: err});
+    }
+    const submitHandler = (e) => {
+
+        let err = ''
         e.preventDefault();
-        console.log(loginData);
-
-        // sol server
-
+        dispatch(userLogin(loginData, setErrRes))
     }
 
     //đăng nhập bằng FB
@@ -85,6 +104,10 @@ function Login() {
                     <div className='article-register'>
                         <h3 className='text-center-register'>ĐĂNG NHẬP</h3>
 
+                        {(error.error==='') ? null :
+                                <div>{error.error}</div>
+                        }
+
                         <form className='signup-register' onSubmit={submitHandler}>
                             <div className='form-group-register'>
                                 <input type='email'
@@ -97,6 +120,7 @@ function Login() {
                                             setError({ ...error, email: err })
                                         }
                                     }
+                                    value={loginData.email}
                                     required
                                 />
                             </div>
@@ -118,6 +142,8 @@ function Login() {
                                             console.log(err);
                                         }
                                     }
+                                    value={loginData.password}
+
                                     required
                                 />
                             </div>

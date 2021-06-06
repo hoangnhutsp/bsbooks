@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 
 // middleware
 import { sessionMiddleware } from "./middlewares/session.middleware.js"
-import { refreshTokenMiddleware } from "./middlewares/refreshToken.middleware.js"
+//import { refreshTokenMiddleware } from "./middlewares/refreshToken.middleware.js"
 
 
 // router

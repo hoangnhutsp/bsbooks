@@ -1,0 +1,49 @@
+.tag {
+    border-radius: 15px;
+    padding:7px 15px;
+    background-color: gray;
+
+}
+
+.tagItem {
+    margin:5px 0;
+}
+
+.tagItem span {
+    background: rgb(238, 238, 238);
+    font-size: 13px;
+    padding: 2px 12px;
+    line-height: 20px;
+    display: inline-block;
+    position: relative;
+    color: rgb(36, 36, 36);
+    border-radius: 12px;
+    margin-bottom: 4px;
+}
+
+.input {
+    flex: 1 1 0%;
+    width: 95px;
+    height: 30px;
+    padding: 0px 8px;
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+    text-align: left;
+    border: 1px solid rgb(184, 184, 184);
+    outline: 0px;
+    font-size: 13px;
+}
+
+.sort-item {
+    margin:0 10px;
+    padding-bottom: 5px;
+}
+.sort-item:hover {
+    border-bottom: 2px solid blue;
+}
+
+.selected {
+    border-bottom: 2px solid blue;
+    font-weight: bold;
+    color: blue;
+}

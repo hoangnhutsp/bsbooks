@@ -1,6 +1,6 @@
 export const validateEmail = text => {
     const re = /\S+@\S+\.\S+/;
-    if (text == ''){
+    if (text === ''){
         return 'Vui lòng điền email'
     }
     else {
@@ -11,7 +11,7 @@ export const validateEmail = text => {
 }
 
 export const validatePassWord = text => {
-    if (text == '')
+    if (text === '')
         return 'Vui lòng nhập password';
     return '';
 }
@@ -22,7 +22,7 @@ export const validatePhoneNumber = checkingText => {
     const regexp = /^\d{10}$/;
     const re = /^[0-9\b]+$/;
     //check not null
-    if (checkingText == '') {
+    if (checkingText === '') {
         return 'Vui lòng nhập số điện thoại';
     }
     else {
@@ -41,12 +41,11 @@ export const validatePhoneNumber = checkingText => {
 
 export const validateName = checkingText => {
     const re = /^[a-zA-Z]+$/;
-    if (checkingText == '') {
+    if (checkingText === '') {
         return 'Vui lòng nhập đầy đủ Họ tên';
     }
     else {
-        if (!re.test(checkingText))
-            return 'Tên chỉ được chứa chữ cái';
+        
     }
 
     return '';
@@ -54,13 +53,13 @@ export const validateName = checkingText => {
 
 
 export const validateAddress = checkingText => {
-    if (checkingText == '')
+    if (checkingText === '')
         return 'Vui lòng nhập địa chỉ';
     return '';
 }
 
 export const validateConfPassWord = (checkingText, password) => {
-    if (checkingText == '' && password != '')
+    if (checkingText === '' && password !== '')
         return 'Vui lòng nhập lại password';
     else {
         if (checkingText !== password)
