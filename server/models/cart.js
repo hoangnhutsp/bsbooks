@@ -4,14 +4,20 @@ const cartSchema = mongoose.Schema({
     idUser: {
         type: mongoose.Types.ObjectId
     },
-    products: [
+    items: [
         {
             productId: Number,
             quantity: Number,
             name: String,
-            price: Number
-        }
+            price: Number,
+            checked: Boolean,
+            image: String,
+        }   
     ],
+    status : {
+        type: Number,
+        default: 0,
+    },
     createdAt: {
         type: Date,
         default: Date.now
