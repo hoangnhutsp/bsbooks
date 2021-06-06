@@ -140,6 +140,16 @@
     background: rgb(245, 84, 84);
     color: #333;
 }
+.cart-action-button button {
+    display: block;
+    text-align: center;
+    padding: .7rem;
+    margin-bottom: .5rem;
+    text-decoration: none;
+    border: none;
+    background: rgb(245, 84, 84);
+    color: #fff;
+}
 
 .cart-action-button a:first-child{
     order: 1;

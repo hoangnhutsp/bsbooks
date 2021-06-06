@@ -27,7 +27,7 @@ export default function SearchBox() {
 
     })
     document.addEventListener('click', (event) => {
-      ulRef.current.style.display = 'none'
+      ulRef.current.style.display = 'null'
     })
   }, [])
 

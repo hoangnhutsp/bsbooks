@@ -16,14 +16,19 @@ import {
 
 function Cart() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const cartStore = useSelector(state => state.cart);
-
+    const userStore = useSelector(state => state.user);
+    const [isLogged, setIsLogged] = useState(0)
     const [productCart, setProductCart] = useState();
     const [sumPrice, setSumPrice] = useState(0)
 
     useEffect(() => {
         setProductCart(cartStore);
     }, [cartStore])
+    useEffect(() => {
+        setIsLogged(userStore.isLogged);
+    }, [userStore])
 
     const adjustQuantityProductCart = (_id, val) => {        
         let newCart = productCart.items;
@@ -59,6 +64,12 @@ function Cart() {
         }
         dispatch(updateCart(productCart));
     }, [productCart])
+
+    const buttonCheckout = () => {
+        if (isLogged) history.push('/checkout'); else {
+            alert("Ban chua dang nhap ...")
+        }
+    }
     
     const Item = ({item, idx}) => {
         return (
@@ -144,8 +155,8 @@ function Cart() {
                             <p>{sumPrice}</p>
                         </div>
                         <div className="cart-action-button">
-                            <a href="">Tiếp tục mua sắm</a>
-                            <a href="" className="btn-main">Chi tiết đơn hàng</a>
+                            <a href="/">Tiếp tục mua sắm</a>
+                            <button className="btn-main" onClick={() => buttonCheckout()}>Dat hang</button>
                         </div>
                     </div>
                 </div>
