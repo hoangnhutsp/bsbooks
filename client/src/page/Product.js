@@ -3,6 +3,10 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import { getProductDetails } from '../api/product/product_details'
 // Custom component
 import ImgShowcase from '../components/img_showcase'
+
+import { useDispatch } from 'react-redux';
+
+import { addToCart } from './../redux/actions/cart'
 import './product.css'
 function Product() {
     const { id } = useParams();
@@ -10,6 +14,7 @@ function Product() {
     const [count, setCount] = useState(1) // count
     const [shouldFullPara, setShouldFullPara] = useState(false) // is readmore needed
     const history = useHistory();
+    const dispatch = useDispatch();
 
     useEffect(async () => { // Fetch product details
         if (!id) {
@@ -19,7 +24,19 @@ function Product() {
         const data = await getProductDetails(id);
         setData(data)
     }, [])
+    
+    const buttonAddToCart = () => {
+        console.log(count);
+        let info = {};
+        info._id = data._id;
+        info.name = data.name;
+        info.quantity = count;
+        info.image = data.thumbnail_url;
+        info.price = data.price;
+        info.checked = 1;
 
+        dispatch(addToCart(info))
+    }
     return data ? (
         <div className='product'>
             < div className='container' >
@@ -30,7 +47,7 @@ function Product() {
                     <p>Tác giả: {data.author_name}</p>
                     <p>{data.name}</p>
                     <div className='row price-view'>
-                        <p className='big-text bold child'>{data.discount.format(0, 3)}</p>
+                        <p className='big-text bold child'>{(data.price - data.discount).format(0, 3)}</p>
                         <p className='med-text line-through child    '>{data.price.format(0, 3)} </p>
                         <p className='sml-text child'>-{data.discount_rate}%</p>
                     </div>
@@ -48,7 +65,7 @@ function Product() {
                             <p>+</p>
                         </div>
                     </div>
-                    <div className='addToCard center hover' >
+                    <div className='addToCard center hover' onClick={e => buttonAddToCart()}>
                         <p className='white'>Chọn mua</p>
                     </div>
 

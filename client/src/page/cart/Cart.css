@@ -9,12 +9,14 @@
     background: rgb(247, 243, 243);
     padding: 1rem;
 }
-
+.wrapper {
+    margin: 0rem 10rem;
+}
 .cart-conllection{
     margin-top: 0rem;
 }
 
-.cart-item form{
+.cart-item .form{
     display: grid;
     grid-template-columns: 100%;
     border: 1px solid #efefef;
@@ -41,7 +43,8 @@
 
 .cart-quantity-md, 
 .cart-unit-price,
-.cart-product-total{
+.cart-product-join,
+.cart-product-remove{
     display: none;
 }
 
@@ -58,14 +61,18 @@
 }
 
 .cart-quantity-controls-sm,
-.cart-quantity-controls{
+.cart-quantity-controls,
+.remove{
     display: flex;
 }
 
 .cart-quantity-controls-sm button,
 .cart-quantity-controls-sm input,
 .cart-quantity-controls button,
-.cart-quantity-controls input{
+.cart-quantity-controls input,
+.remove button,
+.cart-product-join input,
+.cart-product-remove button{
     height: 25px;
     width: 25px;
     border: none;
@@ -78,7 +85,10 @@
 }
 
 .cart-quantity-controls-sm button,
-.cart-quantity-controls button{
+.cart-quantity-controls button,
+.remove button,
+.cart-product-join input,
+.cart-product-remove button{
     background-color: rgb(252, 52, 52);
     color: #fff;
     border-radius: 50%;
@@ -130,6 +140,16 @@
     background: rgb(245, 84, 84);
     color: #333;
 }
+.cart-action-button button {
+    display: block;
+    text-align: center;
+    padding: .7rem;
+    margin-bottom: .5rem;
+    text-decoration: none;
+    border: none;
+    background: rgb(245, 84, 84);
+    color: #fff;
+}
 
 .cart-action-button a:first-child{
     order: 1;
@@ -141,22 +161,33 @@
     display: none;
 }
 
+.cart-quantity-controls button:disabled,
+.cart-quantity-controls-sm button:disabled {
+    background: #fa7d7d;
+}
+
+.cart-product-join input{
+    width: 12%;
+    height: 12%;
+}
+
 /*RESPONSIVE*/
 @media only screen and (min-width: 786px) {
     .cart-quantity-md, 
     .cart-unit-price,
-    .cart-product-total{
+    .cart-product-join,
+    .cart-product-remove{
          display: flex;
          justify-content: center;
          align-items: center;
          width: 15%;
     }
 
-    .cart-item form:first-child{
+    .cart-item .form:first-child{
         border-bottom: 1px solid #efefef;
     }
 
-    .cart-item form{
+    .cart-item .form{
         box-shadow: none;
         border: none;
         display: flex;
@@ -225,10 +256,3 @@
     }
     
 }
-/*
-@media only screen and (min-width: 960px){
-    .page-banner-sm{
-        display: none;
-    }
-
-}*/

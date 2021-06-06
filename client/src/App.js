@@ -20,6 +20,9 @@ import Login from './page/login/Login'
 import Signup from './page/login/Signup'
 import ProductPage from './page/productPage'
 
+import Cart from './page/cart/Cart';
+import Checkout from './page/Checkout';
+
 
 import {getProfile} from './redux/actions/user';
 import {
@@ -62,6 +65,12 @@ const App = () => {
             </Route>
             <Route path="/signup">
               <Signup />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/checkout">
+              <Checkout />
             </Route>
             <Route path="*">
               <PageNotFound />

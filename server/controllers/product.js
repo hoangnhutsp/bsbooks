@@ -92,6 +92,7 @@ export const getProduct = async (req, res) => {
 }
 
 const attributeProductDetails = [
+    "_id",
     "id",
     "id_category",
     "sku",
