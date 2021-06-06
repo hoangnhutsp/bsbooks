@@ -37,7 +37,7 @@ function Cart() {
                 item.quantity += val;
             }
         })
-        setProductCart({...productCart, cart: newCart});
+        setProductCart({...productCart, items: newCart});
     }
 
     const removeProductCart = (_id) => {
@@ -46,7 +46,8 @@ function Cart() {
     }
 
     const addjustCheckbox = _id => {
-        let newItems = productCart.items.map(item => {
+        let newItems = productCart.items;
+        newItems.map(item => {
             if (item._id === _id) {
                 item.checked = !item.checked;
             }
@@ -143,7 +144,8 @@ function Cart() {
                             <p>Chọn</p>
                             <p>Xóa</p>
                         </div>
-                        {productCart.items.map((item, idx) => {
+                        {
+                        productCart.items.map((item, idx) => {
                             return (
                                 <Item item={item} idx={idx}></Item>
                             )
