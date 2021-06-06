@@ -1,10 +1,8 @@
 import mongoose from 'mongoose';
 import Cart from '../models/cart.js';
-import User from '../models/user.js';
 
 
 const checkInfoCart = cart => {
-
     return true;
 }
 const checkUserID = userID => {
@@ -12,8 +10,8 @@ const checkUserID = userID => {
 }
 export const addToCart = async (req, res) => {
     try {
-        let infoCart = req.body.cart;
-        let userID = "1234";
+        let infoCart = req.body;
+        let userID = req.userID;
 
         if (!checkUserID(userID) || !checkInfoCart(infoCart)) {
             res.status(200).json({
@@ -22,47 +20,70 @@ export const addToCart = async (req, res) => {
             });
         }
         else {
-
-            let count = infoCart.length;
+            let count = 1;
             const cart = await Cart.findOne({ userID });
             if (!cart) {
                 const newCart = new Cart({
                     userID,
-                    infoCart,
+                    items: infoCart,
                     count,
                     status: 0,
                 });
                 await newCart.save();
             }
             else {
-                console.log('sol found in cart');
+                const items = cart["items"];
+                console.log(items);
+                let indexItem = items.findIndex(q => q["_id"] == infoCart["_id"]);
+                console.log(indexItem);
+                if (indexItem !== -1) {
+                    items[indexItem]["quantity"] += infoCart["quantity"];
+                } else items.push(infoCart)
+
+                await Cart.findByIdAndUpdate(cart["_id"], { items }, { new: true });
             }
             res.status(200).json({ message: 'Add cart successful' });
         }
     } catch (error) {
-        res.status(404).json({ message: message.error })
+        res.status(404).json({ message: error.message })
     }
 }
 
-
+const resDataCart = {
+    count: 0,
+    items: [],
+}
 export const getCartItem = async (req, res) => {
     try {
-        const item = req.body;
-        let _sessionId = req.signedCookies.sessionId;
-        if (!_sessionId) {
-            res.status(200).json({ message: "WR: Session ID not found!!!" })
+        let userID = req.userID;
+        const filter = {
+            userID: {$eq : userID},
+            status: {$eq : 0},
         }
 
-        if (!mongoose.Types.ObjectId.isValid(_sessionId)) return res.status(200).send('No session with id');
+        let cart = await Cart.findOne(filter);
 
-        const cart = await Cart.find({ sessionId: _sessionId })
-
-        if (cart.length === 0) {
-            res.status(200).json({ messange: "CART EMPTY" })
-        } else {
-
-            res.status(200).json(cart[0]["products"])
+        if (cart) {
+            resDataCart.items = cart.items;
+            resDataCart.count = cart.count;
         }
+
+        res.status(200).json(resDataCart)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
+export const updateCart = async (req, res) => {
+    try {
+        let userID = req.userID;
+        let infoCart = req.body;
+        const filter = {
+            userID: {$eq : userID},
+            status: {$eq : 0},
+        }
+        const doc = await Cart.findOneAndUpdate(filter, infoCart, {new: true});
+        res.status(200).json(doc)
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

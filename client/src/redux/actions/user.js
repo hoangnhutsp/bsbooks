@@ -1,5 +1,5 @@
 import * as api from '../../api';
-
+import {getCart} from '../../api/cart'
 
 
 export const getProfile = () => async (dispatch) => {
@@ -29,6 +29,12 @@ export const userLogin = (info, setErr) => async (dispatch) => {
                 }
                 window.localStorage.setItem('token', data.token);
                 dispatch({type: 'LOGIN', payload: profile})
+                getCart()
+                .then(res => res.data)
+                .then(data => {
+                    dispatch({type: 'GET_CART', payload: data})
+                })
+
                 setErr('')
             } else {
                 setErr(data.message)
