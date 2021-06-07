@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState} from 'react'
+import { useState } from 'react'
 import './Password.css'
 function Password() {
 
@@ -9,6 +9,18 @@ function Password() {
         newPassword: "",
         confirmPassword: "",
     })
+    const [error, setError] = useState({
+        error: 'aasdasd',
+        currentPassword: 'aaaa',
+        newPassword: 'Loi',
+        confirmPassword: 'Loi',
+    });
+
+    const setErrorResponse = err => {
+        if (err.status) {
+            console.log(err.message);
+        }
+    }
     const submitHanler = e => {
         e.preventDefault();
 
@@ -22,6 +34,7 @@ function Password() {
                 <p>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </p>
             </div>
             <hr />
+            {(error.error)&&<div className="error-error">{error.error}</div>}                
 
             <form onSubmit={submitHanler}>
                 <table id="table-change-password">
@@ -33,8 +46,9 @@ function Password() {
                                 name="current-password"
                                 id="current-password"
                                 value={password.currentPassword}
-                                onChange={(e) => setPassword({...password, currentPassword: e.target.value})}
+                                onChange={(e) => setPassword({ ...password, currentPassword: e.target.value })}
                             />
+                            {(error.currentPassword) && <div className="error-text-change-password">{error.currentPassword}</div>}
                         </td>
                     </tr>
                     <tr className="form-group-text">
@@ -45,9 +59,10 @@ function Password() {
                                 name="new-password"
                                 id="new-password"
                                 value={password.newPassword}
-                                onChange={(e) => setPassword({...password, newPassword: e.target.value})}
-
+                                onChange={(e) => setPassword({ ...password, newPassword: e.target.value })}
                             />
+                            {(error.newPassword) && <div className="error-text-change-password">{error.newPassword}</div>}
+
                         </td>
                     </tr>
                     <tr className="form-group-text">
@@ -58,9 +73,10 @@ function Password() {
                                 name="confirm-password"
                                 id="confirm-password"
                                 value={password.confirmPassword}
-                                onChange={(e) => setPassword({...password, confirmPassword: e.target.value})}
-
+                                onChange={(e) => setPassword({ ...password, confirmPassword: e.target.value })}
                             />
+                            {(error.confirmPassword) && <div className="error-text-change-password">{error.confirmPassword}</div>}
+
                         </td>
                     </tr>
                 </table>
@@ -69,6 +85,7 @@ function Password() {
                     <button type="submit" id="submit-change-password">Xac nhan</button>
                     <p>Quen mat khau?</p>
                 </div>
+
             </form>
 
         </div>

@@ -41,6 +41,9 @@ const dbOptions = {
     useFindAndModify: false,
 }
 
+
+console.log(`MONGO URL: ${process.env.URL_MONGODB}`);
+
 app.use(session({
     secret: 'some secrec',
     resave: false,

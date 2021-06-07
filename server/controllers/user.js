@@ -111,6 +111,9 @@ export const getProfileUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
+        console.log('UPDATE USER');
+        let _id = req.userID;
+        console.log(_id);
         const user_find = await User.findOne({ _id: req.userID });
         if (user_find.length == 0)
             res.status(400).json({ message: "User is't already" })
@@ -220,23 +223,31 @@ export const forgotPassWord = async (req, res) => {
     }
 }
 
+
+const checkPassword = password => {
+
+    return true;
+}
+
 export const resetPassWord = async (req, res) => {
     try {
-        const resetLink = req.params.token;
-        //Kiểm tra new pass và confirmpass rỗng
-        if (!req.body.password || !req.body.confirmPassword)
-            res.status(400).json({ message: 'Password hoặc confirmPassword rỗng hoặc ko trùng nhau' })
-        else {
-            if (req.body.confirmPassword !== req.body.password) {
-                res.status(400).json({ message: 'ConfirmPassword not same password' })
-            } else {
-                const decodedData = jwt.verify(resetLink, RESET_PASSWORD);
-                const idUser = decodedData.id;
-                //console.log(idUser);
-                //kiểm tra user
-                const user = await User.findById(idUser);
+
+        const userID = req.userID;
+
+        let currentPassword = req.body.currentPassword;
+        let newPassword = req.body.newPassword;
+        let confirmPassword = req.body.confirmPassword;
+
+
+        if (   !checkPassword(currentPassword) 
+            || !checkPassword(newPassword) 
+            || !checkPassword(confirmPassword
+            || (newPassword !== confirmPassword))
+        ) res.status(400).json({status: 0, message: 'Password khong hop le'})
+        else {           
+                const user = await User.findById(userID);
                 if (!user)
-                    res.status(200).json('User not exist');
+                    res.status(400).json('Tai khoan khong ton tai');
                 else {
                     //kiểm tra trùng resetLink
                     if (user.resetLink !== resetLink)
@@ -250,7 +261,9 @@ export const resetPassWord = async (req, res) => {
                 }
             }
 
-        }
+        
+
+        res.status(200).json({message: 'success'})
 
     } catch (error) {
         res.status(404).json({ message: error.message })

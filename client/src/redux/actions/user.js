@@ -55,7 +55,7 @@ export const userUpdateInfo = (info, notiRES) => async (dispatch) =>{
     }
     api.userUpdateInfo(info, token)
     .then(res => res.data)
-    .then(data=> {
+    .then(data => {
         dispatch({ type: 'UPDATE_PROFILE', payload: info})
     })
     .catch(err => {

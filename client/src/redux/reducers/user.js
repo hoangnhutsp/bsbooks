@@ -12,7 +12,7 @@ const User = (user = initUser, action) => {
         case 'LOGIN': 
             return data;
         case 'UPDATE_PROFILE':
-            return data;
+            return {...user, infoUser: data};
         case 'GET_PROFILE':
             const newProfile = {
                 infoUser: data,

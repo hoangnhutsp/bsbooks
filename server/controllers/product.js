@@ -17,15 +17,22 @@ const SIZE_OF_SUGGESTION = 6;
 
 
 const getListCate = async (query) => {
-    let category = query.category || DEFAULT_CATEGORY;
-    if (category > 40) category = DEFAULT_CATEGORY;
-    category = await Category.find({ id: category })
-    let id_path = category[0]["id_path"];
-    let cate = await Category.find({ id_path: { $regex: RegExp(`^${id_path}`) } })
-    let arrCate = [];
-    cate.forEach(element => arrCate.push(element["id"]));
 
-    return arrCate;
+    try {
+        let category = query.category || DEFAULT_CATEGORY;
+        if (category > 40) category = DEFAULT_CATEGORY;
+        category = await Category.find({ id: category })
+        let id_path = category[0]["id_path"];
+        let cate = await Category.find({ id_path: { $regex: RegExp(`^${id_path}`) } })
+        let arrCate = [];
+        cate.forEach(element => arrCate.push(element["id"]));
+        return arrCate;
+
+    } catch (error) {
+        console.log(error.message);
+    }
+    
+
 }
 const initQuery = async (query) => {
     let category = await getListCate(query);
@@ -39,7 +46,7 @@ const initQuery = async (query) => {
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
-        id_category: { $in: category }
+        // id_category: { $in: category }
     }
 
     return queryString;

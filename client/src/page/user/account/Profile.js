@@ -86,8 +86,9 @@ function Profile() {
     const submitHanler = e => {
         e.preventDefault();
         profile.avatar = currentAvatar;
+        console.log(profile);
         dispatch(userUpdateInfo(profile, notiRES))
-        window.location.reload();
+       // window.location.reload();
     }
 
     return (

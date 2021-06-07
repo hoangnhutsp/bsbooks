@@ -12,7 +12,7 @@ router.get('/profile', authMiddleware, getProfileUser);
 router.post('/update',authMiddleware, updateUser);
 router.post('/login-facebook', loginFacebook);
 router.post('/forgot-password', forgotPassWord);
-router.post('/reset-password/:token', resetPassWord);
+router.post('/reset-password/',authMiddleware, resetPassWord);
 router.post('/login-google', googleLogin);
 
 export default router;
