@@ -42,7 +42,7 @@ export default function SearchBox() {
   };
 
   const selectProduct = (id) => {
-    history.push(`/product/${id}`)   
+    history.push(`/product-details/${id}`)   
   }
 
   const queryChange = async e => {

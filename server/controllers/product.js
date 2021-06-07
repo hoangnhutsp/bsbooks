@@ -46,7 +46,7 @@ const initQuery = async (query) => {
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
-        // id_category: { $in: category }
+        id_category: { $in: category }
     }
 
     return queryString;

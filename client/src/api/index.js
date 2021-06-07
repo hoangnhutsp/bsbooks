@@ -63,3 +63,18 @@ export const userLoginFacebook = ({accessToken, userID}) => {
 }
 
 
+export const changePassword = async ({currentPassword, newPassword}, setErrorResponse) => {
+    let token = localStorage.getItem('token');
+    const URL = localhost + 'user/change-password';
+    await axios.post(URL, {currentPassword, newPassword}, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(res => res.data)
+    .then(data => setErrorResponse(data))
+    .catch( err => setErrorResponse({status: 0, message: err.message}))
+
+}
