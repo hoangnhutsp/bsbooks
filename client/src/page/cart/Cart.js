@@ -156,7 +156,7 @@ function Cart() {
                         </div>
                         <div className="cart-action-button">
                             <a href="/">Tiếp tục mua sắm</a>
-                            <button className="btn-main" onClick={() => buttonCheckout()}>Dat hang</button>
+                            <button className="btn-main" onClick={() => buttonCheckout()}>Thanh toán giỏ hàng</button>
                         </div>
                     </div>
                 </div>

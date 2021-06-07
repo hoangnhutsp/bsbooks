@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import Home from './page/Home'
 import User from './page/user/User'
 import Search from './page/Search'
+import Billstarus from './page/Billstarus'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -76,6 +77,7 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
+          <Billstarus></Billstarus>
           <Footer></Footer>
         </div>
       </Router>
