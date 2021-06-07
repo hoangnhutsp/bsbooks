@@ -23,6 +23,8 @@ import ProductPage from './page/productPage'
 import Cart from './page/cart/Cart';
 import Checkout from './page/cart/Checkout';
 
+import InfoTransport from './components/InfoTransport';
+
 
 import {getProfile} from './redux/actions/user';
 import {getCart} from './redux/actions/cart'
@@ -78,6 +80,7 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
+          <InfoTransport />
           <Footer></Footer>
         </div>
       </Router>

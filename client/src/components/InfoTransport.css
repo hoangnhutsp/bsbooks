@@ -1,3 +1,11 @@
+*{
+    font-size: 1rem;
+}
+.Info-col{
+    padding: 1rem;
+    width: 20%;
+    margin: 1rem 0rem;
+}
 .Info-col ul li {
     font-size: 1.2rem;
     padding-top: 0.5rem;
@@ -12,13 +20,21 @@
     color: white;
 }
 .InfoTransportContainer .Infocontainer {
-background-color: #363b49;
-padding: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #363b49;
 }
 
-.InfoTransportContainer .Infocontainer {
-    margin:auto;
-}
 .InfoBold{
     font-weight: 1000;
+}
+
+.size {
+    width: 10rem;
+    height: 10rem;
 }
