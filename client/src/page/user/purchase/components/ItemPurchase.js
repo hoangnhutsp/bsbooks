@@ -1,30 +1,44 @@
 import React from 'react';
+import {
+    useEffect,
+} from 'react';
 import { useState } from 'react';
 import './ItemPurchase.css'
+import {typeOfPurchase} from '../constain'
 
-function ItemPurchase({ data }) {
-    const [Item, setItem] = useState(data);
-    return (
-        <div className="container-item-purchase">
-            <div className="title-item-purchase">
-                <div className="date-item-purchase">
-                    Ngay giao: {Item.date}
-                </div>
-                <div className="status-item-purchase">
-                    {Item.status}
-                </div>
+function ItemPurchase({ invoiceData }) {
+
+    const [invoice, setItem] = useState()
+    useEffect(() => {
+        setItem(invoiceData);
+    }, [invoiceData])
+
+    const ComponentPrice = ({price}) => {
+        return(
+            <div className="price row">
+                <div className="price">{price}</div>
             </div>
+        )
+    }
+    return invoice ? (
+        <div className="container-item-purchase">
+         
+                <div className="status-item-purchase">
+                    {typeOfPurchase[invoice.status_invoice]}
+                </div>
             <br />
-            {Item.products.map((val, key) => {
+            {invoice.items.map((val, key) => {
                 return (
                     <div>
                         <div className="container-product-purchase">
-                            <img alt="not-found" src={val.url}></img>
+                            <img alt="not-found" src={val.image}></img>
                             <div className="info-product-purchase">
                                 <p>{val.name}</p>
                                 <span>x{val.quantity}</span>
                             </div>
-                            <p className="price-product-purchase">{val.price}</p>
+                            <div>
+                                <ComponentPrice price={val.price} />
+                            </div>
                         </div>
                         <hr className="hr-break-items"></hr>
                     </div>
@@ -32,11 +46,11 @@ function ItemPurchase({ data }) {
             })}
             <div className="total-lable">
                 <p >Tong so tien:</p>
-                <p className="price">{Item.sumPrice}</p>
+                <p className="price">{invoice.total}</p>
             </div>
             <hr className="hr-break-purchase"/>
         </div>
-    )
+    ):null;
 }
 
 export default ItemPurchase

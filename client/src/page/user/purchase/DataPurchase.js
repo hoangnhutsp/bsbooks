@@ -1,7 +1,7 @@
 
 export const DataPurchase = [
     {
-        status: "Da Giao",
+        status: 0,
         date:"24-04-2020",
         sumPrice: 1000000,
         products:[
@@ -20,7 +20,7 @@ export const DataPurchase = [
         ]
     },
     {
-        status: "Cho Xac Nhan",
+        status: 1,
         date:"24-04-2020",
         sumPrice: 1000000,
 

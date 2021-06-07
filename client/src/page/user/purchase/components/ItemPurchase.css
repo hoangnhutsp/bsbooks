@@ -1,6 +1,7 @@
-.title-item-purchase{
-    display: flex;
-    flex-direction: row;
+.status-item-purchase {
+    text-align: right;
+    text-transform: uppercase;
+    color: lightcoral;
 }
 
 .date-item-purchase {
@@ -17,7 +18,6 @@
 
 .container-item-purchase .hr-break-purchase{
     border: solid 2px #228999;
-
 }
 
 .hr-break-items{
@@ -36,6 +36,18 @@
 .container-product-purchase .price-product-purchase{
     color: #228999;
 }
+
+.total-price{
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.price {
+    margin-left: 0.3rem;
+    color: #228999;
+
+}
+
 
 .info-product-purchase {
     flex-grow: 1;
