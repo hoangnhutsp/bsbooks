@@ -6,7 +6,7 @@ function Footer() {
     <div className='FooterContainer'>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
       <footer className = "footer">
-        <div className="container">
+        <div className="container-footer">
           <div className="row">
             <div className="footer-col">
               <h4>chúng tôi</h4>
@@ -34,6 +34,7 @@ function Footer() {
                 <li><a href="http://localhost:3000/">+ (028) 888 999</a></li>
                 <li><a href="http://localhost:3000/">sweetheartuit.com</a></li>
                 <li><a href="http://localhost:3000/">bsbookuit@gmail.com</a></li>
+
               </ul>
             </div>
             <div className="footer-col">

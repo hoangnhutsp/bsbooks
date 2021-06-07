@@ -62,20 +62,22 @@
 }
 
 .button-submit-register {
-    padding: 0.6rem 1rem;
-    color: #fff;
-    background: #23bab5;
+    width: 75%;
+    background: #f85656;
     border-radius: 0;
-    border: 2px solid #23bab5;
-    transition: all 400ms cubic-bezier(.4,0,.2,1);
+    border: 2px solid #f85656;
+    font-family: Helvetica,sans-serif;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(.27548vw + 12.71074px);
     display: block;
     margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
+    line-height: 2.8;
     text-align: center;
-    white-space: nowrap;
     touch-action: manipulation;
-    user-select: none;
     margin: auto;
 }
 .article-register {
@@ -100,3 +102,97 @@
     color: red;
     margin-top: 10px;
   }
+
+.login-facebook {
+    margin: auto;
+    line-height: 1.42857143;
+    border-radius: 0;
+    transition: all 400ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.login-google {
+    margin: auto;
+    line-height: 1.42857143;
+    border-radius: 0;
+    display: block;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    padding-bottom: 12px;
+    width: 86%;
+    margin: auto;
+}
+
+
+.sigup-google {
+    margin: auto;
+    line-height: 1.42857143;
+    border-radius: 0;
+    display: block;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    padding-bottom: 12px;
+    width: 80%;
+    margin: auto;
+}
+
+.button-submit-sigup {
+    width: 69%;
+    background: #f85656;
+    border-radius: 0;
+    border: 2px solid #f85656;
+    font-family: Helvetica,sans-serif;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(.27548vw + 12.71074px);
+    display: block;
+    margin-bottom: 0;
+    line-height: 2.7;
+    text-align: center;
+    touch-action: manipulation;
+    margin: auto;
+}
+
+.error-text-register {
+    color: #f82a2a;
+    font-family: Helvetica,sans-serif;
+    font-size: small;
+    margin-top: 20px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 2%;
+    margin-inline-end: 0px;
+
+}
+
+.button-submit-resetpass{
+    width: 55%;
+    background: #f85656;
+    border-radius: 0;
+    border: 2px solid #f85656;
+    font-family: Helvetica,sans-serif;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(255, 254, 254);
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(.27548vw + 12.71074px);
+    display: block;
+    margin-bottom: 0;
+    line-height: 2;
+    text-align: center;
+    touch-action: manipulation;
+    margin: auto;
+}

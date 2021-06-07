@@ -4,6 +4,8 @@ import "./Profile.css";
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import axios from 'axios'
 
+
+
 import { userUpdateInfo } from './../../../redux/actions/user'
 function Profile() {
     const userStore = useSelector(state => state.user);
@@ -86,8 +88,9 @@ function Profile() {
     const submitHanler = e => {
         e.preventDefault();
         profile.avatar = currentAvatar;
+        console.log(profile);
         dispatch(userUpdateInfo(profile, notiRES))
-        window.location.reload();
+       // window.location.reload();
     }
 
     return (

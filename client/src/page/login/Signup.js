@@ -1,5 +1,7 @@
 import './Register.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 import {
     validatePhoneNumber,
@@ -10,23 +12,29 @@ import {
     validateConfPassWord,
 } from './CheckInfo'
 
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
     useHistory,
 } from 'react-router-dom'
-import {userSignup} from './../../redux/actions/user'
+import {
+    userSignup,
+    userLoginGoogle,
+    userLoginFacebook,
+} from './../../redux/actions/user'
+
 function Register() {
+    const [currentUser, setCurrentUser] = useState({})
     const history = useHistory();
     const dispatch = useDispatch();
     const [registerData, setRegisterData] = useState({
-        phone: '0123456789',
-        name: 'Trang Hoang Nhut',
-        email: 'hn@gmail.com',
-        address: 'Sa Dec Dong Thap',
-        gender: 'male',
-        birthday: '2000-03-20',
-        password: 'Nhut2404020',
-        confirmPassWord: 'Nhut2404020'
+        phone: '',
+        name: '',
+        email: '',
+        address: '',
+        gender: '',
+        birthday: '',
+        password: '',
+        confirmPassWord: ''
     })
 
     const [error, setError] = useState({
@@ -43,23 +51,34 @@ function Register() {
 
     const setErrRes = err => {
         if (err.status) history.push('/'); else
-        setError({...error, error: err.message});
+            setError({ ...error, error: err.message });
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(registerData);
-
         let wr = 0;
         for (let x in error) {
             wr = wr || error[x] !== ''
         }
-
         if (!wr) {
             dispatch(userSignup(registerData, setErrRes))
         }
-
     }
+    const responseFacebook = (res) => {
+        let accessToken = res.accessToken;
+        let userID = res.userID;
+        dispatch(userLoginFacebook({ accessToken, userID }, setErrRes))
+    }
+    const responseSuccessGoogle = (res) => {
+        let tokenId = res.tokenId
+        dispatch(userLoginGoogle(tokenId, setErrRes))
+    }
+
+    const responseErrorGoogle = (res) => {
+        console.log(res);
+    }
+
 
 
     return (
@@ -68,8 +87,8 @@ function Register() {
                 <div className='col-sm-6-register'>
                     <div className='article-register'>
                         <h3 className='text-center-register'>ĐĂNG KÍ</h3>
-                        {(error.error==='') ? null :
-                                <div>{error.error}</div>
+                        {(error.error === '') ? null :
+                            <div>{error.error}</div>
                         }
                         <form className='signup-register' onSubmit={submitHandler}>
                             <div className='form-group-register'>
@@ -87,8 +106,8 @@ function Register() {
                                     value={registerData.name}
                                     required></input>
                             </div>
-                            {(error.name === '') ? null :
-                                <div>{error.name}</div>
+                            {(error.name == '') ? null :
+                                <div className='error-text-register'>{error.name}</div>
                             }
 
                             <div className='form-group-register'>
@@ -105,8 +124,8 @@ function Register() {
                                     value={registerData.email}
                                     required></input>
                             </div>
-                            {(error.email === '') ? null :
-                                <div>{error.email}</div>
+                            {(error.email == '') ? null :
+                                <div className='error-text-register'>{error.email}</div>
                             }
                             <div className='form-group-register'>
                                 <input
@@ -124,8 +143,8 @@ function Register() {
 
                                     required></input>
                             </div>
-                            {(error.phone === '') ? null :
-                                <div>{error.phone}</div>
+                            {(error.phone == '') ? null :
+                                <div className='error-text-register'>{error.phone}</div>
                             }
                             <div className='form-group-register'>
                                 <input type='text'
@@ -142,8 +161,8 @@ function Register() {
 
                                     required></input>
                             </div>
-                            {(error.address === '') ? null :
-                                <div>{error.address}</div>
+                            {(error.address == '') ? null :
+                                <div className='error-text-register'>{error.address}</div>
                             }
 
                             <div className='form-group-register'>
@@ -170,14 +189,16 @@ function Register() {
                                     onBlur={(e) => {
                                         let err = validatePassWord(e.target.value);
                                         setError({ ...error, password: err })
-                                        err = validateConfPassWord(registerData.confirmPassWord, e.target.value);
-                                        setError({ ...error, confirmPassWord: err })
+                                        if (registerData.confirmPassWord !== '') {
+                                            err = validateConfPassWord(registerData.confirmPassWord, e.target.value);
+                                            setError({ ...error, password: err })
+                                        }
                                     }}>
 
                                 </input>
                             </div>
-                            {(error.password === '') ? null :
-                                <div>{error.password}</div>
+                            {(error.password == '') ? null :
+                                <div className='error-text-register'>{error.password}</div>
                             }
 
 
@@ -192,15 +213,17 @@ function Register() {
 
                                     onBlur={(e) => {
                                         let err = validateConfPassWord(e.target.value, registerData.password);
-                                        setError({ ...error, confirmPassWord: err })
+                                        if (err !== '') setError({ ...error, confirmPassWord: err }); else {
+                                            setError({ ...error, confirmPassWord: '' })
+                                            setError({ ...error, password: '' })
+
+                                        }
                                     }}>
                                 </input>
                             </div>
-                            {(error.confirmPassWord === '') ? null :
-                                <div>{error.confirmPassWord}</div>
+                            {(error.confirmPassWord == '') ? null :
+                                <div className='error-text-register'>{error.confirmPassWord}</div>
                             }
-
-
 
                             <div className='form-group-register'>
                                 <input name='gioitinh'
@@ -217,16 +240,41 @@ function Register() {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nữ
                         </div>
-                            {(error.gender === '') ? null :
-                                <div>{error.gender}</div>
+                            {(error.gender == '') ? null :
+                                <div className='error-text-register'>{error.gender}</div>
                             }
 
                             <div className='form-group-register'>
-                                <button type='submit' className='button-submit-register'>Đăng kí</button>
+                                <button type='submit' className='button-submit-sigup'>ĐĂNG KÝ</button>
+                                <div className='login-facebook'>
+                            <FacebookLogin
+                                appId="340793020896447"
+                                autoLoad={false}
+                                callback={responseFacebook}
+                                size="medium "
+                                icon="fa-facebook"
+                                textButton="Đăng ký với FaceBoook" />
+                        </div>
+                        <div className='sigup-google'>
+                            <GoogleLogin
+                                className='login-google'
+                                clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                buttonText="ĐĂNG KÝ VỚI GOOGLE"
+                                cssClass="btnGoogle"
+
+                                onSuccess={responseSuccessGoogle}
+                                onFailure={responseErrorGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
+                        </div>
                             </div>
                         </form>
+                        
+
+                        
                     </div>
                 </div>
+               
             </div>
         </div>
     )

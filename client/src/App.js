@@ -20,18 +20,23 @@ import Login from './page/login/Login'
 import Signup from './page/login/Signup'
 import ProductPage from './page/productPage'
 
+import Cart from './page/cart/Cart';
+import Checkout from './page/cart/Checkout';
+
 
 import {getProfile} from './redux/actions/user';
+import {getCart} from './redux/actions/cart'
 import {
   useDispatch,
 } from 'react-redux';
 
 const App = () => {
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-      dispatch(getProfile())
-  }, [dispatch])
+  // const dispatch = useDispatch()
+  // useEffect(() => {
+  //     dispatch(getProfile());
+  //     dispatch(getCart);
+  // }, [dispatch])
 
   return (
     <>
@@ -62,6 +67,12 @@ const App = () => {
             </Route>
             <Route path="/signup">
               <Signup />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/checkout">
+              <Checkout />
             </Route>
             <Route path="*">
               <PageNotFound />

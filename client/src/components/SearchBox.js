@@ -42,7 +42,7 @@ export default function SearchBox() {
   };
 
   const selectProduct = (id) => {
-    history.push(`/product/${id}`)   
+    history.push(`/product-details/${id}`)   
   }
 
   const queryChange = async e => {
@@ -79,8 +79,8 @@ export default function SearchBox() {
         </button>
       </div>
       <div className="container-dropdown-search-box">
-        <hr></hr>
         <ul id="results" className="list-group-search-box" ref={ulRef}>
+        <hr></hr>
         {
           options.map((option, idx) => {
             return (

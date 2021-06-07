@@ -1,17 +1,28 @@
 import mongoose from 'mongoose';
 
 const cartSchema = mongoose.Schema({
-    idUser: {
-        type: mongoose.Types.ObjectId
+    userID: {
+        type: String
     },
-    products: [
+    items: [
         {
-            productId: Number,
+            _id: String,
             quantity: Number,
             name: String,
-            price: Number
-        }
+            price: Number,
+            checked: Boolean,
+            image: String,
+            checked: {
+                type: Boolean,
+                default: 1,
+            }
+        }   
     ],
+    status : {
+        type: Number,
+        default: 0,
+    },
+    count: Number,
     createdAt: {
         type: Date,
         default: Date.now

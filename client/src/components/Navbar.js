@@ -14,29 +14,27 @@ import {
 import iconShoppingCart from './../icons/shopping-cart.svg'
 function Navbar() {
 
-    const userStore = useSelector(state => state.user);
-    let initData = {}
-    initData.status = userStore.isLogged;
-    if (userStore.isLogged) {
-        initData.name = userStore.infoUser.name;
-        initData.url = userStore.infoUser.avatar;
-    } else {
-        initData.name = '';
-        initData.url = '';
-    }
+    const Store = useSelector(state => state);
+
     const [countCart, setCountCart] = useState(0)
-    const [userNavbar, setUserNavbar] = useState(
-        initData
-    );
+
+    const [userNavbar, setUserNavbar] = useState({
+        name : '',
+        url : '',
+    });
 
     useEffect(() => {
-        if (userStore.isLogged) {
-            let status = userStore.isLogged;
-            let name = userStore.infoUser.name;
-            let url = userStore.infoUser.avatar;
+        if (Store.user.isLogged) {
+            let status = Store.user.isLogged;
+            let name = Store.user.infoUser.name;
+            let url = Store.user.infoUser.avatar;
             setUserNavbar({ status, name, url })
         }
-    }, [userStore])
+
+        if (Store.cart) {
+            setCountCart(Store.cart.count)
+        }
+    }, [Store])
     const Logout = () => {
         localStorage.clear();
         window.location.reload();
