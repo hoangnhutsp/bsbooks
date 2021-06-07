@@ -8,7 +8,7 @@ import { OAuth2Client } from 'google-auth-library';
 import { lchown } from 'fs';
 import { RSA_NO_PADDING } from 'constants';
 
-const DOMAIN = 'sandboxfd6f315452fe4242b1419326999c6fb1.mailgun.org';
+const DOMAIN = process.env.DOMAIN;
 const API_KEY = '123';
 //oAuth
 const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
@@ -294,9 +294,6 @@ export const googleLogin = async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 }
-
-changePassword
-
 
 export const changePassword = async (req, res) => {
     try {
