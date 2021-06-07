@@ -8,14 +8,14 @@ import { OAuth2Client } from 'google-auth-library';
 import { lchown } from 'fs';
 import { RSA_NO_PADDING } from 'constants';
 
-const DOMAIN = process.env.DOMAIN;
-const apiKey =  "32fd788756cf15d67e0c41b93bc95b16-1d8af1f4-4b0568a1";
+const DOMAIN = 'sandboxfd6f315452fe4242b1419326999c6fb1.mailgun.org';
+const API_KEY = '123';
 //oAuth
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
+const CLIENT_SECRET = 'AC6CUSWFSQW0Zrxm7fUdwnE-';
 
-const mg = mailgun({ apiKey, domain: DOMAIN });
-const client = new OAuth2Client(CLIENT_ID)
+const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
+const client = new OAuth2Client("551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com")
 
 const RESET_PASSWORD = 're-pass bsbook';
 const SECRET = 'bsbooksToken';
@@ -111,9 +111,6 @@ export const getProfileUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        console.log('UPDATE USER');
-        let _id = req.userID;
-        console.log(_id);
         const user_find = await User.findOne({ _id: req.userID });
         if (user_find.length == 0)
             res.status(400).json({ message: "User is't already" })
@@ -223,31 +220,23 @@ export const forgotPassWord = async (req, res) => {
     }
 }
 
-
-const checkPassword = password => {
-
-    return true;
-}
-
 export const resetPassWord = async (req, res) => {
     try {
-
-        const userID = req.userID;
-
-        let currentPassword = req.body.currentPassword;
-        let newPassword = req.body.newPassword;
-        let confirmPassword = req.body.confirmPassword;
-
-
-        if (   !checkPassword(currentPassword) 
-            || !checkPassword(newPassword) 
-            || !checkPassword(confirmPassword
-            || (newPassword !== confirmPassword))
-        ) res.status(400).json({status: 0, message: 'Password khong hop le'})
-        else {           
-                const user = await User.findById(userID);
+        const resetLink = req.params.token;
+        //Kiểm tra new pass và confirmpass rỗng
+        if (!req.body.password || !req.body.confirmPassword)
+            res.status(400).json({ message: 'Password hoặc confirmPassword rỗng hoặc ko trùng nhau' })
+        else {
+            if (req.body.confirmPassword !== req.body.password) {
+                res.status(400).json({ message: 'ConfirmPassword not same password' })
+            } else {
+                const decodedData = jwt.verify(resetLink, RESET_PASSWORD);
+                const idUser = decodedData.id;
+                //console.log(idUser);
+                //kiểm tra user
+                const user = await User.findById(idUser);
                 if (!user)
-                    res.status(400).json('Tai khoan khong ton tai');
+                    res.status(200).json('User not exist');
                 else {
                     //kiểm tra trùng resetLink
                     if (user.resetLink !== resetLink)
@@ -261,9 +250,7 @@ export const resetPassWord = async (req, res) => {
                 }
             }
 
-        
-
-        res.status(200).json({message: 'success'})
+        }
 
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -308,4 +295,43 @@ export const googleLogin = async (req, res) => {
     }
 }
 
+changePassword
+
+
+export const changePassword = async (req, res) => {
+    try {
+        const resetLink = req.params.token;
+        //Kiểm tra new pass và confirmpass rỗng
+        if (!req.body.password || !req.body.confirmPassword)
+            res.status(400).json({ message: 'Password hoặc confirmPassword rỗng hoặc ko trùng nhau' })
+        else {
+            if (req.body.confirmPassword !== req.body.password) {
+                res.status(400).json({ message: 'ConfirmPassword not same password' })
+            } else {
+                const decodedData = jwt.verify(resetLink, RESET_PASSWORD);
+                const idUser = decodedData.id;
+                //console.log(idUser);
+                //kiểm tra user
+                const user = await User.findById(idUser);
+                if (!user)
+                    res.status(200).json('User not exist');
+                else {
+                    //kiểm tra trùng resetLink
+                    if (user.resetLink !== resetLink)
+                        res.status(200).json('ResetLink incorrect')
+                    else {
+                        const password = req.body.password;
+                        const hashPassword = await bcrypt.hash(password, 12);
+                        const updateUser = await User.findByIdAndUpdate(idUser, { password: hashPassword, resetLink: '' }, { new: true })
+                        res.status(200).json({ result: updateUser })
+                    }
+                }
+            }
+
+        }
+
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
 
