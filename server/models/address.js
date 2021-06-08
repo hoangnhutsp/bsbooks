@@ -9,6 +9,9 @@ const addressSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    name: String,
+    email: String,
+    phone: String,
     is_default: {
         type: Number,
         default: 0

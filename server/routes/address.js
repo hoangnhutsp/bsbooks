@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/', authMiddleware, addAddress);                       //oke
 router.get('/user', authMiddleware, getAddressByIdUser);            //oke
 router.post('/update/:id', authMiddleware, updateAddress);
-router.get('/defaul/:id', authMiddleware, setAddressDefaul)
+router.post('/default/:id', authMiddleware, setAddressDefaul)
 router.delete('/delete/:id', authMiddleware, deleteAddress)
 router.get('/:id', authMiddleware, getAddressById);
 
