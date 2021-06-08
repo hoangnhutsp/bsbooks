@@ -158,7 +158,13 @@ export const getProductByID = async (req, res) => {
                     data[x] = productDetail[x];
                 }
         }
-        res.status(200).json(data);
+
+        console.log(data.id_category);
+        let x = {};
+        x.category = data.id_category;
+        let breadcrumb = await getBreadcrumbCategory(x);
+       
+        res.status(200).json({data, breadcrumb});
 
 
     } catch (error) {
@@ -204,18 +210,18 @@ export const searchProduct = async (req, res) => {
         const query = req.query;
 
         let q = query.q;
-
+        console.log(q);
         let product = await Product
             .find({
                 $text:
                 {
                     $search: q,
-                    $caseSensitive: false,
-                    $diacriticSensitive: true
+                    // $caseSensitive: false,
+                    // $diacriticSensitive: true
                 }
-            }, { score: { $meta: "textScore" } })
-            .sort({ score: { $meta: "textScore" } })
-        product = slicePage(query.page, product)
+            })
+            // .sort({ score: { $meta: "textScore" } })
+      //  product = slicePage(query.page, product)
 
         res.status(200).json(product)
     } catch (error) {

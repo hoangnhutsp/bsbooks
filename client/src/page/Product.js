@@ -3,6 +3,7 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import { getProductDetails } from '../api/product/product_details'
 // Custom component
 import ImgShowcase from '../components/img_showcase'
+import Breadcrumb from '../components/Breadcrumb.js';
 
 import { useDispatch } from 'react-redux';
 
@@ -15,6 +16,7 @@ function Product() {
     const [shouldFullPara, setShouldFullPara] = useState(false) // is readmore needed
     const history = useHistory();
     const dispatch = useDispatch();
+    const [breadcrumb, setBreadcrumb] = useState()
 
     useEffect(async () => { // Fetch product details
         if (!id) {
@@ -22,7 +24,8 @@ function Product() {
             return
         }
         const data = await getProductDetails(id);
-        setData(data)
+        setData(data.data);
+        setBreadcrumb(data.breadcrumb);
     }, [])
     
     const buttonAddToCart = () => {
@@ -39,6 +42,7 @@ function Product() {
     }
     return data ? (
         <div className='product'>
+            <Breadcrumb breadcrumb={breadcrumb} title={data.name} />
             < div className='container' >
                 <div className='col-4'>
                     {data.images && <ImgShowcase images={data.images} />}

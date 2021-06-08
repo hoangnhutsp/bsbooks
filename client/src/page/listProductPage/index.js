@@ -12,7 +12,7 @@ import Breadcrumb from '../../components/Breadcrumb.js';
 //
 import {queryStringSortType} from './constantQuery'
 
-const ProductPage = () => {
+const ProductPage = (data) => {
     const [fromValue, setFromValue] = useState(0)
     const [toValue, setToValue] = useState(0)
     const [rating, setRating] = useState(0)
