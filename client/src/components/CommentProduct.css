@@ -1,0 +1,103 @@
+
+.titile-comment{
+    margin-bottom: 1.5%;
+    padding-left: 1%;
+}
+
+.underline-comment{
+    /*height: .1875rem;
+    width: 100%;
+    background-position-x: -1.875rem;
+    background-size: 7.25rem 1.875rem;
+    background-image: repeating-linear-gradient(45deg, #6fa6d6,#6fa6d6 33px,transparent 0,transparent 41px,#f18d9b 0, #f18d9b 74px,transparent 0,transparent 82px);
+    margin-bottom: 30px;*/
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-content-current{
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    -webkit-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.comment-product{
+    color: #555555;
+    border-top: none;
+    padding: 0px 0px 60px 0px;
+    font-size: 14px;
+    font-family: "Product Sans";
+}
+
+.details-comment-product{
+    font-family: "Arial Regular","Arial";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    float: none;
+    border: none;
+    width: 100%;
+    clear: both;
+    display: block; 
+}
+
+.comment-product>div{
+    margin-bottom: 15px;
+}
+
+.details-comment-product .titile-details-comment-product{
+    border-bottom: 1px solid #ddd;
+}
+
+.h4-titile-details-comment-product {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.join-button{
+    width: 100%;
+    font-size: 13px;
+}
+
+.join-button-comment-product{
+    float: right;
+}
+
+/*.comment-product, .details-comment-product, .join-button, .join-button-comment-product, .input-join-button-comment-product{
+    background: #498374;
+}*/
+
+.input-join-button-comment-product{
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    border: 0;
+    /*background: #53a1cc;
+    color: #fff;*/
+    font-size: 14px;
+    line-height: 25px;
+    font-weight: 500;
+    padding: 5px 15px !important;
+    background: #498374 !important;
+    border: solid 1px #498374 !important;
+    display: inline;
+    border-radius: 0px;
+    color: #fff;
+    
+}
