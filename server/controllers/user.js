@@ -330,3 +330,12 @@ export const changePassword = async (req, res) => {
     }
 }
 
+export const getAllUser = async(req, res) => {
+    try {
+        const allUser = await User.find();
+        res.status(200).json(allUser)
+    } catch (error) {
+        res.status(200).json({message: error.message})
+    }
+}
+

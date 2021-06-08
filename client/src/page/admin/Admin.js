@@ -7,6 +7,7 @@ import UserSidebar from './UserSidebar'
 // 
 import Profile from './account/Profile';
 import ControlProduct from './products/ProductList';
+import EditProduct from './products/EditProduct'
 import Password from './account/Password';
 import Order from './notifications/Order';
 import Promotion from './notifications/Promotion';
@@ -32,7 +33,9 @@ function Admin() {
                     <Route exact path={`${path}/products`}>
                         <ControlProduct />
                     </Route>
-
+                    <Route exact path={`${path}/product-details/:id`}>
+                        <EditProduct/>
+                    </Route>
                     <Route exact path={`${path}/users`}>
                         <Password />
                     </Route>
