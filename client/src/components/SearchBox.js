@@ -27,7 +27,7 @@ export default function SearchBox() {
 
     })
     document.addEventListener('click', (event) => {
-      ulRef.current.style.display = 'null'
+      ulRef.current.style.display = 'none'
     })
   }, [])
 
@@ -42,7 +42,7 @@ export default function SearchBox() {
   };
 
   const selectProduct = (id) => {
-    history.push(`/product/${id}`)   
+    history.push(`/product-details/${id}`)   
   }
 
   const queryChange = async e => {

@@ -1,5 +1,5 @@
 import * as api from '../../api';
-
+import {getCart} from '../../api/cart'
 
 
 export const getProfile = () => async (dispatch) => {
@@ -29,9 +29,15 @@ export const userLogin = (info, setErr) => async (dispatch) => {
                 }
                 window.localStorage.setItem('token', data.token);
                 dispatch({type: 'LOGIN', payload: profile})
-                setErr('')
+                getCart()
+                .then(res => res.data)
+                .then(data => {
+                    dispatch({type: 'GET_CART', payload: data})
+                })
+
+                setErr({status: data.status, message:'succes'})
             } else {
-                setErr(data.message)
+                setErr({status: 0, message:'wrong'})
             }
         })
         .catch(err => {
@@ -49,7 +55,7 @@ export const userUpdateInfo = (info, notiRES) => async (dispatch) =>{
     }
     api.userUpdateInfo(info, token)
     .then(res => res.data)
-    .then(data=> {
+    .then(data => {
         dispatch({ type: 'UPDATE_PROFILE', payload: info})
     })
     .catch(err => {
@@ -73,10 +79,58 @@ export const userSignup = (info, notiRES) => async (dispatch) =>{
             dispatch({type: 'SIGNUP', payload: profile})
             notiRES({status: data.status, message:'succes'})
         }
-        notiRES(data) 
+        notiRES({status: 0, message:'wr'}) 
     })
     .catch(err => {
         console.log(err);
-        notiRES(err.message);
+        notiRES({status: 0, message:err.message});
     })
 }
+
+
+export const userLoginGoogle = (tokenId, notiRES) => async (dispatch) =>{
+    api.userLoginGoogle(tokenId)
+    .then(res => res.data)
+    .then(data=> {
+        if (data.status){
+            const profile = {
+                infoUser: data.user,
+                isLogged: true,
+                isAdmin: data.user.role==='ADMIN',
+                token: data.token,
+            }
+            window.localStorage.setItem('token', data.token);
+            dispatch({type: 'LOGIN', payload: profile})
+            notiRES({status: data.status, message:'succes'});
+        }
+        notiRES({status: 0, message:'succes'}) 
+    })
+    .catch(err => {
+        notiRES({status: 0, message:err.message});
+    })
+}
+
+
+export const userLoginFacebook = ({accessToken, userID}, notiRES) => async (dispatch) =>{
+    api.userLoginFacebook({accessToken, userID})
+    .then(res => res.data)
+    .then(data => {
+        if (data.status){
+            const profile = {
+                infoUser: data.user,
+                isLogged: true,
+                isAdmin: data.user.role==='ADMIN',
+                token: data.token,
+            }
+            window.localStorage.setItem('token', data.token);
+            dispatch({type: 'LOGIN', payload: profile})
+            notiRES({status: data.status, message:'succes'});
+        }
+        notiRES({status: data.status, message:'wr'}) 
+    })
+    .catch(err => {
+        console.log(err);
+        notiRES({status: 0, message:err.message});
+    })
+}
+

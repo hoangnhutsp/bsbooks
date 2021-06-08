@@ -7,20 +7,29 @@ import validator from 'validator';
 
 
 const userSchema = mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        require: true
+    },
     phone: String,
     email: {
         type: String,
         unique: true,
+        require: true,
         validate: value => {
             if(!validator.isEmail(value))
                 throw new Error({error: "Invalid email credentials "})
         }
     },
-    password: String,
+    password: {
+        type: String,
+    },
     address: String,
     gender: String,
-    birthday: Date,
+    birthday: {
+        type: Date,
+        default: Date.now(),
+    },
     avatar: {
         type: String,
         default: "http://localhost:5000/default/images/default-avatar-profile.jpg",
@@ -29,6 +38,7 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "USER",
     },
+  
 })
 
 

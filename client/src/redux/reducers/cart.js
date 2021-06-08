@@ -5,7 +5,6 @@ const initCart = {
 }
 
 const Cart = (cart = initCart, action) => {
-    
     switch (action.type) {
         case 'ADD_TO_CART':
             let item = action.payload;
@@ -30,7 +29,8 @@ const Cart = (cart = initCart, action) => {
         case 'UPDATE_CART':
             return action.payload;
         case 'GET_CART':
-            return cart;
+            console.log('GET_DATA');
+            return action.payload;
         default:
             return cart;
     }

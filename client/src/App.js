@@ -13,6 +13,8 @@ import Footer from './components/Footer'
 
 import Home from './page/Home'
 import User from './page/user/User'
+import Admin from './page/admin/Admin'
+
 import Search from './page/Search'
 import Billstarus from './page/Billstarus'
 import PageNotFound from './page/PageNotFound'
@@ -22,20 +24,24 @@ import Signup from './page/login/Signup'
 import ProductPage from './page/productPage'
 
 import Cart from './page/cart/Cart';
-import Checkout from './page/Checkout';
+import Checkout from './page/cart/Checkout';
+
+import InfoTransport from './components/InfoTransport';
 
 
 import {getProfile} from './redux/actions/user';
+import {getCart} from './redux/actions/cart'
 import {
   useDispatch,
 } from 'react-redux';
 
 const App = () => {
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-      dispatch(getProfile())
-  }, [dispatch])
+  // const dispatch = useDispatch()
+  // useEffect(() => {
+  //     dispatch(getProfile());
+  //     dispatch(getCart);
+  // }, [dispatch])
 
   return (
     <>
@@ -49,10 +55,13 @@ const App = () => {
             <Route path="/user">
               <User />
             </Route>
+            <Route path="/admin">
+              <Admin />
+            </Route>
             <Route path="/search">
               <Search />
             </Route>
-            <Route path="/product">
+            <Route path="/product/:id_cate">
               <ProductPage />
             </Route>
             <Route path="/product-details/:id">
@@ -78,6 +87,8 @@ const App = () => {
             </Route>
           </Switch>
           <Billstarus></Billstarus>
+
+          <InfoTransport />
           <Footer></Footer>
         </div>
       </Router>

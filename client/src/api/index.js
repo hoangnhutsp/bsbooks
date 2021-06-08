@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { responseSuccessGoogle } from './loginFBGG';
 axios.defaults.withCredentials = true
 
 
@@ -19,7 +20,6 @@ export const userLogin = (info) => {
     return axios.post(URL, info);
 }
 
-
 export const userUpdateInfo = (info, token) => {
     const URL = localhost + 'user/update';
     return axios.post(
@@ -39,4 +39,42 @@ export const userSignup = (info) => {
             'Content-Type': 'application/json',
         }
     });
+}
+
+export const userLoginGoogle = (tokenId) => {
+    const URL = localhost + 'user/login-google';
+
+    return axios.post(URL, {tokenId}, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+        },
+    })
+}
+
+export const userLoginFacebook = ({accessToken, userID}) => {
+    const URL = localhost + 'user/login-facebook';
+    return axios.post(URL, {accessToken, userID}, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json',
+        },
+    })
+}
+
+
+export const changePassword = async ({currentPassword, newPassword}, setErrorResponse) => {
+    let token = localStorage.getItem('token');
+    const URL = localhost + 'user/change-password';
+    await axios.post(URL, {currentPassword, newPassword}, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(res => res.data)
+    .then(data => setErrorResponse(data))
+    .catch( err => setErrorResponse({status: 0, message: err.message}))
+
 }

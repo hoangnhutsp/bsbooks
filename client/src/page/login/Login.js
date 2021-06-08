@@ -1,28 +1,31 @@
 import './Register.css';
-import React from "react";
-import { 
-    useState, 
-} from 'react'
+import React, { useState, useEffect } from "react";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
-import { 
-    useDispatch 
-} from 'react-redux';
+import { validatePassWord, validateEmail } from './CheckInfo'
+import { useDispatch } from 'react-redux';
+
 import {
     useHistory,
 } from 'react-router-dom'
 
-import {userLogin} from './../../redux/actions/user'
+import {
+    userLogin, 
+    userLoginGoogle, 
+    userLoginFacebook
+} from './../../redux/actions/user'
 
-import {validatePassWord, validateEmail} from './CheckInfo'
 
 function Login() {
     let history = useHistory();
+    const [currentUser, setCurrentUser] = useState({})
 
     const dispatch = useDispatch();
 
     const [loginData, setLoginData] = useState({
-        email: 'hoangnhutsp@gmail.com',
-        password: '1234',
+        email: '',
+        password: '',
     })
 
     const [error, setError] = useState({
@@ -34,16 +37,29 @@ function Login() {
 
     const setErrRes = err => {
         console.log(err);
-        if (err === '') history.push('/'); else
-        setError({...error, error: err});
+        if (err.status) history.push('/'); else
+        setError({...error, error: err.message});
     }
     const submitHandler = (e) => {
-
         let err = ''
         e.preventDefault();
         dispatch(userLogin(loginData, setErrRes))
     }
 
+    const responseFacebook = (res) => {
+        let accessToken = res.accessToken;
+        let userID = res.userID;
+        dispatch(userLoginFacebook({accessToken, userID} ,setErrRes))
+    }
+
+    const responseSuccessGoogle = (res) => {
+        let tokenId = res.tokenId
+        dispatch(userLoginGoogle(tokenId ,setErrRes))
+    }
+
+    const responseErrorGoogle = (res) => {
+        console.log(res);
+    }
 
     return (
         <div className='containner-register'>
@@ -63,9 +79,9 @@ function Login() {
                                     placeholder='Địa chỉ Email'
                                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                                     onBlur={
-                                        (e) => { 
+                                        (e) => {
                                             let err = validateEmail(e.target.value);
-                                            setError({...error, email: err})
+                                            setError({ ...error, email: err })
                                         }
                                     }
                                     value={loginData.email}
@@ -74,8 +90,8 @@ function Login() {
                             </div>
 
 
-                            {(error.email==='') ? null :
-                                <div>{error.email}</div>
+                            {(error.email == '') ? null :
+                                <div className = 'error-text-register'>{error.email}</div>
                             }
 
                             <div className='form-group-register'>
@@ -86,7 +102,7 @@ function Login() {
                                     onBlur={
                                         (e) => {
                                             let err = validatePassWord(e.target.value);
-                                            setError({...error, password: err});
+                                            setError({ ...error, password: err });
                                             console.log(err);
                                         }
                                     }
@@ -96,16 +112,37 @@ function Login() {
                                 />
                             </div>
 
-                            {(error.password==='') ? null :
-                                <div>{error.password}</div>
+                            {(error.password == '') ? null :
+                                <div className = 'error-text-register'>{error.password}</div>
                             }
 
                             <div className='form-group-register'>
-                                <button type='submit' className='button-submit-register'>Đăng Nhập</button>
+                                <button type='submit' className='button-submit-register'>ĐĂNG NHẬP</button>
                             </div>
 
 
                         </form>
+                        <div className='login-facebook'>
+                            <FacebookLogin
+                                appId="340793020896447"
+                                autoLoad={false}
+                                callback={responseFacebook}
+                                icon="fa-iconfacebook"
+                                size="medium "
+                                textButton="Đăng nhập với FaceBoook" />
+                        </div>
+                        <div className='login-google'>
+                            <GoogleLogin
+                                className = 'login-google'
+                                clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                buttonText="ĐĂNG NHẬP VỚI GOOGLE"
+                                onSuccess={responseSuccessGoogle}
+                                onFailure={responseErrorGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
+                        </div>
+
+
                     </div>
                 </div>
             </div>

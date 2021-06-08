@@ -1,5 +1,6 @@
 .CheckoutContainer{
     font-size: 17px;
+    margin-bottom: 5rem;
 }
 
 .h3-checkout{
@@ -84,8 +85,20 @@ span.price{
         margin-top: 20px;
     }
 }
-
-
+.btn-checkout {
+    
+    margin: 1rem;
+    padding: 1rem 2rem; 
+    border: none;
+    background-color: tomato;
+    color: #fff;
+}
+.container-btn-checkout {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
 
 
 
