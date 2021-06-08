@@ -29,6 +29,10 @@
     background-color: rgb(255, 255, 255);
     border-radius: 4px;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .row-recently-view{
@@ -43,8 +47,9 @@
 }
 
 .click-strac-recently-view{
-    margin-left: 3%;
     display: flex;
+    justify-self: center;
+    align-items: center;
     width: 80%px;
     opacity: 1;
     transform: translate3d(0px, 0px, 0px);

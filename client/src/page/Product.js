@@ -4,6 +4,8 @@ import { getProductDetails } from '../api/product/product_details'
 // Custom component
 import ImgShowcase from '../components/img_showcase'
 import Breadcrumb from '../components/Breadcrumb.js';
+import RecentlyView from '../components/product_list/RecentlyView'
+
 
 import { useDispatch } from 'react-redux';
 
@@ -41,6 +43,7 @@ function Product() {
         dispatch(addToCart(info))
     }
     return data ? (
+        <div>
         <div className='product'>
             <Breadcrumb breadcrumb={breadcrumb} title={data.name} />
             < div className='container' >
@@ -92,7 +95,8 @@ function Product() {
                     <p className="readmore hover" onClick={() => setShouldFullPara(!shouldFullPara)}>{!shouldFullPara ? "Đọc thêm" : "Thu gọn"}</p>
                 </div>
             </div >
-
+        </div>
+        <RecentlyView />
         </div>
     ) : null
 }
@@ -100,7 +104,6 @@ function Product() {
 Number.prototype.format = function (n, x, s, c) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
         num = this.toFixed(Math.max(0, ~~n));
-
     return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ',')) + 'đ';
 };
 

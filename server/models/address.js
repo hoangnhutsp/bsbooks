@@ -9,7 +9,7 @@ const addressSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    is_defaul: {
+    is_default: {
         type: Number,
         default: 0
     }

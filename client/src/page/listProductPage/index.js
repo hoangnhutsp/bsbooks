@@ -8,7 +8,7 @@ import  {getProductLists} from '../../api/product/product_list'
 import Rate from '../../components/rate'
 import Item from '../../components/item'
 import Breadcrumb from '../../components/Breadcrumb.js';
-
+import RecentlyView from '../../components/product_list/RecentlyView'
 //
 import {queryStringSortType} from './constantQuery'
 
@@ -144,6 +144,8 @@ const ProductPage = (data) => {
 
                 </div>
             </div>
+            <RecentlyView />
+
         </div>
     ):null;
 }

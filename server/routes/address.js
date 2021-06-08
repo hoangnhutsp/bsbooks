@@ -4,8 +4,8 @@ import { addAddress, getAddressById, getAddressByIdUser, updateAddress, setAddre
 import authMiddleware from '../middlewares/auth.middleware.js'
 
 const router = express.Router()
-router.post('/', authMiddleware, addAddress);
-router.get('/user', authMiddleware, getAddressByIdUser);
+router.post('/', authMiddleware, addAddress);                       //oke
+router.get('/user', authMiddleware, getAddressByIdUser);            //oke
 router.post('/update/:id', authMiddleware, updateAddress);
 router.get('/defaul/:id', authMiddleware, setAddressDefaul)
 router.delete('/delete/:id', authMiddleware, deleteAddress)

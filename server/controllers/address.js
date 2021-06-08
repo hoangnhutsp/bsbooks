@@ -24,9 +24,12 @@ export const addAddress = async (req, res) => {
                 if (sameAddress.length != 0)
                     res.status(200).json({ message: 'Địa chỉ đã tồn tại' })
                 else {
+                    let def = 0;
+                    if (listAddress.length === 0) def = 1; 
                     const newAddress = new Address({
                         id_user: idUser,
                         address: address,
+                        is_default: def,
                     })
                     await newAddress.save()
                     res.status(200).json(newAddress)
