@@ -31,8 +31,27 @@ const getListCate = async (query) => {
     } catch (error) {
         console.log(error.message);
     }
-    
+}
 
+
+const getBreadcrumbCategory = async (query) => {
+    console.log('get breadcrumb');
+    let category = query.category || DEFAULT_CATEGORY;
+    let cate = await Category.findOne({ id: category })
+    let breadcrumb = [];
+
+    if (cate) {
+        let id_path = cate.id_path.split('-');
+
+
+        for (let i = 0; i < id_path.length; i++) {
+            if (id_path[i] == 0) continue;
+            let { name } = await Category.findOne({ id: id_path[i] })
+            breadcrumb.push({ name, path: `/product/${id_path[i]}` })
+        }
+    }
+
+    return breadcrumb
 }
 const initQuery = async (query) => {
     let category = await getListCate(query);
@@ -90,8 +109,8 @@ export const getProduct = async (req, res) => {
 
         if (page)
             product = slicePage(page, product)
-
-        res.status(200).json({ size: product.length, product })
+        let breadcrumb = await getBreadcrumbCategory(query);
+        res.status(200).json({ size: product.length, product, breadcrumb })
 
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -139,7 +158,13 @@ export const getProductByID = async (req, res) => {
                     data[x] = productDetail[x];
                 }
         }
-        res.status(200).json(data);
+
+        console.log(data.id_category);
+        let x = {};
+        x.category = data.id_category;
+        let breadcrumb = await getBreadcrumbCategory(x);
+       
+        res.status(200).json({data, breadcrumb});
 
 
     } catch (error) {
@@ -185,18 +210,18 @@ export const searchProduct = async (req, res) => {
         const query = req.query;
 
         let q = query.q;
-
+        console.log(q);
         let product = await Product
             .find({
                 $text:
                 {
                     $search: q,
-                    $caseSensitive: false,
-                    $diacriticSensitive: true
+                    // $caseSensitive: false,
+                    // $diacriticSensitive: true
                 }
-            }, { score: { $meta: "textScore" } })
-            .sort({ score: { $meta: "textScore" } })
-        product = slicePage(query.page, product)
+            })
+            // .sort({ score: { $meta: "textScore" } })
+      //  product = slicePage(query.page, product)
 
         res.status(200).json(product)
     } catch (error) {

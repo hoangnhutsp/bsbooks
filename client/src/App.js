@@ -13,7 +13,10 @@ import Footer from './components/Footer'
 
 import Home from './page/Home'
 import User from './page/user/User'
+import Admin from './page/admin/Admin'
+
 import Search from './page/Search'
+import Billstarus from './page/Billstarus'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -52,10 +55,13 @@ const App = () => {
             <Route path="/user">
               <User />
             </Route>
+            <Route path="/admin">
+              <Admin />
+            </Route>
             <Route path="/search">
               <Search />
             </Route>
-            <Route path="/product">
+            <Route path="/product/:id_cate">
               <ProductPage />
             </Route>
             <Route path="/product-details/:id">

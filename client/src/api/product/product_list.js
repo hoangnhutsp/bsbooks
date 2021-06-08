@@ -9,7 +9,6 @@ export const getProductLists = async (query) => {
     console.log(URL);
     let {data} = await axios.get(URL)
 
-    console.log(data);
     return data;
 }
 

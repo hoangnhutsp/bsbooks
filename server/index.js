@@ -16,10 +16,13 @@ import productRoutes from './routes/product.js';
 import userRouters from './routes/user.js'
 import evaluateRouters from './routes/evaluate.js'
 import categoryRoutes from './routes/category.js'
+import invoiceRoutes from './routes/invoice.js'
+
 import recentlyViewd from './routes/recently_viewed.js'
 import uploadImageRoutes from './routes/upload_image.js'
 import addressRoutes from './routes/address.js'
 
+import {breadcrumb} from './controllers/other.js'
 const app = express();
 
 
@@ -66,6 +69,9 @@ app.use('/category', categoryRoutes);
 app.use('/recently_viewd', recentlyViewd)
 app.use('/upload_image', uploadImageRoutes);
 app.use('/address', addressRoutes);
+app.use('/invoice', invoiceRoutes);
+app.use('/breadcrumb' , breadcrumb);
+
 
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
