@@ -86,8 +86,6 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-          <Billstarus></Billstarus>
-
           <InfoTransport />
           <Footer></Footer>
         </div>

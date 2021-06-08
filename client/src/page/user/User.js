@@ -10,7 +10,8 @@ import Address from './account/Address';
 import Password from './account/Password';
 import Order from './notifications/Order';
 import Promotion from './notifications/Promotion';
-import Purchase from './purchase/Purchase'
+import Billstatus from './purchase/order/Billstatus'
+import PurchaseController from './purchase/PurchaseController'
 function User() {
     let { path } = useRouteMatch();
 
@@ -36,14 +37,11 @@ function User() {
                     <Route exact path={`${path}/password`}>
                         <Password />
                     </Route>
-                    <Route exact path={`${path}/other`}>
-                        <Order />
-                    </Route>
                     <Route exact path={`${path}/promotion`}>
                         <Promotion />
                     </Route>
-                    <Route exact path={`${path}/purchase`}>
-                        <Purchase />
+                    <Route path={`${path}/purchase`}>
+                        <PurchaseController />
                     </Route>
                 </Switch>
             </div>

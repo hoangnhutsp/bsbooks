@@ -33,7 +33,7 @@
 /*phần đường dẫn tình trạng đơn hàng*/
 
 .order-tracking{
-    /* margin: 30px auto; */
+    margin: 30px auto;
 }
 
 .order-tracking img{
@@ -228,7 +228,7 @@
 }
 
 .first-branch-detail-time-delivery-address{
-    width: 200px;
+    width: 10rem;
     position: relative;
     left: 20px;
     top: -14px;
@@ -290,4 +290,11 @@
 .cart-total-list-product-details-bill{
         justify-content: flex-end;
         flex-direction: row;
-}
+    }
+
+
+
+
+
+
+
