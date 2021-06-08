@@ -6,7 +6,7 @@ import UserSidebar from './UserSidebar'
 
 // 
 import Profile from './account/Profile';
-import Address from './account/Address';
+import ControlProduct from './products/ProductList';
 import Password from './account/Password';
 import Order from './notifications/Order';
 import Promotion from './notifications/Promotion';
@@ -26,25 +26,20 @@ function Admin() {
                     <Route exact path={path}>
                         <Profile />
                     </Route>
-                    <Route exact path={`${path}/profile`}>
+                    <Route exact path={`${path}/dashboad`}>
                         <Profile />
                     </Route>
-                    <Route exact path={`${path}/address`}>
-                        <Address />
+                    <Route exact path={`${path}/products`}>
+                        <ControlProduct />
                     </Route>
 
-                    <Route exact path={`${path}/password`}>
+                    <Route exact path={`${path}/users`}>
                         <Password />
                     </Route>
-                    <Route exact path={`${path}/other`}>
+                    <Route exact path={`${path}/invoice`}>
                         <Order />
                     </Route>
-                    <Route exact path={`${path}/promotion`}>
-                        <Promotion />
-                    </Route>
-                    <Route exact path={`${path}/purchase`}>
-                        <Purchase />
-                    </Route>
+                    
                 </Switch>
             </div>
         </div>

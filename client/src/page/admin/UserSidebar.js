@@ -58,10 +58,6 @@ function UserSidebar() {
 
     return (
         <div className="sidebar-container">
-                <div className="sidebar-profile">
-                    <img alt="avt-user" id="sidebar-avatar" src={userSidebarData.url}></img>
-                    <div id="sidebar-name">{userSidebarData.name}</div>
-                </div>
             <ul className="sidebar-list">
                 {SidebarData.map((val, key) => {
                         return (
