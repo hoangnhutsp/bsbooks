@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, location } from 'react-router-dom'
 import '../../App.css'
 import './styles.css'
 // api
@@ -7,6 +7,7 @@ import  {getProductLists} from '../../api/product/product_list'
 // custom component
 import Rate from '../../components/rate'
 import Item from '../../components/item'
+import Breadcrumb from '../../components/Breadcrumb.js';
 
 //
 import {queryStringSortType} from './constantQuery'
@@ -18,21 +19,25 @@ const ProductPage = () => {
     const [sortType, setSortType] = useState(0)
     const [curData, setCurData] = useState([])
     const [cache, setCache] = useState({}) // Caching data
+    const [breadcrumb, setBreadcrumb] = useState()
+    const [cate, setCate] = useState(1)
 
+
+    const { id_cate } = useParams();
  
 
-
     useEffect(async() => {
-        await sortData(sortType) // default is soft by pop
+        await getData() // default is soft by pop
     }, [])
 
+
     useEffect(() => {
-        sortData();
-    }, [sortType])
+        getData();
+    }, [sortType, id_cate])
 
-
-    const sortData = async () => {
-        let queryString = queryStringSortType[sortType].query;
+    const getData = async () => {
+        console.log(id_cate);
+        let queryString = queryStringSortType[sortType].query + `&category=${id_cate}`;
         if (toValue || fromValue) {
             queryString += `&price=${fromValue},${toValue}`;
         }
@@ -42,12 +47,16 @@ const ProductPage = () => {
         
         console.log(`query: ${queryString}`);
         const data = await getProductLists(queryString)
+        console.log(data);
         setCurData(data.product)  
+        console.log('data.bre');
+        console.log(data.breadcrumb);
+        setBreadcrumb(data.breadcrumb)
     }
 
-   
-    return (
+    return breadcrumb&&setCurData?(
         <div className="productPage">
+            <Breadcrumb breadcrumb={breadcrumb}/>
             <div className="container-f90 row">
 
                 <div className="col-2">
@@ -141,7 +150,7 @@ const ProductPage = () => {
                 </div>
             </div>
         </div>
-    )
+    ):null;
 }
 
 

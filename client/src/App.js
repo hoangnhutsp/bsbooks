@@ -55,7 +55,7 @@ const App = () => {
             <Route path="/search">
               <Search />
             </Route>
-            <Route path="/product">
+            <Route path="/product/:id_cate">
               <ProductPage />
             </Route>
             <Route path="/product-details/:id">

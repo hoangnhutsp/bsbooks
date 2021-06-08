@@ -31,8 +31,27 @@ const getListCate = async (query) => {
     } catch (error) {
         console.log(error.message);
     }
-    
+}
 
+
+const getBreadcrumbCategory = async (query) => {
+    console.log('get breadcrumb');
+    let category = query.category || DEFAULT_CATEGORY;
+    let cate = await Category.findOne({ id: category })
+    let breadcrumb = [];
+
+    if (cate) {
+        let id_path = cate.id_path.split('-');
+
+
+        for (let i = 0; i < id_path.length; i++) {
+            if (id_path[i] == 0) continue;
+            let { name } = await Category.findOne({ id: id_path[i] })
+            breadcrumb.push({ name, path: `/product/${id_path[i]}` })
+        }
+    }
+
+    return breadcrumb
 }
 const initQuery = async (query) => {
     let category = await getListCate(query);
@@ -90,8 +109,8 @@ export const getProduct = async (req, res) => {
 
         if (page)
             product = slicePage(page, product)
-
-        res.status(200).json({ size: product.length, product })
+        let breadcrumb = await getBreadcrumbCategory(query);
+        res.status(200).json({ size: product.length, product, breadcrumb })
 
     } catch (error) {
         res.status(404).json({ message: error.message });
