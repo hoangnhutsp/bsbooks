@@ -15,15 +15,7 @@ const productDetailSchema = mongoose.Schema({
         }
     ],
     id_author: Number,
-    images: [
-        {
-            base_url: String,
-            thumbnail_url: String,
-            small_url: String,
-            medium_url: String,
-            large_url: String,
-        }
-    ]
+    images: [String]
 });
 
 const ProductDetail = mongoose.model('product_detail', productDetailSchema);

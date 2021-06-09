@@ -1,0 +1,29 @@
+.pagination-item-number {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0px 5px;
+    color: #707070;
+    border: 2px solid #ebebeb;
+    font-size: 14px;    
+}
+
+.pagination-item-number:hover {
+    border: solid 1px  rgb(24, 158, 255);
+}
+
+.pagination-item-number-select {
+    display: inline-block;
+    margin: 0px 5px;
+    border: solid 1px  rgb(24, 158, 255);
+    color: rgb(24, 158, 255);
+    font-size: 14px;
+}
+.circle {
+    width: 32px;
+    line-height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+}
+

@@ -12,6 +12,8 @@ import RecentlyView from '../../components/product_list/RecentlyView'
 //
 import {queryStringSortType} from './constantQuery'
 
+import Pagination from '../../components/Pagination'
+
 const ProductPage = () => {
     const [fromValue, setFromValue] = useState(0)
     const [toValue, setToValue] = useState(0)
@@ -20,7 +22,7 @@ const ProductPage = () => {
     const [curData, setCurData] = useState([])
     const [cache, setCache] = useState({}) // Caching data
     const [breadcrumb, setBreadcrumb] = useState()
-
+    const [pagination, setPagination] = useState()
 
     const { id_cate } = useParams();
  
@@ -34,8 +36,16 @@ const ProductPage = () => {
         getData();
     }, [sortType, id_cate])
 
+    useEffect(() => {
+        if (rating || fromValue || toValue) getData();
+    }, [fromValue, toValue, rating])
+
+    useEffect(() => {
+        console.log(pagination);
+    }, [pagination])
+
+
     const getData = async () => {
-        console.log(id_cate);
         let queryString = queryStringSortType[sortType].query + `&category=${id_cate}`;
         if (toValue || fromValue) {
             queryString += `&price=${fromValue},${toValue}`;
@@ -43,14 +53,17 @@ const ProductPage = () => {
         if (rating) {
             queryString += `&rating=${rating}`;
         }
-        
         const data = await getProductLists(queryString)
         setCurData(data.product)  
         setBreadcrumb(data.breadcrumb)
+        setPagination({page: data.page,pageMax: data.pageMax})
     }
+
+
 
     return breadcrumb&&setCurData?(
         <div className="productPage">
+           
             <Breadcrumb breadcrumb={breadcrumb} title={`(${curData.length} Quyen Sach)`}/>
             <div className="container-f90 row">
 
@@ -140,7 +153,9 @@ const ProductPage = () => {
                             return <Item data={item}></Item>
                         })}
                     </div>
-                    
+                    <div className="row justify-content-flex-end margin-top-2-rem">
+                        {pagination&&<Pagination pagination={pagination} setPagination={setPagination} />}
+                    </div>
 
                 </div>
             </div>

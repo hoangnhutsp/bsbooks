@@ -19,6 +19,8 @@ const router = express.Router();
 router.get('/search', searchProduct);
 router.get('/search/suggestion', suggestionProduct)
 router.get('/', getProduct);
+
+
 router.get('/:id', updateRecentlyViewed, getProductByID);
 router.post('/:id', updateProduct);
 router.post('/', createProduct)
