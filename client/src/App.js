@@ -20,7 +20,7 @@ import User from './page/user/User'
 import Admin from './page/admin/Admin'
 
 import Search from './page/Search'
-import Billstarus from './page/Billstarus'
+import TermsPage from './page/TermsPage'
 //import FormComment from './page/FormComment'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
@@ -93,6 +93,7 @@ const App = () => {
           </Switch>
           <CommentProduct></CommentProduct>
           <NotificationBox></NotificationBox>
+          <TermsPage></TermsPage>
           <InfoTransport />
           <ShowComment></ShowComment>
           <Footer></Footer>
