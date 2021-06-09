@@ -1,5 +1,4 @@
 .breadcrumb-block {
-    background-color: #e9edf175;
     height: 2rem;
     list-style:none;
     padding-left: 4rem;
@@ -10,7 +9,7 @@
 }
 .breadcrumb-block .mz-breadcrumb-block__list{
    display: flex; 
-   margin-left: 1rem;
+   margin-left: 0.5rem;
 }
 
 
@@ -23,11 +22,10 @@
 }
 
 .img-size-icons-home {
-    width: 1.2rem;
-    height: 1.2rem;
-    padding-right: 0.2rem;
+    width: 1.4rem;
 }
 
 .title-breadcrum{
     font-weight: bold;
+    
 }
