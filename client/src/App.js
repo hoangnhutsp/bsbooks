@@ -10,9 +10,6 @@ import {
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import CommentProduct from './components/CommentProduct'
-
-import ShowComment from './components/ShowComment'
 
 import Home from './page/Home'
 import User from './page/user/User'

@@ -2,12 +2,27 @@ import React, {useState, useEffect} from 'react';
 import './CommentProduct.css';
 
 import FormComment from './FormComment';
-import iconPreview from './assets/preview.jpg'
+import iconPreview from './../assets/preview.jpg'
+import ShowComment from './ShowComment';
 
-function CommentProduct() {
+import { 
+    useDispatch,
+    useSelector, 
+} from 'react-redux';
+
+function CommentProduct({data, idProduct}) {
+
+    const userStore = useSelector(state => state.user);
+    const [isLogged, setIsLogged] = useState(0);
+    const [idUser, setIdUser] = useState()
+
+    useEffect(() => {
+        setIsLogged(userStore.isLogged)
+        setIdUser(userStore.infoUser._id);
+    }, [userStore])
+
 
     const [openForm, setOpenForm] = useState(0)
-    const [comment, setComment] = useState([])
     const CommentIsEmpty = () => {
         return (
             <div className='comment-is-empty'>
@@ -29,10 +44,8 @@ function CommentProduct() {
                 <div className="comment-product">
                     <div className="details-comment-product">
                         <div>
-                            <div className="titile-details-comment-product">
-                                <h4 className="h4-titile-details-comment-product">Đánh giá sản phẩm</h4>
-                            </div>
-                            {(comment.length===0)&&<CommentIsEmpty />}
+                            {data.map((comment) => <ShowComment comment={comment}/>)}
+                            {(data.length===0)&&<CommentIsEmpty />}
                             <div className="join-button">
                                 <span className="join-button-comment-product">
                                     <input 
@@ -47,7 +60,7 @@ function CommentProduct() {
                     </div>
                 </div>
             </div>
-            {(openForm===1)&&<FormComment setOpenForm={setOpenForm}/>}
+            {(openForm===1)&&<FormComment setOpenForm={setOpenForm} idUser={idUser} idProduct={idProduct}/>}
             
         </div>
     );

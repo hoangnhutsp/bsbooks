@@ -6,11 +6,11 @@ import ImgShowcase from '../components/img_showcase'
 import Breadcrumb from '../components/Breadcrumb.js';
 import RecentlyView from '../components/product_list/RecentlyView'
 
-
+import * as apiEvaluate from '../api/evaluate';
 import { useDispatch } from 'react-redux';
 
 import { addToCart } from './../redux/actions/cart'
-import CommentProduct from './../components/CommentProduct'
+import CommentProduct from '../components/comment/CommentProduct'
 import './product.css'
 function Product() {
     const { id } = useParams();
@@ -20,6 +20,7 @@ function Product() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [breadcrumb, setBreadcrumb] = useState()
+    const [evaluate, setEvaluate] = useState([])
 
     useEffect(async () => { // Fetch product details
         if (!id) {
@@ -29,6 +30,10 @@ function Product() {
         const data = await getProductDetails(id);
         setData(data.data);
         setBreadcrumb(data.breadcrumb);
+
+        const evaluate = await apiEvaluate.getEvaluateToProduct({idProduct: id})
+        setEvaluate(evaluate.data)
+        window.scrollTo(0, 0)
     }, [])
 
     const buttonAddToCart = () => {
@@ -99,7 +104,8 @@ function Product() {
             </div>
             <RecentlyView />
             <div className="container-comment-product-in-pb">
-                <CommentProduct />
+                <CommentProduct data={evaluate} idProduct={id}/>
+                
             </div>
         </div>
     ) : null

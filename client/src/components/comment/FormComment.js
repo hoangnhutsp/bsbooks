@@ -1,9 +1,11 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import './FormComment.css';
-function FormComment({setOpenForm}) {
+import * as apiEvaluate from './../../api/evaluate'
 
 
-    const [rating, setRating] = useState(-1)
+function FormComment({ setOpenForm, idUser, idProduct }) {
+
+
     const [info, setInfo] = useState({})
 
     const data = [
@@ -14,18 +16,26 @@ function FormComment({setOpenForm}) {
         "Rất hài lòng"
     ]
 
-    const submitHanler = e => {
-        e.preventDefault();
-        console.log(rating);
-        console.log(info);
+    const checkInfo = (info) => {
+        return true;
+    }
+    const submitHanler = async e => {
+        e.preventDefault()
+        if (checkInfo(info)) {
+            console.log('POST COMMENT');
+            info.idUser = idUser;
+            info.idProduct=idProduct;
+            await apiEvaluate.addEvaluate(info)
+            setOpenForm(0);
+            window.location.reload()
+        }
 
-        setOpenForm(1);
     }
     return (
         <div className='FormCommentContainer'>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
             <div className="fancybox-overlay fancybox-overlay-fixed" id="FormCommentContainer-div1"
-                onClick={(e) => (e.target.id==='FormCommentContainer-div1')&&setOpenForm(0)}
+                onClick={(e) => (e.target.id === 'FormCommentContainer-div1') && setOpenForm(0)}
             >
                 <div className="fancybox-warp fancybox-desktop fancybox-type-inline fancybox-opened" tabIndex="-1" id="FormCommentContainer-div2">
                     <div className="fancybox-skin" id="FormCommentContainer-div3">
@@ -38,10 +48,10 @@ function FormComment({setOpenForm}) {
                                     >
                                         <input type="hidden" name="productId" id="review_product_id" value="17182526" />
                                         <div className="icon-close-form-comment"
-                                            
+
                                         >
                                             <i id="icon-close-form-comment-id" class="far fa-times-circle"
-                                            onClick={() => setOpenForm(0)}
+                                                onClick={() => setOpenForm(0)}
                                             ></i>
                                         </div>
                                         <h4>Đánh giá sản phẩm</h4>
@@ -49,9 +59,9 @@ function FormComment({setOpenForm}) {
                                             <div id="dvRating" className="dvRating-container">
                                                 {
                                                     data.map((item, idx) =>
-                                                        <div className={(rating >= idx) ? "selected-rating-vote" : "rating-vote"}
-                                                            onClick={() => {
-                                                                setRating(idx)
+                                                        <div className={(info.star >= idx) ? "selected-rating-vote" : "rating-vote"}
+                                                            onClick={(e) => {
+                                                                setInfo({ ...info, star: idx })
                                                             }}
                                                         >
                                                             <i data-alt={idx} title={item} class="fas fa-star"></i>
@@ -59,33 +69,14 @@ function FormComment({setOpenForm}) {
 
                                                     )
                                                 }
-                                                {/* <div className={(rating>=1)?"selected-rating-vote":"rating-vote"}>
-                                                    <i data-alt="1" title="Rất tệ" class="fas fa-star"></i>
-                                                </div>
-                                                <div className={(rating>=2)?"selected-rating-vote":"rating-vote"}>
-                                                    <i data-alt="2" title="Không hài lòng" class="fas fa-star"></i>
-
-                                                </div>
-                                                <div className={(rating>=3)?"selected-rating-vote":"rating-vote"}>
-                                                    <i data-alt="3" title="Bình thường" class="fas fa-star"></i>
-                                                </div>
-                                                <div className={(rating>=4)?"selected-rating-vote":"rating-vote"}>
-                                                    <i data-alt="4" title="Hài lòng" class="fas fa-star"></i>
-                                                </div>
-                                                <div className={(rating>=5)?"selected-rating-vote":"rating-vote"}>
-                                                    <i data-alt="5" title="Rất hài lòng" class="fas fa-star"></i>
-                                                </div> */}
 
                                             </div>
                                             <input type="hidden" name="rating" id="review_rate" value="0"
-                                                onClick={e => {
-                                                    console.log(e.target.attributes);
-                                                }}
                                             />
                                             <span className="bpr-form-message-error"></span>
                                         </fieldset>
                                         <fieldset className="bpr-form-contact">
-                                            <div className="bpr-form-contact-name require">
+                                            {/* <div className="bpr-form-contact-name require">
                                                 <input type="text" maxLength="128" id="review_author" name="author" placeholder="Nhập tên của bạn"
                                                     value={info.author}
                                                     onChange={(e) => setInfo({ ...info, author: e.target.value })}
@@ -98,20 +89,20 @@ function FormComment({setOpenForm}) {
                                                     onChange={(e) => setInfo({ ...info, email: e.target.value })}
                                                 />
                                                 <span className="bpr-form-message-error"></span>
-                                            </div>
+                                            </div> */}
                                         </fieldset>
                                         <fieldset className="bpr-form-review">
                                             <div className="bpr-form-review-titile require">
-                                                <input type="text" maxLength="512" id="review_titile" name="title" placeholder="Tiêu đề" 
-                                                value={info.title}
-                                                onChange={(e) => setInfo({ ...info, title: e.target.value })}
+                                                <input type="text" maxLength="512" id="review_titile" name="title" placeholder="Tiêu đề"
+                                                    value={info.title}
+                                                    onChange={(e) => setInfo({ ...info, title: e.target.value })}
                                                 />
                                                 <span className="bpr-form-message-error"></span>
                                             </div>
                                             <div className="bpr-form-review-body require">
-                                                <textarea type="text" maxLength="1500" id="review_body" name="body" rows="5" placeholder="Nội dung"
+                                                <textarea type="text" maxLength="1500" id="review_body" name="comment" rows="5" placeholder="Nội dung"
                                                     value={info.body}
-                                                    onChange={(e) => setInfo({ ...info, body: e.target.value })}
+                                                    onChange={(e) => setInfo({ ...info, comment: e.target.value })}
                                                 />
                                                 <span className="bpr-form-message-error"></span>
                                             </div>
