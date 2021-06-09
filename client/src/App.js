@@ -33,6 +33,8 @@ import {getCart} from './redux/actions/cart'
 import {
   useDispatch,
 } from 'react-redux';
+import ListInvoice from './page/admin/invoice/ListInvoice';
+
 
 const App = () => {
 
@@ -85,6 +87,7 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
+          <ListInvoice/>
           <InfoTransport />
           <Footer></Footer>
         </div>

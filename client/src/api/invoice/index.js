@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getInvoiceLists} from './invoice_list'
 axios.defaults.withCredentials = true
 
 
@@ -65,3 +66,9 @@ export const getInvoiceByID = (id) => {
         }},
     )
 }
+
+export default {
+    getInvoiceLists
+}
+
+
