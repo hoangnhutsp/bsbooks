@@ -1,0 +1,299 @@
+/*div 1 chỉnh được nền đen*/
+#FormCommentContainer-div1{
+    width: auto;
+    height: auto;
+    display: flex;
+}
+
+.fancybox-overlay {
+    width: 100% !important;
+}
+.selected-rating-vote i {
+    color: rgb(255, 190, 0);
+}
+.rating-vote i {
+    color: #444;
+}
+.icon-close-form-comment{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.icon-close-form-comment #icon-close-form-comment-id:hover{
+    color: #000;
+}
+.dvRating-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.fancybox-overlay{
+    overflow: auto;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: none;
+    z-index: 8010;
+    background: url('https://productreviews.sapoapps.vn/assets/libs/fancyBox/source/fancybox_overlay.png');
+}
+/*có nó mới có nền đen và xuất hiện form*/
+.fancybox-overlay-fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+/*div2*/
+
+#FormCommentContainer-div2{
+    width: 330px;
+    height: auto;
+    margin: auto;
+    /*position: absolute;
+    top: 88px;
+    left: 40%;
+    opacity: 1;*/
+    /*justify-content: center;*/
+    overflow: visible;
+}
+
+.fancybox-opened {
+    z-index: 8030;
+}
+
+.fancybox-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8020;
+}
+
+.fancybox-wrap, .fancybox-skin, .fancybox-outer, .fancybox-inner{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    vertical-align: top;
+}
+
+/*div3*/
+#FormCommentContainer-div3{
+    padding: 15px;
+    width: auto;
+    height: auto;
+}
+
+.fancybox-opened, .fancybox-skin {
+    -webkit-box-shadow: 0 10px 25px rgb(0 0 0 / 50%);
+    box-shadow: 0 10px 25px rgb(0 0 0 / 50%);
+}
+
+.fancybox-skin {
+    position: relative;
+    background: #f9f9f9;
+    color: #444;
+    text-shadow: none;
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+
+.fancybox-skin {
+    background: #fff !important;
+}
+
+/*div4*/
+.fancybox-outer, .fancybox-inner {
+    position: relative;
+}
+
+#FormCommentContainer-div4{
+    overflow: auto;
+    width: 300px;
+    height: auto;
+}
+
+.fancybox-inner {
+    overflow: hidden;
+}
+
+.bizweb-product-reviews-form {
+    min-width: 300px;
+}
+
+/*form*/
+.FormCommentContainer-form {
+    margin-bottom: 30px;
+    display: block;
+    margin-top: 0em;
+}
+
+.bizweb-product-reviews-form input, .bizweb-product-reviews-form input[type="email"], .bizweb-product-reviews-form textarea {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+/*input {
+    display: inline-block;
+    width: auto;
+}
+
+input, textarea, fieldset {
+    border-radius: 0;
+    max-width: 100%;
+}
+
+input, textarea, button {
+    font-size: 1em;
+}
+
+input, textarea, button {
+    line-height: 1.7;
+    font-family: "Product Sans";
+    color: #252525;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}*/
+
+.bizweb-product-reviews-form h4 {
+    text-align: center;
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.bizweb-product-reviews-form fieldset {
+    border: none;
+}
+
+.bizweb-product-reviews-form fieldset {
+    padding: 0 5px;
+}
+
+fieldset {
+    border: 1px solid #e1e1e1;
+    padding: 15px;
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-inline-start: 0.75em;
+    padding-inline-end: 0.75em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+    
+}
+
+#dvRating{
+    cursor: pointer;
+    color: rgb(255, 190, 0);
+}
+
+
+.bizweb-product-reviews-form form .bpr-form-rating #dvRating i {
+    
+    margin-bottom: 3%;
+}
+
+.bizweb-product-reviews-form .bpr-form-rating #dvRating {
+    margin-bottom: 0;
+}
+
+.bizweb-product-reviews-form #dvRating {
+    font-size: 11px;
+    text-align: center;
+}
+
+.bizweb-product-reviews-form fieldset div {
+    margin-bottom: 15px;
+}
+
+.bizweb-product-reviews-form .bpr-form-rating .bpr-form-message-error {
+    font-size: 12px;
+    display: none;
+    color: #a94442;
+}
+
+.bizweb-product-reviews-form .bpr-form-message-error {
+    font-size: 12px;
+    display: none;
+}
+
+.bizweb-product-reviews-form textarea {
+    height: auto;
+}
+
+textarea {
+    min-height: 100px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.bizweb-product-reviews-form .bpr-form-review-error .error {
+    color: #a94442;
+    font-size: 13px;
+    font-style: italic;
+}
+
+body .bizweb-product-reviews-form fieldset .bpr-button-submit {
+    color: #fff;
+    background-color: #498374;
+    border-color: transparent;
+    border: 1px solid transparent;
+}
+
+.bizweb-product-reviews-form .bpr-button-submit {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    display: block;
+    margin: 0 auto;
+    width: auto;
+}
+
+.bpr-form-contact input,
+#review_body {
+    
+    border: solid 1.5px #D3D3D3;
+    -webkit-transition: 1s; /* Safari */
+    transition: 1s;
+}
+  input[type=text]:hover{
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+  }
+  input[type=text]:focus {
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    outline-width: 0px;
+  }
+
+  #review_body:hover{
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+  }
+  #review_body:focus {
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    outline-width: 0px;
+  }
+
+
+

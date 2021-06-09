@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const recentlyViewedSchema = mongoose.Schema({
-    id_user: String,
     id_session: String,
     id_product: String,
     createdAt: {

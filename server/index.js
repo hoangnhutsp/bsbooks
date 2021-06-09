@@ -20,6 +20,7 @@ import invoiceRoutes from './routes/invoice.js'
 
 import recentlyViewd from './routes/recently_viewed.js'
 import uploadImageRoutes from './routes/upload_image.js'
+import addressRoutes from './routes/address.js'
 
 import {breadcrumb} from './controllers/other.js'
 const app = express();
@@ -37,7 +38,7 @@ app.use(cookieParser());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 const PORT = process.env.PORT || 5000;
 
-const CONNECTION_URL = process.env.URL_MONGODB;
+const CONNECTION_URL = process.env.URL_MONGODB_LOCAL;
 const dbOptions = {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -67,8 +68,11 @@ app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
 app.use('/recently_viewd', recentlyViewd)
 app.use('/upload_image', uploadImageRoutes);
+app.use('/address', addressRoutes);
 app.use('/invoice', invoiceRoutes);
 app.use('/breadcrumb' , breadcrumb);
+
+
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
         app.listen(PORT, () => {
