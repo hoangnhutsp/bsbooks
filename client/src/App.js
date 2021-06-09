@@ -17,8 +17,6 @@ import User from './page/user/User'
 import Admin from './page/admin/Admin'
 
 import Search from './page/Search'
-import Billstarus from './page/Billstarus'
-import FormComment from './page/FormComment'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -31,11 +29,6 @@ import Checkout from './page/cart/Checkout';
 import InfoTransport from './components/InfoTransport';
 
 
-import {getProfile} from './redux/actions/user';
-import {getCart} from './redux/actions/cart'
-import {
-  useDispatch,
-} from 'react-redux';
 
 const App = () => {
 
@@ -88,8 +81,8 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-          <CommentProduct></CommentProduct>
-          <FormComment></FormComment>
+          {/* <CommentProduct></CommentProduct> */}
+          {/* <FormComment></FormComment> */}
           <InfoTransport />
 
           <Footer></Footer>

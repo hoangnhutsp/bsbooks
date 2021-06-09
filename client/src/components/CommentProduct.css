@@ -1,7 +1,11 @@
+.CommentProductContainer {
+    margin-top: 4rem;
+    width: 80%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: auto;
+    margin-left: auto;
 
-.titile-comment{
-    margin-bottom: 1.5%;
-    padding-left: 1%;
 }
 
 .underline-comment{
@@ -99,5 +103,16 @@
     display: inline;
     border-radius: 0px;
     color: #fff;
+    
+}
+
+.comment-is-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.comment-is-empty img {
+    width: 10rem;
     
 }

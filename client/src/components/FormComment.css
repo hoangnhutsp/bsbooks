@@ -8,6 +8,28 @@
 .fancybox-overlay {
     width: 100% !important;
 }
+.selected-rating-vote i {
+    color: rgb(255, 190, 0);
+}
+.rating-vote i {
+    color: #444;
+}
+.icon-close-form-comment{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.icon-close-form-comment #icon-close-form-comment-id:hover{
+    color: #000;
+}
+.dvRating-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
 
 .fancybox-overlay{
     overflow: auto;
@@ -187,6 +209,7 @@ fieldset {
     cursor: pointer;
     color: rgb(255, 190, 0);
 }
+
 
 .bizweb-product-reviews-form form .bpr-form-rating #dvRating i {
     
