@@ -12,13 +12,15 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CommentProduct from './components/CommentProduct'
 
+import ShowComment from './components/ShowComment'
+
 import Home from './page/Home'
 import User from './page/user/User'
 import Admin from './page/admin/Admin'
 
 import Search from './page/Search'
 import Billstarus from './page/Billstarus'
-import FormComment from './page/FormComment'
+//import FormComment from './page/FormComment'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -89,9 +91,9 @@ const App = () => {
             </Route>
           </Switch>
           <CommentProduct></CommentProduct>
-          <FormComment></FormComment>
+          
           <InfoTransport />
-
+          <ShowComment></ShowComment>
           <Footer></Footer>
         </div>
       </Router>
