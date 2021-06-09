@@ -5,12 +5,13 @@ import "./User.css";
 import UserSidebar from './UserSidebar'
 
 // 
-import Profile from './account/Profile';
 import ControlProduct from './products/ProductList';
 import EditProduct from './products/EditProduct'
 import ControlUser from './user/UserList'
 import EditUser from './user/EditUser'
 import ViewUser from './user/ViewUser'
+import AddAdmin from './admin/AddAdminForm'
+import Profile from './account/Profile';
 import Product from '../../page/Product'
 import Password from './account/Password';
 import Order from './notifications/Order';
@@ -51,6 +52,9 @@ function Admin() {
                     </Route>
                     <Route exact path={`${path}/users/:id`}>
                         <ViewUser/>
+                    </Route>
+                    <Route exact path={`${path}/new-user`}>
+                        <AddAdmin/>
                     </Route>
                     <Route exact path={`${path}/invoice`}>
                         <Order />
