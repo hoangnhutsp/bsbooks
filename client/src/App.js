@@ -11,6 +11,7 @@ import {
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CommentProduct from './components/CommentProduct'
+import NotificationBox from './components/NotificationBox'
 
 import ShowComment from './components/ShowComment'
 
@@ -91,7 +92,7 @@ const App = () => {
             </Route>
           </Switch>
           <CommentProduct></CommentProduct>
-          
+          <NotificationBox></NotificationBox>
           <InfoTransport />
           <ShowComment></ShowComment>
           <Footer></Footer>
