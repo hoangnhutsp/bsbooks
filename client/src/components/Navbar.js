@@ -12,6 +12,8 @@ import {
 } from 'react-redux';
 
 import iconShoppingCart from './../icons/shopping-cart.svg'
+
+import AllCategories from './all_categories';
 function Navbar() {
 
     const Store = useSelector(state => state);
@@ -98,6 +100,9 @@ function Navbar() {
                     </Link >
                 </div>
 
+            </div>
+            <div className="container-main-navbar">
+                <AllCategories />
             </div>
         </div>
     )

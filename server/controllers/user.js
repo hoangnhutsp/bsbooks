@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+'use strict';
+
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';

@@ -3,6 +3,15 @@
     display: inline-block;
 }
   
+.container-main-navbar{
+    display: flex;
+    flex-direction: row;
+    padding: 0rem 8rem;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    margin-bottom: 2rem;
+}
 .dropdown-content {
     display: none;
     position: absolute;
