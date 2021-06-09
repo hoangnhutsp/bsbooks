@@ -5,7 +5,7 @@ import iconView from '../products/icon/view.png'
 import iconDelete from '../products/icon/delete.png'
 import { Link } from 'react-router-dom'
 
-const item = {
+const datatest = {
     "birthday": null,
     "avatar": "http://localhost:5000/default/images/default-avatar-profile.jpg",
     "role": "USER",
@@ -18,32 +18,32 @@ const item = {
     "address": "",
     "gender": "",
     "__v": 0
-  }
+}
 
-const Item = () => {
-    const [dataProductDelete, setDataProductDelete] = useState('');
+const Item = (item) => {
+    const [dataUserDelete, setDataUserDelete] = useState('');
 
     return (
-        <div className="control-item">
-            <div className='control-form'>
-                <div className="control-image">
-                    <img className="control-image" src={item.item.thumbnail_url}></img>
+        <div className="control-item-admin-user">
+            <div className='control-form-admin-user'>
+                <div className='admin-user-avatar-contain'>
+                    <img alt="avatar user" className="admin-user-avatar" src={item.item.avatar} />
                 </div>
-                <p className="control-product-name">{item.item.name}</p>
-                <p className="control-price-sm">{item.item.price}</p>
+                <p className="control-name-admin-user">{item.item.name}</p>
+                <p className="control-price-sm-admin-user">{item.item.email}</p>
                 {/* <small>x {item.count}</small> */}
-                <div className="control-edit-container">
+                <div className="control-edit-container-admin-user">
 
-                    <Link to=''>
-                        <img className="contro-edit-product" src={iconView}></img>
+                    <Link to={`users/${item.item._id}`}>
+                        <img className="contro-edit-admin-user" src={iconView}></img>
                     </Link>
 
-                    <Link to=''>
-                        <img className="contro-edit-product" src={iconEdit}></img>
+                    <Link to={`edit-users/${item.item._id}`}>
+                        <img className="contro-edit-admin-user" src={iconEdit}></img>
                     </Link>
 
-                    <button className='control-product-remove' onClick={() => setDataProductDelete(item._id)}>
-                        <img className="control-delete-product" src={iconDelete}></img>
+                    <button className='control-remove-admin-user' onClick={() => setDataUserDelete(item.item._id)}>
+                        <img className="control-delete-admin-user" src={iconDelete}></img>
                     </button>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 /*nội dung sản phẩm trong giỏ hàng*/
 
-.ontrol-item .control-form{
+.control-item-admin-user .control-form-admin-user{
     display: grid;
     grid-template-columns: 100%;
     border: 1px solid #efefef;
@@ -10,44 +10,11 @@
                 inset -2px -2px 2px #efefef;
 }
 
-.control-product{
-    display: flex;
-    grid-template-columns: 80px auto;
-    grid-gap: 0rem 1.3rem;
-    padding: 1rem 0rem;
-    border-bottom: 1px solid #efefef;
-}
-
-.control-image{
-    margin-left: 2%;
-    height: 75px;
-    border-radius: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.control-unit-price,
-.control-product-remove{
+.control-remove-admin-user{
     display: none;
 }
 
-.control-controls-sm{
-    display: flex;
-    justify-content: space-between;
-    padding: .5rem .8rem;
-}
-
-.control-remove{
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #505050;
-}
-
-.control-remove{
-    display: flex;
-}
-.control-remove button,
-.control-product-remove{
+.control-remove-admin-user{
     background-color: white;
     height: 25px;
     width: 25px;
@@ -58,44 +25,32 @@
     margin-right: .3rem;
 }
 
-.control-product-name{
+.control-name-admin-user{
     font-weight: bold;
     color: #505050;
     margin-bottom: .3rem;
-    margin-left: 5%;
-    width: 40%;
+    margin-left: 1%;
+    width: 30%;
     text-align: left;
     position: left;
 }
 
-.control-price-sm{
-    color: rgb(252, 52, 52);
+.control-price-sm-admin-user{
+    color: #505050;
     font-weight: bold;
     margin-bottom: .3rem;
-    width: 20%;
+    width: 50%;
+    justify-content: left;
 }
 
-.control-product-info {
+.control-info-admin-user {
     font-weight: bold;
     color: #333;
 }
 
 /*bảng tổng kết*/
-.control-total-holder{
-    margin-top: 2rem;
-}
 
-.control-total{
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.control-total p{
-    font-weight: bold;
-}
-
-.contro-edit-product{
+.contro-edit-admin-user{
     padding-top: 5%;
     width: 20%;
     display: flex;
@@ -103,15 +58,15 @@
     align-items: center;
 }
 
-.control-edit-container{
+.control-edit-container-admin-user{
     width: 30%;
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
-.control-delete-product{
-    width: 65%;
+.control-delete-admin-user{
+    width: 55%;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -120,42 +75,50 @@
 
 /*RESPONSIVE*/
 @media only screen and (min-width: 786px) {
-    .control-product-name{
-        width: 40%;
+    .control-name-admin-user{
         display: flex;
         justify-content: left;
         align-items: center;
     }
-    .control-price-sm{
-        width: 30%;
-        display: flex;
-    }
-    .control-product-info{
+    .control-info-admin-user{
         display: flex;
          justify-content: center;
          align-items: center;
     
     }
-    .control-price-sm,
-    .control-product-remove{
+    .control-remove-admin-user{
         width: 55%;
          display: flex;
          justify-content: center;
          align-items: center;
     }
 
-    .control-item .control-form:first-child{
+    .control-item-admin-user .control-form-admin-user:first-child{
         border-bottom: 1px solid #efefef;
     }
 
-    .control-item .control-form{
+    .control-item-admin-user .control-form-admin-user{
         box-shadow: none;
         border: none;
         display: flex;
         border-bottom: 1px solid #efefef;
     }
 
-    .control-controls-sm{
+    .control-controls-sm-admin-user{
         display: none;
     }
+}
+
+.admin-user-avatar-contain {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.admin-user-avatar {
+    object-fit: cover;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
 }

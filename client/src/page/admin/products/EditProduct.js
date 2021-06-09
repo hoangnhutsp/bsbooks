@@ -47,17 +47,6 @@ function EditProduct() {
         return result
     }
 
-    const getOtherInf = (inf) => {
-        let temp = {
-            name: inf.name,
-            author_name: inf.author_name,
-            price: inf.price,
-            discount: inf.discount,
-            discount_rate: inf.discount_rate
-        }
-        return temp;
-    }
-
     useEffect(async () => {
         if (!id) {
             history.push('/')
@@ -123,8 +112,8 @@ function EditProduct() {
                 <h3 className='title-update-product'>{data.name}</h3>
                 <div className='col-12'>
                     <div className="infor-control-product">
-                        <div className="form-group-text">
-                            <p className="text-name">Tác giả</p>
+                        <div className="form-group-text-page-admin">
+                            <p className="text-name-page-admin">Tác giả</p>
                             <input
                                 type="text"
                                 name="price"
@@ -135,8 +124,8 @@ function EditProduct() {
                             />
                         </div>
 
-                        <div className="form-group-text">
-                            <p className="text-name">Tên </p>
+                        <div className="form-group-text-page-admin">
+                            <p className="text-name-page-admin">Tên </p>
                             <input
                                 type="text"
                                 name="price"
@@ -147,8 +136,8 @@ function EditProduct() {
                             />
                         </div>
 
-                        <div className="form-group-text">
-                            <p className="text-name">Giá gốc</p>
+                        <div className="form-group-text-page-admin">
+                            <p className="text-name-page-admin">Giá gốc</p>
                             <input
                                 type="text"
                                 name="price"
@@ -159,8 +148,8 @@ function EditProduct() {
                             />
                         </div>
 
-                        <div className="form-group-text">
-                            <p className="text-name">Số tiền giảm</p>
+                        <div className="form-group-text-page-admin">
+                            <p className="text-name-page-admin">Số tiền giảm</p>
                             <input
                                 type="text"
                                 name="price"
@@ -171,8 +160,8 @@ function EditProduct() {
                             />
                         </div>
 
-                        <div className="form-group-text">
-                            <p className="text-name">Phần trăm giảm giá </p>
+                        <div className="form-group-text-page-admin">
+                            <p className="text-name-page-admin">Phần trăm giảm giá </p>
                             <input
                                 type="text"
                                 name="price"
@@ -192,14 +181,14 @@ function EditProduct() {
                     </div>
                     <div className='button-upload-image-product'>
                         <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
-                        <label htmlFor="upload-image">Chon Anh</label>
+                        <label htmlFor="upload-image">Chọn Ảnh</label>
                     </div>
                 </div>
                 <div className="col-12">
                     <br></br>
                     <p className="big-text bold">Thông tin chung:</p>
-                    <div className="form-group-text">
-                        <p className="text-name">Công ty phát hành</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">Công ty phát hành</p>
                         <input
                             type="text"
                             name="name"
@@ -210,8 +199,8 @@ function EditProduct() {
                         />
                     </div>
 
-                    <div className="form-group-text">
-                        <p className="text-name">Ngày xuất bản</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">Ngày xuất bản</p>
                         <input
                             type="text"
                             name="name"
@@ -222,8 +211,8 @@ function EditProduct() {
                         />
                     </div>
 
-                    <div className="form-group-text">
-                        <p className="text-name">Loại bìa</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">Loại bìa</p>
                         <input
                             type="text"
                             name="name"
@@ -234,8 +223,8 @@ function EditProduct() {
                         />
                     </div>
 
-                    <div className="form-group-text">
-                        <p className="text-name">SKU</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">SKU</p>
                         <input
                             type="text"
                             name="name"
@@ -246,8 +235,8 @@ function EditProduct() {
                         />
                     </div>
 
-                    <div className="form-group-text">
-                        <p className="text-name">Nhà xuất bản</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">Nhà xuất bản</p>
                         <input
                             type="text"
                             name="name"
@@ -258,8 +247,8 @@ function EditProduct() {
                         />
                     </div>
 
-                    <div className="form-group-text">
-                        <p className="text-name">Số trang</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">Số trang</p>
                         <input
                             type="text"
                             name="name"
@@ -270,8 +259,8 @@ function EditProduct() {
                         />
                     </div>
 
-                    <div className="form-group-text">
-                        <p className="text-name">Kích thước</p>
+                    <div className="form-group-text-page-admin">
+                        <p className="text-name-page-admin">Kích thước</p>
                         <input
                             type="text"
                             name="name"
@@ -289,7 +278,6 @@ function EditProduct() {
                     <p className="readmore hover" onClick={() => setShouldFullPara(!shouldFullPara)}>{!shouldFullPara ? "Đọc thêm" : "Thu gọn"}</p>
                 </div>
                 <button className="button-update-product" onClick={() => UpdateProduct()}>Cập nhật</button>
-                <button onClick={() => console.log(data)}>testttttttt</button>
             </div >
 
         </div>

@@ -17,6 +17,7 @@ import userRouters from './routes/user.js'
 import evaluateRouters from './routes/evaluate.js'
 import categoryRoutes from './routes/category.js'
 import invoiceRoutes from './routes/invoice.js'
+import adminRouter from './routes/admin.js'
 
 import recentlyViewd from './routes/recently_viewed.js'
 import uploadImageRoutes from './routes/upload_image.js'
@@ -69,6 +70,7 @@ app.use('/recently_viewd', recentlyViewd)
 app.use('/upload_image', uploadImageRoutes);
 app.use('/invoice', invoiceRoutes);
 app.use('/breadcrumb' , breadcrumb);
+app.use('/admin', adminRouter)
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
         app.listen(PORT, () => {

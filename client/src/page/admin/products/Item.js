@@ -20,15 +20,15 @@ const Item = (item) => {
                 {/* <small>x {item.count}</small> */}
                 <div className="control-edit-container">
 
-                    <Link to=''>
+                    <Link to={`product-details/${item.item._id}`}>
                         <img className="contro-edit-product" src={iconView}></img>
                     </Link>
 
-                    <Link to=''>
+                    <Link to={`edit-product/${item.item._id}`}>
                         <img className="contro-edit-product" src={iconEdit}></img>
                     </Link>
 
-                    <button className='control-product-remove' onClick={() => setDataProductDelete(item._id)}>
+                    <button className='control-product-remove' onClick={() => setDataProductDelete(item.item._id)}>
                         <img className="control-delete-product" src={iconDelete}></img>
                     </button>
                 </div>

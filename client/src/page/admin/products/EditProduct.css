@@ -78,7 +78,7 @@
     transition: border-color ease-in-out .15s,
     box-shadow ease-in-out .15s;
 }
-.text-name{
+.text-name-page-admin{
     width: 30%;
 }
 
@@ -88,7 +88,7 @@
     margin-bottom: 5%;
 }
 
-.form-group-text {
+.form-group-text-page-admin {
     width: 100;
     display:flex;
 }
@@ -127,4 +127,9 @@
     text-align: center;
     touch-action: manipulation;
     margin: auto;
+    margin-top: 5%;
+}
+
+.label-upload-image{
+    margin-top: 2%;
 }
