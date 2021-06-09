@@ -1,0 +1,187 @@
+.categories-view {
+    display: block;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+}
+
+.menu-button {
+    cursor: pointer;
+    margin: 0;
+    padding: 15px 15px 15px 22px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    line-height: 17px;
+    height: 45px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #498374;
+}
+
+.hamberger-toggle {
+    top:23px
+}
+
+.menu-button .hamberger-toggle::before {
+    top: 4px;
+}
+
+.menu-button .hamberger-toggle::after {
+    bottom: 4px;
+}
+
+.menu-button .hamberger-toggle,.menu-button .hamberger-toggle::before,.menu-button .hamberger-toggle::after  {
+    background: #fff;
+    content: "";
+    display: block;
+    height: 2px;
+    position: absolute;
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    width: 14px;
+    border-radius: 3px;
+}
+
+
+.menu-button .hamberger-toggle::after {
+    background: #fff;
+    content: "";
+    display: block;
+    height: 2px;
+    position: absolute;
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    width: 14px;
+    border-radius: 3px;
+}
+
+.menu-button .title {
+    padding-left: 23px;
+}
+
+.item-view {
+    cursor: pointer;
+    border: 1px solid #000;
+    position: absolute;
+    height: auto;
+    margin: 0 5px;
+    background: #fff;
+    left: 0;
+    z-index: 99;
+    float: left;
+}
+
+.categories-view .item {
+    background: #fff;
+    margin: 0;
+    position: relative;
+    padding: 15px 15px 15px 22px;
+}
+
+
+/* NOTES */
+.item:hover {
+    background: #498374;
+}
+
+.item span {
+    color: #000;
+    padding-left: 15px;
+}
+
+
+.icon::before {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 10px;
+    color: #498374;
+}
+
+
+.item .arrow::after {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 20px;
+    color: #498374;
+}
+
+
+.item:hover>  span ,.item:hover> .icon::before ,.item:hover> .arrow::after{
+    color: #fff ;
+}
+
+
+
+.detail-view {
+    cursor: pointer;
+    border: 1px solid #498374   ;
+    position: absolute;
+    height: auto;
+    width: 800px;
+    padding: 40px;
+    margin: 0 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #fff;
+    left: 202px;
+    z-index: 99;
+    float: left;
+}
+
+.detail-view span {
+    padding: 20px;
+}
+
+.detail-view .link {
+    text-decoration: none;
+
+}
+.detail-view .link:hover {
+    color: #498374;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.pull-left {
+    margin-left: 20px;
+}
+
+.pull-left .link {
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.green {
+    color: #498374;
+}
+
+.phone-number {
+    position: absolute;
+    right: 0;
+    
+}
+
+.phone-number .fa-phone {
+    padding-right: 10px;
+    color: #498374;
+    font-size: 20px;
+}
+
+.phone-number a {
+    color: #498374;
+    text-decoration: none;
+    font-size: 20px;
+}
