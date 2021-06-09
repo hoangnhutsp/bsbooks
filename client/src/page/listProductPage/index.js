@@ -8,19 +8,17 @@ import  {getProductLists} from '../../api/product/product_list'
 import Rate from '../../components/rate'
 import Item from '../../components/item'
 import Breadcrumb from '../../components/Breadcrumb.js';
-
+import RecentlyView from '../../components/product_list/RecentlyView'
 //
 import {queryStringSortType} from './constantQuery'
 
-const ProductPage = (data) => {
+const ProductPage = () => {
     const [fromValue, setFromValue] = useState(0)
     const [toValue, setToValue] = useState(0)
     const [rating, setRating] = useState(0)
     const [sortType, setSortType] = useState(0)
     const [curData, setCurData] = useState([])
-    const [cache, setCache] = useState({}) // Caching data
     const [breadcrumb, setBreadcrumb] = useState()
-
 
     const { id_cate } = useParams();
  
@@ -32,7 +30,11 @@ const ProductPage = (data) => {
 
     useEffect(() => {
         getData();
-    }, [sortType, id_cate])
+    }, [sortType ])
+    
+    useEffect(() => {
+        console.log(rating);
+    }, [rating])
 
     const getData = async () => {
         console.log(id_cate);
@@ -43,21 +45,24 @@ const ProductPage = (data) => {
         if (rating) {
             queryString += `&rating=${rating}`;
         }
-        
         const data = await getProductLists(queryString)
         setCurData(data.product)  
         setBreadcrumb(data.breadcrumb)
+        setPage({page: data.page,pageMax: data.pageMax})
+        console.log(data);
     }
+    
 
     return breadcrumb&&setCurData?(
         <div className="productPage">
-            <Breadcrumb breadcrumb={breadcrumb} title={`(${curData.length} Quyen Sach)`}/>
+            <Breadcrumb breadcrumb={breadcrumb} title={`(${curData.size} Quyen Sach)`}/>
             <div className="container-f90 row">
 
                 <div className="col-2">
                     <p className="bold uppercase">Đánh giá</p>
                     <br></br>
-                    <div className="row align-center hover" onClick={() => setRating(5)}>
+                    <div className="row align-center hover" 
+                    >
                         <Rate number={5} />
                         <p>Từ 5 sao</p>
                     </div>
@@ -144,6 +149,8 @@ const ProductPage = (data) => {
 
                 </div>
             </div>
+            <RecentlyView />
+
         </div>
     ):null;
 }

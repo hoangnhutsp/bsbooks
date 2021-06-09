@@ -21,7 +21,9 @@ function Breadcrumb( {breadcrumb, title}) {
             <ul className='mz-breadcrumb-block__list'>
                 {data.map((pa, idx) => {
                     let name = pa.name + '  /'
-                    return(<li className="breadcrum-item-name">
+
+                    console.log(pa.path);
+                    return(<li className="breadcrum-item-name" key={idx}>
                         <div className="nhutrang">
                         <Link  to={pa.path}>{name}&nbsp;</Link>
 

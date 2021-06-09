@@ -1,37 +1,49 @@
 import React from 'react'
 import { useState } from 'react'
 import './ItemAddress.css'
-function ItemAddress({ data }) {
+import { Link, useParams, useHistory } from 'react-router-dom'
 
-    const [address, setAddress] = useState(data)
+function ItemAddress({ data , idx,  setAddressDefaul, delAdress}) {
+    const history = useHistory();
 
-    console.log(data);
+
+    
+
     return (
         <div className="container-item-address">
             <div className="container-info-address">
                 <table className="table-info-address">
                     <tr>
                         <td className="info-address-lable">Ho va ten</td>
-                        <td className="info-address-val">{address.name}</td>
+                        <td className="info-address-val">{data.name}</td>
                     </tr>
                     <tr>
                         <td className="info-address-lable">So dien thoai</td>
-                        <td className="info-address-val">{address.phone}</td>
+                        <td className="info-address-val">{data.phone}</td>
                     </tr>
                     <tr>
                         <td className="info-address-lable">Dia chi</td>
-                        <td>{address.address}</td>
+                        <td>{data.address}</td>
                     </tr>
                 </table>
                 <div className="edit-info-address">
-                    <button>Sua</button>
-                    <button>Xoa</button>
+                    {data.is_default===1&&<span className="is-default-address">Mac dinh</span>}
+                    <button 
+                        className="btn-edit-address"
+                        onClick={()=>history.push(`/user/address/edit/${data._id}`)}
+                    
+                    >Sua</button>
+                    <button className="btn-edit-address"
+                        onClick={() => {
+                            delAdress(data._id, idx);
+                        }}
+                    >Xoa</button>
                 </div>
             </div>
 
 
-            <button className="btn-make-default">Dat lam mac dinh</button>
-
+            {(data.is_default===0)&&<button className="btn-make-default" onClick={() => setAddressDefaul(data._id, idx)}>Dat lam mac dinh</button>}
+            <hr></hr>
         </div>
     )
 }

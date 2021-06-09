@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+'use strict';
+
 import Cart from '../models/cart.js';
 
 

@@ -1,7 +1,7 @@
 export const queryStringSortType = [
-    {name: 'default',       query: '?sort=popular,desc'},
-    {name: 'top_seller',    query: '?sort=seller,desc'},
-    {name: 'newes',         query: '?sort=createdAt,desc'},
+    {name: 'default',       query: '?sort=sell,desc'},
+    {name: 'top_seller',    query: '?sort=sell,desc'},
+    {name: 'newest',        query: '?sort=day_ago_created,asc'},
     {name: 'low_price',     query: '?sort=price,asc'},
     {name: 'high_price',    query: '?sort=price,desc'},
 ]

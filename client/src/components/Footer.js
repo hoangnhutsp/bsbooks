@@ -5,10 +5,10 @@ function Footer() {
   return (
     <div className='FooterContainer'>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-      <footer className = "footer">
+      <footer className = "frame-footer">
         <div className="container-footer">
-          <div className="row">
-            <div className="footer-col">
+          <div className="container-footer-row">
+            <div className="container-footer-col">
               <h4>chúng tôi</h4>
               <ul>
                 <li><a href="http://localhost:3000/">Địa chỉ:</a></li>
@@ -17,7 +17,7 @@ function Footer() {
                 <li><a href="http://localhost:3000/">chính sách</a></li>
               </ul>
             </div>
-            <div className="footer-col">
+            <div className="container-footer-col">
               <h4>hỗ trợ</h4>
               <ul>
                 <li><a href="http://localhost:3000/">FAQ</a></li>
@@ -27,7 +27,7 @@ function Footer() {
                 <li><a href="http://localhost:3000/">thanh toán</a></li>
               </ul>
             </div>
-            <div className="footer-col">
+            <div className="container-footer-col">
               <h4>liên hệ</h4>
               <ul>
                 <li><a href="http://localhost:3000/">+ (028) 999 999</a></li>
@@ -37,7 +37,7 @@ function Footer() {
 
               </ul>
             </div>
-            <div className="footer-col">
+            <div className="container-footer-col">
               <h4>truyền thông</h4>
               <div className="social-links">
                 <a href="http://localhost:3000/"><i className="fab fa-facebook"></i></a>
