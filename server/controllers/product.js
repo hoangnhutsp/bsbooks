@@ -58,12 +58,11 @@ const initQuery = async (query) => {
     let category = await getListCate(query);
     let price = query.price || DEFAULT_PRICE;
     price = String(price).split(',');
-    let minPrice = price[0];
-    let maxPrice = price[1];
+    let minPrice = Number(price[0]);
+    let maxPrice = Number(price[1]);
     if (!maxPrice) maxPrice = DEFAULT_MAX_PRICE
     let q = query.q;
     let rating = query.rating || DEFAULT_RATING;
-
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
@@ -127,8 +126,21 @@ export const getProduct = async (req, res) => {
 
 
         let breadcrumb = await getBreadcrumbCategory(query);
-
-        res.status(200).json({ size, crrSize: product.length, page, pageMax, product, breadcrumb })
+        
+        console.log(queryString);
+        let minPrice = queryString.price.$gt;
+        let maxPrice = queryString.price.$lt;
+        
+        res.status(200).json({ 
+            size, 
+            crrSize: product.length, 
+            page, 
+            pageMax, 
+            product, 
+            breadcrumb, 
+            queryPrice: {minPrice, maxPrice}, 
+            queryRating: queryString.rating_average.$gt + 1 
+        })
 
     } catch (error) {
         res.status(404).json({ message: error.message });

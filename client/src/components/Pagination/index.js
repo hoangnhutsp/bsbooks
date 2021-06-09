@@ -1,57 +1,40 @@
 import React, { useState, useEffect } from 'react'
 
 import './Pagination.css'
-function Pagination({ pagination, setPagination }) {
-    let { page, pageMax } = pagination;
+function Pagination({ page, pageMax, setPage }) {
+    let arrPagination = [];
+    let formPage = Math.max(page - 2, 1);
+    let toPage = Math.min(formPage + 4, pageMax);
+    formPage = Math.max(1, Math.min(formPage, toPage - 4))
+    for (let i = formPage; i <= toPage; i++) arrPagination.push(i);
 
-    const [arrPagination, setArrPagination] = useState([])
-    const [currPage, setCurrPage] = useState(pagination.page)
-    const [currPageMax, setCurrPageMax] = useState(pagination.pageMax)
-
-    const creatListPage = (page, pageMax) => {
-        let arr = [];
-        let formPage = Math.max(page - 2, 1);
-        let toPage = Math.min(formPage + 4, pageMax);
-        formPage = Math.max(1, Math.min(formPage, toPage-4))
-        for (let i = formPage; i <= toPage; i++) arr.push(i);
-        return arr;
-    }
-
-    useEffect(() => {
-        setArrPagination(creatListPage(page, pageMax));
-    }, [])
-
-    useEffect(() => {
-        console.log(currPage, currPageMax);
-        if (currPage && currPageMax) {
-            setArrPagination(creatListPage(currPage, currPageMax))
-            setPagination({ page: currPage, pageMax: currPageMax })
-        }
-    }, [currPage])
-
-    const NumberPage = (x) => 
-         <div
-            className={(x === currPage)
+    const NumberPage = (x) =>
+        <div
+            className={(x === page)
                 ? "pagination-item-number-select circle"
                 : "pagination-item-number circle"}
             onClick={() => setCurrPage(x)}
         >{x}</div>
-    
-    return (pagination) && (
+
+    const setCurrPage = (page) => {
+        console.log('set page');
+        setPage(page)
+    }
+    return (arrPagination.length>0) && (
         <div>
             <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
             <div className="pagination-list-item">
-                <div 
+                <div
                     className="pagination-item-number circle"
                     onClick={() => {
-                        if (currPage > 1) setCurrPage(currPage-1);
+                        if (page > 1) setCurrPage(page - 1);
                     }}
                 ><i class="fas fa-caret-left"></i></div>
                 {arrPagination.map((x) => NumberPage(x))}
-                <div 
+                <div
                     className="pagination-item-number circle"
                     onClick={() => {
-                        if (currPage < currPageMax) setCurrPage(currPage+1);
+                        if (page < pageMax) setCurrPage(page + 1);
                     }}
                 ><i class="fas fa-caret-right"></i></div>
 
