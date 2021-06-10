@@ -7,7 +7,7 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumb.css'
 import iconHomepage from './../icons/homepage.svg'
-function Breadcrumb( {breadcrumb}) {
+function Breadcrumb( {breadcrumb, title}) {
 
     const [data, setData] = useState([]);
     useEffect(() => {
@@ -20,13 +20,17 @@ function Breadcrumb( {breadcrumb}) {
 
             <ul className='mz-breadcrumb-block__list'>
                 {data.map((pa, idx) => {
-                    let name = pa.name
-                    if (idx != data.length-1) name += ` /`;
-                    return(<li className={idx!==data.length-1?"breadcrum-item-name":"breadcrum-item-name-end"}>
-                        
-                        <Link to={pa.path}>{name}&nbsp;</Link>
+                    let name = pa.name + '  /'
+
+                    console.log(pa.path);
+                    return(<li className="breadcrum-item-name" key={idx}>
+                        <div className="nhutrang">
+                        <Link  to={pa.path}>{name}&nbsp;</Link>
+
+                        </div>
                     </li>)
                 })}
+                <li className="title-breadcrum">{title}</li>
 
             </ul>
         </div>

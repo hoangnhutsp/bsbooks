@@ -3,6 +3,15 @@
     display: inline-block;
 }
   
+.container-main-navbar{
+    display: flex;
+    flex-direction: row;
+    padding: 0rem 8rem;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    margin-bottom: 2rem;
+}
 .dropdown-content {
     display: none;
     position: absolute;
@@ -12,8 +21,18 @@
     padding: 12px 16px;
     z-index: 1;
   }
-  
-  .dropdown:hover .dropdown-content {
+
+.container-item-on-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-notifications {
+    margin-left: 2rem;
+}
+.dropdown:hover .dropdown-content {
     display: block;
   }
 .dropdown-content-item {
@@ -94,4 +113,16 @@
 .navbar-icon-shopping-cart {
     width: 2rem;
     height: 2rem;
+    margin-left: 1rem;
+}
+.navbar-icon-bell i{
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.row-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

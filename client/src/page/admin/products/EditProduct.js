@@ -2,62 +2,33 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams, useHistory } from 'react-router-dom'
 import { getProductDetails } from '../../../api/product/product_details'
 import axios from 'axios'
-// Custom component
+
+import * as apiProduct from './../../../api/product'
+
 
 import './EditProduct.css'
 function EditProduct() {
     const { id } = useParams();
     const [data, setData] = useState() // Data product detals
-    const [count, setCount] = useState(1) // count
     const [shouldFullPara, setShouldFullPara] = useState(false) // is readmore needed
     const history = useHistory();
-    //biến tạm để cập nhật specifications
-    const [temp, setTemp] = useState([]);
-    //biến tạm lấy những giá trị update còn lại
+
     const [currentAvatar, setCurrentAvatar] = useState('')
 
-    //lấy đúng giá trị của các trường trong attributes
-    const getdata = (data) => {
-        let result = {
-            compani: '',
-            publicDate: '',
-            size: '',
-            typeCover: '',
-            SKU: '',
-            publicCompani: '',
-            numberPage: '',
-        }
-        data.map((item, idx) => {
-            if (item.name == "Công ty phát hành")
-                result.compani = item.value;
-            if (item.name == "Ngày xuất bản")
-                result.publicDate = item.value;
-            if (item.name == "Kích thước")
-                result.size = item.value;
-            if (item.name == "Loại bìa")
-                result.typeCover = item.value;
-            if (item.name == "Số trang")
-                result.numberPage = item.value;
-            if (item.name == "SKU")
-                result.sku = item.value;
-            if (item.name == "Nhà xuất bản")
-                result.publicCompani = item.value
-        })
-        console.log(result)
-        return result
-    }
+    const [specifications, setSpecifications] = useState({})
+
 
     useEffect(async () => {
         if (!id) {
             history.push('/')
             return
         }
-        const data1 = await getProductDetails(id);
+        const { data } = await getProductDetails(id);
+        const data1 = data
         console.log('Đã load data')
         setData(data1)
-        let data2 = getdata(data1.specifications[0].attributes)
-        setTemp(data2)
-        setCurrentAvatar(data1.images[0].base_url)
+        setSpecifications(data1.specifications[0])
+        setCurrentAvatar(data1.images[0])
     }, [])
 
     const getBase64 = file => {
@@ -79,13 +50,14 @@ function EditProduct() {
         getBase64(file)
             .then(result => {
                 const images = [result];
-                const data = { images }
+                const igms = { images }
                 const url = "http://localhost:5000/upload_image";
-                axios.post(url, data)
+                axios.post(url, igms)
                     .then((res) => res.data)
-                    .then((data) => {
-                        let path = data.path_images[0];
-                        setCurrentAvatar(path);
+                    .then((imgs) => {
+                        console.log(imgs);
+                        let path = imgs.path_images[0];
+                        setData({...data, thumbnail_url: path});
                     })
                     .catch((err) => {
                         console.log(err);
@@ -98,38 +70,15 @@ function EditProduct() {
     }
 
     //cập nhật lại giá trị specification
-    const UpdateProduct = () => {
-        let specification = [{
-            name: "Thông tin chung",
-            attributes: [
-                {
-                    name: "Công ty phát hành", 
-                    value: temp.compani
-                },
-                {
-                    name: "Ngày xuất bản",
-                    value: temp.publicDate
-                }, 
-                {
-                    name: "Loại bìa", 
-                    value: temp.typeCover
-                },
-                {
-                    name: "SKU",
-                    value: temp.SKU
-                },
-                {
-                    name: "Nhà xuất bản",
-                    value: temp.publicCompani
-                },
-                {
-                    name: "Số trang",
-                    value: temp.numberPage
-                }
-            ]
-        }];
-        setData({ ...data, specifications: specification })
+    const UpdateProduct = async () => {
+        setData({ ...data, specifications: specifications })
+        let newProduct = data;
+        newProduct.specifications = [specifications];
+        console.log(newProduct);
+        await apiProduct.updateProduct(newProduct);
+
     }
+
 
     return data ? (
         <div className='product'>
@@ -145,7 +94,7 @@ function EditProduct() {
                                 id="price"
                                 value={data.author_name}
                                 className="input-edit-product"
-                                onChange={e => setData({ ...data, author_name: e.author_name })}
+                                onChange={e => setData({ ...data, author_name: e.target.value })}
                             />
                         </div>
 
@@ -168,8 +117,8 @@ function EditProduct() {
                                 name="price"
                                 id="price"
                                 className="input-edit-product"
-                                value={(data.price).format(0, 3)}
-                                onChange={e => setData({ ...data, discount: e.target.value })}
+                                value={(data.price)}
+                                onChange={e => setData({ ...data, price: e.target.value })}
                             />
                         </div>
 
@@ -180,7 +129,7 @@ function EditProduct() {
                                 name="price"
                                 id="price"
                                 className="input-edit-product"
-                                value={(data.discount).format(0, 3)}
+                                value={(data.discount)}
                                 onChange={e => setData({ ...data, discount: e.target.value })}
                             />
                         </div>
@@ -202,7 +151,7 @@ function EditProduct() {
                 <br></br>
                 <div className="col-12">
                     <div className="container-image-product-upload">
-                        <img className='edit-image-product' alt="product-image" id="product-image-current" src={currentAvatar}></img>
+                        <img className='edit-image-product' alt="product-image" id="product-image-current" src={data.thumbnail_url}></img>
                     </div>
                     <div className='button-upload-image-product'>
                         <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
@@ -211,90 +160,32 @@ function EditProduct() {
                 </div>
                 <div className="col-12">
                     <br></br>
-                    <p className="big-text bold">Thông tin chung:</p>
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">Công ty phát hành</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.compani}
-                            onChange={e => setTemp({ ...temp, compani: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">Ngày xuất bản</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.publicDate}
-                            onChange={e => setTemp({ ...temp, publicDate: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">Loại bìa</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.typeCover}
-                            onChange={e => setTemp({ ...temp, typeCover: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">SKU</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.SKU}
-                            onChange={e => setTemp({ ...temp, SKU: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">Nhà xuất bản</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.publicCompani}
-                            onChange={e => setTemp({ ...temp, publicCompani: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">Số trang</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.numberPage}
-                            onChange={e => setTemp({ ...temp, numberPage: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group-text-page-admin">
-                        <p className="text-name-page-admin">Kích thước</p>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="input-edit-product"
-                            value={temp.size}
-                            onChange={e => setTemp({ ...temp, size: e.target.value })}
-                        />
-                    </div>
+                  
+                            <div>
+                                <p className="big-text bold">{specifications.name}</p>
+                                {specifications.attributes&&specifications.attributes.map((item, idx) => {
+                                    return (
+                                        <div className="form-group-text-page-admin">
+                                            <p className="text-name-page-admin">{item.name}</p>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                id="name"
+                                                className="input-edit-product"
+                                                value={item.value}
+                                                onChange={e => {
+                                                    let att = specifications.attributes;
+                                                    att[idx].value = e.target.value;
+                                                    setSpecifications({...specifications, attributes: att});
+                                                }
+                                                }
+                                            />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                   
+                 
                 </div>
                 <div className="col-12">
                     <br></br>
@@ -309,11 +200,11 @@ function EditProduct() {
     ) : null
 }
 
-Number.prototype.format = function (n, x, s, c) {
-    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
-        num = this.toFixed(Math.max(0, ~~n));
+// Number.prototype.format = function (n, x, s, c) {
+//     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+//         num = this.toFixed(Math.max(0, ~~n));
 
-    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ',')) + 'đ';
-};
+//     return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ',')) + 'đ';
+// };
 
 export default EditProduct

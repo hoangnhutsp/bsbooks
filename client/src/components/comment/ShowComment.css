@@ -1,0 +1,172 @@
+.jFkAwY {
+    width: 1270px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.jUzqeQ {
+    word-break: break-word;
+    opacity: 1;
+    color: rgb(36, 36, 36);
+    min-height: auto;
+}
+
+.jUzqeQ .customer-reviews__heading {
+    font-size: 18px;
+    line-height: 24px;
+    margin: 10px 0px 10px;
+}
+
+.jUzqeQ .customer-reviews__inner {
+    background-color: rgb(255, 255, 255);
+    padding: 0px 0px 24px;
+    border-radius: 4px;
+}
+
+.hMjYZK {
+    padding: 1rem;
+    /*display: flex;*/
+    border-top: 1px solid rgb(242, 242, 242);
+}
+
+.hMjYZK .review-comment__user {
+    flex-basis: 335px;
+    flex-shrink: 0;
+}
+/*hinh anh va ten nguoi dung*/
+.hMjYZK .review-comment__user-inner {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.hMjYZK .review-comment__user-avatar {
+    margin: 0px 12px 0px 0px;
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.gDQSLG img {
+    display: block;
+    max-width: 100%;
+    border-style: none;
+    border-radius: 50%;
+}
+
+.hMjYZK .review-comment__user-name {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.flex-grow-review-comment__rating-title{
+    flex-grow: 1;
+}
+
+.hMjYZK .review-comment__rating-title {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0px 0px 4px;
+}
+
+/*icon ngoi sao*/
+.hMjYZK .review-comment__rating {
+    flex-shrink: 0;
+}
+
+.dYhelp {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+.dYhelp span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#div-fas-fa-star{
+    width: 100%;
+}
+
+.dYhelp > div {
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.hMjYZK .review-comment__title {
+    margin: 0px 0px 0px 12px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: rgb(36, 36, 36);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.hMjYZK .review-comment__content {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0px 0px 8px;
+}
+
+.hMjYZK .review-comment__thank {
+    padding: 8px 16px 9px;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(13, 92, 182);
+    border: 1px solid rgb(13, 92, 182);
+    font-weight: 500;
+    border-radius: 4px;
+    margin: 0px 8px 0px 0px;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+}
+
+.hMjYZK .review-comment__thank > i {
+    margin: 0px 8px 0px 0px;
+}
+
+.hMjYZK .review-comment__thank > i, .hMjYZK .review-comment__thank > span {
+    display: inline-block;
+    vertical-align: middle;
+    color: rgb(13, 92, 182);
+    /*font-weight: 500;*/
+}
+
+.span-review-comment__thank{
+    font-weight: bold;
+}
+
+.hMjYZK .review-comment__reply {
+    padding: 8px 16px 9px;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(13, 92, 182);
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+    font-weight: bold;
+}
+
+
+.yellow{
+    color: rgb(255, 255, 0);
+}

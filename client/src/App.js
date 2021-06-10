@@ -16,6 +16,12 @@ import User from './page/user/User'
 import Admin from './page/admin/Admin'
 
 import Search from './page/Search'
+import TermsPage from './page/TermsPage'
+import SecurityPage from './page/SecurityPage'
+import FandAPage from './page/FandAPage'
+import AboutUs from './page/AboutUs'
+//import FormComment from './page/FormComment'
+
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -28,22 +34,11 @@ import Checkout from './page/cart/Checkout';
 import InfoTransport from './components/InfoTransport';
 
 
-import {getProfile} from './redux/actions/user';
-import {getCart} from './redux/actions/cart'
-import {
-  useDispatch,
-} from 'react-redux';
-
 const App = () => {
-
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //     dispatch(getProfile());
-  //     dispatch(getCart);
-  // }, [dispatch])
 
   return (
     <>
+      <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
       <Router>
         <div>
           <Navbar></Navbar>
@@ -75,11 +70,24 @@ const App = () => {
             <Route path="/signup">
               <Signup />
             </Route>
+            
             <Route path="/cart">
               <Cart />
             </Route>
             <Route path="/checkout">
               <Checkout />
+            </Route>
+            <Route path="/dieu-khoan">
+              <TermsPage />
+            </Route>
+            <Route path="/chinh-sach-bao-mat">
+              <SecurityPage />
+            </Route>
+            <Route path="/faq">
+              <FandAPage />
+            </Route>
+            <Route path="/about-us">
+              <AboutUs />
             </Route>
             <Route path="*">
               <PageNotFound />

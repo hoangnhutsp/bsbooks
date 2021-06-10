@@ -66,6 +66,7 @@ function Checkout() {
 
     let invoice = {}
     invoice.name = infoUser.name;
+    invoice.address = infoUser.address;
     invoice.email = infoUser.email;
     invoice.phone = infoUser.phone;
     invoice.total = total;
