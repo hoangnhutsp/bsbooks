@@ -76,7 +76,7 @@ const AllCategories = () => {
                 <Link to='/New-arrivals' className={pathname === "/New-arrivals" ? "green link" : "link"}> Sach moi</Link>
                 <Link to='/FAQ' className={pathname === "/FAQ" ? "green link" : "link"}> FAQ</Link>
                 <Link to='/About-us' className={pathname === "/About-us" ? "green link" : "link"}> Ve chung toi</Link>
-                <Link to='/Contact' className={pathname === "/Contact" ? "green link" : "link"}> Lien he</Link>
+                <Link to='/Contact' className={pathname === "/Contact" ? "green link" : "link"}> ĐIỀU KHOẢN DỊCH VỤ</Link>
             </div>
 
             <div className="phone-number pointer">

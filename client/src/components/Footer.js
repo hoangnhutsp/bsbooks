@@ -28,12 +28,11 @@ function Footer() {
               </ul>
             </div>
             <div className="container-footer-col">
-              <h4>liên hệ</h4>
+              <h4>Chinh sach</h4>
               <ul>
-                <li><a href="http://localhost:3000/">+ (028) 999 999</a></li>
-                <li><a href="http://localhost:3000/">+ (028) 888 999</a></li>
-                <li><a href="http://localhost:3000/">sweetheartuit.com</a></li>
-                <li><a href="http://localhost:3000/">bsbookuit@gmail.com</a></li>
+                <li><a href="http://localhost:3000/dieu-khoan">Dieu khoan dich vu</a></li>
+                <li><a href="http://localhost:3000/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+           
 
               </ul>
             </div>

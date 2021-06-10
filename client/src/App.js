@@ -68,6 +68,12 @@ const App = () => {
             <Route path="/signup">
               <Signup />
             </Route>
+            <Route path="/dieu-khoan">
+              <TermsPage />
+            </Route>
+            <Route path="/chinh-sach-bao-mat">
+              <SecurityPage />
+            </Route>
             <Route path="/cart">
               <Cart />
             </Route>
@@ -78,8 +84,6 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-          <TermsPage></TermsPage>
-          <SecurityPage></SecurityPage>
           <InfoTransport />
           <Footer></Footer>
         </div>
