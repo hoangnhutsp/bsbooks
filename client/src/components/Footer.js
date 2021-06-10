@@ -11,29 +11,23 @@ function Footer() {
             <div className="container-footer-col">
               <h4>chúng tôi</h4>
               <ul>
-                <li><a href="http://localhost:3000/">Địa chỉ:</a></li>
-                <li><a href="http://localhost:3000/">TP. Hồ Chí Minh</a></li>
-                <li><a href="http://localhost:3000/">về chúng tôi</a></li>
-                <li><a href="http://localhost:3000/">chính sách</a></li>
+                <li><a href="http://localhost:3000/about-us">về chúng tôi</a></li>
               </ul>
             </div>
             <div className="container-footer-col">
               <h4>hỗ trợ</h4>
               <ul>
-                <li><a href="http://localhost:3000/">FAQ</a></li>
-                <li><a href="http://localhost:3000/">vận chuyển</a></li>
-                <li><a href="http://localhost:3000/">trả hàng</a></li>
-                <li><a href="http://localhost:3000/">tình trạng đơn</a></li>
-                <li><a href="http://localhost:3000/">thanh toán</a></li>
+                <li><a href="http://localhost:3000/faq">FAQ</a></li>
+                <li><a href="http://localhost:3000/user/purchase">tình trạng đơn</a></li>
+                <li><a href="http://localhost:3000/cart/checkout">thanh toán</a></li>
               </ul>
             </div>
             <div className="container-footer-col">
-              <h4>liên hệ</h4>
+              <h4>Chinh sach</h4>
               <ul>
-                <li><a href="http://localhost:3000/">+ (028) 999 999</a></li>
-                <li><a href="http://localhost:3000/">+ (028) 888 999</a></li>
-                <li><a href="http://localhost:3000/">sweetheartuit.com</a></li>
-                <li><a href="http://localhost:3000/">bsbookuit@gmail.com</a></li>
+                <li><a href="http://localhost:3000/dieu-khoan">Dieu khoan dich vu</a></li>
+                <li><a href="http://localhost:3000/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+           
 
               </ul>
             </div>
