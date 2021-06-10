@@ -4,13 +4,19 @@ import "./User.css";
 
 import UserSidebar from './UserSidebar'
 
-// 
+import ControlProduct from './products/ProductList';
+import EditProduct from './products/EditProduct'
+import ControlUser from './user/UserList'
+import EditUser from './user/EditUser'
+import ViewUser from './user/ViewUser'
+import AddAdmin from './admin/AddAdminForm'
+import AddProduct from './products/AddProduct'
 import Profile from './account/Profile';
-import Address from './account/Address';
-import Password from './account/Password';
+import Product from '../../page/Product'
 import Order from './notifications/Order';
-import Promotion from './notifications/Promotion';
-import Purchase from './purchase/Purchase'
+import Dashboad from './dashboad'
+import ListInvoice from './invoice/ListInvoice'
+
 function Admin() {
     let { path } = useRouteMatch();
 
@@ -24,27 +30,40 @@ function Admin() {
             <div className="user-content">
                 <Switch>
                     <Route exact path={path}>
-                        <Profile />
+                        <Dashboad />
                     </Route>
-                    <Route exact path={`${path}/profile`}>
-                        <Profile />
-                    </Route>
-                    <Route exact path={`${path}/address`}>
-                        <Address />
+                    <Route exact path={`${path}/dashboad`}>
+                        <Dashboad />
                     </Route>
 
-                    <Route exact path={`${path}/password`}>
-                        <Password />
+                    <Route exact path={`${path}/products`}>
+                        <ControlProduct />
                     </Route>
-                    <Route exact path={`${path}/other`}>
-                        <Order />
+                    <Route exact path={`${path}/product-details/:id`}>
+                        <Product/>
                     </Route>
-                    <Route exact path={`${path}/promotion`}>
-                        <Promotion />
+                    <Route exact path={`${path}/edit-product/:id`}>
+                        <EditProduct/>
                     </Route>
-                    <Route exact path={`${path}/purchase`}>
-                        <Purchase />
+                    <Route exact path={`${path}/new-product`}>
+                        <AddProduct/>
                     </Route>
+                    <Route exact path={`${path}/users`}>
+                        <ControlUser />
+                    </Route>
+                    <Route exact path={`${path}/edit-users/:id`}>
+                        <EditUser/>
+                    </Route>
+                    <Route exact path={`${path}/users/:id`}>
+                        <ViewUser/>
+                    </Route>
+                    <Route exact path={`${path}/new-user`}>
+                        <AddAdmin/>
+                    </Route>
+                    <Route exact path={`${path}/invoice`}>
+                        <ListInvoice />
+                    </Route>
+                    
                 </Switch>
             </div>
         </div>

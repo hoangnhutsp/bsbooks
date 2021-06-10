@@ -1,6 +1,8 @@
 /*modify title*/
 .Terms-Page-Container{
-    padding: 0 3%;
+    padding: 0 10%;
+    line-height: 1.7;
+    margin-bottom: 5rem;
 }
 
 .Terms-Page-Container-title h2{

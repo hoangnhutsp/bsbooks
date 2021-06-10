@@ -20,17 +20,6 @@ export default function SearchBox() {
   const ulRef = useRef();
   const inputRef = useRef();
 
-  // useEffect(() => {
-  //   // inputRef.current.addEventListener('click', (event) => {
-  //   //   event.stopPropagation();
-  //   //   ulRef.current.style.display = 'block'
-
-  //   // })
-  //   // document.addEventListener('click', (event) => {
-  //   //   ulRef.current.style.display = 'none'
-  //   // })
-  // }, [])
-
   const submitHandler = (e) => {
     e.preventDefault();
     let path_current = window.location.pathname;

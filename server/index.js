@@ -17,9 +17,11 @@ import userRouters from './routes/user.js'
 import evaluateRouters from './routes/evaluate.js'
 import categoryRoutes from './routes/category.js'
 import invoiceRoutes from './routes/invoice.js'
+import adminRouter from './routes/admin.js'
 
 import recentlyViewd from './routes/recently_viewed.js'
 import uploadImageRoutes from './routes/upload_image.js'
+import addressRoutes from './routes/address.js'
 
 import {breadcrumb} from './controllers/other.js'
 const app = express();
@@ -37,7 +39,7 @@ app.use(cookieParser());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 const PORT = process.env.PORT || 5000;
 
-const CONNECTION_URL = process.env.URL_MONGODB;
+const CONNECTION_URL = process.env.URL_MONGODB_LOCAL;
 const dbOptions = {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -45,13 +47,13 @@ const dbOptions = {
 }
 
 
-console.log(`MONGO URL: ${process.env.URL_MONGODB}`);
+console.log(`MONGO URL: ${CONNECTION_URL}`);
 
 app.use(session({
     secret: 'some secrec',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.URL_MONGODB }),
+    store: MongoStore.create({ mongoUrl: CONNECTION_URL }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 
     }
@@ -67,8 +69,11 @@ app.use('/product', productRoutes);
 app.use('/category', categoryRoutes);
 app.use('/recently_viewd', recentlyViewd)
 app.use('/upload_image', uploadImageRoutes);
+app.use('/address', addressRoutes);
 app.use('/invoice', invoiceRoutes);
 app.use('/breadcrumb' , breadcrumb);
+app.use('/admin', adminRouter)
+
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
         app.listen(PORT, () => {

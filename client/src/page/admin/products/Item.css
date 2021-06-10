@@ -1,0 +1,217 @@
+/*nội dung sản phẩm trong giỏ hàng*/
+
+.control-item .control-form{
+    display: grid;
+    grid-template-columns: 100%;
+    border: 1px solid #efefef;
+    margin-bottom: 1.2rem;
+    border-radius: 7px 7px 0px 0px;
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2),
+                inset -2px -2px 2px #efefef;
+}
+
+.control-product{
+    display: flex;
+    grid-template-columns: 80px auto;
+    grid-gap: 0rem 1.3rem;
+    padding: 1rem 0rem;
+    border-bottom: 1px solid #efefef;
+}
+
+.control-image{
+    margin-left: 2%;
+    height: 75px;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.control-unit-price,
+.control-product-remove{
+    display: none;
+}
+
+.control-controls-sm{
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem .8rem;
+}
+
+.control-remove{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #505050;
+}
+
+.control-remove{
+    display: flex;
+}
+.control-remove button,
+.control-product-remove{
+    background-color: white;
+    height: 25px;
+    width: 25px;
+    border: none;
+    outline: none;
+    text-align: center;
+    margin-left: .3rem;
+    margin-right: .3rem;
+}
+
+.control-product-name{
+    font-weight: bold;
+    color: #505050;
+    margin-bottom: .3rem;
+    margin-left: 5%;
+    width: 40%;
+    text-align: left;
+    position: left;
+}
+
+.control-price-sm{
+    color: rgb(252, 52, 52);
+    font-weight: bold;
+    margin-bottom: .3rem;
+    width: 20%;
+}
+
+.control-product-info {
+    font-weight: bold;
+    color: #333;
+}
+
+/*bảng tổng kết*/
+.control-total-holder{
+    margin-top: 2rem;
+}
+
+.control-total{
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-total p{
+    font-weight: bold;
+}
+
+.contro-edit-product{
+    padding-top: 5%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-edit-container{
+    width: 30%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.control-delete-product{
+    width: 65%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+
+/*RESPONSIVE*/
+@media only screen and (min-width: 786px) {
+    .control-product-name{
+        width: 40%;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+    .control-price-sm{
+        width: 30%;
+        display: flex;
+    }
+    .control-product-info{
+        display: flex;
+         justify-content: center;
+         align-items: center;
+    
+    }
+    .control-price-sm,
+    .control-product-remove{
+        width: 55%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .control-item .control-form:first-child{
+        border-bottom: 1px solid #efefef;
+    }
+
+    .control-item .control-form{
+        box-shadow: none;
+        border: none;
+        display: flex;
+        border-bottom: 1px solid #efefef;
+    }
+
+    .control-controls-sm{
+        display: none;
+    }
+}
+
+.title-control-product-admin {
+    width: 100%;
+    display: flex;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.title-image-for-product{
+    padding-left: 2%;
+    width: 10%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.title-name-for-product{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-price-for-product{
+    width: 38%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.class-include-add-icon {
+    width: 15%;
+    display: flex;
+    padding: 2%;
+    padding-bottom: 0   ;
+    justify-content: right;
+    align-items: center;
+    float: right;
+}
+
+.class-include-link-tag-new-product a {
+    text-decoration: none;
+}
+
+.class-icon-add-product{
+    width: 20%;
+    display: flex;
+    justify-content: right;
+    position: right;
+    align-items: center;
+}
+
+.class-text-form-product{
+    padding-left: 1%;
+    width: 100%;
+    color: teal;
+}

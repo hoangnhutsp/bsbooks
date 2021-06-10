@@ -10,10 +10,6 @@ import {
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import CommentProduct from './components/CommentProduct'
-import NotificationBox from './components/NotificationBox'
-
-import ShowComment from './components/ShowComment'
 
 import Home from './page/Home'
 import User from './page/user/User'
@@ -26,6 +22,7 @@ import FandAPage from './page/FandAPage'
 import AboutUs from './page/AboutUs'
 import ContactPage from './page/ContactPage'
 //import FormComment from './page/FormComment'
+
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -38,22 +35,11 @@ import Checkout from './page/cart/Checkout';
 import InfoTransport from './components/InfoTransport';
 
 
-import {getProfile} from './redux/actions/user';
-import {getCart} from './redux/actions/cart'
-import {
-  useDispatch,
-} from 'react-redux';
-
 const App = () => {
-
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //     dispatch(getProfile());
-  //     dispatch(getCart);
-  // }, [dispatch])
 
   return (
     <>
+      <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
       <Router>
         <div>
           <Navbar></Navbar>
@@ -85,25 +71,36 @@ const App = () => {
             <Route path="/signup">
               <Signup />
             </Route>
+            
             <Route path="/cart">
               <Cart />
             </Route>
             <Route path="/checkout">
               <Checkout />
             </Route>
+            <Route path="/dieu-khoan">
+              <TermsPage />
+            </Route>
+            <Route path="/chinh-sach-bao-mat">
+              <SecurityPage />
+            </Route>
+            <Route path="/faq">
+              <FandAPage />
+            </Route>
+            <Route path="/about-us">
+              <AboutUs />
+            </Route>
+            <Route path="/contact">
+              <ContactPage />
+            </Route>
             <Route path="*">
               <PageNotFound />
             </Route>
           </Switch>
-          <CommentProduct></CommentProduct>
-          <NotificationBox></NotificationBox>
-          <TermsPage></TermsPage>
-          <SecurityPage></SecurityPage>
-          <FandAPage></FandAPage>
-          <AboutUs></AboutUs>
-          <ContactPage></ContactPage>
+       
+
+
           <InfoTransport />
-          <ShowComment></ShowComment>
           <Footer></Footer>
         </div>
       </Router>
