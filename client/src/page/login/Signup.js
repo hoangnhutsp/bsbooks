@@ -10,6 +10,7 @@ import {
     validateAddress,
     validatePassWord,
     validateConfPassWord,
+    validateDateTime,
 } from './CheckInfo'
 
 import { useDispatch } from 'react-redux'
@@ -46,7 +47,9 @@ function Register() {
         gender: '',
         birthday: '',
         password: '',
-        confirmPassWord: ''
+        confirmPassWord: '',
+        birthday: '',
+        test: '',
     })
 
     const setErrRes = err => {
@@ -173,9 +176,15 @@ function Register() {
                                         setRegisterData({ ...registerData, birthday: e.target.value })
                                     }}
                                     value={registerData.birthday}
-
+                                    onBlur={(e) => {
+                                        let err = validateDateTime(e.target.value);
+                                        setError({ ...error, birthday: err })
+                                    }}
                                     required></input>
                             </div>
+                            {(error.birthday == '') ? null :
+                                <div className='error-text-register'>{error.birthday}</div>
+                            }
 
                             <div className='form-group-register'>
                                 <input type='password'
@@ -247,34 +256,34 @@ function Register() {
                             <div className='form-group-register'>
                                 <button type='submit' className='button-submit-sigup'>ĐĂNG KÝ</button>
                                 <div className='login-facebook'>
-                            <FacebookLogin
-                                appId="340793020896447"
-                                autoLoad={false}
-                                callback={responseFacebook}
-                                size="medium "
-                                icon="fa-facebook"
-                                textButton="Đăng ký với FaceBoook" />
-                        </div>
-                        <div className='sigup-google'>
-                            <GoogleLogin
-                                className='login-google'
-                                clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
-                                buttonText="ĐĂNG KÝ VỚI GOOGLE"
-                                cssClass="btnGoogle"
+                                    <FacebookLogin
+                                        appId="340793020896447"
+                                        autoLoad={false}
+                                        callback={responseFacebook}
+                                        size="medium "
+                                        icon="fa-facebook"
+                                        textButton="Đăng ký với FaceBoook" />
+                                </div>
+                                <div className='sigup-google'>
+                                    <GoogleLogin
+                                        className='login-google'
+                                        clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                        buttonText="ĐĂNG KÝ VỚI GOOGLE"
+                                        cssClass="btnGoogle"
 
-                                onSuccess={responseSuccessGoogle}
-                                onFailure={responseErrorGoogle}
-                                cookiePolicy={'single_host_origin'}
-                            />
-                        </div>
+                                        onSuccess={responseSuccessGoogle}
+                                        onFailure={responseErrorGoogle}
+                                        cookiePolicy={'single_host_origin'}
+                                    />
+                                </div>
                             </div>
                         </form>
-                        
 
-                        
+
+
                     </div>
                 </div>
-               
+
             </div>
         </div>
     )
