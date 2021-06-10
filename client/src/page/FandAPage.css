@@ -1,0 +1,41 @@
+/*modify title*/
+.FandA-Page-Container{
+    padding: 0 3%;
+}
+
+.FandA-Page-Container-title h2{
+    text-transform: capitalize;
+    margin-top: 2%;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+.FandA-Page-Container-title h2::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #498374;
+    height: 3px;
+    box-sizing: border-box;
+    width: 70px;
+}
+
+ol.FandA-Page-Container-content-ol {
+    padding-left: 1%;
+}
+
+ol.FandA-Page-Container-content-ol li{
+    color: #2aa785;
+    font-weight: bold;
+}
+
+.FandA-Page-Container-content-ol p{
+    margin: 1% 0px;
+}
+
+.FandA-Page-Container-content-ol-indentation{
+    padding-left: 2%;
+}
