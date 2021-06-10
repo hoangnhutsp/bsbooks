@@ -10,10 +10,6 @@ import {
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import CommentProduct from './components/CommentProduct'
-import NotificationBox from './components/NotificationBox'
-
-import ShowComment from './components/ShowComment'
 
 import Home from './page/Home'
 import User from './page/user/User'
@@ -23,6 +19,7 @@ import Search from './page/Search'
 import TermsPage from './page/TermsPage'
 import SecurityPage from './page/SecurityPage'
 //import FormComment from './page/FormComment'
+
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
@@ -34,23 +31,12 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
-
-import {getProfile} from './redux/actions/user';
-import {getCart} from './redux/actions/cart'
-import {
-  useDispatch,
-} from 'react-redux';
-
 const App = () => {
-
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //     dispatch(getProfile());
-  //     dispatch(getCart);
-  // }, [dispatch])
 
   return (
     <>
+      <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
+
       <Router>
         <div>
           <Navbar></Navbar>
@@ -92,12 +78,9 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-          <CommentProduct></CommentProduct>
-          <NotificationBox></NotificationBox>
           <TermsPage></TermsPage>
           <SecurityPage></SecurityPage>
           <InfoTransport />
-          <ShowComment></ShowComment>
           <Footer></Footer>
         </div>
       </Router>

@@ -18,7 +18,7 @@ const invoiceSchema = mongoose.Schema({
     },
     name: String,
     email: String,
-    phone: Number,
+    phone: String,
     address: String,
     sum_price: Number,
     ship_price: Number,

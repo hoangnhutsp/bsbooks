@@ -47,3 +47,56 @@
     font-weight: bold;
     color: blue;
 }
+
+.justify-content-flex-end {
+    justify-content: flex-end;
+}
+
+.margin-top-2-rem {
+    margin-top: 2rem;
+}
+
+.btn-find-product-price-rating {
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    text-align: center;
+    border: none;
+    background-color: #498374;
+    color:#fff;
+}
+.btn-find-product-price-rating:hover {
+    background-color: rgba(73, 131, 116, 0.9)
+}
+
+
+.container-filter-price-rating span{
+    cursor: pointer;
+    background-color: rgb(238, 238, 238);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    margin-right: 1rem;
+    font-size: 12px;
+}
+.container-filter-price-rating-item span{
+    cursor: pointer;
+    background-color: rgba(27, 168, 255, 0.1);;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    margin-right: 1rem;
+    font-size: 12px;
+}
+.container-filter-price-rating-item span i{
+    cursor: pointer;
+    margin-left: 0.4rem;
+    font-size: 12px;
+}
+.container-filter-price-rating-item span i:hover{
+    color: #333;
+}
+.margin-top-1rem{
+    margin-top: 1rem;
+}
+.fillter {
+    background-color: (27, 168, 255, 0.1);
+}
