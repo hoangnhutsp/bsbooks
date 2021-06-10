@@ -22,7 +22,7 @@ router.get('/', getProduct);
 
 
 router.get('/:id', updateRecentlyViewed, getProductByID);
-router.post('/:id', updateProduct);
+router.post('/update', updateProduct);
 router.post('/', createProduct)
 
 export default router;

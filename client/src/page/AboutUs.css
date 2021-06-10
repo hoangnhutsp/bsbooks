@@ -1,0 +1,39 @@
+/*modify title*/
+.AboutUs-Page-Container{
+    padding: 0 10%;
+    line-height: 1.7;
+    margin-bottom: 5rem;
+}
+
+.AboutUs-Page-Container-title h2{
+    text-transform: capitalize;
+    margin-top: 2%;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+.AboutUs-Page-Container-title h2::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #498374;
+    height: 3px;
+    box-sizing: border-box;
+    width: 70px;
+}
+
+ol.AboutUs-Page-Container-content-service{
+    padding-left: 3.5%;
+    margin: 1% 0;
+}
+
+.AboutUs-Page-Container-content-service li{
+    margin: 1% 0;
+}
+
+.AboutUs-Page-Container-content-page1 p{
+    margin: 1% 0;
+}

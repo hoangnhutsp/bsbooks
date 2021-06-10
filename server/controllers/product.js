@@ -3,7 +3,7 @@
 import Product from '../models/product.js';
 import Category from '../models/category.js'
 import ProductDetail from '../models/product_detail.js'
-
+import Config from '../models/config.js';
 
 const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
@@ -71,7 +71,7 @@ const initQuery = async (query) => {
     }
 
     if (q) {
-        queryString['$text'] = {$search: q}
+        queryString['$text'] = { $search: q }
     }
 
     return queryString;
@@ -115,7 +115,7 @@ export const getProduct = async (req, res) => {
         let textScore = {}
 
 
-        if (query.q) textScore['score'] = {$meta: "textScore"};
+        if (query.q) textScore['score'] = { $meta: "textScore" };
         let product = await Product.find(queryString, textScore).sort(sortString);
         const size = product.length;
 
@@ -127,20 +127,20 @@ export const getProduct = async (req, res) => {
 
 
         let breadcrumb = await getBreadcrumbCategory(query);
-        
+
         console.log(queryString);
         let minPrice = queryString.price.$gt;
         let maxPrice = queryString.price.$lt;
-        
-        res.status(200).json({ 
-            size, 
-            crrSize: product.length, 
-            page, 
-            pageMax, 
-            product, 
-            breadcrumb, 
-            queryPrice: {minPrice, maxPrice}, 
-            queryRating: queryString.rating_average.$gt + 1 
+
+        res.status(200).json({
+            size,
+            crrSize: product.length,
+            page,
+            pageMax,
+            product,
+            breadcrumb,
+            queryPrice: { minPrice, maxPrice },
+            queryRating: queryString.rating_average.$gt + 1
         })
 
     } catch (error) {
@@ -152,9 +152,7 @@ const attributeProductDetails = [
     "_id",
     "id",
     "id_category",
-    "sku",
     "name",
-    "url_key",
     "short_description",
     "price",
     "discount",
@@ -162,13 +160,11 @@ const attributeProductDetails = [
     "rating_average",
     "review_count",
     "thumbnail_url",
-    "has_ebook",
     "inventory_status",
     "publisher",
     "author_name",
     "description",
     "specifications",
-    "id_author",
     "images"
 ];
 
@@ -180,6 +176,8 @@ export const getProductByID = async (req, res) => {
         let id = product["id"];
         let productDetail = await ProductDetail.findOne({ id });
 
+        console.log(product);
+        console.log(productDetail);
         let data = {};
         for (let x of attributeProductDetails) {
             if (x in product) {
@@ -193,8 +191,8 @@ export const getProductByID = async (req, res) => {
         let x = {};
         x.category = data.id_category;
         let breadcrumb = await getBreadcrumbCategory(x);
-       
-        res.status(200).json({data, breadcrumb});
+
+        res.status(200).json({ data, breadcrumb });
 
 
     } catch (error) {
@@ -205,29 +203,77 @@ export const getProductByID = async (req, res) => {
 const checkInfoProduct = (product) => {
     return true;
 }
-
-export const createProduct = async (req, res) => {
-    const product = req.body;
-    if (!checkInfoProduct(product)) {
-        res.status(500).json({ message: "Info not valid!!!" })
+function removeVietnameseAccent (str) {
+    // remove accents
+    var from = "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ",
+        to   = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+    for (var i=0, l=from.length ; i < l ; i++) {
+      str = str.replace(RegExp(from[i], "gi"), to[i]);
     }
-    const newProduct = new Product(product);
+  
+    str = str.toLowerCase().trim().replace(/[^a-z0-9\-]/g, ' ')
+    return str;
+}
+export const createProduct = async (req, res) => {
     try {
-        await newProduct.save();
-        res.status(201).json(newProduct);
+        console.log('create product');
+        let { newProduct, newProductDetail, image } = req.body;
+        if (!newProduct || !newProductDetail || !image) {
+            return res.status(500).json({ message: "Info not valid!!!" })
+        }
+
+        const config = await Config.findOne({forCollection: 'product'});
+
+
+        if (config !== null) {
+            let id = config.idSeed + 1;
+            newProduct.id = newProductDetail.id = id;
+
+            await Config.findByIdAndUpdate({_id: config._id}, {idSeed: id});
+
+            //SOL: product
+            newProduct.idx_name = removeVietnameseAccent(newProduct.name);
+            newProduct.idx_author_name = removeVietnameseAccent(newProduct.author_name);
+            newProduct.short_description = newProductDetail.description;
+            if (newProduct.short_description.length > 200)
+                newProduct.short_description = newProduct.short_description.slice(0, 200) + '...';
+            newProduct.thumbnail_url = image;
+            newProduct.inventory_status = "available"
+            newProduct.day_ago_created = 1
+
+
+            newProductDetail.images[0] = image
+            const newP = new Product(newProduct);
+            const newPD= new ProductDetail(newProductDetail);
+
+            console.log(newP);
+
+            console.log(newPD);
+            await newP.save();
+            await newPD.save();
+        }
+        res.status(201).json({ status: 1});
+
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message })
     }
 }
 
 export const updateProduct = async (req, res) => {
+    console.log('UPDATE PRODUCT');
     const product = req.body;
     if (!product) {
         return res.status(400).send({ message: "Data update can not empty" })
     }
-    const _id = req.params.id;
+    let _id = product._id;
+    let id = product.id;
+    console.log(id);
     try {
+        console.log(product);
         await Product.findByIdAndUpdate(_id, product, { useFindAndModify: false });
+        let { specifications, description } = product
+        await ProductDetail.findOneAndUpdate({ id }, { specifications, description }, { useFindAndModify: false })
         res.status(201).json({ message: "sussessfully!!!" })
     } catch (error) {
         res.status(500).json({ message: "Error Update user information" });
@@ -248,7 +294,7 @@ export const searchProduct = async (req, res) => {
                 },
 
             },
-            {score: {$meta: "textScore"}}
+                { score: { $meta: "textScore" } }
             )
             .sort({ score: { $meta: "textScore" } })
 
@@ -263,7 +309,7 @@ export const suggestionProduct = async (req, res) => {
     try {
         let q = req.query.q;
         let regex = new RegExp(q, 'i');
-        const product = await Product.find({ idx_name: regex}, {name: '1'} ).limit(SIZE_OF_SUGGESTION);
+        const product = await Product.find({ idx_name: regex }, { name: '1' }).limit(SIZE_OF_SUGGESTION);
         res.status(200).json({ size: product.length, product })
 
     } catch (error) {
