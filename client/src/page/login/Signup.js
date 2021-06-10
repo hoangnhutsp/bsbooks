@@ -14,6 +14,7 @@ import {
 
 import { useDispatch } from 'react-redux'
 import {
+    Link,
     useHistory,
 } from 'react-router-dom'
 import {
@@ -90,6 +91,29 @@ function Register() {
                         {(error.error === '') ? null :
                             <div>{error.error}</div>
                         }
+
+                        <div className='class-include-facebook-google-login'>
+                            <div className='login-google'>
+                                <FacebookLogin
+                                    appId="340793020896447"
+                                    autoLoad={false}
+                                    callback={responseFacebook}
+                                    cssClass='facebook-login-button'
+                                    icon="fa-facebook"
+                                    textButton="FACEBOOK" />
+                            </div>
+                            <div className='login-google'>
+                                <GoogleLogin
+                                    className='google-login-button'
+                                    clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                    buttonText="GOOGLE"
+                                    onSuccess={responseSuccessGoogle}
+                                    onFailure={responseErrorGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                    icon={false}
+                                />
+                            </div>
+                        </div>
                         <form className='signup-register' onSubmit={submitHandler}>
                             <div className='form-group-register'>
                                 <input
@@ -227,12 +251,14 @@ function Register() {
 
                             <div className='form-group-register'>
                                 <input name='gioitinh'
+                                    className='gender-user'
                                     type='radio' value='male'
                                     checked={registerData.gender === 'male'}
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nam
                             <input name='gioitinh'
+                                    className='gender-user'
                                     type='radio'
                                     value='female'
                                     checked={registerData.gender === 'female'}
@@ -246,35 +272,18 @@ function Register() {
 
                             <div className='form-group-register'>
                                 <button type='submit' className='button-submit-sigup'>ĐĂNG KÝ</button>
-                                <div className='login-facebook'>
-                            <FacebookLogin
-                                appId="340793020896447"
-                                autoLoad={false}
-                                callback={responseFacebook}
-                                size="medium "
-                                icon="fa-facebook"
-                                textButton="Đăng ký với FaceBoook" />
-                        </div>
-                        <div className='sigup-google'>
-                            <GoogleLogin
-                                className='login-google'
-                                clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
-                                buttonText="ĐĂNG KÝ VỚI GOOGLE"
-                                cssClass="btnGoogle"
-
-                                onSuccess={responseSuccessGoogle}
-                                onFailure={responseErrorGoogle}
-                                cookiePolicy={'single_host_origin'}
-                            />
-                        </div>
                             </div>
                         </form>
-                        
 
-                        
+                        <div className='class-have-an-account'>
+                            <div>Bạn đã có tài khoản?</div>
+                            <Link to='/login'>
+                                <div className='go-to-login-form'>Đăng nhập </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     )
