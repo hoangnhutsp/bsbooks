@@ -221,13 +221,19 @@ export const createProduct = async (req, res) => {
 }
 
 export const updateProduct = async (req, res) => {
+    console.log('UPDATE PRODUCT');
     const product = req.body;
     if (!product) {
         return res.status(400).send({ message: "Data update can not empty" })
     }
-    const _id = req.params.id;
+    let _id = product._id;
+    let id = product.id;
+    console.log(id);
     try {
+        console.log(product);
         await Product.findByIdAndUpdate(_id, product, { useFindAndModify: false });
+        let {specifications, description} = product
+        await ProductDetail.findOneAndUpdate({id}, {specifications, description}, { useFindAndModify: false })
         res.status(201).json({ message: "sussessfully!!!" })
     } catch (error) {
         res.status(500).json({ message: "Error Update user information" });
