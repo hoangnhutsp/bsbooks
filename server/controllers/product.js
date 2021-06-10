@@ -19,10 +19,12 @@ const DEFAULT_MAX_PRICE = 10000000;
 const getListCate = async (query) => {
 
     try {
-        console.log(query.category);
-        let category = query.category || DEFAULT_CATEGORY;
-        if (category > 40) category = DEFAULT_CATEGORY;
-        category = await Category.find({ id: category })
+        let id = query.category || DEFAULT_CATEGORY;
+        if (id > 40) id = DEFAULT_CATEGORY;
+        const category = await Category.find({ id: id })
+        if (category === []) {
+            console.log(' WR: URL LOCAL MONGO DB');
+        }
         let id_path = category[0]["id_path"];
         let cate = await Category.find({ id_path: { $regex: RegExp(`^${id_path}`) } })
         let arrCate = [];
@@ -54,7 +56,6 @@ const getBreadcrumbCategory = async (query) => {
     return breadcrumb
 }
 const initQuery = async (query) => {
-    query.category = Math.max(1, query.category)
     let category = await getListCate(query);
     let price = query.price || DEFAULT_PRICE;
     price = String(price).split(',');

@@ -4,19 +4,17 @@ import "./User.css";
 
 import UserSidebar from './UserSidebar'
 
-// 
 import ControlProduct from './products/ProductList';
 import EditProduct from './products/EditProduct'
 import ControlUser from './user/UserList'
 import EditUser from './user/EditUser'
 import ViewUser from './user/ViewUser'
 import AddAdmin from './admin/AddAdminForm'
-import Profile from './account/Profile';
 import Product from '../../page/Product'
-import Password from './account/Password';
 import Order from './notifications/Order';
-import Promotion from './notifications/Promotion';
-import Purchase from './purchase/Purchase'
+import Dashboad from './dashboad'
+import ListInvoice from './invoice/ListInvoice'
+
 function Admin() {
     let { path } = useRouteMatch();
 
@@ -30,11 +28,12 @@ function Admin() {
             <div className="user-content">
                 <Switch>
                     <Route exact path={path}>
-                        <Profile />
+                        <Dashboad />
                     </Route>
                     <Route exact path={`${path}/dashboad`}>
-                        <Profile />
+                        <Dashboad />
                     </Route>
+
                     <Route exact path={`${path}/products`}>
                         <ControlProduct />
                     </Route>
@@ -57,7 +56,7 @@ function Admin() {
                         <AddAdmin/>
                     </Route>
                     <Route exact path={`${path}/invoice`}>
-                        <Order />
+                        <ListInvoice />
                     </Route>
                     
                 </Switch>

@@ -30,26 +30,11 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
-
-import {getProfile} from './redux/actions/user';
-import {getCart} from './redux/actions/cart'
-import {
-  useDispatch,
-} from 'react-redux';
-import ListInvoice from './page/admin/invoice/ListInvoice';
-
-
 const App = () => {
-
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //     dispatch(getProfile());
-  //     dispatch(getCart);
-  // }, [dispatch])
 
   return (
     <>
-                <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
+      <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
 
       <Router>
         <div>
@@ -92,7 +77,6 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-          <ListInvoice/>
           <InfoTransport />
           <Footer></Footer>
         </div>

@@ -47,13 +47,13 @@ const dbOptions = {
 }
 
 
-console.log(`MONGO URL: ${process.env.URL_MONGODB}`);
+console.log(`MONGO URL: ${CONNECTION_URL}`);
 
 app.use(session({
     secret: 'some secrec',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.URL_MONGODB }),
+    store: MongoStore.create({ mongoUrl: CONNECTION_URL }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 
     }

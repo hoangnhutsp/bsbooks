@@ -52,12 +52,13 @@ function EditProduct() {
             history.push('/')
             return
         }
-        const data1 = await getProductDetails(id);
+        const {data} = await getProductDetails(id);
+        const data1 = data
         console.log('Đã load data')
         setData(data1)
         let data2 = getdata(data1.specifications[0].attributes)
         setTemp(data2)
-        setCurrentAvatar(data1.images[0].base_url)
+        setCurrentAvatar(data1.images[0])
     }, [])
 
     const getBase64 = file => {
@@ -106,6 +107,10 @@ function EditProduct() {
         setData({ ...data, specifications: specification })
     }
 
+    useEffect(() => {
+        console.log(data);
+    }, [data])
+
     return data ? (
         <div className='product'>
             < div className='container' >
@@ -143,8 +148,8 @@ function EditProduct() {
                                 name="price"
                                 id="price"
                                 className="input-edit-product"
-                                value={(data.price).format(0, 3)}
-                                onChange={e => setData({ ...data, discount: e.target.value })}
+                                value={(data.price)}
+                                onChange={e => setData({ ...data, price: e.target.value })}
                             />
                         </div>
 
@@ -155,7 +160,7 @@ function EditProduct() {
                                 name="price"
                                 id="price"
                                 className="input-edit-product"
-                                value={(data.discount).format(0, 3)}
+                                value={(data.discount)}
                                 onChange={e => setData({ ...data, discount: e.target.value })}
                             />
                         </div>
@@ -284,11 +289,11 @@ function EditProduct() {
     ) : null
 }
 
-Number.prototype.format = function (n, x, s, c) {
-    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
-        num = this.toFixed(Math.max(0, ~~n));
+// Number.prototype.format = function (n, x, s, c) {
+//     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+//         num = this.toFixed(Math.max(0, ~~n));
 
-    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ',')) + 'đ';
-};
+//     return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ',')) + 'đ';
+// };
 
 export default EditProduct
