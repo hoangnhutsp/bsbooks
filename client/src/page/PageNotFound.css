@@ -1,0 +1,39 @@
+.PageNotFoundContainer-Container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Montserrat";
+    color: rgb(56,56,56);
+    
+}
+
+.PageNotFoundContainer-Container-img{
+    justify-content: center;
+}
+
+.PageNotFoundContainer-Container-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.PageNotFoundContainer-Container-wrapper h1 {
+    font-size: 3rem;
+    margin-top: 20px;
+}
+.PageNotFoundContainer-Container-wrapper .PageNotFoundContainer-Container-message {
+    font-size: 1.5rem;
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+}
+.PageNotFoundContainer-Container-btn {
+    background: rgb(48, 158, 134);
+    padding: 20px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #fff;
+}
+.PageNotFoundContainer-Container-btn:hover {background: rgb(89, 196, 181);}
