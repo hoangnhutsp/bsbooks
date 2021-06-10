@@ -1,83 +1,53 @@
-.CommentProductContainer-nav {
-	display: flex;
-	align-items: center;
-	background: #00A9D4;
-	height: 60px;
-	position: relative;
-}
-.CommentProductContainer-icon {
+.NotificationContainer {
+	padding-right: 1rem;
 	cursor: pointer;
-	margin-right: 50px;
-	line-height: 60px;
-}
-.CommentProductContainer-icon span {
-	background: #f00;
-	padding: 7px;
-	border-radius: 50%;
-	color: #fff;
-	vertical-align: top;
-	margin-left: -25px;
-}
-.CommentProductContainer-icon i {
-	display: inline-block;
-	width: 40px;
-	margin-top: 20px;
-}
-.CommentProductContainer-icon:hover {
-	opacity: .7;
 }
 
-.CommentProductContainer-logo {
-	flex: 1;
-	margin-left: 50px;
-	color: #eee;
-	font-size: 20px;
-	font-family: monospace;
-}
 
 /*ẩn hiện nội dung thông báo*/
 
-.CommentProductContainer-notifi-box {
+.NotificationContainer-notifi-box {
 	width: 300px;
 	height: auto;
 	opacity: 1;
 	position: absolute;
-	top: 63px;
-	right: 35px;
-	transition: 1s opacity, 250ms height;
+	top: 2.5rem;
+	right: 1rem;
+	transition: 0.2s opacity, 250ms height;
+	background-color: #fff;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.CommentProductContainer-notifi-box h2 {
+.NotificationContainer-notifi-box h2 {
 	font-size: 14px;
 	padding: 10px;
 	border-bottom: 1px solid #eee;
 	color: #999;
 }
-.CommentProductContainer-notifi-box h2 span {
+.NotificationContainer-notifi-box h2 span {
 	color: #f00;
 }
-.CommentProductContainer-notifi-item {
+.NotificationContainer-notifi-item {
 	display: flex;
 	border-bottom: 1px solid #eee;
 	padding: 15px 5px;
 	margin-bottom: 15px;
 	cursor: pointer;
 }
-.CommentProductContainer-notifi-item:hover {
+.NotificationContainer-notifi-item:hover {
 	background-color: #eee;
 }
-.CommentProductContainer-notifi-item img {
+.NotificationContainer-notifi-item img {
 	display: block;
 	width: 50px;
 	margin-right: 10px;
 	border-radius: 50%;
 }
-.CommentProductContainer-notifi-item .text h4 {
+.NotificationContainer-notifi-item .text h4 {
 	color: #777;
 	font-size: 16px;
 	margin-top: 10px;
 }
-.CommentProductContainer-notifi-item .text p {
+.NotificationContainer-notifi-item .text p {
 	color: #aaa;
 	font-size: 12px;
 }

@@ -79,10 +79,10 @@ const AllCategories = () => {
                 <Link to='/Contact' className={pathname === "/Contact" ? "green link" : "link"}> ĐIỀU KHOẢN DỊCH VỤ</Link>
             </div>
 
-            <div className="phone-number pointer">
+            {/* <div className="phone-number pointer">
                 <i className="fas fa-phone"></i>
                 <a href="tel:0905749999">0905 749 999</a>
-            </div>
+            </div> */}
         </div>
     )
 }

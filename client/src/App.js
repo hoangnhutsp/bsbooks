@@ -31,12 +31,13 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
+import NotificationBox from './components/NotificationBox'
+
 const App = () => {
 
   return (
     <>
       <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
-
       <Router>
         <div>
           <Navbar></Navbar>
