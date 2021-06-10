@@ -17,6 +17,8 @@ const productSchema = mongoose.Schema({
     inventory_status: String,
     publisher: String,
     author_name: String,
+    idx_name: String,
+    idx_author_name: String,
 });
 
 const Product = mongoose.model('products', productSchema);

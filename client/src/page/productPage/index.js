@@ -8,34 +8,36 @@ import  {getProductLists} from '../../api/product/product_list'
 import Rate from '../../components/rate'
 import Item from '../../components/item'
 import Breadcrumb from '../../components/Breadcrumb.js';
-
+import RecentlyView from '../../components/product_list/RecentlyView'
 //
 import {queryStringSortType} from './constantQuery'
 
+import Pagination from '../../components/Pagination'
 const ProductPage = () => {
-    const [fromValue, setFromValue] = useState(0)
-    const [toValue, setToValue] = useState(0)
+    const [fromValue, setFromValue] = useState()
+    const [toValue, setToValue] = useState()
     const [rating, setRating] = useState(0)
     const [sortType, setSortType] = useState(0)
     const [curData, setCurData] = useState([])
-    const [cache, setCache] = useState({}) // Caching data
     const [breadcrumb, setBreadcrumb] = useState()
-
-
+    const [page, setPage] = useState(1)
+    const [pageMax, setPageMax] = useState(1)
+    const [size, setSize] = useState()
+    const [raV, setRaV] = useState({minV: 0, maxV: 0});
+    
     const { id_cate } = useParams();
- 
+    
 
-    useEffect(async() => {
-        await getData() // default is soft by pop
+    useEffect(() => {
+        getData()
     }, [])
-
 
     useEffect(() => {
         getData();
-    }, [sortType, id_cate])
+    }, [sortType, page, id_cate, fromValue, toValue, rating])
 
     const getData = async () => {
-        console.log(id_cate);
+        console.log('getData');
         let queryString = queryStringSortType[sortType].query + `&category=${id_cate}`;
         if (toValue || fromValue) {
             queryString += `&price=${fromValue},${toValue}`;
@@ -43,15 +45,48 @@ const ProductPage = () => {
         if (rating) {
             queryString += `&rating=${rating}`;
         }
+        if (page){
+            queryString += `&page=${page}`
+        }
         
-        const data = await getProductLists(queryString)
-        setCurData(data.product)  
-        setBreadcrumb(data.breadcrumb)
+
+            const data = await getProductLists(queryString)
+            setCurData(data.product)  
+            setBreadcrumb(data.breadcrumb)
+            setPageMax(data.pageMax)
+            setSize(data.size)
+
+            let queryPrice = data.queryPrice;
+            if (!(queryPrice.minPrice === 0&&queryPrice.maxPrice===100000000)){
+                setFromValue(queryPrice.minPrice);
+                setToValue(queryPrice.maxPrice)
+            }
+            let queryRating = data.queryRating;
+            if (queryRating >= 3){
+                setRating(queryRating)
+            }
+        //window.location.reload();
+        window.scrollTo(0, 0)
     }
 
+
+    const getText = () => {
+        if (fromValue === 0) return `Duoi ${toValue}`
+        if (toValue === 0) return `Tren ${fromValue}`
+        return `Tu ${fromValue} den ${toValue}`
+    }
+
+    const ResultNotFound = () => {
+
+        return (
+            <div>
+                <h2>Không tìm thấy bất kỳ kết quả phu hop.</h2>
+            </div>
+        )
+    }
     return breadcrumb&&setCurData?(
         <div className="productPage">
-            <Breadcrumb breadcrumb={breadcrumb} title={`(${curData.length} Quyen Sach)`}/>
+            <Breadcrumb breadcrumb={breadcrumb} title={`(${size} Quyen Sach)`}/>
             <div className="container-f90 row">
 
                 <div className="col-2">
@@ -106,19 +141,32 @@ const ProductPage = () => {
 
                     <p className="sml-text">Chọn khoảng giá</p>
                     <br></br>
-                    <input className="input" placeholder={0} value={fromValue} onChange={(event) => {
+                    <input className="input" placeholder={0} onChange={(event) => {
                         const value = event.target.value
                         if (!isNaN(parseFloat(value)) && isFinite(value)) {
-                            setFromValue(event.target.value)
+                            setRaV({...raV, minV : value})
                         }
                     }}></input>
                     <span > - </span>
-                    <input className="input" placeholder={0} value={toValue} onChange={(event) => {
+                    <input className="input" placeholder={0} onChange={(event) => {
                         const value = event.target.value
                         if (!isNaN(parseFloat(value)) && isFinite(value)) {
-                            setToValue(event.target.value)
+                            setRaV({...raV, maxV : value})
                         }
                     }}></input>
+
+                    <div className="btn-find-product-price-rating"
+                        onClick={e => {
+                           let {minV, maxV} = raV;
+                           console.log(minV, maxV);
+                           if(minV&&maxV){
+                            setFromValue(minV);
+                            setToValue(maxV);  
+                           } 
+                        }}
+                    >    
+                   Tim kiem
+                    </div>       
                 </div>
 
                 <div className="col-10">
@@ -134,16 +182,48 @@ const ProductPage = () => {
                         <span className={sortType === 4 ? "sort-item hover selected" : "sort-item hover"}
                             onClick={() => setSortType(4)}>Giá cao</span>
                     </div>
+                    <div className="row margin-top-1rem">
+                        <div className="container-filter-price-rating">
+                        <span>Mien phi giao hang</span>
+                        </div>
+                        <div className="container-filter-price-rating-item">
+                        
+                        {    ((fromValue>0)||(toValue>0))&&<span>{getText()}
+                        
+                    
+                        <i class="fas fa-times" onClick={() => {setFromValue(0); setToValue(0)}}></i>
+                        </span>}
+                        
+                        </div>
+                        <div className="container-filter-price-rating-item">
+                        {(rating>2)&&<span>{`Tu ${rating} sao`}
+                        <i class="fas fa-times" onClick={() => setRating(0)}></i>
+                        </span>}
+                        </div>
+                        <div className="container-filter-price-rating-item">
+                        {(fromValue>0||toValue>0||(rating>2))&&<span 
+                            onClick={ () => {
+                                 setFromValue(0);
+                                 setToValue(0);
+                                 setRating(0);
+                            }}
+                        >{`Xoa tat ca`}</span> }                       
+                        </div>
+                    </div>
                     <br></br>
                     <div className="row wrap justify-center">
-                        {curData.map(item=> {
+                        {curData.length>0?curData.map(item=> {
                             return <Item data={item}></Item>
-                        })}
+                        }):<ResultNotFound />}
                     </div>
-                    
+                    <div className="row justify-content-flex-end margin-top-2-rem">
+                        {(pageMax>1)&&<Pagination setPage={setPage} page={page} pageMax={pageMax} />}
+                    </div>
 
                 </div>
             </div>
+            <RecentlyView />
+
         </div>
     ):null;
 }

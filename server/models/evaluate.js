@@ -9,6 +9,7 @@ const evaluateSchema = mongoose.Schema({
     },
     star: Number,
     comment: String,
+    title: String,
     createAt: {
         type: Date,
         default: Date.now

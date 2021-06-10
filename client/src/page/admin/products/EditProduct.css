@@ -1,0 +1,127 @@
+
+.product .container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    margin: auto;
+}
+
+
+
+.product .addToCard {
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(243, 79, 79)
+}
+
+
+
+
+.col-12 {
+    width: 100%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-4 {
+    width: 33.33333%;
+}
+
+.col-8 {
+    width: 66.66666%;
+}
+
+.product .less {
+    height: 200px;
+    overflow: hidden;
+    
+}
+ 
+.product .readmore {
+    margin-bottom: 100px;
+    color: blue;
+}
+.edit-image-product{
+    width: auto;
+    height: 10rem;
+    margin: 1rem;
+}
+
+.container-image-product-upload{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-edit-product {
+    display: block;
+    width: 50%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: rgb(0, 0, 0);
+    background-color: rgb(241, 241, 241);
+    background-image: none;
+    border: 1px solid rgb(255, 252, 252);
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    transition: border-color ease-in-out .15s,
+    box-shadow ease-in-out .15s;
+}
+.text-name-page-admin{
+    width: 30%;
+}
+
+.infor-control-product{
+    width: 100%;
+    display: block;
+    margin-bottom: 5%;
+}
+
+.form-group-text-page-admin {
+    width: 100;
+    display:flex;
+}
+
+.button-update-product{
+    width: 55%;
+    background: #f85656;
+    border-radius: 0;
+    border: 2px solid #dd6868;
+    font-family: Helvetica,sans-serif;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(255, 254, 254);
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(.27548vw + 12.71074px);
+    display: block;
+    margin-bottom: 0;
+    line-height: 3;
+    text-align: center;
+    touch-action: manipulation;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+.title-update-product{
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    display: inline-block;
+
+}
+
+.button-upload-image-product{
+    display: flex;
+    flex-direction: row;
+}
+
+.label-upload-image{
+    margin-top: 2%;
+}

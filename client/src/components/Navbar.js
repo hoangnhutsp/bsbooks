@@ -12,6 +12,8 @@ import {
 } from 'react-redux';
 
 import iconShoppingCart from './../icons/shopping-cart.svg'
+import NotificationBox from './NotificationBox'
+import AllCategories from './all_categories';
 function Navbar() {
 
     const Store = useSelector(state => state);
@@ -65,8 +67,11 @@ function Navbar() {
 
     return (
         <div className="container-navbar">
+            
             <div className="container-mini-navbar">
-                {
+                <div className="container-item-on-top">
+                        <NotificationBox />
+                    {
                     userNavbar.status
                         ? <UserIsLogin />
                         : <div className="navbar-login-signup">
@@ -78,6 +83,8 @@ function Navbar() {
                             </Link >
                         </div>
                 }
+             
+                </div>
 
             </div>
             <div className="container-main-navbar">
@@ -89,15 +96,21 @@ function Navbar() {
                 <div>
                     <SearchBox />
                 </div>
-                <div className="container-navbar-cart">
+                <div className="container-navbar-cart row-center">
+               
                     <Link to="/cart">
-                        <div>
+                        <div> 
+                            
+
                             <img alt="icon-shopping-cart" className="navbar-icon-shopping-cart" src={iconShoppingCart} />
                             {countCart > 0 && <span className="navbar-cart-number">{countCart}</span>}
                         </div>
                     </Link >
                 </div>
 
+            </div>
+            <div className="container-main-navbar">
+                <AllCategories />
             </div>
         </div>
     )

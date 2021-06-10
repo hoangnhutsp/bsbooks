@@ -6,7 +6,7 @@ import UserSidebar from './UserSidebar'
 
 // 
 import Profile from './account/Profile';
-import Address from './account/Address';
+import AddressController from './account/address/';
 import Password from './account/Password';
 import Order from './notifications/Order';
 import Promotion from './notifications/Promotion';
@@ -30,8 +30,8 @@ function User() {
                     <Route exact path={`${path}/profile`}>
                         <Profile />
                     </Route>
-                    <Route exact path={`${path}/address`}>
-                        <Address />
+                    <Route path={`${path}/address`}>
+                        <AddressController />
                     </Route>
 
                     <Route exact path={`${path}/password`}>
