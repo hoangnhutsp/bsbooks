@@ -23,6 +23,7 @@ import Search from './page/Search'
 import TermsPage from './page/TermsPage'
 import SecurityPage from './page/SecurityPage'
 import FandAPage from './page/FandAPage'
+import AboutUs from './page/AboutUs'
 //import FormComment from './page/FormComment'
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
@@ -98,6 +99,7 @@ const App = () => {
           <TermsPage></TermsPage>
           <SecurityPage></SecurityPage>
           <FandAPage></FandAPage>
+          <AboutUs></AboutUs>
           <InfoTransport />
           <ShowComment></ShowComment>
           <Footer></Footer>
