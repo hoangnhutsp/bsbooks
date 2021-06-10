@@ -39,7 +39,7 @@ function EditProduct() {
             if (item.name == "Số trang")
                 result.numberPage = item.value;
             if (item.name == "SKU")
-                result.SKU = item.value;
+                result.sku = item.value;
             if (item.name == "Nhà xuất bản")
                 result.publicCompani = item.value
         })
@@ -101,7 +101,32 @@ function EditProduct() {
     const UpdateProduct = () => {
         let specification = [{
             name: "Thông tin chung",
-            attributes: [temp]
+            attributes: [
+                {
+                    name: "Công ty phát hành", 
+                    value: temp.compani
+                },
+                {
+                    name: "Ngày xuất bản",
+                    value: temp.publicDate
+                }, 
+                {
+                    name: "Loại bìa", 
+                    value: temp.typeCover
+                },
+                {
+                    name: "SKU",
+                    value: temp.SKU
+                },
+                {
+                    name: "Nhà xuất bản",
+                    value: temp.publicCompani
+                },
+                {
+                    name: "Số trang",
+                    value: temp.numberPage
+                }
+            ]
         }];
         setData({ ...data, specifications: specification })
     }

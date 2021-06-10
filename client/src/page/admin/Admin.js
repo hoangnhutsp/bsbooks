@@ -11,6 +11,7 @@ import ControlUser from './user/UserList'
 import EditUser from './user/EditUser'
 import ViewUser from './user/ViewUser'
 import AddAdmin from './admin/AddAdminForm'
+import AddProduct from './products/AddProduct'
 import Profile from './account/Profile';
 import Product from '../../page/Product'
 import Password from './account/Password';
@@ -43,6 +44,9 @@ function Admin() {
                     </Route>
                     <Route exact path={`${path}/edit-product/:id`}>
                         <EditProduct/>
+                    </Route>
+                    <Route exact path={`${path}/new-product`}>
+                        <AddProduct/>
                     </Route>
                     <Route exact path={`${path}/users`}>
                         <ControlUser />

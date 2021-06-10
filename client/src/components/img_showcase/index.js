@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import './styles.css'
-const ImgShowcase = (props) => {
+const ImgShowcase =     (props) => {
     const [curIndex, setCurIndex] = useState(0) // Current index of main image
     const [images, setImages] = useState([]) // Current index of main image
 

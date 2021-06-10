@@ -16,7 +16,7 @@ const Item = (item) => {
                     <img className="control-image" src={item.item.thumbnail_url}></img>
                 </div>
                 <p className="control-product-name">{item.item.name}</p>
-                <p className="control-price-sm">{item.item.price}</p>
+                <p className="control-price-sm">{item.item.price.format(0, 3)}</p>
                 {/* <small>x {item.count}</small> */}
                 <div className="control-edit-container">
 
