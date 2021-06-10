@@ -33,7 +33,6 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
-import NotificationBox from './components/NotificationBox'
 
 const App = () => {
 
@@ -71,17 +70,24 @@ const App = () => {
             <Route path="/signup">
               <Signup />
             </Route>
+            
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route path="/checkout">
+              <Checkout />
+            </Route>
             <Route path="/dieu-khoan">
               <TermsPage />
             </Route>
             <Route path="/chinh-sach-bao-mat">
               <SecurityPage />
             </Route>
-            <Route path="/cart">
-              <Cart />
+            <Route path="/faq">
+              <FandAPage />
             </Route>
-            <Route path="/checkout">
-              <Checkout />
+            <Route path="/about-us">
+              <AboutUs />
             </Route>
             <Route path="*">
               <PageNotFound />
