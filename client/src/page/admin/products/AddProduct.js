@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getCategoryLists } from '../../../api/other/category_list'
 import './AddProduct.css'
-
+import * as apiProduct from './../../../api/product'
 const AddProduct = () => {
     //Lấy danh mục 
     const [category, setCatelogy] = useState([])
@@ -12,46 +12,32 @@ const AddProduct = () => {
         //console.log(data);
         let arr = [];
         data.map((item) => {
-            console.log('index: ', item.id_path.length)
             if (item.id_path.length > 6) {
-                console.log(item.name)
                 arr.push(item)
             }
         })
         setCatelogy(arr)
-        console.log('arr', arr)
     }, [])
-    //Lấy product
+
+
+
     const [newProduct, setNewProduct] = useState({
         id_category: '',
         name: '',
-        url_key: '',
-        short_description: '',
-        price: '',
-        thumbnail_url: 'http://localhost:5000/upload/images/00000_base_url.png',
-        publisher: '',
+        price: 0,
+        thumbnail_url: 'http://localhost:5000/default/images/product_default.png',
         author_name: '',
-        index_name: '',
-        index_author_name: '',
     })
 
     //Lấy Product-detail được thêm
     const [newProductDetail, setNewProductDetail] = useState({
-        id_category: newProduct.id_category,
-        name: newProduct.name,
-        url_key: newProduct.url_key,
-        short_description: newProduct.short_description,
-        price: newProduct.price,
-        thumbnail_url: newProduct.thumbnail_url,
-        publisher: newProduct.publisher,
-        author_name: newProduct.author_name,
         description: '',
         specifications: [{
             name: "Thông tin chung",
             attributes: [
                 {
                     name: "Công ty phát hành",
-                    value: newProduct.publisher
+                    value: '',
                 },
                 {
                     name: "Ngày xuất bản",
@@ -79,35 +65,13 @@ const AddProduct = () => {
                 }
             ]
         }],
-        images: [{
-            base_url: 'http://localhost:5000/upload/images/00000_base_url.png',
-            thumbnail_url: '',
-            small_url: '',
-            medium_url: '',
-            large_url: ''
-        }],
+        images: ['http://localhost:5000/upload/images/00000_base_url.png',
+        ],
     })
-
     //cập nhật product-detail khi product thay đổi
-    useEffect(() => {
-        setNewProductDetail({
-            ...newProductDetail,
-            name: newProduct.name,
-            id_category: newProduct.id_category,
-            price: newProduct.price,
-            short_description: newProduct.short_description,
-            thumbnail_url: newProduct.thumbnail_url,
-            publisher: newProduct.publisher,
-            author_name: newProduct.author_name,
-            url_key: newProduct.url_key,
-        })
-    }, [newProduct])
 
-    const [image, setImage] = useState(newProductDetail.images[0])
+    const [image, setImage] = useState(newProduct.thumbnail_url)
     //cập nhật danh sách hình ảnh khi thêm hình
-    useEffect (() => {
-        setNewProductDetail({...newProductDetail, images: image})
-    }, [image])
 
     const getBase64 = file => {
         return new Promise(resolve => {
@@ -134,7 +98,7 @@ const AddProduct = () => {
                     .then((res) => res.data)
                     .then((data) => {
                         let path = data.path_images[0];
-                        setImage({...image, base_url: path});
+                        setImage(path);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -147,7 +111,7 @@ const AddProduct = () => {
     }
 
     //biến tạm để cập nhật specifications
-    const [specification, setSpecification] = useState(newProductDetail.specifications);
+    const [specification, setSpecification] = useState(newProductDetail.specifications[0]);
 
     useEffect(() => {
         setNewProductDetail({ ...newProductDetail, specifications: specification })
@@ -159,22 +123,34 @@ const AddProduct = () => {
     const [baseInf, setBaseInf] = useState(false);
     const [generalInf, setGeneralInf] = useState(false);
 
+
+    const submitHandler = async () => {
+        console.log('submit');
+        await apiProduct.createProduct({newProduct, newProductDetail, image})
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
     return (
         <div className='product'>
             <div className='container'>
                 <div className='col-12'>
                     {/* Nếu khung chưa hình và nút chọn hình bị to thì vào chỉnh file AddProduct.css, sửa heigh của class contrain-image-and-button-new-product */}
                     <div className='contrain-image-and-button-new-product'>
-                    <div className='main-img-view'>
-                        <img alt='product' className="main-img" src={image.base_url} />
-                        <br></br>
-                        <div className='button-upload-image-product'>
-                            <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
-                            <label htmlFor="upload-image">Chọn Ảnh</label>
+                        <div className='main-img-view'>
+                            <img alt='product' className="main-img" src={image} />
+                            <br></br>
+                            <div className='button-upload-image-product'>
+                                <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
+                                <label htmlFor="upload-image">Chọn Ảnh</label>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    
+
                 </div>
                 <br></br>
                 <div className='container-information-new-product'>
@@ -197,18 +173,6 @@ const AddProduct = () => {
                                     />
                                 </div>
 
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Tên không dấu</p>
-                                    <input
-                                        type="text"
-                                        name="index_name"
-                                        id="index_name"
-                                        className="input-add-new-product"
-                                        value={newProduct.index_name}
-                                        onChange={e => setNewProduct({ ...newProduct, index_name: e.target.value })}
-                                    />
-                                </div>
                                 <div className="form-group-text-page-admin">
                                     <p className="text-name-add-new-product">Tác giả</p>
                                     <input
@@ -217,19 +181,7 @@ const AddProduct = () => {
                                         id="author"
                                         value={newProduct.author_name}
                                         className="input-add-new-product"
-                                        onChange={e => setNewProduct({ ...newProduct, author_name: e.author_name })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Tên tác giả không dấu</p>
-                                    <input
-                                        type="text"
-                                        name="index_authir_name"
-                                        id="index_authir_name"
-                                        className="input-add-new-product"
-                                        value={newProduct.index_author_name}
-                                        onChange={e => setNewProduct({ ...newProduct, index_author_name: e.target.value })}
+                                        onChange={e => setNewProduct({ ...newProduct, author_name: e.target.value })}
                                     />
                                 </div>
 
@@ -254,17 +206,6 @@ const AddProduct = () => {
                         {(!showOtherInf) ? null :
                             <div>
                                 <div className="infor-control-product">
-                                    <div className="form-group-text-page-admin">
-                                        <p className="text-name-add-new-product">Url Key</p>
-                                        <input
-                                            type="text"
-                                            name="url_key"
-                                            id="url_key"
-                                            className="input-add-new-product"
-                                            value={newProduct.url_key}
-                                            onChange={e => setNewProduct({ ...newProduct, url_key: e.target.value })}
-                                        />
-                                    </div>
 
                                     <div className="form-group-text-page-admin">
                                         <p className="text-name-add-new-product">Danh mục</p>
@@ -282,17 +223,6 @@ const AddProduct = () => {
                                         </select>
                                     </div>
 
-                                    <div className="form-group-text-page-admin">
-                                        <p className="text-name-add-new-product">Mô tả ngắn</p>
-                                        <textarea
-                                            type="text"
-                                            name="short_description"
-                                            id="short_description"
-                                            className="textarea-short-description-new-product"
-                                            value={newProduct.short_description}
-                                            onChange={e => setNewProduct({ ...newProduct, short_description: e.target.value })}
-                                        />
-                                    </div>
                                 </div>
                             </div>}
                         {/* kết thúc khung hiện */}
@@ -302,90 +232,25 @@ const AddProduct = () => {
                         <h4 onClick={() => setGeneralInf(!generalInf)}>THÔNG TIN CHUNG</h4>
                         {(!generalInf) ? null :
                             <div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Công ty phát hành</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_1"
-                                        id="attribute_value_1"
-                                        className="input-add-new-product"
-                                        // value={temp.compani}
-                                        // onChange={e => setTemp({ ...temp, compani: e.target.value })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Ngày xuất bản</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_2"
-                                        id="attribute_value_2"
-                                        className="input-add-new-product"
-                                        // value={temp.publicDate}
-                                        // onChange={e => setTemp({ ...temp, publicDate: e.target.value })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Loại bìa</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_3"
-                                        id="attribute_value_3"
-                                        className="input-add-new-product"
-                                        //value={temp.typeCover}
-                                        //onChange={e => setTemp({ ...temp, typeCover: e.target.value })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">SKU</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_4"
-                                        id="attribute_value_4"
-                                        className="input-add-new-product"
-                                        // value={temp.SKU}
-                                        // onChange={e => setTemp({ ...temp, SKU: e.target.value })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Nhà xuất bản</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_5"
-                                        id="attribute_value_5"
-                                        className="input-add-new-product"
-                                        // value={temp.publicCompani}
-                                        // onChange={e => setTemp({ ...temp, publicCompani: e.target.value })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Số trang</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_6"
-                                        id="attribute_value_6"
-                                        className="input-add-new-product"
-                                        // value={temp.numberPage}
-                                        // onChange={e => setTemp({ ...temp, numberPage: e.target.value })}
-                                    />
-                                </div>
-
-                                <div className="form-group-text-page-admin">
-                                    <p className="text-name-add-new-product">Kích thước</p>
-                                    <input
-                                        type="text"
-                                        name="attribute_value_7"
-                                        id="attribute_value_7"
-                                        className="input-add-new-product"
-                                        // value={temp.size}
-                                        // onChange={e => setTemp({ ...temp, size: e.target.value })}
-                                    />
-                                </div>
+                                {specification && specification.attributes.map((key, idx) => {
+                                    return (<div className="form-group-text-page-admin">
+                                        <p className="text-name-add-new-product">{key.name}</p>
+                                        <input
+                                            type="text"
+                                            name="attribute_value_1"
+                                            id="attribute_value_1"
+                                            className="input-add-new-product"
+                                            value={key.value}
+                                            onChange={(e) => {
+                                                let att = specification.attributes;
+                                                att[idx].value = e.target.value;
+                                                console.log(att);
+                                                setSpecification({...specification, attributes: att});
+                                            }}
+                                        />
+                                    </div>)
+                                })}
+                             
                             </div>}
                     </div>
                     <br></br>
@@ -402,11 +267,7 @@ const AddProduct = () => {
                         />
                     </div>
                 </div>
-                <button className="button-update-product" >Thêm Sách</button>
-
-                {/* <button onClick = {()=> console.log(newProduct)}>Test New Product</button>
-                <button onClick = {()=> console.log(newProductDetail)}>Test New Product Detail</button> */}
-
+                <button className="button-update-product" onClick={(e) => submitHandler()}>Thêm Sách</button>
             </div>
 
         </div>

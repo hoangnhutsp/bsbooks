@@ -20,3 +20,21 @@ export const updateProduct = (product) => {
     
     } else return null;
 }
+
+export const createProduct = ({newProduct, newProductDetail, image}) => {
+    console.log('create Product');
+    let token = localStorage.getItem('token');
+    console.log('token: ', token);
+    if (token) {
+        const URL = localhost + 'product/';
+        return axios.post(
+            URL,
+            {newProduct, newProductDetail, image}, 
+            {headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }}
+        )
+    
+    } else return null;
+}
