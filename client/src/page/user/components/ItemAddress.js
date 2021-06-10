@@ -14,35 +14,35 @@ function ItemAddress({ data , idx,  setAddressDefaul, delAdress}) {
             <div className="container-info-address">
                 <table className="table-info-address">
                     <tr>
-                        <td className="info-address-lable">Ho va ten</td>
+                        <td className="info-address-lable">Họ và Tên</td>
                         <td className="info-address-val">{data.name}</td>
                     </tr>
                     <tr>
-                        <td className="info-address-lable">So dien thoai</td>
+                        <td className="info-address-lable">Số điện thoại</td>
                         <td className="info-address-val">{data.phone}</td>
                     </tr>
                     <tr>
-                        <td className="info-address-lable">Dia chi</td>
+                        <td className="info-address-lable">Địa chỉ</td>
                         <td>{data.address}</td>
                     </tr>
                 </table>
                 <div className="edit-info-address">
-                    {data.is_default===1&&<span className="is-default-address">Mac dinh</span>}
+                    {data.is_default===1&&<span className="is-default-address">Mặc định</span>}
                     <button 
                         className="btn-edit-address"
                         onClick={()=>history.push(`/user/address/edit/${data._id}`)}
                     
-                    >Sua</button>
+                    >Sửa</button>
                     <button className="btn-edit-address"
                         onClick={() => {
                             delAdress(data._id, idx);
                         }}
-                    >Xoa</button>
+                    >Xóa</button>
                 </div>
             </div>
 
 
-            {(data.is_default===0)&&<button className="btn-make-default" onClick={() => setAddressDefaul(data._id, idx)}>Dat lam mac dinh</button>}
+            {(data.is_default===0)&&<button className="btn-make-default" onClick={() => setAddressDefaul(data._id, idx)}>Đặt làm mặc định</button>}
             <hr></hr>
         </div>
     )

@@ -51,13 +51,13 @@ function Navbar() {
                     </div>
                     <div className='dropdown-content'>
                         <div className='dropdown-content-item'>
-                            <Link to='/user'>Thong tin ca nhan</Link><br/>
+                            <Link to='/user'>Thông tin cá nhân</Link><br/>
                         </div>
                         <div className='dropdown-content-item'>
-                            <Link ext to='/user/purchase'>Don hang</Link><br/>
+                            <Link ext to='/user/purchase'>Đơn hàng</Link><br/>
                         </div>
                         <div className='dropdown-content-item' onClick={Logout}>
-                            <Link to='/'>Dang xuat</Link>
+                            <Link to='/'>Đăng xuất</Link>
                         </div>
 
                     </div>
@@ -76,10 +76,10 @@ function Navbar() {
                         ? <UserIsLogin />
                         : <div className="navbar-login-signup">
                             <Link className="narbar-login" to="/login">
-                                Dang nhap
+                                Đăng nhập
                             </Link >
                             <Link className="narbar-signup" to="/signup">
-                                Dang ky
+                                Đăng ký
                             </Link >
                         </div>
                 }

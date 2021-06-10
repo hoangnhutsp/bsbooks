@@ -69,7 +69,7 @@ export default function SearchBox() {
           type="text"
           name="search-box"
           id="search-box"
-          placeholder='Tim kiem sach hoac tac gia...'
+          placeholder='Tìm kiếm sách hoặc tác giả...'
           autoComplete="off"
           onChange={queryChange}
           value={query}

@@ -87,7 +87,7 @@ function ViewUser() {
                                 </tr>
 
                                 <tr className="form-group-radio">
-                                    <td>Gioi tinh</td>
+                                    <td>Giới tính</td>
                                     <td>
                                         <p>{(profile.gender === 'male')? 'Nam':(profile.gender === 'female')? 'Nữ': 'Khác'}</p>
                                     </td>

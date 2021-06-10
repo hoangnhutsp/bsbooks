@@ -23,9 +23,9 @@ function Footer() {
               </ul>
             </div>
             <div className="container-footer-col">
-              <h4>Chinh sach</h4>
+              <h4>Chính sách</h4>
               <ul>
-                <li><a href="http://localhost:3000/dieu-khoan">Dieu khoan dich vu</a></li>
+                <li><a href="http://localhost:3000/dieu-khoan">Điều khoản dịch vụ</a></li>
                 <li><a href="http://localhost:3000/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
            
 

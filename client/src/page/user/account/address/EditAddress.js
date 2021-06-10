@@ -54,7 +54,7 @@ function EditAddress({type}) {
                         </td>
                     </tr>
                     <tr className="form-group-text">
-                        <td className="lable-table">Ten</td>
+                        <td className="lable-table">Tên</td>
                         <td>
                             <input
                                 type="text"
@@ -69,7 +69,7 @@ function EditAddress({type}) {
                         </td>
                     </tr>
                     <tr className="form-group-text">
-                        <td className="lable-table">So dien thoai</td>
+                        <td className="lable-table">Số điện thoại</td>
                         <td>
                             <input
                                 type="text"
@@ -86,7 +86,7 @@ function EditAddress({type}) {
                 </table>
 
                 <div className="btn-submit">
-                    <button type="submit" id="submit">Xac nhan</button>
+                    <button type="submit" id="submit">Xác nhận</button>
                 </div>
 
             </form>

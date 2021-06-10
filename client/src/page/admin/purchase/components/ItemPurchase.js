@@ -45,7 +45,7 @@ function ItemPurchase({ invoiceData }) {
                 )
             })}
             <div className="total-lable">
-                <p >Tong so tien:</p>
+                <p >Tổng số tiền:</p>
                 <p className="price">{invoice.total}</p>
             </div>
             <hr className="hr-break-purchase"/>

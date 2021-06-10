@@ -80,7 +80,7 @@ const ProductPage = () => {
 
         return (
             <div>
-                <h2>Không tìm thấy bất kỳ kết quả phu hop.</h2>
+                <h2>Không tìm thấy bất kỳ kết quả phù hợp.</h2>
             </div>
         )
     }
@@ -165,7 +165,7 @@ const ProductPage = () => {
                            } 
                         }}
                     >    
-                   Tim kiem
+                   Tìm kiếm
                     </div>       
                 </div>
 
@@ -184,7 +184,7 @@ const ProductPage = () => {
                     </div>
                     <div className="row margin-top-1rem">
                         <div className="container-filter-price-rating">
-                        <span>Mien phi giao hang</span>
+                        <span>Miễn phí giao hàng</span>
                         </div>
                         <div className="container-filter-price-rating-item">
                         
