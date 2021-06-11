@@ -20,6 +20,8 @@ const getListCate = async (query) => {
 
     try {
         let id = query.category || DEFAULT_CATEGORY;
+
+        console.log(id);
         if (id > 40) id = DEFAULT_CATEGORY;
         const category = await Category.find({ id: id })
         if (category === []) {
@@ -39,6 +41,8 @@ const getListCate = async (query) => {
 
 const getBreadcrumbCategory = async (query) => {
     let category = query.category || DEFAULT_CATEGORY;
+
+    console.log(category);
     let cate = await Category.findOne({ id: category })
     let breadcrumb = [];
 
@@ -71,6 +75,7 @@ const initQuery = async (query) => {
     }
 
     if (q) {
+        q = removeVietnameseAccent(q).toLowerCase();
         queryString['$text'] = { $search: q }
     }
 
@@ -78,7 +83,7 @@ const initQuery = async (query) => {
 }
 
 const initSort = (query) => {
-
+    console.log(query.sort);
     let sort = String(query.sort || DEFAULT_SORT).split(',');
     let type = sort[0];
     let criteria = sort[1] || DEFAULT_CRITERIA;
@@ -89,9 +94,10 @@ const initSort = (query) => {
     if (query.q) {
         queryString = {
             score: { $meta: "textScore" },
-            [type]: criteria,
         }
-    } else {
+    } else 
+    if (query.sort !== undefined)
+    {
         queryString = {
             [type]: criteria,
         }
@@ -113,7 +119,6 @@ export const getProduct = async (req, res) => {
         const queryString = await initQuery(query);
         const sortString = initSort(query);
         let textScore = {}
-
 
         if (query.q) textScore['score'] = { $meta: "textScore" };
         let product = await Product.find(queryString, textScore).sort(sortString);
@@ -309,10 +314,28 @@ export const suggestionProduct = async (req, res) => {
     try {
         let q = req.query.q;
         let regex = new RegExp(q, 'i');
-        const product = await Product.find({ idx_name: regex }, { name: '1' }).limit(SIZE_OF_SUGGESTION);
+        const product = await Product.find({ idx_name: regex }, { name: 1 }).limit(SIZE_OF_SUGGESTION);
         res.status(200).json({ size: product.length, product })
 
     } catch (error) {
         res.status(404).json({ message: error.message });
+    }
+}
+
+export const getProductByCategoryLimit = async (req, res) => {
+    try {
+        const query = req.query;
+        let category = await getListCate(query);
+       
+        const queryString = {
+            id_category: { $in: category }
+        }
+        let product = await Product.find(queryString);
+
+        const cate = await Category.findOne({ id: query.limit });
+        product = product.slice(0, query.limit);
+        res.status(200).json( {title: cate.name, product})
+    } catch (error) {
+        res.status(400).json(error)
     }
 }
