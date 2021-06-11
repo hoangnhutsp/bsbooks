@@ -40,7 +40,7 @@ function EditAddress({type}) {
             <form onSubmit={submitHanler}>
                 <table id="table-edit-address">
                     <tr className="form-group-text">
-                        <td>Dia chi</td>
+                        <td>Địa chỉ</td>
                         <td>
                             <input
                                 type="text"

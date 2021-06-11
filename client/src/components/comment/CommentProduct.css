@@ -98,12 +98,17 @@
     line-height: 25px;
     font-weight: 500;
     padding: 5px 15px !important;
-    background: #498374 !important;
+    background: #498374;
     border: solid 1px #498374 !important;
     display: inline;
     border-radius: 0px;
     color: #fff;
+    cursor: pointer;
     
+}
+
+.input-join-button-comment-product:hover{
+    background: #559483;
 }
 
 .comment-is-empty {

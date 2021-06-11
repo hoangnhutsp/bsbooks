@@ -37,7 +37,6 @@ const Item = (props) => {
 
             </Link>
         </div>
-
     )
 }
 
