@@ -1,5 +1,7 @@
 'use strict';
+import dotenv from 'dotenv'
 
+dotenv.config();
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -9,14 +11,15 @@ import { OAuth2Client } from 'google-auth-library';
 import { lchown } from 'fs';
 import { RSA_NO_PADDING } from 'constants';
 
-const DOMAIN = process.env.DOMAIN;
-const API_KEY = '123';
+const DOMAIN_MAIL_GUN = process.env.DOMAIN_MAIL_GUN;
+const API_KEY_MAIL_GUN = process.env.API_KEY_MAIL_GUN;
+
 //oAuth
 const CLIENT_ID = '551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com';
 const CLIENT_SECRET = 'AC6CUSWFSQW0Zrxm7fUdwnE-';
 
-const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
-const client = new OAuth2Client("551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com")
+const mg = mailgun({ apiKey: API_KEY_MAIL_GUN, domain: DOMAIN_MAIL_GUN });
+const client = new OAuth2Client(CLIENT_ID)
 
 const RESET_PASSWORD = 're-pass bsbook';
 const SECRET = 'bsbooksToken';
@@ -194,7 +197,7 @@ export const forgotPassWord = async (req, res) => {
                 subject: 'Quên mật khẩu Bsbooks',
                 html: `
                 <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-                <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the DevAT channel.</h2>
+                <h2 style="text-align: center; text-transform: uppercase;color: teal;">Quen mat khau</h2>
                 <p>Chào mừng bạn đến với Bsbooks.
                     Bạn hãy Nhấn vào đây để đổi mật khẩu.
                 </p>
@@ -204,7 +207,7 @@ export const forgotPassWord = async (req, res) => {
                 <p>Nếu không nhấn vào bên trên vì một số lỗi kĩ thuật được thì bạn hãy truy cập vào đường dẫn này: 
                 </p>
             
-                <div>"https://www.facebook.com/"</div>
+                <div>"http://localhost:3000/reset-password/${token}"</div>
                 </div>
                 `
             }
@@ -223,35 +226,16 @@ export const forgotPassWord = async (req, res) => {
 
 export const resetPassWord = async (req, res) => {
     try {
+
+        
         const resetLink = req.params.token;
         //Kiểm tra new pass và confirmpass rỗng
-        if (!req.body.password || !req.body.confirmPassword)
-            res.status(400).json({ message: 'Password hoặc confirmPassword rỗng hoặc ko trùng nhau' })
-        else {
-            if (req.body.confirmPassword !== req.body.password) {
-                res.status(400).json({ message: 'ConfirmPassword not same password' })
-            } else {
-                const decodedData = jwt.verify(resetLink, RESET_PASSWORD);
-                const idUser = decodedData.id;
-                //console.log(idUser);
-                //kiểm tra user
-                const user = await User.findById(idUser);
-                if (!user)
-                    res.status(200).json('User not exist');
-                else {
-                    //kiểm tra trùng resetLink
-                    if (user.resetLink !== resetLink)
-                        res.status(200).json('ResetLink incorrect')
-                    else {
-                        const password = req.body.password;
-                        const hashPassword = await bcrypt.hash(password, 12);
-                        const updateUser = await User.findByIdAndUpdate(idUser, { password: hashPassword, resetLink: '' }, { new: true })
-                        res.status(200).json({ result: updateUser })
-                    }
-                }
-            }
-
-        }
+        const decodedData = jwt.verify(resetLink, RESET_PASSWORD);
+        const idUser = decodedData.id;
+        const password = req.body.password;
+        const hashPassword = await bcrypt.hash(password, 12);
+        await User.findByIdAndUpdate(idUser, { password: hashPassword})
+        res.status(200).json({ status: 1 })
 
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -308,19 +292,19 @@ export const changePassword = async (req, res) => {
         const newPassword = req.body.newPassword;
         const userID = req.userID;
 
-        if (!checkInfoPassword(currentPassword) || !checkInfoPassword(newPassword) || currentPassword===newPassword){
-            return res.status(200).json({status: 0, message: "Mat khau khong hop le"});
+        if (!checkInfoPassword(currentPassword) || !checkInfoPassword(newPassword) || currentPassword === newPassword) {
+            return res.status(200).json({ status: 0, message: "Mat khau khong hop le" });
         }
 
-        const {password} = await User.findOne({ _id: userID });
+        const { password } = await User.findOne({ _id: userID });
         if (password !== null) {
             const isPasswordCorrect = await bcrypt.compare(currentPassword, password)
             if (!isPasswordCorrect)
                 res.status(200).json({ status: 0, message: 'Sai mat khau' });
             else {
                 const hashPassword = await bcrypt.hash(newPassword, 12);
-                await User.findByIdAndUpdate(userID, {password: hashPassword});
-                res.status(200).json({status: 1, message: 'Doi mat khau thanh cong'});
+                await User.findByIdAndUpdate(userID, { password: hashPassword });
+                res.status(200).json({ status: 1, message: 'Doi mat khau thanh cong' });
             }
         }
         else

@@ -26,18 +26,12 @@ export const getEvaluateToProduct = ({idProduct}) => {
 
     console.log('API: getEvaluateToProduct');
     console.log(idProduct);
-    let token = localStorage.getItem('token');
-    if (token) {
         const URL = localhost + `evaluate/${idProduct}`;
+        console.log(URL);
         return axios.get(
-            URL,
-            {headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }}
+            URL   
         )
     
-    } else return null;
 }
 
 

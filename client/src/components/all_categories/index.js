@@ -46,7 +46,7 @@ const AllCategories = () => {
                             {
                                 list[0].children.map(item => {
                                     return (
-                                        <div className="item" onMouseMove={() => { item.children && setDetails(item.children) }}>
+                                        <div className="item-all-category" onMouseMove={() => { item.children && setDetails(item.children) }}>
                                             <div className="icon" />
                                             <span className={item.children ? "arrow" : ""}>{item.name}</span>
                                         </div>
@@ -72,17 +72,17 @@ const AllCategories = () => {
             </div>
 
             <div className="pull-left row">
-                <Link to='/All-books' className={pathname === "/All-books" ? "green link" : "link"}> Tat ca sach</Link>
-                <Link to='/New-arrivals' className={pathname === "/New-arrivals" ? "green link" : "link"}> Sach moi</Link>
-                <Link to='/FAQ' className={pathname === "/FAQ" ? "green link" : "link"}> FAQ</Link>
-                <Link to='/About-us' className={pathname === "/About-us" ? "green link" : "link"}> Ve chung toi</Link>
-                <Link to='/Contact' className={pathname === "/Contact" ? "green link" : "link"}> Lien he</Link>
+                <Link to='/product/1' className={pathname === "/product/1" ? "green link" : "link"}> Tất cả sách</Link>
+                <Link to='/New-arrivals' className={pathname === "/New-arrivals" ? "green link" : "link"}> Sách mới</Link>
+                <Link to='/faq' className={pathname === "/faq" ? "green link" : "link"}> Câu hỏi</Link>
+                <Link to='/about-us' className={pathname === "/about-us" ? "green link" : "link"}> Về chúng tôi</Link>
+                <Link to='/Contact' className={pathname === "/contact" ? "green link" : "link"}>Liên hệ</Link>
             </div>
 
-            <div className="phone-number pointer">
+            {/* <div className="phone-number pointer">
                 <i className="fas fa-phone"></i>
                 <a href="tel:0905749999">0905 749 999</a>
-            </div>
+            </div> */}
         </div>
     )
 }

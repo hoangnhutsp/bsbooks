@@ -12,7 +12,7 @@ import {
 } from 'react-redux';
 
 import iconShoppingCart from './../icons/shopping-cart.svg'
-
+import NotificationBox from './NotificationBox'
 import AllCategories from './all_categories';
 function Navbar() {
 
@@ -51,13 +51,13 @@ function Navbar() {
                     </div>
                     <div className='dropdown-content'>
                         <div className='dropdown-content-item'>
-                            <Link to='/user'>Thong tin ca nhan</Link><br/>
+                            <Link to='/user'>Thông tin cá nhân</Link><br/>
                         </div>
                         <div className='dropdown-content-item'>
-                            <Link ext to='/user/purchase'>Don hang</Link><br/>
+                            <Link ext to='/user/purchase'>Đơn hàng</Link><br/>
                         </div>
                         <div className='dropdown-content-item' onClick={Logout}>
-                            <Link to='/'>Dang xuat</Link>
+                            <Link to='/'>Đăng xuất</Link>
                         </div>
 
                     </div>
@@ -67,19 +67,24 @@ function Navbar() {
 
     return (
         <div className="container-navbar">
+            
             <div className="container-mini-navbar">
-                {
+                <div className="container-item-on-top">
+                        <NotificationBox />
+                    {
                     userNavbar.status
                         ? <UserIsLogin />
                         : <div className="navbar-login-signup">
                             <Link className="narbar-login" to="/login">
-                                Dang nhap
+                                Đăng nhập
                             </Link >
                             <Link className="narbar-signup" to="/signup">
-                                Dang ky
+                                Đăng ký
                             </Link >
                         </div>
                 }
+             
+                </div>
 
             </div>
             <div className="container-main-navbar">
@@ -91,9 +96,12 @@ function Navbar() {
                 <div>
                     <SearchBox />
                 </div>
-                <div className="container-navbar-cart">
+                <div className="container-navbar-cart row-center">
+               
                     <Link to="/cart">
-                        <div>
+                        <div> 
+                            
+
                             <img alt="icon-shopping-cart" className="navbar-icon-shopping-cart" src={iconShoppingCart} />
                             {countCart > 0 && <span className="navbar-cart-number">{countCart}</span>}
                         </div>

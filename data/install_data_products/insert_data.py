@@ -3,7 +3,7 @@ from random import randint
 import json
 
 
-_key = ['products', 'product_details', 'categorys', 'configs']
+_key = [ 'categorys']
 
 
 client = MongoClient(port=27017)

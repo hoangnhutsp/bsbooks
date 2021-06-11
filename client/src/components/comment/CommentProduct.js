@@ -28,7 +28,7 @@ function CommentProduct({data, idProduct}) {
             <div className='comment-is-empty'>
                <img src={iconPreview}/>
                <br />
-               <span>Chua co danh gia !!!</span>
+               <span>Chưa có đánh giá !!!</span>
             </div>
         )
     }

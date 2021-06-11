@@ -286,20 +286,23 @@
 .class-for-go-to-forgot-or-signup{
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-content: center;
 }
 .class-go-to-fogot-password{
-    width: 30%;
-    text-align: left;
-    position: left;
+    text-align: center;
+    margin: 1rem;
+}
+
+.class-go-to-fogot-password a :hover{
+    color: #26cea1;
+
 }
 
 .class-go-to-register-because-not-have-account{
-    padding-left: 10%;
     display: flex;
-    width: 70%;
-    text-align: right;
-    position: right;
-    float: right;
+    text-align: center;
+    
 }
 
 .class-for-go-to-forgot-or-signup a :hover{

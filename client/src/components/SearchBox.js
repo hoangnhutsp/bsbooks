@@ -20,16 +20,17 @@ export default function SearchBox() {
   const ulRef = useRef();
   const inputRef = useRef();
 
-  // useEffect(() => {
-  //   // inputRef.current.addEventListener('click', (event) => {
-  //   //   event.stopPropagation();
-  //   //   ulRef.current.style.display = 'block'
-
-  //   // })
-  //   // document.addEventListener('click', (event) => {
-  //   //   ulRef.current.style.display = 'none'
-  //   // })
-  // }, [])
+  useEffect(() => {
+    inputRef.current.addEventListener('click', (event) => {
+        event.stopPropagation();
+        console.log('input click');
+        ulRef.current.style.display = 'block';
+    })
+    document.addEventListener('click', (event) => {
+      console.log('document click');
+      ulRef.current.style.display = 'none'
+    })
+  }, [])
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -47,20 +48,14 @@ export default function SearchBox() {
 
   const queryChange = async e => {
     let q = e.target.value;
-    let data = await getSearchSuggestion(q);
     setQuery(q)
-    setOptions(
-      data.product
-    )
+    if (q !== ''){
+      let data = await getSearchSuggestion(q);
+      setOptions(
+        data.product
+      )
+    } else setOptions([]);
   }
-
-  const defaultOptions = [];
-  for (let i = 0; i < 5; i++) {
-    defaultOptions.push(`option ${i}`)
-    defaultOptions.push(`peo ${i}`)
-
-  }
-
   return (
     <form className="container-navbar-searchbox" onSubmit={submitHandler}>
       <div className="navbar-searchbox" >
@@ -69,7 +64,7 @@ export default function SearchBox() {
           type="text"
           name="search-box"
           id="search-box"
-          placeholder='Tim kiem sach hoac tac gia...'
+          placeholder='Tìm kiếm sách hoặc tác giả...'
           autoComplete="off"
           onChange={queryChange}
           value={query}
@@ -80,7 +75,7 @@ export default function SearchBox() {
       </div>
       <div className="container-dropdown-search-box">
         <ul id="results" className="list-group-search-box" ref={ulRef}>
-        <hr></hr>
+        {/* <hr></hr> */}
         {
           options.map((option, idx) => {
             return (

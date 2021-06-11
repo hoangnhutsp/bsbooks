@@ -10,6 +10,7 @@ import {
     validateAddress,
     validatePassWord,
     validateConfPassWord,
+    validateDateTime,
 } from './CheckInfo'
 
 import { useDispatch } from 'react-redux'
@@ -47,7 +48,9 @@ function Register() {
         gender: '',
         birthday: '',
         password: '',
-        confirmPassWord: ''
+        confirmPassWord: '',
+        birthday: '',
+        test: '',
     })
 
     const setErrRes = err => {
@@ -197,9 +200,15 @@ function Register() {
                                         setRegisterData({ ...registerData, birthday: e.target.value })
                                     }}
                                     value={registerData.birthday}
-
+                                    onBlur={(e) => {
+                                        let err = validateDateTime(e.target.value);
+                                        setError({ ...error, birthday: err })
+                                    }}
                                     required></input>
                             </div>
+                            {(error.birthday == '') ? null :
+                                <div className='error-text-register'>{error.birthday}</div>
+                            }
 
                             <div className='form-group-register'>
                                 <input type='password'
@@ -257,7 +266,7 @@ function Register() {
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nam
-                            <input name='gioitinh'
+                                <input name='gioitinh'
                                     className='gender-user'
                                     type='radio'
                                     value='female'
@@ -265,7 +274,7 @@ function Register() {
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nữ
-                        </div>
+                            </div>
                             {(error.gender == '') ? null :
                                 <div className='error-text-register'>{error.gender}</div>
                             }
@@ -282,10 +291,10 @@ function Register() {
                             </Link>
                         </div>
                     </div>
-                </div>
 
             </div>
         </div>
+    </div>
     )
 };
 export default Register;

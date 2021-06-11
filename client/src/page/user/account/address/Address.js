@@ -67,10 +67,10 @@ function Address() {
             <div className="container-title">
                 <div className="user-title">
                     <h1>Địa Chỉ Của Tôi</h1>
-                    <p>Quản lý thông tin dia chi nhan hang </p>
+                    <p>Quản lý thông tin địa chỉ nhận hàng </p>
                 </div>
                 <div className="btn-add-new-address">
-                    <button onClick={() => history.push('/user/address/create')}>Them dia chi moi</button>
+                    <button onClick={() => history.push('/user/address/create')}>Thêm địa chỉ mới</button>
 
                 </div>
             </div>

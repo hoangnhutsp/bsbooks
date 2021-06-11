@@ -50,16 +50,22 @@ export const addEvaluate = async (req, res) => {
 export const getEvaluateToProduct = async (req, res) => {
     try {
         const idProduct = req.params.idProduct;
+
+        console.log('getEvaluateToProduct');
+        console.log(idProduct);
         let product = await Product.find({ _id: idProduct })
         //check product not exist
         if (product.length === 0) {
             res.status(200).json({ message: 'Product not exist' });
         }
         else {
+            console.log(idProduct);
             let evaluate = await Evaluate.find(
                 { idProduct: idProduct },
                 {idUser:1, star:1, comment:1, title:1}    
             )
+
+            console.log(evaluate);
             let resData = [];
             
             for (let eva of evaluate){

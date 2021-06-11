@@ -16,13 +16,18 @@ import User from './page/user/User'
 import Admin from './page/admin/Admin'
 
 import Search from './page/Search'
-import Billstarus from './page/Billstarus'
+import TermsPage from './page/TermsPage'
+import SecurityPage from './page/SecurityPage'
+import FandAPage from './page/FandAPage'
+import AboutUs from './page/AboutUs'
+import ContactPage from './page/ContactPage'
 //import FormComment from './page/FormComment'
 
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
 import Signup from './page/login/Signup'
+import ResetPassword from './page/login/ResetPassword';
 import ProductPage from './page/productPage'
 
 import Cart from './page/cart/Cart';
@@ -30,12 +35,12 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
+
 const App = () => {
 
   return (
     <>
       <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
-
       <Router>
         <div>
           <Navbar></Navbar>
@@ -67,11 +72,29 @@ const App = () => {
             <Route path="/signup">
               <Signup />
             </Route>
+            <Route path="/reset-password/:token">
+              <ResetPassword />
+            </Route>
             <Route path="/cart">
               <Cart />
             </Route>
             <Route path="/checkout">
               <Checkout />
+            </Route>
+            <Route path="/dieu-khoan">
+              <TermsPage />
+            </Route>
+            <Route path="/chinh-sach-bao-mat">
+              <SecurityPage />
+            </Route>
+            <Route path="/faq">
+              <FandAPage />
+            </Route>
+            <Route path="/about-us">
+              <AboutUs />
+            </Route>
+            <Route path="/contact">
+              <ContactPage />
             </Route>
             <Route path="*">
               <PageNotFound />

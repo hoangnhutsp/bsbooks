@@ -74,7 +74,7 @@
     float: left;
 }
 
-.categories-view .item {
+.categories-view .item-all-category {
     background: #fff;
     margin: 0;
     position: relative;
@@ -83,11 +83,11 @@
 
 
 /* NOTES */
-.item:hover {
+.item-all-category:hover {
     background: #498374;
 }
 
-.item span {
+.item-all-category span {
     color: #000;
     padding-left: 15px;
 }
@@ -103,7 +103,7 @@
 }
 
 
-.item .arrow::after {
+.item-all-category .arrow::after {
     content: "\f105";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -113,7 +113,7 @@
 }
 
 
-.item:hover>  span ,.item:hover> .icon::before ,.item:hover> .arrow::after{
+.item-all-category:hover>  span ,.item-all-category:hover> .icon::before ,.item-all-category:hover> .arrow::after{
     color: #fff ;
 }
 

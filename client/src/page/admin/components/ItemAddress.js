@@ -11,26 +11,26 @@ function ItemAddress({ data }) {
             <div className="container-info-address">
                 <table className="table-info-address">
                     <tr>
-                        <td className="info-address-lable">Ho va ten</td>
+                        <td className="info-address-lable">Họ và tên</td>
                         <td className="info-address-val">{address.name}</td>
                     </tr>
                     <tr>
-                        <td className="info-address-lable">So dien thoai</td>
+                        <td className="info-address-lable">Số điện thoại</td>
                         <td className="info-address-val">{address.phone}</td>
                     </tr>
                     <tr>
-                        <td className="info-address-lable">Dia chi</td>
+                        <td className="info-address-lable">Địa chỉ</td>
                         <td>{address.address}</td>
                     </tr>
                 </table>
                 <div className="edit-info-address">
-                    <button>Sua</button>
-                    <button>Xoa</button>
+                    <button>Sửa</button>
+                    <button>Xóa</button>
                 </div>
             </div>
 
 
-            <button className="btn-make-default">Dat lam mac dinh</button>
+            <button className="btn-make-default">Đặt làm mặc định</button>
 
         </div>
     )

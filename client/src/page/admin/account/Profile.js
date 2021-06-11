@@ -108,13 +108,13 @@ function Profile() {
                             <tbody>
 
                                 <tr className="form-group">
-                                    <td>Email dang nhap</td>
+                                    <td>Email đăng nhập</td>
                                     <td>
                                         <p>{profile.email}</p>
                                     </td>
                                 </tr>
                                 <tr className="form-group-text">
-                                    <td>Ho va ten</td>
+                                    <td>Họ và tên</td>
                                     <td>
                                         <input
                                             type="text"
@@ -126,7 +126,7 @@ function Profile() {
                                     </td>
                                 </tr>
                                 <tr className="form-group-text">
-                                    <td>So dien thoai</td>
+                                    <td>Số điện thoại</td>
                                     <td>
                                         <input type="tel" name="phone" id="phone"
                                             pattern="[0-0]{1}[0-9]{9}"
@@ -139,7 +139,7 @@ function Profile() {
                                 </tr>
 
                                 <tr className="form-group-radio">
-                                    <td>Gioi tinh</td>
+                                    <td>Giới tính</td>
                                     <td>
                                         <input
                                             name="gender" type="radio" value="male"
@@ -153,17 +153,17 @@ function Profile() {
                                             checked={profile.gender === "female"}
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                         />
-                                        <span>Nu</span>
+                                        <span>Nữ</span>
                                         <input
                                             name="gender" type="radio" value="other"
                                             checked={profile.gender === "other"}
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                         />
-                                        <span>Khac</span>
+                                        <span>Khác</span>
                                     </td>
                                 </tr>
                                 <tr className="form-group">
-                                    <td>Ngay sinh</td>
+                                    <td>Ngày sinh</td>
                                     <td>
                                         <input
                                             type="date"
@@ -184,13 +184,13 @@ function Profile() {
                                 <img alt="profile-avatar" id="profile-avatar-current" src={currentAvatar}></img>
                             </div>
                             <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
-                            <label htmlFor="upload-image">Chon Anh</label>
+                            <label htmlFor="upload-image">Chọn ảnh</label>
                         </div>
 
                     </div>
 
                 </div>
-                <button type="submit" id="submit-profile">Luu</button>
+                <button type="submit" id="submit-profile">Lưu</button>
             </form>
         </div>
 

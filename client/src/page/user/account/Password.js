@@ -40,7 +40,7 @@ function Password() {
         e.preventDefault();
 
         if (password.newPassword !== password.confirmPassword)
-            setError({...error, confirmPassword: 'Mau khau khong trung khop'})
+            setError({...error, confirmPassword: 'Mật khẩu không trùng khớp'})
         else{
             if (!checkError()) {
                 api.changePassword({
@@ -54,7 +54,7 @@ function Password() {
     return (
         <div className="container-user-password">
             <div className="user-title">
-                <h1>Doi mat khau</h1>
+                <h1>Đổi mật khẩu</h1>
                 <p>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </p>
             </div>
             <hr />
@@ -82,7 +82,7 @@ function Password() {
                         </td>
                     </tr>
                     <tr className="form-group-text">
-                        <td className="lable-table-password">Mat khau moi</td>
+                        <td className="lable-table-password">Mật khẩu mới</td>
                         <td>
                             <input
                                 type="password"
@@ -94,7 +94,7 @@ function Password() {
                                     let err = checkInfoPassword(e.target.value);
                                     setError({...error,newPassword: err})
                                     if (e.target.value===password.currentPassword)
-                                        setError({...error, newPassword: 'Mat khau moi trung voi mat khau hien tai'})
+                                        setError({...error, newPassword: 'Mật khẩu mới trùng với mật khẩu hiện tại'})
                                 }}
                                 required
                             />
@@ -103,7 +103,7 @@ function Password() {
                         </td>
                     </tr>
                     <tr className="form-group-text">
-                        <td className="lable-table-password">Xac nhan lai mat khau</td>
+                        <td className="lable-table-password">Xác nhận lại mật khẩu</td>
                         <td>
                             <input
                                 type="password"
@@ -116,7 +116,7 @@ function Password() {
                                     setError({...error,confirmPassword: err})
                                     if(e.target.value!==password.newPassword
                                      &&e.target.value.length>=password.newPassword.length)
-                                        setError({...error, confirmPassword: 'Mau khau khong trung khop'})
+                                        setError({...error, confirmPassword: 'Mật khẩu không trùng khớp'})
                                 }}
                                 required
                             />
@@ -127,8 +127,8 @@ function Password() {
                 </table>
 
                 <div className="btn-submit-re-pass">
-                    <button type="submit" id="submit-change-password">Xac nhan</button>
-                    <p>Quen mat khau?</p>
+                    <button type="submit" id="submit-change-password">Xác nhận</button>
+                    <p>Quên mật khẩu?</p>
                 </div>
 
             </form>

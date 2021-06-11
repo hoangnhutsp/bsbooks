@@ -143,18 +143,19 @@ function Login() {
                             </div>
                         </form>
                         <div className='class-for-go-to-forgot-or-signup'>
-                            <div className='class-go-to-fogot-password'>
-                                <Link to='/forgot-password'>
-                                    <div>Quên mật khẩu</div>
-                                </Link>
-                            </div>
+                            
                             <div className='class-go-to-register-because-not-have-account'>
-                                <div>Bạn chưa có tài khoản?</div>
+                                <div>Bạn chưa có tài khoản?&nbsp;&nbsp; </div>
                                 <Link to='/signup'>
                                     <div className='go-to-login-form'>Đăng ký </div>
                                 </Link>
                             </div>
                         </div>
+                        <div className='class-go-to-fogot-password'>
+                                <Link to='/forgot-password'>
+                                    <div>Quên mật khẩu</div>
+                                </Link>
+                            </div>
                     </div>
                 </div>
             </div>

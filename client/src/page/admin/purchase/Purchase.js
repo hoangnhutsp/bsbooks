@@ -55,8 +55,8 @@ function Purchase() {
     return (
         <div className="container-user-purchase">
             <div className="user-title">
-                <h1>Don hang</h1>
-                <p>Tat ca don hang</p>
+                <h1>Đơn đặt hàng</h1>
+                <p>Tất cả đơn hàng</p>
             </div>
             <hr className="break-title-and-info" />
 

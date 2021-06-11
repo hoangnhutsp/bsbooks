@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams, location } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import '../../App.css'
 import './styles.css'
 // api
@@ -13,7 +13,8 @@ import RecentlyView from '../../components/product_list/RecentlyView'
 import {queryStringSortType} from './constantQuery'
 
 import Pagination from '../../components/Pagination'
-const ProductPage = () => {
+
+const ProductPage = (props) => {
     const [fromValue, setFromValue] = useState()
     const [toValue, setToValue] = useState()
     const [rating, setRating] = useState(0)
@@ -24,21 +25,30 @@ const ProductPage = () => {
     const [pageMax, setPageMax] = useState(1)
     const [size, setSize] = useState()
     const [raV, setRaV] = useState({minV: 0, maxV: 0});
-    
     const { id_cate } = useParams();
-    
+    const location = useLocation();  
 
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const querySearch = Object.fromEntries(urlSearchParams.entries());
     useEffect(() => {
         getData()
     }, [])
 
     useEffect(() => {
+    
         getData();
     }, [sortType, page, id_cate, fromValue, toValue, rating])
 
     const getData = async () => {
         console.log('getData');
-        let queryString = queryStringSortType[sortType].query + `&category=${id_cate}`;
+        let queryString = queryStringSortType[sortType].query;
+        if (location.pathname==='/search' && querySearch.q !== ''){
+            queryString += `&q=${querySearch.q.replace(" ", "%20")}`
+        }
+        if (id_cate){
+            queryString += `&category=${id_cate}`
+        }
         if (toValue || fromValue) {
             queryString += `&price=${fromValue},${toValue}`;
         }
@@ -80,13 +90,19 @@ const ProductPage = () => {
 
         return (
             <div>
-                <h2>Không tìm thấy bất kỳ kết quả phu hop.</h2>
+                <h2>Không tìm thấy bất kỳ kết quả phù hợp.</h2>
             </div>
         )
     }
+
+    const titleBreadcrumb = (size) => {
+        if (location.pathname==='/search') 
+            return `Kết quả tìm kiếm cho \"${querySearch.q}\": ${size} kết quả`
+        return `(${size} Quyen Sach)`
+    }
     return breadcrumb&&setCurData?(
         <div className="productPage">
-            <Breadcrumb breadcrumb={breadcrumb} title={`(${size} Quyen Sach)`}/>
+            <Breadcrumb breadcrumb={breadcrumb} title={titleBreadcrumb(size)}/>
             <div className="container-f90 row">
 
                 <div className="col-2">
@@ -165,7 +181,7 @@ const ProductPage = () => {
                            } 
                         }}
                     >    
-                   Tim kiem
+                   Tìm kiếm
                     </div>       
                 </div>
 
@@ -184,7 +200,7 @@ const ProductPage = () => {
                     </div>
                     <div className="row margin-top-1rem">
                         <div className="container-filter-price-rating">
-                        <span>Mien phi giao hang</span>
+                        <span>Miễn phí giao hàng</span>
                         </div>
                         <div className="container-filter-price-rating-item">
                         
