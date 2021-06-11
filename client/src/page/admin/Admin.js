@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router';
 import "./User.css";
+import {
+    useSelector
+} from 'react-redux';
+
 
 import UserSidebar from './UserSidebar'
 
@@ -16,13 +20,20 @@ import Product from '../../page/Product'
 import Order from './notifications/Order';
 import Dashboad from './dashboad/Dashboard'
 import ListInvoice from './invoice/ListInvoice'
-
+import NotAllowed from './components/NotAllowed'
 function Admin() {
-    let { path } = useRouteMatch();
 
+    const user = useSelector(state => state.user);
+    let { path } = useRouteMatch();
+    const [isAdmin, setIsAdmin] = useState(0)
+    useEffect(() => {
+        if (user.isLogged){
+            setIsAdmin(user.isAdmin)
+        }
+    }, [user])
     return (
         <div className="container-user">
-
+        {isAdmin?
         <div className="User">
             <div className="user-usersidebar">
                 <UserSidebar />
@@ -66,7 +77,7 @@ function Admin() {
                     
                 </Switch>
             </div>
-        </div>
+        </div>:<NotAllowed />}
 
         </div>
 

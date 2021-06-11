@@ -1,10 +1,14 @@
 import './Register.css';
 import React, { useState, useEffect } from "react";
+import { Link, useParams, useLocation, useHistory } from 'react-router-dom'
 
 import { validatePassWord, validateConfPassWord } from './CheckInfo'
-
+import * as apiUser from './../../api'
 
 function ResetPass() {
+    const history = useHistory();
+    const { token } = useParams();
+
     const [resetPass, setResetPass] = useState({
         password: '',
         confirmPassword: '',
@@ -19,7 +23,20 @@ function ResetPass() {
 
     const submitHandler = e => {
         e.preventDefault();
-        console.log(resetPass);
+        if (error.error===''&&error.password===''&&error.confirmPassword===''){
+            console.log('RESET PASSWORD');
+            apiUser.resetPassword({token, password: resetPass.password})
+            .then(res => res.data)
+            .then(data => {
+                if (data.status){
+                    // Thong bao
+                    history.push('/login')
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     return (
@@ -54,15 +71,19 @@ function ResetPass() {
                                     placeholder='Nhập lại mật khẩu'
                                     onChange={(e) => {
                                         setResetPass({ ...resetPass, confirmPassWord: e.target.value })
+                                        if (e.target.value.length>=resetPass.password.length){
+                                            let err = validateConfPassWord(e.target.value, resetPass.password);
+                                            setError({ ...error, confirmPassword: err })    
+                                        }
                                     }}
                                     onBlur={(e) => {
-                                        let err = validateConfPassWord(e.target.value);
-                                        setError({ ...error, confirmPassWord: err })
+                                        let err = validateConfPassWord(e.target.value, resetPass.password);
+                                        setError({ ...error, confirmPassword: err })
                                     }}>
                                 </input>
                             </div>
-                            {(error.confirmPassWord == '') ? null :
-                                <div className = 'error-text-register'>{error.confirmPassWord}</div>
+                            {(error.confirmPassword == '') ? null :
+                                <div className = 'error-text-register'>{error.confirmPassword}</div>
                             }
 
                             <div className='form-group-register'>

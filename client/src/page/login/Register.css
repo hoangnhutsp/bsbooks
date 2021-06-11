@@ -82,9 +82,9 @@
 
 .button-submit-register {
     width: 75%;
-    background: #f85656;
+    background: #498374;
     border-radius: 0;
-    border: 2px solid #f85656;
+    border: 2px solid #498374;
     font-family: Helvetica,sans-serif;
     font-weight: 700;
     -webkit-font-smoothing: antialiased;
@@ -121,21 +121,67 @@
     color: red;
     margin-top: 10px;
   }
+.class-include-facebook-google-login{
+    width: 100%;
+    display: flex;
+    padding-bottom: 5%;
+}
 
 .login-facebook {
-    margin: auto;
-    line-height: 1.42857143;
+    width: 86%;
+    height: 40%;
+    display: flex;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 0;
     transition: all 400ms cubic-bezier(.4,0,.2,1);
-    display: block;
+    display: flex;
     margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
+    justify-content: center;
+    text-align: right;
+    position: right;
+
+}
+
+.facebook-login-button{
+    width: 100%;
+    height: 47px;
+    background-color: #4C69BA;
+    display: flex;
+    align-items: center;
+    color: white;
+    box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px;
+    padding: 0px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Roboto, sans-serif;
+    margin-bottom: 0;
+    justify-content: center;
     text-align: center;
-    padding-bottom: 12px;
+}
+
+.google-login-button{
+    width: 100%;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px;
+    padding: 0px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Roboto, sans-serif;
+    margin-bottom: 0;
+    justify-content: center;
+    text-align: center;
 }
 
 .login-google {
+    /* width: 40%; */
     margin: auto;
     line-height: 1.42857143;
     border-radius: 0;
@@ -166,9 +212,9 @@
 
 .button-submit-sigup {
     width: 69%;
-    background: #f85656;
+    background: #498374;
     border-radius: 0;
-    border: 2px solid #f85656;
+    border: 2px solid #498374;
     font-family: Helvetica,sans-serif;
     font-weight: 700;
     -webkit-font-smoothing: antialiased;
@@ -221,3 +267,44 @@
     padding-left: 5%;
 }
 
+.gender-register-and-login{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.class-have-an-account{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.class-have-an-account a :hover{
+    color: #26cea1;
+}
+
+.class-for-go-to-forgot-or-signup{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.class-go-to-fogot-password{
+    text-align: center;
+    margin: 1rem;
+}
+
+.class-go-to-fogot-password a :hover{
+    color: #26cea1;
+
+}
+
+.class-go-to-register-because-not-have-account{
+    display: flex;
+    text-align: center;
+    
+}
+
+.class-for-go-to-forgot-or-signup a :hover{
+    color: #26cea1;
+}
