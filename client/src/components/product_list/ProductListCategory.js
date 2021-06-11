@@ -3,35 +3,29 @@ import Item from '../item/index.js'
 import './RecentlyView.css'
 import { Link } from 'react-router-dom'
 
-import {getRecentlyViewed} from '../../api/recently_viewd/index.js'
+import * as apiProduct from '../../api/product'
 
-const RecentlyView = ({type, id_category}) => {
-    const [recentlyData, setRecentlyData] = useState()
-
-    useEffect(() => {
-        getRecentlyViewed()
+const ProductListCategory = ({category}) => {
+   
+    const [dataCate, setDataCate] = useState({})
+    useEffect( async () => {
+        await apiProduct.getProductByCategoryLimit({category, limit: 5})
         .then(res => res.data)
         .then(data => {
-            setRecentlyData(data);
+            setDataCate(data)
         })
         .catch(err => console.log(err));
     }, [])
 
-    const typeOfView = [
-        'recentlyview',
-        'category',
-        'newest',
-        'bestseller',
-    ]
-    
-    return recentlyData?(
+
+    return (dataCate)?(
         <div className='container-recently-view'>
             <div className=''>
                 <div className='title-recently-view'>
-                    <h2>DANH SÁCH XEM GẦN ĐÂY</h2>
+                    <h2>{dataCate.title}</h2>
                 </div>
                 <div className='container-product-recently-view'>
-                    {recentlyData.map(item => {
+                    {dataCate.product&&dataCate.product.map(item => {
                         return <Item data={item}></Item>
                     })}
                 </div>
@@ -39,4 +33,4 @@ const RecentlyView = ({type, id_category}) => {
         </div>
     ):null;
 }
-export default RecentlyView;
+export default ProductListCategory;

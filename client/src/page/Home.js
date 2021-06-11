@@ -8,6 +8,8 @@ import  {getProductLists} from '../api/product/product_list'
 import Rate from '../components/rate'
 import Item from '../components/item'
 
+
+import ProductListCategory from '../components/product_list/ProductListCategory'
 //
 
 const Home = () => {
@@ -46,31 +48,12 @@ const Home = () => {
 
    
     return (
-        <div className="productPage">
-            <div className="container-f90 row justify-center">
-                <div className="col-10">
-                    <div className="row">
-                        <span className={sortType === 0 ? "sort-item hover selected" : "sort-item hover"}
-                            onClick={() => setSortType(0)} >Phổ biến</span>
-                        <span className={sortType === 1 ? "sort-item hover selected" : "sort-item hover"}
-                            onClick={() => setSortType(1)}>Bán chạy</span>
-                        <span className={sortType === 2 ? "sort-item hover selected" : "sort-item hover"}
-                            onClick={() => setSortType(2)}>Hàng mới</span>
-                        <span className={sortType === 3 ? "sort-item hover selected" : "sort-item hover"}
-                            onClick={() => setSortType(3)}>Giá thấp</span>
-                        <span className={sortType === 4 ? "sort-item hover selected" : "sort-item hover"}
-                            onClick={() => setSortType(4)}>Giá cao</span>
-                    </div>
-                    <br></br>
-                    <div className="row wrap justify-center">
-                        {curData.map(item=> {
-                            return <Item data={item}></Item>
-                        })}
-                    </div>
-                    
-
-                </div>
-            </div>
+        <div>
+            <ProductListCategory category={3}/>
+            <ProductListCategory category={4}/>
+            <ProductListCategory category={5}/>
+            <ProductListCategory category={6}/>
+            <ProductListCategory category={7}/>
         </div>
     )
 }

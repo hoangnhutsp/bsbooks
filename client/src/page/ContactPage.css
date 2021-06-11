@@ -1,0 +1,180 @@
+
+.ContactPageContainer-contact-content h2{
+    text-transform: capitalize;
+    margin-top: 2%;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+    font-size: 2rem;
+}
+
+.ContactPageContainer-contact-content h2::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #498374;
+    height: 3px;
+    box-sizing: border-box;
+    width: 70px;
+}
+.ContactPageContainer{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.ContactPageContainer-contact{
+    position: relative;
+    min-height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ContactPageContainer-contact .ContactPageContainer-contact-content{
+    max-width: 800px;
+    text-align: center;
+}
+
+/*.ContactPageContainer-contact .ContactPageContainer-contact-content h2{
+    font-size: 36px;
+    font-weight: 500;
+    color: #333;
+}*/
+
+.ContactPageContainer-contact .ContactPageContainer-contact-content p{
+    font-weight: 300;
+    color: #333;
+}
+
+.ContactPageContainer-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.ContactPageContainer-container .ContactPageContainer-contactInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ContactPageContainer-container .ContactPageContainer-contactInfo .ContactPageContainer-box{
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+
+.ContactPageContainer-container .ContactPageContainer-contactInfo .ContactPageContainer-box .icon{
+    min-width: 60px;
+    height: 60px;
+    background: #388d73;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.ContactPageContainer-container .ContactPageContainer-contactInfo .ContactPageContainer-box .ContactPageContainer-box-text{
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #333;
+    flex-direction: column;
+    font-weight: 300;
+}
+
+.ContactPageContainer-container .ContactPageContainer-contactInfo .ContactPageContainer-box .ContactPageContainer-box-text h3{
+    font-weight: 10px;
+    color: #108a69;
+}
+
+.ContactPageContainer-contactForm{
+    width: 40%;
+    padding: 40px;
+    background: rgb(255, 255, 255);
+}
+
+.ContactPageContainer-contactForm h2{
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.ContactPageContainer-inputBox{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ContactPageContainer-text,
+.ContactPageContainer-textarea{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid #333;
+    outline: none;
+    resize: none;
+}
+
+.ContactPageContainer-inputBox-span{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #666;
+}
+
+.ContactPageContainer-text :focus ~ .ContactPageContainer-inputBox-span,
+.ContactPageContainer-text :valid ~ .ContactPageContainer-inputBox-span,
+.ContactPageContainer-textarea :focus ~ .ContactPageContainer-inputBox-span,
+.ContactPageContainer-textarea :valid ~ .ContactPageContainer-inputBox-span{
+    color: #e91e63;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+
+.ContactPageContainer-contactForm .ContactPageContainer-inputBox input[type="submit"]{
+    width: 100px;
+    background: #229677;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+
+@media (max-width:991px) {
+    .ContactPageContainer-contact{
+        padding: 50px;
+    }
+
+    .ContactPageContainer-container{
+        flex-direction: column;
+    }
+
+    .ContactPageContainer-container .ContactPageContainer-contactInfo{
+        margin-bottom: 40px;
+    }
+
+    .ContactPageContainer-container .ContactPageContainer-contactInfo,
+    .ContactPageContainer-contactForm{
+        width: 100%;
+    }
+}
+
+
+
+
+

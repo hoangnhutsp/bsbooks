@@ -3,7 +3,7 @@
 import Product from '../models/product.js';
 import Category from '../models/category.js'
 import ProductDetail from '../models/product_detail.js'
-
+import Config from '../models/config.js';
 
 const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
@@ -20,6 +20,8 @@ const getListCate = async (query) => {
 
     try {
         let id = query.category || DEFAULT_CATEGORY;
+
+        console.log(id);
         if (id > 40) id = DEFAULT_CATEGORY;
         const category = await Category.find({ id: id })
         if (category === []) {
@@ -39,6 +41,8 @@ const getListCate = async (query) => {
 
 const getBreadcrumbCategory = async (query) => {
     let category = query.category || DEFAULT_CATEGORY;
+
+    console.log(category);
     let cate = await Category.findOne({ id: category })
     let breadcrumb = [];
 
@@ -71,14 +75,15 @@ const initQuery = async (query) => {
     }
 
     if (q) {
-        queryString['$text'] = {$search: q}
+        q = removeVietnameseAccent(q).toLowerCase();
+        queryString['$text'] = { $search: q }
     }
 
     return queryString;
 }
 
 const initSort = (query) => {
-
+    console.log(query.sort);
     let sort = String(query.sort || DEFAULT_SORT).split(',');
     let type = sort[0];
     let criteria = sort[1] || DEFAULT_CRITERIA;
@@ -89,9 +94,10 @@ const initSort = (query) => {
     if (query.q) {
         queryString = {
             score: { $meta: "textScore" },
-            [type]: criteria,
         }
-    } else {
+    } else 
+    if (query.sort !== undefined)
+    {
         queryString = {
             [type]: criteria,
         }
@@ -114,33 +120,33 @@ export const getProduct = async (req, res) => {
         const sortString = initSort(query);
         let textScore = {}
 
-
-        if (query.q) textScore['score'] = {$meta: "textScore"};
+        if (query.q) textScore['score'] = { $meta: "textScore" };
         let product = await Product.find(queryString, textScore).sort(sortString);
         const size = product.length;
 
         let page = query.page || DEFAULT_PAGE;
-        const pageMax = Math.round((size - 1) / DEFAULT_SIZE_PAGE) + 1;
+        const pageMax = Math.floor((size - 1) / DEFAULT_SIZE_PAGE) + 1;
+        console.log("pageMax", pageMax);
         page = Math.max(page, 1);
         page = Math.min(page, pageMax)
         product = slicePage(page, product)
 
 
         let breadcrumb = await getBreadcrumbCategory(query);
-        
+
         console.log(queryString);
         let minPrice = queryString.price.$gt;
         let maxPrice = queryString.price.$lt;
-        
-        res.status(200).json({ 
-            size, 
-            crrSize: product.length, 
-            page, 
-            pageMax, 
-            product, 
-            breadcrumb, 
-            queryPrice: {minPrice, maxPrice}, 
-            queryRating: queryString.rating_average.$gt + 1 
+
+        res.status(200).json({
+            size,
+            crrSize: product.length,
+            page,
+            pageMax,
+            product,
+            breadcrumb,
+            queryPrice: { minPrice, maxPrice },
+            queryRating: queryString.rating_average.$gt + 1
         })
 
     } catch (error) {
@@ -152,9 +158,7 @@ const attributeProductDetails = [
     "_id",
     "id",
     "id_category",
-    "sku",
     "name",
-    "url_key",
     "short_description",
     "price",
     "discount",
@@ -162,13 +166,11 @@ const attributeProductDetails = [
     "rating_average",
     "review_count",
     "thumbnail_url",
-    "has_ebook",
     "inventory_status",
     "publisher",
     "author_name",
     "description",
     "specifications",
-    "id_author",
     "images"
 ];
 
@@ -180,6 +182,8 @@ export const getProductByID = async (req, res) => {
         let id = product["id"];
         let productDetail = await ProductDetail.findOne({ id });
 
+        console.log(product);
+        console.log(productDetail);
         let data = {};
         for (let x of attributeProductDetails) {
             if (x in product) {
@@ -193,8 +197,8 @@ export const getProductByID = async (req, res) => {
         let x = {};
         x.category = data.id_category;
         let breadcrumb = await getBreadcrumbCategory(x);
-       
-        res.status(200).json({data, breadcrumb});
+
+        res.status(200).json({ data, breadcrumb });
 
 
     } catch (error) {
@@ -205,17 +209,59 @@ export const getProductByID = async (req, res) => {
 const checkInfoProduct = (product) => {
     return true;
 }
-
-export const createProduct = async (req, res) => {
-    const product = req.body;
-    if (!checkInfoProduct(product)) {
-        res.status(500).json({ message: "Info not valid!!!" })
+function removeVietnameseAccent (str) {
+    // remove accents
+    var from = "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ",
+        to   = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+    for (var i=0, l=from.length ; i < l ; i++) {
+      str = str.replace(RegExp(from[i], "gi"), to[i]);
     }
-    const newProduct = new Product(product);
+  
+    str = str.toLowerCase().trim().replace(/[^a-z0-9\-]/g, ' ')
+    return str;
+}
+export const createProduct = async (req, res) => {
     try {
-        await newProduct.save();
-        res.status(201).json(newProduct);
+        console.log('create product');
+        let { newProduct, newProductDetail, image } = req.body;
+        if (!newProduct || !newProductDetail || !image) {
+            return res.status(500).json({ message: "Info not valid!!!" })
+        }
+
+        const config = await Config.findOne({forCollection: 'product'});
+
+
+        if (config !== null) {
+            let id = config.idSeed + 1;
+            newProduct.id = newProductDetail.id = id;
+
+            await Config.findByIdAndUpdate({_id: config._id}, {idSeed: id});
+
+            //SOL: product
+            newProduct.idx_name = removeVietnameseAccent(newProduct.name);
+            newProduct.idx_author_name = removeVietnameseAccent(newProduct.author_name);
+            newProduct.short_description = newProductDetail.description;
+            if (newProduct.short_description.length > 200)
+                newProduct.short_description = newProduct.short_description.slice(0, 200) + '...';
+            newProduct.thumbnail_url = image;
+            newProduct.inventory_status = "available"
+            newProduct.day_ago_created = 1
+
+
+            newProductDetail.images[0] = image
+            const newP = new Product(newProduct);
+            const newPD= new ProductDetail(newProductDetail);
+
+            console.log(newP);
+
+            console.log(newPD);
+            await newP.save();
+            await newPD.save();
+        }
+        res.status(201).json({ status: 1});
+
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message })
     }
 }
@@ -232,8 +278,8 @@ export const updateProduct = async (req, res) => {
     try {
         console.log(product);
         await Product.findByIdAndUpdate(_id, product, { useFindAndModify: false });
-        let {specifications, description} = product
-        await ProductDetail.findOneAndUpdate({id}, {specifications, description}, { useFindAndModify: false })
+        let { specifications, description } = product
+        await ProductDetail.findOneAndUpdate({ id }, { specifications, description }, { useFindAndModify: false })
         res.status(201).json({ message: "sussessfully!!!" })
     } catch (error) {
         res.status(500).json({ message: "Error Update user information" });
@@ -254,7 +300,7 @@ export const searchProduct = async (req, res) => {
                 },
 
             },
-            {score: {$meta: "textScore"}}
+                { score: { $meta: "textScore" } }
             )
             .sort({ score: { $meta: "textScore" } })
 
@@ -269,10 +315,28 @@ export const suggestionProduct = async (req, res) => {
     try {
         let q = req.query.q;
         let regex = new RegExp(q, 'i');
-        const product = await Product.find({ idx_name: regex}, {name: '1'} ).limit(SIZE_OF_SUGGESTION);
+        const product = await Product.find({ idx_name: regex }, { name: 1 }).limit(SIZE_OF_SUGGESTION);
         res.status(200).json({ size: product.length, product })
 
     } catch (error) {
         res.status(404).json({ message: error.message });
+    }
+}
+
+export const getProductByCategoryLimit = async (req, res) => {
+    try {
+        const query = req.query;
+        let category = await getListCate(query);
+       
+        const queryString = {
+            id_category: { $in: category }
+        }
+        let product = await Product.find(queryString);
+
+        const cate = await Category.findOne({ id: query.category });
+        product = product.slice(0, query.limit);
+        res.status(200).json( {title: cate.name, product})
+    } catch (error) {
+        res.status(400).json(error)
     }
 }

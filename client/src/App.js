@@ -20,6 +20,7 @@ import TermsPage from './page/TermsPage'
 import SecurityPage from './page/SecurityPage'
 import FandAPage from './page/FandAPage'
 import AboutUs from './page/AboutUs'
+import ContactPage from './page/ContactPage'
 //import FormComment from './page/FormComment'
 
 import PageNotFound from './page/PageNotFound'
@@ -89,11 +90,13 @@ const App = () => {
             <Route path="/about-us">
               <AboutUs />
             </Route>
+            <Route path="/contact">
+              <ContactPage />
+            </Route>
             <Route path="*">
               <PageNotFound />
             </Route>
           </Switch>
-          <PageNotFound></PageNotFound>
           <InfoTransport />
           <Footer></Footer>
         </div>
