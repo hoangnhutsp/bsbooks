@@ -14,7 +14,7 @@ import AddProduct from './products/AddProduct'
 import Profile from './account/Profile';
 import Product from '../../page/Product'
 import Order from './notifications/Order';
-import Dashboad from './dashboad'
+import Dashboad from './dashboad/Dashboard'
 import ListInvoice from './invoice/ListInvoice'
 
 function Admin() {
