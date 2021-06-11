@@ -24,8 +24,8 @@ export const SidebarData = [
 
     },
     {
-        title: "Khuyen mai",
-        link: "promotion",
+        title: "Thong bao",
+        link: "notifications",
         cName: 'sidebar-text'
 
     },

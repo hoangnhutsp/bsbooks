@@ -46,7 +46,7 @@
 .widget-content .widget-numbers span
 {
     font-weight:bold;
-    font-size:2.5rem;
+    font-size:1.5rem;
     display:block;
     padding-top: 1.2rem;
 }
@@ -143,7 +143,7 @@
 .Das-Header{
     border-radius: 5px;
     padding: 0.8rem;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #fff;
 }
 .Das-Body-1{
@@ -194,7 +194,7 @@ padding-left: 2rem;
 .widget-content .widget-numbers-2 span
 {
     font-weight:bold;
-    font-size:2.5rem;
+    font-size:1.5rem;
     display:block;
     padding-top: 1.2rem;
 }

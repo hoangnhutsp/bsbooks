@@ -81,7 +81,7 @@ function Navbar() {
             
             <div className="container-mini-navbar">
                 <div className="container-item-on-top">
-                        <NotificationBox />
+                        
                     {
                     userNavbar.status
                         ? <UserIsLogin />
@@ -108,14 +108,10 @@ function Navbar() {
                     <SearchBox />
                 </div>
                 <div className="container-navbar-cart row-center">
-               
+                     <NotificationBox />
                     <Link to="/cart">
-                        <div> 
-                            
-
                             <img alt="icon-shopping-cart" className="navbar-icon-shopping-cart" src={iconShoppingCart} />
                             {countCart > 0 && <span className="navbar-cart-number">{countCart}</span>}
-                        </div>
                     </Link >
                 </div>
 

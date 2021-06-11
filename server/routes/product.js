@@ -20,10 +20,12 @@ const router = express.Router();
 router.get('/search', searchProduct);
 router.get('/search/suggestion', suggestionProduct)
 router.get('/', getProduct);
-
 router.get('/category', getProductByCategoryLimit)
 
 router.get('/:id', updateRecentlyViewed, getProductByID);
+
+
+
 router.post('/update', updateProduct);
 router.post('/', createProduct)
 

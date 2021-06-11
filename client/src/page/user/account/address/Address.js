@@ -75,7 +75,7 @@ function Address() {
                 </div>
             </div>
             <hr />
-            {address.length>0?address.map(
+            {address&&address.length>0?address.map(
                 (val, key) => {
                     return (
                         <ItemAddress data={val} idx={key} 
