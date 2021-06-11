@@ -57,18 +57,20 @@ function Product() {
                         {data.images && <ImgShowcase images={data.images} />}
                     </div>
                     <div className='col-6'>
-                        <p>Tác giả: {data.author_name}</p>
-                        <p>{data.name}</p>
+                        <div className="product-detail-name-col-6">
+                            <p>{data.name}</p>
+                        </div>
+                        <p><span className="product-detail-name-col-6-span">Tác giả:</span> {data.author_name}</p>
                         <div className='row price-view'>
-                            <p className='big-text bold child'>{(data.price - data.discount).format(0, 3)}</p>
-                            <p className='med-text line-through child    '>{data.price.format(0, 3)} </p>
-                            <p className='sml-text child'>-{data.discount_rate}%</p>
+                            <p className='big-text bold child'>{(data.price).format(0, 3)}</p>
+                            <p className='med-text line-through child'>{(data.discount + data.price).format(0, 3)} </p>
+                            <p className='sml-text child'>{data.discount_rate}%</p>
                         </div>
 
                         <p className='sml-text'>Bạn hãy <Link><a>NHẬP ĐỊA CHỈ</a></Link> nhận hàng để được dự báo thời gian & chi phí giao hàng một cách chính xác nhất.</p>
-                        <p>Số lượng</p>
+                        <p className="product-detail-name-col-6-so-luong">Số lượng</p>
                         <div className='row'>
-                            <div className='square hover' onClick={() => count >= 1 && setCount(count - 1)}>
+                            <div className='square hover' onClick={() => count > 1 && setCount(count - 1)}>
                                 <p>-</p>
                             </div>
                             <div className='square count' >

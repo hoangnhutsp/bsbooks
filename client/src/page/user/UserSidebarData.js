@@ -1,30 +1,30 @@
 
 export const SidebarData = [
     {
-        title: "Tai Khoan Cua Toi",
+        title: "Tài khoản của tôi",
         link: "profile",
         cName: 'sidebar-text'
     },
     {
-        title: "Dia Chi",
+        title: "Địa chỉ",
         link: "address",
         cName: 'sidebar-text'
 
     },
     {
-        title: "Doi Mat Khau",
+        title: "Đổi mật khẩu",
         link: "password",
         cName: 'sidebar-text'
 
     },
     {
-        title: "Don Mua",
+        title: "Đơn mua",
         link: "purchase",
         cName: 'sidebar-text'
 
     },
     {
-        title: "Khuyen mai",
+        title: "Khuyến mãi",
         link: "promotion",
         cName: 'sidebar-text'
 

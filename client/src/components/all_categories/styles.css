@@ -21,6 +21,10 @@
     background: #498374;
 }
 
+.menu-button:hover{
+    background: #559483;
+}
+
 .hamberger-toggle {
     top:23px
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Cart.css';
 import {formatCash} from './functionCart.js'
+
 import {
     addToCart,
     updateCart,
@@ -154,7 +155,7 @@ function Cart() {
                     <div className="cart-total-holder">
                         <div className="cart-total">
                             <p>Tổng cộng</p>
-                            <p>{sumPrice}</p>
+                            <p>{formatCash(String(sumPrice))}<span>đ</span></p>
                         </div>
                         <div className="cart-action-button">
                             <a href="/">Tiếp tục mua sắm</a>
