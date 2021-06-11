@@ -9,7 +9,7 @@ const ProductListCategory = ({category}) => {
    
     const [dataCate, setDataCate] = useState({})
     useEffect( async () => {
-        await apiProduct.getProductByCategoryLimit({category, limit: 4})
+        await apiProduct.getProductByCategoryLimit({category, limit: 5})
         .then(res => res.data)
         .then(data => {
             setDataCate(data)
@@ -25,7 +25,7 @@ const ProductListCategory = ({category}) => {
                     <h2>{dataCate.title}</h2>
                 </div>
                 <div className='container-product-recently-view'>
-                    {dataCate.product.map(item => {
+                    {dataCate.product&&dataCate.product.map(item => {
                         return <Item data={item}></Item>
                     })}
                 </div>

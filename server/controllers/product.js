@@ -332,7 +332,7 @@ export const getProductByCategoryLimit = async (req, res) => {
         }
         let product = await Product.find(queryString);
 
-        const cate = await Category.findOne({ id: query.limit });
+        const cate = await Category.findOne({ id: query.category });
         product = product.slice(0, query.limit);
         res.status(200).json( {title: cate.name, product})
     } catch (error) {

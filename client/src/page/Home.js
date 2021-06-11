@@ -50,6 +50,10 @@ const Home = () => {
     return (
         <div>
             <ProductListCategory category={3}/>
+            <ProductListCategory category={4}/>
+            <ProductListCategory category={5}/>
+            <ProductListCategory category={6}/>
+            <ProductListCategory category={7}/>
         </div>
     )
 }
