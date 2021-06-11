@@ -12,7 +12,7 @@ import ViewUser from './user/ViewUser'
 import AddAdmin from './admin/AddAdminForm'
 import Product from '../../page/Product'
 import Order from './notifications/Order';
-import Dashboad from './dashboad'
+import Dashboad from './dashboad/Dashboad'
 import ListInvoice from './invoice/ListInvoice'
 
 function Admin() {
