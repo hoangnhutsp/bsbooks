@@ -16,6 +16,8 @@ import Product from '../../page/Product'
 import Order from './notifications/Order';
 import Dashboad from './dashboad'
 import ListInvoice from './invoice/ListInvoice'
+import ViewInvoice from './invoice/ViewInvoice';
+import EditInvoice from './invoice/EditInvoice';
 
 function Admin() {
     let { path } = useRouteMatch();
@@ -63,7 +65,12 @@ function Admin() {
                     <Route exact path={`${path}/invoice`}>
                         <ListInvoice />
                     </Route>
-                    
+                    <Route exact path={`${path}/invoice/:id`}> 
+                        <ViewInvoice/>
+                    </Route>
+                    <Route exact path={`${path}/edit-invoice/:id`}>
+                        <EditInvoice/>
+                    </Route>
                 </Switch>
             </div>
         </div>
