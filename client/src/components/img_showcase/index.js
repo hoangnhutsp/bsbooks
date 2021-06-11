@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import './styles.css'
-const ImgShowcase = (props) => {
+const ImgShowcase =     (props) => {
     const [curIndex, setCurIndex] = useState(0) // Current index of main image
     const [images, setImages] = useState([]) // Current index of main image
 
@@ -23,7 +23,7 @@ const ImgShowcase = (props) => {
             <div className="sub-imgs-view">
                 {
                     images.map((item, index) => {
-                        return <img alt='product' className= {curIndex === index ? "sm-img selected" : "sm-img"}
+                        return (index<3)&&<img alt='product' className= {curIndex === index ? "sm-img selected" : "sm-img"}
                           src={item} onClick={()=>setCurIndex(index)} />
                     })
                 }

@@ -21,12 +21,14 @@ import TermsPage from './page/TermsPage'
 import SecurityPage from './page/SecurityPage'
 import FandAPage from './page/FandAPage'
 import AboutUs from './page/AboutUs'
+import ContactPage from './page/ContactPage'
 //import FormComment from './page/FormComment'
 
 import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
 import Signup from './page/login/Signup'
+import ResetPassword from './page/login/ResetPassword';
 import ProductPage from './page/productPage'
 
 import Cart from './page/cart/Cart';
@@ -71,7 +73,9 @@ const App = () => {
             <Route path="/signup">
               <Signup />
             </Route>
-            
+            <Route path="/reset-password/:token">
+              <ResetPassword />
+            </Route>
             <Route path="/cart">
               <Cart />
             </Route>
@@ -90,11 +94,13 @@ const App = () => {
             <Route path="/about-us">
               <AboutUs />
             </Route>
+            <Route path="/contact">
+              <ContactPage />
+            </Route>
             <Route path="*">
               <PageNotFound />
             </Route>
           </Switch>
-          <PageNotFound></PageNotFound>
           <BackTop></BackTop>
           <InfoTransport />
           <Footer></Footer>

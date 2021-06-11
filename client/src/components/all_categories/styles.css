@@ -102,6 +102,10 @@
     color: #498374;
 }
 
+.item.hover {
+    background-color: #fff;
+}
+
 
 .item .arrow::after {
     content: "\f105";

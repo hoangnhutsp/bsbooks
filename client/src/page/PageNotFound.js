@@ -11,7 +11,7 @@ function PageNotFound() {
                 <p className="PageNotFoundContainer-Container-message">
                     Trang này hiện đang không tìm thấy. Bạn có thể quay lại trang chủ hoặc liên hệ với chúng tôi!
                 </p>
-                <a href="#" className="PageNotFoundContainer-Container-btn">Đi đến trang chủ</a>
+                <a href="/" className="PageNotFoundContainer-Container-btn">Đi đến trang chủ</a>
             </div>
         </div>
     </div>

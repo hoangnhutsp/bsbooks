@@ -78,3 +78,11 @@ export const changePassword = async ({currentPassword, newPassword}, setErrorRes
     .catch( err => setErrorResponse({status: 0, message: err.message}))
 
 }
+
+export const resetPassword = async ({token, password}) => {
+    console.log(token, password);
+    const URL = localhost + `user/reset-password/${token}`
+    console.log(URL);
+    return await axios.post(URL, {password})
+}
+

@@ -7,7 +7,8 @@ import {
     getProductByID, 
     updateProduct, 
     searchProduct, 
-    suggestionProduct
+    suggestionProduct,
+    getProductByCategoryLimit
 } from '../controllers/product.js';
 
 import {
@@ -20,10 +21,13 @@ router.get('/search', searchProduct);
 router.get('/search/suggestion', suggestionProduct)
 router.get('/', getProduct);
 
+router.get('/category', getProductByCategoryLimit)
 
 router.get('/:id', updateRecentlyViewed, getProductByID);
 router.post('/update', updateProduct);
 router.post('/', createProduct)
+
+
 
 export default router;
 

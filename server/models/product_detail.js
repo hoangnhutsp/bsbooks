@@ -14,7 +14,6 @@ const productDetailSchema = mongoose.Schema({
             ],
         }
     ],
-    id_author: Number,
     images: [String]
 });
 

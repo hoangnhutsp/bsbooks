@@ -1,6 +1,6 @@
 /*nội dung sản phẩm trong giỏ hàng*/
 
-.ontrol-item .control-form{
+.control-item .control-form{
     display: grid;
     grid-template-columns: 100%;
     border: 1px solid #efefef;
@@ -139,9 +139,9 @@
     .control-price-sm,
     .control-product-remove{
         width: 55%;
-         display: flex;
-         justify-content: center;
-         align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .control-item .control-form:first-child{
@@ -158,4 +158,60 @@
     .control-controls-sm{
         display: none;
     }
+}
+
+.title-control-product-admin {
+    width: 100%;
+    display: flex;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.title-image-for-product{
+    padding-left: 2%;
+    width: 10%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.title-name-for-product{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-price-for-product{
+    width: 38%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.class-include-add-icon {
+    width: 15%;
+    display: flex;
+    padding: 2%;
+    padding-bottom: 0   ;
+    justify-content: right;
+    align-items: center;
+    float: right;
+}
+
+.class-include-link-tag-new-product a {
+    text-decoration: none;
+}
+
+.class-icon-add-product{
+    width: 20%;
+    display: flex;
+    justify-content: right;
+    position: right;
+    align-items: center;
+}
+
+.class-text-form-product{
+    padding-left: 1%;
+    width: 100%;
+    color: teal;
 }

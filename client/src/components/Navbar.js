@@ -23,6 +23,7 @@ function Navbar() {
     const [userNavbar, setUserNavbar] = useState({
         name : '',
         url : '',
+        isAdmin: 0,
     });
 
     useEffect(() => {
@@ -30,7 +31,8 @@ function Navbar() {
             let status = Store.user.isLogged;
             let name = Store.user.infoUser.name;
             let url = Store.user.infoUser.avatar;
-            setUserNavbar({ status, name, url })
+            let isAdmin = Store.user.isAdmin;
+            setUserNavbar({ status, name, url, isAdmin})
         }
 
         if (Store.cart) {
@@ -42,14 +44,23 @@ function Navbar() {
         window.location.reload();
 
     }
+
+    const getName = (name, isAdmin) => {
+        if (isAdmin) return `${name} (Admin)`;
+        return name;
+    }
     const UserIsLogin = () => {
         return (
                 <div className='dropdown'>
                     <div className='navbar-user'>
                         <img alt="avatar user" className="navbar-user-avatar" src={userNavbar.url} />
-                        <span className="navbar-user-name">{userNavbar.name}</span>
+                        <span className="navbar-user-name">{getName(userNavbar.name, userNavbar.isAdmin)}</span>
                     </div>
                     <div className='dropdown-content'>
+                        {userNavbar.isAdmin&&
+                        <div className='dropdown-content-item'>
+                            <Link to='/admin'>Admin</Link><br/>
+                        </div>}
                         <div className='dropdown-content-item'>
                             <Link to='/user'>Thông tin cá nhân</Link><br/>
                         </div>
