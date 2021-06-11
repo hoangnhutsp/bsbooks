@@ -5,6 +5,7 @@ import { getProductDetails } from '../api/product/product_details'
 import ImgShowcase from '../components/img_showcase'
 import Breadcrumb from '../components/Breadcrumb.js';
 import RecentlyView from '../components/product_list/RecentlyView'
+import ProductListSame from '../components/product_list/SameProduct'
 
 import * as apiEvaluate from '../api/evaluate';
 import { useDispatch } from 'react-redux';
@@ -28,6 +29,7 @@ function Product() {
             return
         }
         const data = await getProductDetails(id);
+        console.log('data: ',data)
         setData(data.data);
         setBreadcrumb(data.breadcrumb);
 
@@ -102,6 +104,7 @@ function Product() {
                     </div>
                 </div >
             </div>
+            <ProductListSame category={data.id_category} currentProductName={data.name}/>
             <RecentlyView />
             <div className="container-comment-product-in-pb">
                 <CommentProduct data={evaluate} idProduct={id}/>
