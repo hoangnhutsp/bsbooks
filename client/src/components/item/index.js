@@ -13,7 +13,6 @@ const Item = (props) => {
                 <p>{data.price.format(0, 3)} <span className="line-through bold sml-text">{data.discount.format(0, 3)}</span></p>
                 <p className="sml-text bold">{data.discount_rate}%</p>
             </div>
-
         </Link>
 
     )

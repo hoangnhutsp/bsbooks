@@ -15,6 +15,8 @@ import {
     useHistory,
 } from 'react-router-dom'
 
+import imgEmptyCart from '../../assets/emptycart.png'
+
 function Cart() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -72,6 +74,20 @@ function Cart() {
             alert("Ban chua dang nhap ...")
         }
     }
+
+    function CartIsEmpty() {
+        return (
+            <div className="cart-is-empty">
+                <img alt="icon" className="cart-is-empty-icon" src={imgEmptyCart} />
+                <p className="cart-is-empty-content">Không có sản phẩm nào trong giỏ hàng.</p>
+                <p className="cart-is-empty-content">Quay lại cửa hàng để tiếp tục mua sắm.</p>
+
+
+                
+            </div>
+        )
+    }
+    
     
     const Item = ({item, idx}) => {
         return (
@@ -132,7 +148,7 @@ function Cart() {
         )
     }
 
-    return productCart ? (
+    return (productCart&&productCart.count) ? (
         <div className='CartContainer'>
             <div className="product-cart">
                 <h4 className="page-banner-sm">Cart</h4>
@@ -165,7 +181,7 @@ function Cart() {
                 </div>
             </div>
         </div>
-    ):null;
+    ): <CartIsEmpty />;
 }
 
 export default Cart;

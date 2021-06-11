@@ -10,6 +10,7 @@ import {
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import BackTop from './components/BackTop'
 
 import Home from './page/Home'
 import User from './page/user/User'
@@ -100,6 +101,7 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
+          <BackTop></BackTop>
           <InfoTransport />
           <Footer></Footer>
         </div>

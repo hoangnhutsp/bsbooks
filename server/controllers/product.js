@@ -274,12 +274,11 @@ export const updateProduct = async (req, res) => {
     }
     let _id = product._id;
     let id = product.id;
-    console.log(id);
     try {
+        await Product.findByIdAndUpdate(_id, product, { useFindAndModify: true });
         console.log(product);
-        await Product.findByIdAndUpdate(_id, product, { useFindAndModify: false });
         let { specifications, description } = product
-        await ProductDetail.findOneAndUpdate({ id }, { specifications, description }, { useFindAndModify: false })
+        await ProductDetail.findOneAndUpdate({ id }, { specifications, description }, { useFindAndModify: true })
         res.status(201).json({ message: "sussessfully!!!" })
     } catch (error) {
         res.status(500).json({ message: "Error Update user information" });
