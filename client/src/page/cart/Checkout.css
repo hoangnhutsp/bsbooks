@@ -7,6 +7,7 @@
     color: #333;
     padding: 1rem;
     margin-bottom: 2%;
+    font-size: 19px;
 }
 
 .h2-checkout{
@@ -21,7 +22,7 @@
     box-sizing: border-box;
 }
 
-.row{
+.CheckoutContainer-row{
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -40,20 +41,20 @@
 }
 
 .icon-kc{
-    margin-left: 1%;
+    margin-left: 2%;
+    margin-bottom: 2%;
 }
 
 .col-25, 
 .col-75{
-    padding: 0 5%;
+    padding: 0 3%;
     margin-bottom: 3%;
 }
 
-.container{
+.CheckoutContainer-container{
     padding: 3px 18px 13px 18px;
-    border: 1px solid lightgray;
+    /*border: 1px solid lightgray;*/
     border-radius: 3px;
-    
 }
 
 .input-checkout{
@@ -101,7 +102,15 @@ span.price{
 }
 
 
+.CheckoutContainer-phi-van-chuyen,
+.CheckoutContainer-tong-tien{
+    font-weight: bold;
+}
 
+.CheckoutContainer-phi-van-chuyen-inline{
+    display: inline;
+    justify-content: space-between;
+}
 
 
 

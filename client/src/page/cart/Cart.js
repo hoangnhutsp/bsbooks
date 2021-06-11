@@ -82,8 +82,8 @@ function Cart() {
                         </div>
                         <div className="cart-product-infor">
                             <p className="cart-product-name">{item.name}</p>
-                            <p className="cart-price-sm">{item.price}</p>
-                            <small>x {item.count}</small>
+                            <p className="cart-price-sm">x {item.quantity}</p>
+                            {/*<p className="cart-price-sm">{item.price}</p>*/}
                         </div>
                     </div>
                     <div className="cart-quantity-md">
@@ -101,7 +101,7 @@ function Cart() {
                         </div>
                     </div>
                     <div className="cart-unit-price">
-                        <h4>{formatCash(String(item.price))}</h4>
+                        <h4>{formatCash(String(item.price))}<span>đ</span></h4>
                     </div>
                     <div className="cart-product-join">
                         <input
