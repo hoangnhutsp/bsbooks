@@ -8,13 +8,7 @@
 2. Cài đặt [Yarn](https://classic.yarnpkg.com/latest.msi)
 3. Tạo một file .env với path: /bsbooks/server/.env thêm vào nội dung:
 
-   ```shell
-URL_MONGODB=mongodb+srv://hoangnhutsp:Nhutsp240420@bsbooks.utegf.mongodb.net/bsbooks_db?retryWrites=true&w=majority
-DOMAIN_MAIL_GUN=sandboxdf9cca1a0e21488e94280e08ef32f592.mailgun.org
-API_KEY_MAIL_GUN=cf562be2b445515ac21fd946ec3651dc-90ac0eb7-6f9584c5
-CLIENT_ID=551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com
-CLIENT_SECRET=AC6CUSWFSQW0Zrxm7fUdwnE-
-URL_MONGODB_LOCAL=mongodb://localhost:27017/bsbooks
+
    ```
 
 4. cd vào /bsbooks/server và run:
