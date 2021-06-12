@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Cart.css';
 import {formatCash} from './functionCart.js'
+
 import {
     addToCart,
     updateCart,
@@ -13,6 +14,8 @@ import {
 import {
     useHistory,
 } from 'react-router-dom'
+
+import imgEmptyCart from '../../assets/emptycart.png'
 
 function Cart() {
     const dispatch = useDispatch();
@@ -71,6 +74,20 @@ function Cart() {
             alert("Ban chua dang nhap ...")
         }
     }
+
+    function CartIsEmpty() {
+        return (
+            <div className="cart-is-empty">
+                <img alt="icon" className="cart-is-empty-icon" src={imgEmptyCart} />
+                <p className="cart-is-empty-content">Không có sản phẩm nào trong giỏ hàng.</p>
+                <p className="cart-is-empty-content">Quay lại cửa hàng để tiếp tục mua sắm.</p>
+
+
+                
+            </div>
+        )
+    }
+    
     
     const Item = ({item, idx}) => {
         return (
@@ -131,7 +148,7 @@ function Cart() {
         )
     }
 
-    return productCart ? (
+    return (productCart&&productCart.count) ? (
         <div className='CartContainer'>
             <div className="product-cart">
                 <h4 className="page-banner-sm">Cart</h4>
@@ -154,7 +171,7 @@ function Cart() {
                     <div className="cart-total-holder">
                         <div className="cart-total">
                             <p>Tổng cộng</p>
-                            <p>{sumPrice}</p>
+                            <p>{formatCash(String(sumPrice))}<span>đ</span></p>
                         </div>
                         <div className="cart-action-button">
                             <a href="/">Tiếp tục mua sắm</a>
@@ -164,7 +181,7 @@ function Cart() {
                 </div>
             </div>
         </div>
-    ):null;
+    ): <CartIsEmpty />;
 }
 
 export default Cart;

@@ -73,7 +73,7 @@
 .ContactPageContainer-container .ContactPageContainer-contactInfo .ContactPageContainer-box .icon{
     min-width: 60px;
     height: 60px;
-    background: #388d73;
+    background: #498374;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -147,12 +147,16 @@
 
 .ContactPageContainer-contactForm .ContactPageContainer-inputBox input[type="submit"]{
     width: 100px;
-    background: #229677;
+    background: #498374;
     color: #fff;
     border: none;
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
+}
+
+.ContactPageContainer-contactForm .ContactPageContainer-inputBox input[type="submit"]:hover{
+    background: #559483;
 }
 
 @media (max-width:991px) {

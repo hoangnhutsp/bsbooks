@@ -137,7 +137,8 @@ function Checkout() {
         </div>
       </div>
       <div className="container-btn-checkout">
-        <button className="btn-checkout" onClick={() => btnCheckout()}>Đặt hàng</button>
+        <a href="/">Quay lại giỏ hàng</a>
+        <button className="btn-checkout" onClick={() => btnCheckout()}>Thanh toán đơn hàng</button>
       </div>
     </div>
   ) : null;

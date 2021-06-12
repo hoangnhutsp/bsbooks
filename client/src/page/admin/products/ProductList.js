@@ -3,14 +3,28 @@ import Item from './Item.js'
 import { getProductLists } from '../../../api/product/product_list.js'
 import { Link } from 'react-router-dom'
 import iconAdd from './icon/add.png'
+import Pagination from './../../../components/Pagination';
 
 const ControlProduct = () => {
+    const [page, setPage] = useState(1)
+    const [pageMax, setPageMax] = useState(1)
+
     const [allProduct, setAllProduct] = useState([])
     useEffect(async () => {
-        const data = await getProductLists('')
-        console.log(data['product']);
-        setAllProduct(data.product)
+        getData();
     }, [])
+
+    useEffect(() => {
+        getData();
+        window.scrollTo(0, 0)
+    }, [page])
+    
+    const getData = async () => {
+        const data = await getProductLists(`?page=${page}`);
+        setAllProduct(data.product);
+        setPage(data.page)
+        setPageMax(data.pageMax)
+    }
 
     return (
         <div className='product-list-admin-page-contrainner'>
@@ -32,6 +46,10 @@ const ControlProduct = () => {
             {allProduct.map(item => {
                 return <Item item={item} ></Item>
             })}
+
+            <div className="pagination-row-flex-end">
+                {page&&<Pagination setPage={setPage} page={page} pageMax={pageMax}/>}
+            </div>
         </div>
     )
 }

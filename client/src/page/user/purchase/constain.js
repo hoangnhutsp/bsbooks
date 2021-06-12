@@ -1,7 +1,7 @@
 export const typeOfPurchase = [
-    'Tat ca',
-    'Cho xac nhan',
-    'Dang giao',
-    'Da giao',
-    'Da huy',
+    'Tất cả',
+    'Chờ xác nhận',
+    'Đang giao',
+    'Đã giao',
+    'Đã hủy',
 ]

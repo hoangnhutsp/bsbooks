@@ -1,12 +1,18 @@
 import * as api from '../../api';
 import {getCart} from '../../api/cart'
 
+const getToken = () => {
+    return localStorage.getItem('token');
+}
+const clearToken = () => {
+    localStorage.clear();
+}
 
 export const getProfile = () => async (dispatch) => {
-    let token = localStorage.getItem('token');
-    if (!token){
-        return;
-    }
+
+    const token = getToken();
+    if (!token) return;
+    
     try {
         const {data} = await api.getProfile(token);
         dispatch({type: 'GET_PROFILE', payload: data})
@@ -14,10 +20,10 @@ export const getProfile = () => async (dispatch) => {
         console.log(error.message);
     }
 }
-export const userLogin = (info, setErr) => async (dispatch) => {
+export const userLogin = (info, setErrorResponse) => async (dispatch) => {
     try {
-        api.userLogin(info)
-        .then(res => res.data)
+        await api.userLogin(info)
+        .then(res =>res.data)
         .then((data) => {
             if (data.status)
             {
@@ -35,39 +41,34 @@ export const userLogin = (info, setErr) => async (dispatch) => {
                     dispatch({type: 'GET_CART', payload: data})
                 })
 
-                setErr({status: data.status, message:'succes'})
+                setErrorResponse(data)
             } else {
-                setErr({status: 0, message:'wrong'})
+                setErrorResponse({status: 0, message: data.message})
             }
         })
         .catch(err => {
-            setErr('wr')
+            setErrorResponse({status: 0, message: 'Loi he thong'})
         })
     } catch (error) {
-        console.log(error.message);
+        console.log({status: 0, message: error.message});
     }
 }
 
-export const userUpdateInfo = (info, notiRES) => async (dispatch) =>{
-    let token = localStorage.getItem('token');
-    if (!token){
-        return;
-    }
-    api.userUpdateInfo(info, token)
-    .then(res => res.data)
-    .then(data => {
-        dispatch({ type: 'UPDATE_PROFILE', payload: info})
-    })
-    .catch(err => {
-        console.log(err);
-    })
+
+export const userUpdateInfo = (info, setErrorResponse) => async (dispatch) =>{
+    const token = getToken();
+    if (!token) return;
+    await api.userUpdateInfo(info, token)
+    .then(res => setErrorResponse({status: 1, message: 'Cap nhat thong tin thanh cong'}))
+    .catch(err => setErrorResponse({status: 1, message: 'Loi he thong'}))
+    dispatch({ type: 'UPDATE_PROFILE', payload: info})
 }
 
-export const userSignup = (info, notiRES) => async (dispatch) =>{
+export const userSignup = (info, setErrorResponse) => async (dispatch) =>{
     api.userSignup(info)
     .then(res => res.data)
     .then(data=> {
-
+        console.log(data);
         if (data.status){
             const profile = {
                 infoUser: data.user,
@@ -77,18 +78,18 @@ export const userSignup = (info, notiRES) => async (dispatch) =>{
             }
             window.localStorage.setItem('token', data.token);
             dispatch({type: 'SIGNUP', payload: profile})
-            notiRES({status: data.status, message:'succes'})
+            setErrorResponse({status: data.status, message:'succes'})
         }
-        notiRES({status: 0, message:'wr'}) 
+        setErrorResponse(data) 
     })
     .catch(err => {
         console.log(err);
-        notiRES({status: 0, message:err.message});
+        setErrorResponse({status: 0, message:err.message});
     })
 }
 
 
-export const userLoginGoogle = (tokenId, notiRES) => async (dispatch) =>{
+export const userLoginGoogle = (tokenId, setErrorResponse) => async (dispatch) =>{
     api.userLoginGoogle(tokenId)
     .then(res => res.data)
     .then(data=> {
@@ -101,17 +102,17 @@ export const userLoginGoogle = (tokenId, notiRES) => async (dispatch) =>{
             }
             window.localStorage.setItem('token', data.token);
             dispatch({type: 'LOGIN', payload: profile})
-            notiRES({status: data.status, message:'succes'});
+            setErrorResponse({status: data.status, message:'succes'});
         }
-        notiRES({status: 0, message:'succes'}) 
+        setErrorResponse({status: 0, message:'succes'}) 
     })
     .catch(err => {
-        notiRES({status: 0, message:err.message});
+        setErrorResponse({status: 0, message:err.message});
     })
 }
 
 
-export const userLoginFacebook = ({accessToken, userID}, notiRES) => async (dispatch) =>{
+export const userLoginFacebook = ({accessToken, userID}, setErrorResponse) => async (dispatch) =>{
     api.userLoginFacebook({accessToken, userID})
     .then(res => res.data)
     .then(data => {
@@ -124,13 +125,12 @@ export const userLoginFacebook = ({accessToken, userID}, notiRES) => async (disp
             }
             window.localStorage.setItem('token', data.token);
             dispatch({type: 'LOGIN', payload: profile})
-            notiRES({status: data.status, message:'succes'});
+            setErrorResponse({status: data.status, message:'succes'});
         }
-        notiRES({status: data.status, message:'wr'}) 
+        setErrorResponse({status: data.status, message:'wr'}) 
     })
     .catch(err => {
-        console.log(err);
-        notiRES({status: 0, message:err.message});
+        setErrorResponse({status: 0, message:err.message});
     })
 }
 

@@ -6,6 +6,7 @@
 
 .thumnail {
     width: 100%;
+    height: 200px;
     text-align: center
 }
 
@@ -15,8 +16,36 @@
     margin: 0px 0px 4px;
     line-height: 20px;
     word-break: break-word;
+    justify-content: center;
+    text-align: center;
 }
 
 .item:hover {
     box-shadow: 0px 0px 15px 2px #18141C20    ;
+}
+
+.class-product-detail-for-unline-link-tag a {
+    text-decoration: none;
+}
+
+.class-name-price-in-item{
+    padding-left: 2%;
+    color: #52a08b;
+}
+
+.discount-price-item-display {
+    font-size: 12px;
+    float: right;
+    padding-right: 2%;
+}
+
+.class-for-text-discount-rate {
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0px 0px 4px;
+    line-height: 20px;
+    word-break: break-word;
+    color: rgb(255, 60, 60);
+    font-weight: bold;
+    padding-left: 2%;
 }
