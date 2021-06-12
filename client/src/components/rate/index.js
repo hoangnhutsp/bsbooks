@@ -26,7 +26,7 @@ const Rate = (props) => {
     }, [])
 
     return (
-        <div style={{marginLeft:-3}}>
+        <div style={{marginLeft:10}}>
             {stars}
         </div>
     )

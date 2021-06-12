@@ -10,3 +10,12 @@ export const getInvoiceLists = async (query) => {
     let {data} = await axios.get(URL)
     return data;
 }
+
+
+
+export const getInvoiceDetail = async (id) => {
+    let URL = localhost + id
+    console.log(URL);
+    let {data} = await axios.get(URL)
+    return data;
+}

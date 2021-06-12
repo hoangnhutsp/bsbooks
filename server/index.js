@@ -18,12 +18,12 @@ import evaluateRouters from './routes/evaluate.js'
 import categoryRoutes from './routes/category.js'
 import invoiceRoutes from './routes/invoice.js'
 import adminRouter from './routes/admin.js'
+import notificationRouter from './routes/notification.js'
 
 import recentlyViewd from './routes/recently_viewed.js'
 import uploadImageRoutes from './routes/upload_image.js'
 import addressRoutes from './routes/address.js'
 
-import {breadcrumb} from './controllers/other.js'
 const app = express();
 
 
@@ -39,15 +39,12 @@ app.use(cookieParser());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 const PORT = process.env.PORT || 5000;
 
-const CONNECTION_URL = process.env.URL_MONGODB;
+const CONNECTION_URL = process.env.URL_MONGODB_LOCAL;
 const dbOptions = {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useFindAndModify: false,
 }
-
-
-console.log(`MONGO URL: ${CONNECTION_URL}`);
 
 app.use(session({
     secret: 'some secrec',
@@ -60,7 +57,6 @@ app.use(session({
 }))
 
 app.use(sessionMiddleware);
-//app.use(refreshTokenMiddleware);
 
 app.use('/user', userRouters)
 app.use('/cart', cartRoutes)
@@ -71,8 +67,8 @@ app.use('/recently_viewd', recentlyViewd)
 app.use('/upload_image', uploadImageRoutes);
 app.use('/address', addressRoutes);
 app.use('/invoice', invoiceRoutes);
-app.use('/breadcrumb' , breadcrumb);
-app.use('/admin', adminRouter)
+app.use('/admin', adminRouter);
+app.use('/notification', notificationRouter);
 
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
@@ -82,6 +78,6 @@ mongoose.connect(CONNECTION_URL, dbOptions)
     })
     .catch((error) => {
         console.log(error.message)
-    });
+});
 
 

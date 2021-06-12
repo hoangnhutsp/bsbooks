@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import Invoice from '../models/invoice.js';
 
-import {valueStatusInvoice} from '../constant/invoice.js';
 const checkDataInvoice = (data) => {
     return true;
 }
@@ -20,26 +19,31 @@ export const createInvoice = async (req, res) => {
         const invoice = new Invoice(data);
 
         await invoice.save();
-        res.status(200).json({status: 1, invoice});
+        res.status(200).json({status: 1, _id: invoice._id});
     } catch (error) {
         res.status(200).json({ status: 0, message: error.message })
     }
 }
 
 export const updateInvoice = async (req, res) => {
+    console.log('UPDATE INVOICE');
     try {
         let _id = req.params.id;
         const invoice =await Invoice.findOne({_id})
 
         if (invoice) {
             let {status_invoice, update} = invoice;
+
+            if (status_invoice === 2){
+                return res.status(200).json({status: 1, invoice})
+            }
             status_invoice++;
             update.push(new Date);
 
             const invoice_new = await Invoice.findByIdAndUpdate({_id}, {status_invoice, update}, {new : true})
-            res.status(200).json({status: 1, invoice_new});
+            res.status(200).json({status: 1, invoice: invoice_new});
         } else {
-            res.status(200).json({status: 1, message: `_id not found`});
+            res.status(200).json({status: 0, message: `_id not found`});
         }
 
     } catch (error) {
@@ -66,4 +70,26 @@ export const getInvoiceByID = async (req, res) => {
         res.status(200).json({status: 0, message: error.message});
     }
 
+}
+
+
+export const getAllInvoice = async (req, res) => {
+    try {
+        let invoice =await Invoice.find({})
+        res.status(200).json({status: 1, invoice});
+    } catch (error) {
+        res.status(200).json({status: 0, message: error.message});
+    }
+
+}
+
+export const cancelInvoice = async (req, res) => {
+    console.log('CANCEL INVOICE');
+    try {
+        let _id = req.params.id;
+        const invoice =await Invoice.findOneAndUpdate({_id}, {status_invoice: 4}, {new: true})
+        res.status(200).json({status: 1, invoice});
+    } catch (error) {
+        res.status(200).json({status: 0, message: error.message});
+    }
 }

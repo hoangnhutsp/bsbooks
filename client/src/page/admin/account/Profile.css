@@ -92,7 +92,7 @@
 input#upload-image{
     display: none;
 }
-input#upload-image + label{
+.avatar-user-profile + label{
     background-color: #4d8cf2;
     margin: 1rem;
     padding: 0.6rem;
@@ -100,25 +100,21 @@ input#upload-image + label{
     border: 0.1rem solid #9ec3ff;
 }
 
-input#upload-image + label:hover{
+.avatar-user-profile + label:hover{
     background-color: #3b73ce;
     border-color: #729fe7;  
     cursor: pointer;
 }
 
-
-
-button#submit-profile{
+#submit-profile-button-save{
     width: 80px;
-    background-color: #4d8cf2;
+    background-color: #498374;
     margin: 16px;
     padding: 10px;
-    color: #FFFF;   
-    border: 2px solid #9ec3ff;
+    color: #FFFF;
 }
 
-button#submit-profile:hover{
-    background-color: #3b73ce;
-    border-color: #729fe7;  
+#submit-profile-button-save:hover{
+    background-color: #559483; 
     cursor: pointer;
 }

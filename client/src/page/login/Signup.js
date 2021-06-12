@@ -15,6 +15,7 @@ import {
 
 import { useDispatch } from 'react-redux'
 import {
+    Link,
     useHistory,
 } from 'react-router-dom'
 import {
@@ -39,7 +40,6 @@ function Register() {
     })
 
     const [error, setError] = useState({
-        error: '',
         phone: '',
         name: '',
         email: '',
@@ -49,12 +49,16 @@ function Register() {
         password: '',
         confirmPassWord: '',
         birthday: '',
-        test: '',
     })
 
-    const setErrRes = err => {
+    const [errResponse, setErrResponse] = useState('')
+
+
+    const setErrorResponse = err => {
+        console.log('ERROR');
+        console.log(err);
         if (err.status) history.push('/'); else
-            setError({ ...error, error: err.message });
+        setErrResponse(err.message);
     }
 
     const submitHandler = (e) => {
@@ -65,34 +69,55 @@ function Register() {
             wr = wr || error[x] !== ''
         }
         if (!wr) {
-            dispatch(userSignup(registerData, setErrRes))
+            dispatch(userSignup(registerData, setErrorResponse))
         }
     }
     const responseFacebook = (res) => {
         let accessToken = res.accessToken;
         let userID = res.userID;
-        dispatch(userLoginFacebook({ accessToken, userID }, setErrRes))
+        dispatch(userLoginFacebook({ accessToken, userID }, setErrorResponse))
     }
     const responseSuccessGoogle = (res) => {
         let tokenId = res.tokenId
-        dispatch(userLoginGoogle(tokenId, setErrRes))
+        dispatch(userLoginGoogle(tokenId, setErrorResponse))
     }
 
     const responseErrorGoogle = (res) => {
-        console.log(res);
+        setErrResponse({message: res });
     }
-
-
 
     return (
         <div className='containner-register'>
             <div className='login-signup-register'>
                 <div className='col-sm-6-register'>
                     <div className='article-register'>
-                        <h3 className='text-center-register'>ĐĂNG KÍ</h3>
+                        <h3 className='text-center-register'>ĐĂNG KÝ</h3>
                         {(error.error === '') ? null :
                             <div>{error.error}</div>
                         }
+
+                        <div className='class-include-facebook-google-login'>
+                            <div className='login-google'>
+                                <FacebookLogin
+                                    appId="340793020896447"
+                                    autoLoad={false}
+                                    callback={responseFacebook}
+                                    cssClass='facebook-login-button'
+                                    icon="fa-facebook"
+                                    textButton="FACEBOOK" />
+                            </div>
+                            <div className='login-google'>
+                                <GoogleLogin
+                                    className='google-login-button'
+                                    clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
+                                    buttonText="GOOGLE"
+                                    onSuccess={responseSuccessGoogle}
+                                    onFailure={responseErrorGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                    icon={false}
+                                />
+                            </div>
+                        </div>
                         <form className='signup-register' onSubmit={submitHandler}>
                             <div className='form-group-register'>
                                 <input
@@ -200,7 +225,7 @@ function Register() {
                                         setError({ ...error, password: err })
                                         if (registerData.confirmPassWord !== '') {
                                             err = validateConfPassWord(registerData.confirmPassWord, e.target.value);
-                                            setError({ ...error, password: err })
+                                            setError({ ...error, confirmPassWord: err })
                                         }
                                     }}>
 
@@ -222,7 +247,7 @@ function Register() {
 
                                     onBlur={(e) => {
                                         let err = validateConfPassWord(e.target.value, registerData.password);
-                                        if (err !== '') setError({ ...error, confirmPassWord: err }); else {
+                                        if (err === '') setError({ ...error, confirmPassWord: err }); else {
                                             setError({ ...error, confirmPassWord: '' })
                                             setError({ ...error, password: '' })
 
@@ -236,56 +261,44 @@ function Register() {
 
                             <div className='form-group-register'>
                                 <input name='gioitinh'
+                                    className='gender-user'
                                     type='radio' value='male'
                                     checked={registerData.gender === 'male'}
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nam
-                            <input name='gioitinh'
+                                <input name='gioitinh'
+                                    className='gender-user'
                                     type='radio'
                                     value='female'
                                     checked={registerData.gender === 'female'}
                                     onChange={(e) => {
                                         setRegisterData({ ...registerData, gender: e.target.value })
                                     }} />Nữ
-                        </div>
+                            </div>
                             {(error.gender == '') ? null :
                                 <div className='error-text-register'>{error.gender}</div>
+                            }
+                             {(errResponse === '') ? null :
+                                <div className='error-text-register'>{errResponse}</div>
                             }
 
                             <div className='form-group-register'>
                                 <button type='submit' className='button-submit-sigup'>ĐĂNG KÝ</button>
-                                <div className='login-facebook'>
-                                    <FacebookLogin
-                                        appId="340793020896447"
-                                        autoLoad={false}
-                                        callback={responseFacebook}
-                                        size="medium "
-                                        icon="fa-facebook"
-                                        textButton="Đăng ký với FaceBoook" />
-                                </div>
-                                <div className='sigup-google'>
-                                    <GoogleLogin
-                                        className='login-google'
-                                        clientId="551410903005-ev094ec2i9f5j9p2sqmaqv65ic81eg68.apps.googleusercontent.com"
-                                        buttonText="ĐĂNG KÝ VỚI GOOGLE"
-                                        cssClass="btnGoogle"
-
-                                        onSuccess={responseSuccessGoogle}
-                                        onFailure={responseErrorGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                    />
-                                </div>
                             </div>
                         </form>
 
-
-
+                        <div className='class-have-an-account'>
+                            <div>Bạn đã có tài khoản?</div>
+                            <Link to='/login'>
+                                <div className='go-to-login-form'>Đăng nhập </div>
+                            </Link>
+                        </div>
                     </div>
-                </div>
 
             </div>
         </div>
+    </div>
     )
 };
 export default Register;
