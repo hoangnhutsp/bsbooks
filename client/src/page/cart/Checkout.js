@@ -61,7 +61,7 @@ function Checkout() {
     }
   }, [payment, infoUser])
 
-  const btnCheckout = () => {
+  const btnCheckout = async () => {
     console.log('btn checkout');
 
     let invoice = {}
@@ -70,12 +70,21 @@ function Checkout() {
     invoice.email = infoUser.email;
     invoice.phone = infoUser.phone;
     invoice.total = total;
+
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
     invoice.items = cart.items.filter(item => item.checked == 1)
     let newItems = cart.items.filter(item => item.checked == 0)
+
     dispatch(updateCart({items: newItems, count: newItems.length}));
-    apiInvoice.createInvoice(invoice);
+    
+    console.log('invoice - checkout');
+    await apiInvoice.createInvoice(invoice)
+    .then(res => res.data)
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => console.log(err))
   }
  
   return (isLogged && infoUser && checkout) ? (

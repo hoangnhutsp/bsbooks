@@ -15,7 +15,7 @@ const API_KEY_MAIL_GUN = process.env.API_KEY_MAIL_GUN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const RESET_PASSWORD = process.env.RESET_PASSWORD;
-const SECRET = process.env.RESET_PASSWORD;
+const SECRET = process.env.SECRET;
 
 
 const mg = mailgun({ apiKey: API_KEY_MAIL_GUN, domain: DOMAIN_MAIL_GUN });
