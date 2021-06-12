@@ -30,6 +30,13 @@
    
 }
 
+.row{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
 .col-25{
     -ms-flex: 25%;
     flex: 25%;
@@ -79,11 +86,14 @@ span.price{
 
 @media (max-with:800px)
 {
-    .row{
+    .CheckoutContainer-row{
         flex-direction: column-reverse;
     }
     .col-25{
         margin-top: 20px;
+    }
+    .row{
+        flex-direction: column-reverse;
     }
 }
 /*.btn-checkout {
