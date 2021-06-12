@@ -42,7 +42,7 @@
         "description" : "Them dia chia"
     },
     {
-        "name" : "GET_ADDRESS_ID_USER",
+        "name" : "GET_ADDRESS_BY_USERID",
         "path": "/address/user",
         "method": "get",
         "description" : "Xoa san pham"
@@ -60,9 +60,106 @@
         "description" : "Xoa san pham"
     },
     {
-        "name" : "DELETE_ADDRESS",
+        "name" : "DELETE_ADDRESS_BY_ID",
         "path": "/address/delete",
         "method": "delete",
         "description" : "Xoa san pham"
-    }
+    },
+    {
+        "name" : "GET_ADDRESS_BY_ID",
+        "path": "/address",
+        "method": "get",
+        "description" : "Xoa san pham"
+    },
+    
+    
+    {
+        "name" : "UPDATE_CART",
+        "path": "/cart/update",
+        "method": "post",
+        "description" : "Cap nhat gio hang"
+    },
+    {
+        "name" : "ADD_TO_CART",
+        "path": "/cart",
+        "method": "post",
+        "description" : "Them san pham vao gio hang"
+    },
+    {
+        "name" : "GET_ADDRESS",
+        "path": "/cart",
+        "method": "get",
+        "description" : "Lay san pham trong gio hang"
+    },
+    
+    
+    {
+        "name" : "ADD_EVALUATE",
+        "path": "/evaluate",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "ADD_EVALUATE",
+        "path": "/evaluate",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    
+    
+    {
+        "name" : "CREATE_INVOICE",
+        "path": "/invoice/create",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "UPDATE_INVOICE",
+        "path": "/invoice/update",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "CANCEL_INVOICE",
+        "path": "/invoice/cancel",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "GET_ALL_INVOICE",
+        "path": "/invoice/getall",
+        "method": "get",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "GET_INVOICE_BY_ID",
+        "path": "/",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "GET_INVOICE_BY_USER",
+        "path": "/invoice/create",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    
+    {
+        "name" : "ADD_NOTIFICATION",
+        "path": "/notification",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "GET_NOTIFICATION",
+        "path": "/notification",
+        "method": "get",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "UPDATE_NOTIFICATION",
+        "path": "/notification/status",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
 ]
