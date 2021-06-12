@@ -261,6 +261,7 @@ body .bizweb-product-reviews-form fieldset .bpr-button-submit {
     background-color: #498374;
     border-color: transparent;
     border: 1px solid transparent;
+    cursor: pointer;
 }
 
 .bizweb-product-reviews-form .bpr-button-submit {
@@ -270,6 +271,10 @@ body .bizweb-product-reviews-form fieldset .bpr-button-submit {
     display: block;
     margin: 0 auto;
     width: auto;
+}
+
+.bizweb-product-reviews-form .bpr-button-submit:hover{
+    background-color: #559483;
 }
 
 .bpr-form-contact input,

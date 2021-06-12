@@ -21,6 +21,10 @@
     background: #498374;
 }
 
+.menu-button:hover{
+    background: #559483;
+}
+
 .hamberger-toggle {
     top:23px
 }
@@ -74,7 +78,7 @@
     float: left;
 }
 
-.categories-view .item-all-category {
+.categories-view .item {
     background: #fff;
     margin: 0;
     position: relative;
@@ -83,11 +87,11 @@
 
 
 /* NOTES */
-.item-all-category:hover {
+.item:hover {
     background: #498374;
 }
 
-.item-all-category span {
+.item span {
     color: #000;
     padding-left: 15px;
 }
@@ -102,8 +106,12 @@
     color: #498374;
 }
 
+.item.hover {
+    background-color: #fff;
+}
 
-.item-all-category .arrow::after {
+
+.item .arrow::after {
     content: "\f105";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -113,7 +121,7 @@
 }
 
 
-.item-all-category:hover>  span ,.item-all-category:hover> .icon::before ,.item-all-category:hover> .arrow::after{
+.item:hover>  span ,.item:hover> .icon::before ,.item:hover> .arrow::after{
     color: #fff ;
 }
 

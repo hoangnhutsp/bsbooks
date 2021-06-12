@@ -29,6 +29,7 @@
 .control-unit-price,
 .control-product-remove{
     display: none;
+    cursor: pointer;
 }
 
 .control-controls-sm{
@@ -191,7 +192,6 @@
 .class-include-add-icon {
     width: 15%;
     display: flex;
-    padding: 2%;
     padding-bottom: 0   ;
     justify-content: right;
     align-items: center;
@@ -211,7 +211,13 @@
 }
 
 .class-text-form-product{
-    padding-left: 1%;
+    padding-left: 1rem;
     width: 100%;
     color: teal;
+}
+
+.pagination-row-flex-end{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
 }

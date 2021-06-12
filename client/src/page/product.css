@@ -7,7 +7,6 @@
 }
 
 .product  .price-view {
-    background-color: silver;
     width: 300px;
     height: 50px;
     display: flex;
@@ -17,11 +16,27 @@
     justify-items: center;
 }
 
+.price-view{
+    background-color: white;
+    border: 1.5px solid #b3e2d6;
+    border-radius: 25px;
+}
+
+
+
+.price-view:hover{
+    background-color: #f3f3f3;
+    border: 1.5px solid #b3e2d6;
+    border-radius: 25px;
+}
+
 .product .child {
     padding: 0 20px;
 }
 
-
+.product-detail-name-col-6-so-luong{
+    font-weight: bold;
+}
 
 .product .container {
     display: flex;
@@ -45,7 +60,7 @@
 .product .square {
     width: 30px;
     height: 30px;
-    border: 1px solid rgb(236, 236, 236);
+    border: 1px solid #b3e2d6;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -70,7 +85,16 @@
     margin-top: 10px;
     width: 200px;
     height: 40px;
-    background-color: rgb(243, 79, 79)
+    background-color: #498374
+}
+
+.product .addToCard:hover {
+    background-color: #559483
+}
+
+.product-detail-name-col-6 p{
+    font-size: 1.7rem;
+    font-weight: 600;
 }
 
 .product .center {
@@ -85,7 +109,9 @@
     color: white
 }
 
-
+.product-detail-name-col-6-span{
+    font-weight: bold;
+}
 
 
 .col-12 {
@@ -113,4 +139,10 @@
 .product .readmore {
     margin-bottom: 100px;
     color: blue;
+}
+
+.sml-text a{
+    text-decoration: none;
+    color: #498374;
+    font-weight: bold;
 }

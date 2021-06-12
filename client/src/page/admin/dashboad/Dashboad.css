@@ -1,0 +1,221 @@
+/*01*/
+.Dashboard-01{
+    display:flex;
+    flex-wrap:wrap;
+    margin-right:15px;
+    margin-left:15px;
+    justify-content: space-between;
+}
+
+.col-md-6 .col-xl-4 {
+    position:relative;
+    width:100%;
+    padding-right:15px;
+    padding-left:15px
+}
+.mb-3{
+    margin-bottom:30px !important
+}
+.card {
+    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    border-width: 0;
+    transition: all .2s;
+    border-radius: 5px;
+}
+
+.widget-content
+{
+    padding:1rem;
+    flex-direction:row;
+    align-items:center
+}
+.widget-content .widget-content-wrapper{
+    display:flex;
+    flex:1;
+    position:relative;
+    align-items:center
+}.widget-content .widget-content-left .widget-heading{
+    opacity:.8;
+    font-weight:bold
+}
+
+.widget-content .widget-content-right
+{
+    margin-left:auto
+}
+.widget-content .widget-numbers span
+{
+    font-weight:bold;
+    font-size:1.5rem;
+    display:block;
+    padding-top: 1.2rem;
+}
+.widget-content .widget-content-outer
+{
+    display:flex;
+    flex:1;
+    flex-direction:column
+}
+.widget-content .widget-progress-wrapper
+{
+    margin-top:1rem
+}
+.widget-content .widget-progress-wrapper .progress-sub-label
+{
+    margin-top:.33333rem;
+    opacity:.5;
+    display:flex;
+    align-content:center;
+    align-items:center
+}
+.widget-content .widget-progress-wrapper .progress-sub-label .sub-label-right
+{
+    margin-left:auto
+}
+.widget-content .widget-content-right.widget-content-actions
+{
+    visibility:hidden;
+    opacity:0;
+    transition:opacity .2s
+}
+
+
+.text-white, .text-white span{
+    color:#fff ;
+    text-decoration:none;
+}
+.widget-heading{
+    white-space:nowrap;
+    color:rgba(255,255,255,0.8);
+}
+.widget-heading{
+    opacity:.9;
+    font-size: 1rem;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.das-icon{
+    padding: 4rem 0rem 0rem 3rem;
+    color: #fff;
+}
+.bg-midnight-bloom{
+    background-image:
+    linear-gradient(
+        -20deg, 
+        #4087b3 10%, 
+        #736a96 100%
+        ) !important
+}
+
+.bg-arielle-smile{
+    background-image:
+    radial-gradient(
+        circle 248px at center, 
+        #16d9e3 3%, 
+        #66cbe4 47%, 
+        #5ab4f5 100%
+        ) !important
+}
+
+.bg-grow-early{
+    background-image:
+    linear-gradient(
+        to top, 
+        #d8acbd 6%, 
+        #cc657b 100%
+        ) !important
+}
+.bg-grow-anna{
+    background-image:
+    linear-gradient(
+        to top, 
+        #c05f94 6%, 
+        #4a5592 100%
+        ) !important
+}
+
+/*02*/
+.Dashboard-02, .Dashboard-03, .Dashboard-04{
+    margin: 1.5rem 0;
+  
+}
+.Das-Header{
+    border-radius: 5px;
+    padding: 0.8rem;
+    font-size: 1.5rem;
+    color: #fff;
+}
+.Das-Body-1{
+    padding: 1rem 0rem ;  
+    margin-right:15px;
+    margin-left:15px;
+    
+}
+.Das-Body-2{
+    padding: 1rem 5rem ;  
+    margin-right:15px;
+    margin-left:15px;
+    
+}
+.Das-Body-3{
+    padding: 1rem 8rem ;  
+    margin-right:15px;
+    margin-left:15px;
+    
+}
+.Das-Body-1-Part01{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+.Das-Body-1-Part02{
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+.widget-content-left-1{
+ padding-left: 2rem;
+}
+.widget-content-right-1{
+padding-left: 2rem;
+}
+.widget-heading-black-1{
+    color: #524197;
+    font-weight: 1000;
+    font-size: 1.1rem;
+}
+.widget-heading-2{
+    white-space:nowrap;
+    color:rgba(56, 56, 56, 0.8);
+    opacity:.9;
+    font-size: 1rem;
+    font-weight:bold
+}
+.widget-content .widget-numbers-2 span
+{
+    font-weight:bold;
+    font-size:1.5rem;
+    display:block;
+    padding-top: 1.2rem;
+}
+.Product-Border{
+    border: 3px solid #736a96;
+}
+/*invoice border*/
+.invoice-border{
+    border: 3px solid #cc657b;
+}
+
+.widget-heading-black{
+    opacity:.9;
+    font-size: 1rem;
+    font-weight:bold;
+    white-space:nowrap;
+    color:rgba(75, 75, 75, 0.8);
+}
+.text-black span{
+    color: #000000;
+}
+.das-icon-black{
+    color: #000000;
+}

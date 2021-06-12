@@ -29,9 +29,9 @@
     text-align: center;
 }
 .PageNotFoundContainer-Container-btn {
-    background: rgb(48, 158, 134);
+    background: #498374;
     padding: 20px;
     text-decoration: none;
     color: #fff;
 }
-.PageNotFoundContainer-Container-btn:hover {background: rgb(89, 196, 181);}
+.PageNotFoundContainer-Container-btn:hover {background: #559483;}

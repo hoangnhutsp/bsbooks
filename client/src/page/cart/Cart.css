@@ -41,7 +41,7 @@
     background-repeat: no-repeat;
 }
 
-.cart-quantity-md, 
+.cart-quantity-md,
 .cart-unit-price,
 .cart-product-join,
 .cart-product-remove{
@@ -67,9 +67,7 @@
 }
 
 .cart-quantity-controls-sm button,
-.cart-quantity-controls-sm input,
 .cart-quantity-controls button,
-.cart-quantity-controls input,
 .remove button,
 .cart-product-join input,
 .cart-product-remove button{
@@ -84,6 +82,21 @@
     margin-left: .3rem;
 }
 
+
+.cart-quantity-controls-sm input,
+.cart-quantity-controls input{
+    height: 25px;
+    width: 40px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #505050;
+    margin-left: .5rem;
+    padding-left: .2rem;
+}
+
 .cart-quantity-controls-sm button,
 .cart-quantity-controls button,
 .remove button,
@@ -95,21 +108,23 @@
 }
 
 .cart-product-name{
+    width: 90%;
     font-weight: bold;
     color: #505050;
     margin-bottom: .3rem;
 }
 
 .cart-price-sm{
-    color: rgb(252, 52, 52);
+    color: #333;
     font-weight: bold;
     margin-bottom: .3rem;
 }
 
-.cart-product-info small{
+/*.cart-product-infor small{
+    color: rgb(252, 52, 52);
     font-weight: bold;
-    color: #333;
-}
+    margin-bottom: .3rem;
+}*/
 
 /*bảng tổng kết*/
 .cart-total-holder{
@@ -137,7 +152,6 @@
     padding: .7rem;
     margin-bottom: .5rem;
     text-decoration: none;
-    background: rgb(245, 84, 84);
     color: #333;
 }
 .cart-action-button button {
@@ -147,14 +161,23 @@
     margin-bottom: .5rem;
     text-decoration: none;
     border: none;
-    background: rgb(245, 84, 84);
+    background: #498374;
     color: #fff;
+    cursor: pointer;
+}
+
+.cart-action-button button:hover {
+    background: #559483;
 }
 
 .cart-action-button a:first-child{
     order: 1;
     background: #333;
     color: #fff;
+}
+
+.cart-action-button a:first-child:hover{
+    background: rgb(75, 75, 75);
 }
 
 .cart-header{
@@ -245,14 +268,32 @@
         margin-right: 1rem;
     }
 
-    .cart-action-button a{
+    /*.cart-action-button a{
         padding-left: 3rem;
         padding-right: 3rem;
-    }
+    }*/
 
     .cart-action-button a:first-child{
         margin-right: 1.2rem;
         order: 0;
     }
     
+}
+
+
+.cart-is-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+.cart-is-empty .cart-is-empty-icon{
+    height: 6rem;
+    margin: 2rem;
+    overflow: auto;
+}
+.cart-is-empty .cart-is-empty-content{
+    font-weight: 600;
+    height: 20px;
 }
