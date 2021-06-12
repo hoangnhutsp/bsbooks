@@ -18,7 +18,9 @@ function CommentProduct({data, idProduct}) {
 
     useEffect(() => {
         setIsLogged(userStore.isLogged)
-        setIdUser(userStore.infoUser._id);
+        if (isLogged){
+            setIdUser(userStore.infoUser._id);
+        }
     }, [userStore])
 
 

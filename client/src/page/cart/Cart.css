@@ -264,3 +264,21 @@
     }
     
 }
+
+
+.cart-is-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+.cart-is-empty .cart-is-empty-icon{
+    height: 6rem;
+    margin: 2rem;
+    overflow: auto;
+}
+.cart-is-empty .cart-is-empty-content{
+    font-weight: 600;
+    height: 20px;
+}

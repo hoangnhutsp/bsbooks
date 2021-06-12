@@ -19,46 +19,45 @@ import {
 
 function Login() {
     let history = useHistory();
-    const [currentUser, setCurrentUser] = useState({})
-
     const dispatch = useDispatch();
-
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
     })
 
     const [error, setError] = useState({
-        error: '',
         email: '',
         password: '',
     })
 
+    const [errResponse, setErrResponse] = useState('')
 
-    const setErrRes = err => {
-        console.log(err);
+
+    const setErrorResponse = err => {
         if (err.status) history.push('/'); else
-            setError({ ...error, error: err.message });
+            setErrResponse(err.message);
     }
+
     const submitHandler = (e) => {
-        let err = ''
         e.preventDefault();
-        dispatch(userLogin(loginData, setErrRes))
+        setErrorResponse('');
+        if (error.email==='' && error.password==='')
+            dispatch(userLogin(loginData, setErrorResponse))
     }
 
     const responseFacebook = (res) => {
         let accessToken = res.accessToken;
         let userID = res.userID;
-        dispatch(userLoginFacebook({ accessToken, userID }, setErrRes))
+        dispatch(userLoginFacebook({ accessToken, userID }, setErrorResponse))
     }
 
     const responseSuccessGoogle = (res) => {
         let tokenId = res.tokenId
-        dispatch(userLoginGoogle(tokenId, setErrRes))
+        dispatch(userLoginGoogle(tokenId, setErrorResponse))
     }
 
     const responseErrorGoogle = (res) => {
-        console.log(res);
+        setErrorResponse({status: 0, message: 'Dang nhap that bai!!!'})
     }
 
     return (
@@ -67,10 +66,6 @@ function Login() {
                 <div className='col-sm-6-register'>
                     <div className='article-register'>
                         <h3 className='text-center-register'>ĐĂNG NHẬP</h3>
-
-                        {(error.error === '') ? null :
-                            <div>{error.error}</div>
-                        }
 
                         <div className='class-include-facebook-google-login'>
                             <div className='login-google'>
@@ -137,13 +132,17 @@ function Login() {
                             {(error.password == '') ? null :
                                 <div className='error-text-register'>{error.password}</div>
                             }
+                            {(errResponse === '') ? null :
+                                <div className="error-text-register">{errResponse}</div>
+                            }
+
 
                             <div className='form-group-register'>
                                 <button type='submit' className='button-submit-register'>ĐĂNG NHẬP</button>
                             </div>
                         </form>
                         <div className='class-for-go-to-forgot-or-signup'>
-                            
+
                             <div className='class-go-to-register-because-not-have-account'>
                                 <div>Bạn chưa có tài khoản?&nbsp;&nbsp; </div>
                                 <Link to='/signup'>
@@ -152,10 +151,10 @@ function Login() {
                             </div>
                         </div>
                         <div className='class-go-to-fogot-password'>
-                                <Link to='/forgot-password'>
-                                    <div>Quên mật khẩu</div>
-                                </Link>
-                            </div>
+                            <Link to='/forgot-password'>
+                                <div>Quên mật khẩu</div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

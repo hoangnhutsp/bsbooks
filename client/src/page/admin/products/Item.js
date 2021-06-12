@@ -4,11 +4,13 @@ import iconEdit from './icon/edit.png'
 import iconView from './icon/view.png'
 import iconDelete from './icon/delete.png'
 import { Link } from 'react-router-dom'
-
-
+import * as apiProduct from '../../../api/product';
 const Item = (item) => {
-    const [dataProductDelete, setDataProductDelete] = useState('');
 
+    const deleteProduct =async (_id) => {
+        await apiProduct.deleteProduct(_id);
+        window.location.reload();
+    }
     return (
         <div className="control-item">
             <div className='control-form'>
@@ -28,7 +30,7 @@ const Item = (item) => {
                         <img className="contro-edit-product" src={iconEdit}></img>
                     </Link>
 
-                    <button className='control-product-remove' onClick={() => setDataProductDelete(item.item._id)}>
+                    <button className='control-product-remove' onClick={(e) => deleteProduct(item.item._id)}>
                         <img className="control-delete-product" src={iconDelete}></img>
                     </button>
                 </div>
