@@ -118,12 +118,12 @@ function Billstatus() {
               }
             </ul>}
           </div>
-          {/* <div className="cart-total-holder">
+          <div className="cart-total-holder">
             <div className="cart-action-button">
-              <a href="/">Mua Lại</a>
-              <button className="btn-main">Liên Hệ Shop</button>
+              {/* <a href="/>Mua Lại</a> */}
+              {/* <button className="btn-main">Da Nhan Hang</button> */}
             </div>
-          </div> */}
+          </div>
         </div>
 
         <div className="ifo-user-and-time-freight-forwarding">
