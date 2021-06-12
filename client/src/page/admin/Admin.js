@@ -32,8 +32,8 @@ function Admin() {
         }
     }, [user])
     return (
-        <div className="container-user">
-        {isAdmin?
+        
+        
         <div className="User">
             <div className="user-usersidebar">
                 <UserSidebar />
@@ -77,9 +77,9 @@ function Admin() {
                     
                 </Switch>
             </div>
-        </div>:<NotAllowed />}
-
         </div>
+
+        
 
     )
 }

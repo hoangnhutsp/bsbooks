@@ -1,0 +1,50 @@
+.Notification-user-container{
+    display: flex;
+    padding: 1.25rem;
+    cursor: pointer;
+    user-select: none;
+}
+.Notification-user-img{
+    display: flex;
+    margin-right: 1.25rem;
+    width: 5rem;
+    height: 5rem;
+    align-items: center;
+}
+.Noti-user-img{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.Notification-user-text{
+    color: rgba(0,0,0,.54);
+    word-wrap: break-word;
+}
+.Notification-user-text-title{
+    color: rgba(56, 119, 80, 0.8);
+    font-size: 1rem;
+    font-weight: 1000;
+    margin-bottom: .625rem;
+    margin-top: 0;
+}
+.Notification-user-text-description{
+    font-size: .875rem;
+    margin-bottom: .3125rem;
+}
+.Notification-user-delete{
+    flex-shrink: 0;
+    margin-left: auto;
+}
+.Notification-user-delete-button{
+    border: 1px solid rgba(0,0,0,.09);
+    color: rgba(0,0,0,.8);
+    cursor: pointer;
+    height: 1.875rem;
+    margin-left: auto;
+    padding: 0 .4375rem;
+    background-color: #fff;
+    font-size: .75rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    border-radius: 2px;
+}

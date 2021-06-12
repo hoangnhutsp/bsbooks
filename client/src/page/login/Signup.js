@@ -91,7 +91,7 @@ function Register() {
             <div className='login-signup-register'>
                 <div className='col-sm-6-register'>
                     <div className='article-register'>
-                        <h3 className='text-center-register'>ĐĂNG KÍ</h3>
+                        <h3 className='text-center-register'>ĐĂNG KÝ</h3>
                         {(error.error === '') ? null :
                             <div>{error.error}</div>
                         }

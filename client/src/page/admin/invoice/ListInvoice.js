@@ -5,16 +5,7 @@ import iconTransport from './icon/transport.png'
 
 import './ListInvoice.css'
 
-
-
-
 export default function ListInvoice() {
-    // const [allInvoice, setAllInvoice] = useState([])
-    // useEffect(async () => {
-    //     const data = await getInvoiceLists('')
-    //     console.log(data['Invoice']);
-    //     setAllInvoice(data.Invoice)
-    // }, [])
     const Items = [
         {
             _id: 12,
@@ -55,53 +46,6 @@ export default function ListInvoice() {
     ]
     return (
         <div>
-
-            <div className="ListInvoice-header-frist">
-                TỔNG QUAN
-            </div>
-            <div className="ListInvoice-container">
-                <div className="ListInvoice">
-                    <div className="Invoice-row-1">
-                        <div className="Invoice-row-1-col-1">
-                            <p className="label-special">TỔNG SỐ ĐƠN HÀNG</p>
-                            <p className="number-special">8</p>
-                        </div>
-                        <div className="Invoice-row-1-col-2">
-                            <p className="label-special">TỔNG THU</p>
-                            <p className="number-special">10.000.000 VNĐ</p>
-                        </div>
-                    </div>
-
-                    <div className="Invoice-row-2">
-                        <div className="Invoice-row-2-col-1">
-                            <div className="label-special label-icon">
-                                <p className="label-special">CHỜ XÁC NHẬN</p>
-                                <span className="icon-compete-invoice">
-                                    <img className="icon-check-invoice" src={iconCheck}></img>
-                                </span>
-                            </div>
-                            <p className="number-special">80</p>
-                        </div>
-                        <div className="Invoice-row-2-col-2">
-                            <div className="label-special label-icon">
-                                <p className="label-special">ĐANG GIAO</p>
-                                <span className="icon-compete-invoice">
-                                    <img className="icon-transport-invoice" src={iconTransport}></img>
-                                </span>
-                            </div>
-                            <p className="number-special">10</p>
-                        </div>
-                        <div className="Invoice-row-2-col-3">
-                            <div className="label-special label-icon">
-                                <p className="label-special">HOÀN THÀNH</p>
-                                <span className="icon-compete-invoice">
-                                    <img className="icon-compete-invoice" src={iconcompeteinvoice}></img>
-                                </span>
-                            </div>
-                            <p className="number-special">90</p>
-                        </div>
-                    </div>
-                </div>
                 <div className="ListInvoice-header-frist">
                     QUẢN LÝ ĐƠN HÀNG
             </div>
@@ -126,12 +70,7 @@ export default function ListInvoice() {
                                         <div className="Invoice-user-name">Le van luiuiu</div>
                                         <div className="Invoice-totalmoney">{item.total_amount}</div>
                                         <div className="Invoice-status">
-                                            <select className="Invoice-status-select">
-                                                <option className="Invoice-status-option">Chờ xác nhận</option>
-                                                <option className="Invoice-status-option">Đang giao</option>
-                                                <option className="Invoice-status-option">Đã giao</option>
-                                                <option className="Invoice-status-option">Đã hủy</option>
-                                            </select>
+                                            {item.status}
                                         </div>
                                         <div className="Invoice-cancel">
                                             X
@@ -146,7 +85,7 @@ export default function ListInvoice() {
                 <div className="ListInvoice-detail" >
                 </div>
             </div>
-        </div>
+       
     )
 
 }
