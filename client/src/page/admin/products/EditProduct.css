@@ -89,13 +89,13 @@
 
 .button-update-product{
     width: 55%;
-    background: #f85656;
+    background: #498374;
     border-radius: 0;
-    border: 2px solid #dd6868;
+    border: 2px solid #498374;
     font-family: Helvetica,sans-serif;
     font-weight: 600;
     -webkit-font-smoothing: antialiased;
-    color: rgb(255, 254, 254);
+    color: #fff;
     cursor: pointer;
     display: inline-block;
     font-size: calc(.27548vw + 12.71074px);

@@ -17,11 +17,11 @@
     position: relative;
 }
 .Notification-user-text{
-    color: rgba(0,0,0,.54);
+    color:#000;
     word-wrap: break-word;
 }
 .Notification-user-text-title{
-    color: rgba(56, 119, 80, 0.8);
+    color: #498374;
     font-size: 1rem;
     font-weight: 1000;
     margin-bottom: .625rem;
@@ -36,13 +36,13 @@
     margin-left: auto;
 }
 .Notification-user-delete-button{
-    border: 1px solid rgba(0,0,0,.09);
-    color: rgba(0,0,0,.8);
+    border: 1px solid #498374;
+    color: #fff;
     cursor: pointer;
     height: 1.875rem;
     margin-left: auto;
     padding: 0 .4375rem;
-    background-color: #fff;
+    background-color: #498374;
     font-size: .75rem;
     font-weight: 300;
     text-transform: capitalize;
