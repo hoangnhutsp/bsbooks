@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import Invoice from '../models/invoice.js';
 
-import {valueStatusInvoice} from '../constant/invoice.js';
 const checkDataInvoice = (data) => {
     return true;
 }

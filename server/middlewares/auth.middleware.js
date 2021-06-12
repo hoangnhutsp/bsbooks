@@ -1,26 +1,25 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/user.js';
+import dotenv from 'dotenv'
 
-const SECRET = 'bsbooksToken';
+dotenv.config();
+
+const SECRET = process.env.SECRET
 
 const Auth = async (req, res, next) => {
     try {
-
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.split(' ')[1];
-        if (!token) return res.status(400).json({message: 'token null'});
-
+        if (!token) return res.sendStatus(400);
         jwt.verify(token, SECRET, (err, user) => {
-            if (err) return res.status(200).json({message: 'wrong verify token'}); else
+            if (err) return res.status(401).json({message: 'WR: Verify Token'}); else
             {   
                 req.userID = user.id;
-                console.log('pass AUTH');
                 next();
-            }
+            } 
         })
         
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.sendStatus(400);
     }
 }
 export default Auth;
