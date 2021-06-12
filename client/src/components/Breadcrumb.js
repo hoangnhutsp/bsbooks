@@ -6,7 +6,7 @@ import {
 
 import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumb.css'
-import iconHomepage from './../icons/homepage.svg'
+import iconHomepage from './../icons/home_page.svg'
 function Breadcrumb( {breadcrumb, title}) {
 
     const [data, setData] = useState([]);
@@ -16,7 +16,7 @@ function Breadcrumb( {breadcrumb, title}) {
 
     return data?(
         <div className='breadcrumb-block'>
-            <img src={iconHomepage} className="img-size-icons-home"/>
+            {/* <img src={iconHomepage} className="img-size-icons-home"/> */}
 
             <ul className='mz-breadcrumb-block__list'>
                 {data.map((pa, idx) => {

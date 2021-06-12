@@ -8,7 +8,8 @@ import {
     updateProduct, 
     searchProduct, 
     suggestionProduct,
-    getProductByCategoryLimit
+    getProductByCategoryLimit,
+    deleteProductByID,
 } from '../controllers/product.js';
 
 import {
@@ -17,18 +18,14 @@ import {
 
 const router = express.Router();
 
-router.get('/search', searchProduct);
 router.get('/search/suggestion', suggestionProduct)
 router.get('/', getProduct);
 router.get('/category', getProductByCategoryLimit)
-
 router.get('/:id', updateRecentlyViewed, getProductByID);
-
-
 
 router.post('/update', updateProduct);
 router.post('/', createProduct)
-
+router.delete('/:_id', deleteProductByID)
 
 
 export default router;

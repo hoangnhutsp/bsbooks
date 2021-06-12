@@ -71,7 +71,8 @@ const initQuery = async (query) => {
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
-        id_category: { $in: category }
+        id_category: { $in: category },
+        deletedAt: null
     }
 
     if (q) {
@@ -178,31 +179,36 @@ export const getProductByID = async (req, res) => {
     try {
         let _id = req.params.id;
 
-        let product = await Product.findOne({ _id });
-        let id = product["id"];
-        let productDetail = await ProductDetail.findOne({ id });
+        let product = await Product.findOne({ _id, deletedAt: null });
 
-        console.log(product);
-        console.log(productDetail);
-        let data = {};
-        for (let x of attributeProductDetails) {
-            if (x in product) {
-                data[x] = product[x];
-            } else
-                if (x in productDetail) {
-                    data[x] = productDetail[x];
-                }
+        if (product !== null) {
+            let id = product["id"];
+            let productDetail = await ProductDetail.findOne({ id, deletedAt: null });
+    
+            console.log(product);
+            console.log(productDetail);
+            let data = {};
+            for (let x of attributeProductDetails) {
+                if (x in product) {
+                    data[x] = product[x];
+                } else
+                    if (x in productDetail) {
+                        data[x] = productDetail[x];
+                    }
+            }
+    
+            let x = {};
+            x.category = data.id_category;
+            let breadcrumb = await getBreadcrumbCategory(x);
+    
+            res.status(200).json({ data, breadcrumb });
+        
+        } else {
+            res.status(400).json({ message: 'Khong tim thay san pham' });
+
         }
-
-        let x = {};
-        x.category = data.id_category;
-        let breadcrumb = await getBreadcrumbCategory(x);
-
-        res.status(200).json({ data, breadcrumb });
-
-
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 }
 
@@ -314,7 +320,7 @@ export const suggestionProduct = async (req, res) => {
     try {
         let q = req.query.q;
         let regex = new RegExp(q, 'i');
-        const product = await Product.find({ idx_name: regex }, { name: 1 }).limit(SIZE_OF_SUGGESTION);
+        const product = await Product.find({ idx_name: regex, deletedAt: null }, { name: 1 }).limit(SIZE_OF_SUGGESTION);
         res.status(200).json({ size: product.length, product })
 
     } catch (error) {
@@ -328,7 +334,8 @@ export const getProductByCategoryLimit = async (req, res) => {
         let category = await getListCate(query);
        
         const queryString = {
-            id_category: { $in: category }
+            id_category: { $in: category },
+            deletedAt: null,
         }
         let product = await Product.find(queryString);
 
@@ -338,4 +345,17 @@ export const getProductByCategoryLimit = async (req, res) => {
     } catch (error) {
         res.status(400).json(error)
     }
+}
+
+export const deleteProductByID = async (req, res) => {
+    try {
+        let _id = req.params._id;
+
+        const {id} = await Product.findOneAndUpdate({_id}, {deletedAt: Date.now()}, { useFindAndModify: true });
+        await ProductDetail.findOneAndUpdate({id}, {deletedAt: Date.now()})
+        res.status(200).json({status: 1, message: 'remove success'});
+    } catch (error) {   
+        res.sendStatus(400);
+    }
+
 }

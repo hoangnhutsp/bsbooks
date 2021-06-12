@@ -39,7 +39,12 @@ export const updateCart = (cart) => {
 
 
 export const getCart = () => {
+
+    console.log('API GET CART');
+
     let token = localStorage.getItem('token');
+
+    console.log(token);
     if (token) {
         const URL = localhost + 'cart';
         return axios.get(
