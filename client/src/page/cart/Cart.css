@@ -41,7 +41,7 @@
     background-repeat: no-repeat;
 }
 
-.cart-quantity-md, 
+.cart-quantity-md,
 .cart-unit-price,
 .cart-product-join,
 .cart-product-remove{
@@ -67,9 +67,7 @@
 }
 
 .cart-quantity-controls-sm button,
-.cart-quantity-controls-sm input,
 .cart-quantity-controls button,
-.cart-quantity-controls input,
 .remove button,
 .cart-product-join input,
 .cart-product-remove button{
@@ -84,6 +82,21 @@
     margin-left: .3rem;
 }
 
+
+.cart-quantity-controls-sm input,
+.cart-quantity-controls input{
+    height: 25px;
+    width: 40px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #505050;
+    margin-left: .5rem;
+    padding-left: .2rem;
+}
+
 .cart-quantity-controls-sm button,
 .cart-quantity-controls button,
 .remove button,
@@ -95,21 +108,23 @@
 }
 
 .cart-product-name{
+    width: 90%;
     font-weight: bold;
     color: #505050;
     margin-bottom: .3rem;
 }
 
 .cart-price-sm{
-    color: rgb(252, 52, 52);
+    color: #333;
     font-weight: bold;
     margin-bottom: .3rem;
 }
 
-.cart-product-info small{
+/*.cart-product-infor small{
+    color: rgb(252, 52, 52);
     font-weight: bold;
-    color: #333;
-}
+    margin-bottom: .3rem;
+}*/
 
 /*bảng tổng kết*/
 .cart-total-holder{
