@@ -46,7 +46,7 @@ const AllCategories = () => {
                             {
                                 list[0].children.map(item => {
                                     return (
-                                        <div className="item-all-category" onMouseMove={() => { item.children && setDetails(item.children) }}>
+                                        <div className="item" onMouseMove={() => { item.children && setDetails(item.children) }}>
                                             <div className="icon" />
                                             <span className={item.children ? "arrow" : ""}>{item.name}</span>
                                         </div>

@@ -63,7 +63,7 @@ function Password() {
             <form onSubmit={submitHanler}>
                 <table id="table-change-password">
                     <tr className="form-group-text">
-                        <td>Mat khau hien tai</td>
+                        <td>Mật khẩu hiện tại</td>
                         <td>
                             <input
                                 type="password"

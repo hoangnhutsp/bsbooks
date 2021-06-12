@@ -148,7 +148,7 @@ function EditUser() {
                     </div>
 
                 </div>
-                <button type="submit" id="submit-profile">Lưu</button>
+                <button type="submit" id="submit-profile-button-save">Lưu</button>
             </form>
         </div>
 

@@ -61,7 +61,7 @@ function Checkout() {
     }
   }, [payment, infoUser])
 
-  const btnCheckout = () => {
+  const btnCheckout = async () => {
     console.log('btn checkout');
 
     let invoice = {}
@@ -70,12 +70,25 @@ function Checkout() {
     invoice.email = infoUser.email;
     invoice.phone = infoUser.phone;
     invoice.total = total;
+
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
     invoice.items = cart.items.filter(item => item.checked == 1)
     let newItems = cart.items.filter(item => item.checked == 0)
+
     dispatch(updateCart({items: newItems, count: newItems.length}));
-    apiInvoice.createInvoice(invoice);
+    
+    console.log('CREATE INVOICE --- ');
+    await apiInvoice.createInvoice(invoice)
+    .then(res => res.data)
+    .then(data => {
+      if (data.status) {
+        history.push(`/user/purchase/order/${data._id}`)
+      } else {
+        console.log(data);
+      }
+    })
+    .catch(err => console.log(err))
   }
  
   return (isLogged && infoUser && checkout) ? (
@@ -137,7 +150,8 @@ function Checkout() {
         </div>
       </div>
       <div className="container-btn-checkout">
-        <button className="btn-checkout" onClick={() => btnCheckout()}>Đặt hàng</button>
+        <a href="/">Quay lại giỏ hàng</a>
+        <button className="btn-checkout" onClick={() => btnCheckout()}>Thanh toán đơn hàng</button>
       </div>
     </div>
   ) : null;

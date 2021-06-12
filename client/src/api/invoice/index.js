@@ -34,9 +34,27 @@ export const createInvoice = (invoice) => {
 }
 
 export const updateInvoice = (id) => {
+    console.log('api - updateinvoice');
     let token = localStorage.getItem('token');
+    console.log('token');
+    console.log(token);
     const URL = localhost + `invoice/update/${id}`;
-    return axios.post(URL,{
+    return axios.post(URL,{},{
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }}
+    );
+}
+
+
+export const cancelInvoice = (id) => {
+    console.log('api - cancle');
+    let token = localStorage.getItem('token');
+    console.log('token');
+    console.log(token);
+    const URL = localhost + `invoice/cancel/${id}`;
+    return axios.post(URL,{},{
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -58,6 +76,18 @@ export const getInvoice = () => {
 export const getInvoiceByID = (id) => {
     let token = localStorage.getItem('token');
     const URL = localhost + `invoice/${id}`;
+    return axios.get(
+        URL, 
+        {headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        }},
+    )
+}
+
+export const getAllInvoice = () => {
+    let token = localStorage.getItem('token');
+    const URL = localhost + `invoice/getall`;
     return axios.get(
         URL, 
         {headers: {

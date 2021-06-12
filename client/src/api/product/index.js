@@ -48,3 +48,12 @@ export const getProductByCategoryLimit = ({ category, limit }) => {
     const URL = localhost + `product/category?category=${category}&limit=${limit}`;
     return axios.get(URL)
 }
+
+export const deleteProduct = (_id) => {
+    console.log('delete Product: ');
+    console.log(_id);
+
+    const URL = localhost + `product/${_id}`;
+
+    return axios.delete(URL)
+}

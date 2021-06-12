@@ -5,9 +5,11 @@ import {
 import { useState } from 'react';
 import './ItemPurchase.css'
 import {typeOfPurchase} from '../constain'
+import { useHistory } from 'react-router-dom';
 
 function ItemPurchase({ invoiceData }) {
 
+    const history = useHistory();
     const [invoice, setItem] = useState()
     useEffect(() => {
         setItem(invoiceData);
@@ -24,7 +26,7 @@ function ItemPurchase({ invoiceData }) {
         <div className="container-item-purchase">
          
                 <div className="status-item-purchase">
-                    {typeOfPurchase[invoice.status_invoice + 1]}
+                    {typeOfPurchase[invoice.status_invoice]}
                 </div>
             <br />
             {invoice.items.map((val, key) => {
@@ -48,6 +50,9 @@ function ItemPurchase({ invoiceData }) {
                 <p >Tổng số tiền:</p>
                 <p className="price">{invoice.total}</p>
             </div>
+            <button className="total-lable" onClick={() => history.push(`/user/purchase/order/${invoice._id}`)}>
+                <p >Xem chi tiet</p>
+            </button>
             <hr className="hr-break-purchase"/>
         </div>
     ):null;
