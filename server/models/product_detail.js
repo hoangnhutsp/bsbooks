@@ -14,7 +14,11 @@ const productDetailSchema = mongoose.Schema({
             ],
         }
     ],
-    images: [String]
+    images: [String],
+    deletedAt: {
+        type: Date,
+        default: null,
+    },
 });
 
 const ProductDetail = mongoose.model('product_detail', productDetailSchema);

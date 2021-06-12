@@ -1,0 +1,68 @@
+[
+    {
+        "name" : "UPDATE_PRODUCT",
+        "path": "/product/update",
+        "method": "post",
+        "description" : "Cap nhat san pham"
+    },
+    {
+        "name" : "CREATE_PRODUCT",
+        "path": "/product",
+        "method": "post",
+        "description" : "Tao moi san pham"
+    },
+    {
+        "name" : "DELETE_PRODUCT",
+        "path": "/product",
+        "method": "delete",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "GET_PROFILE",
+        "path": "/user/profile",
+        "method": "get",
+        "description" : "Lay thong tin tai khoan"
+    },
+    {
+        "name" : "UPDATE_ACCOUNT",
+        "path": "/user/update",
+        "method": "post",
+        "description" : "Cap nhat thong tin tai khoan"
+    },
+    {
+        "name" : "CHANGE_PASSWORD",
+        "path": "/user/change-password",
+        "method": "post",
+        "description" : "Thay doi mat khau"
+    },
+    {
+        "name" : "ADD_ADDRESS",
+        "path": "/address",
+        "method": "post",
+        "description" : "Them dia chia"
+    },
+    {
+        "name" : "GET_ADDRESS_ID_USER",
+        "path": "/address/user",
+        "method": "get",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "UPDATE_ADDRESS",
+        "path": "/address/update",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "SET_DEFAULT_ADDRESS",
+        "path": "/address/default",
+        "method": "post",
+        "description" : "Xoa san pham"
+    },
+    {
+        "name" : "DELETE_ADDRESS",
+        "path": "/address/delete",
+        "method": "delete",
+        "description" : "Xoa san pham"
+    }
+]
