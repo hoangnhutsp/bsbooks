@@ -20,7 +20,7 @@ export const createInvoice = async (req, res) => {
         const invoice = new Invoice(data);
 
         await invoice.save();
-        res.status(200).json({status: 1, invoice});
+        res.status(200).json({status: 1, _id: invoice._id});
     } catch (error) {
         res.status(200).json({ status: 0, message: error.message })
     }

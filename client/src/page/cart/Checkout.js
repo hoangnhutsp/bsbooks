@@ -78,11 +78,15 @@ function Checkout() {
 
     dispatch(updateCart({items: newItems, count: newItems.length}));
     
-    console.log('invoice - checkout');
+    console.log('CREATE INVOICE --- ');
     await apiInvoice.createInvoice(invoice)
     .then(res => res.data)
     .then(data => {
-      console.log(data);
+      if (data.status) {
+        history.push(`/user/purchase/order/${data._id}`)
+      } else {
+        console.log(data);
+      }
     })
     .catch(err => console.log(err))
   }
