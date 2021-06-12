@@ -1,6 +1,6 @@
 .NotificationContainer {
-	padding-right: 1rem;
 	cursor: pointer;
+	padding: 0.5rem;
 }
 
 
@@ -11,7 +11,7 @@
 	height: auto;
 	opacity: 1;
 	position: absolute;
-	top: 2.5rem;
+	top: 6rem;
 	right: 1rem;
 	transition: 0.2s opacity, 250ms height;
 	background-color: #fff;
@@ -50,4 +50,8 @@
 .NotificationContainer-notifi-item .text p {
 	color: #aaa;
 	font-size: 12px;
+}
+
+.icon-notifacations i {
+	font-size: 1.3rem;
 }
