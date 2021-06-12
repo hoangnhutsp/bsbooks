@@ -27,6 +27,7 @@ import PageNotFound from './page/PageNotFound'
 import Product from './page/Product'
 import Login from './page/login/Login'
 import Signup from './page/login/Signup'
+import ForgotPassword from './page/login/ForgotPassword'
 import ResetPassword from './page/login/ResetPassword';
 import ProductPage from './page/productPage'
 
@@ -71,6 +72,9 @@ const App = () => {
             </Route>
             <Route path="/signup">
               <Signup />
+            </Route>
+            <Route path='/forgot-password'>
+              <ForgotPassword/>
             </Route>
             <Route path="/reset-password/:token">
               <ResetPassword />

@@ -9,7 +9,7 @@ export const addEvaluate = async (req, res) => {
         //idUser, idProduct, star not null
 
         console.log('ADD -- suc');
-        console.log(req.body);
+        //console.log(req.body);
         if (!req.userID || !req.body.idProduct || !req.body.star ||
             typeof req.userID == 'default' || typeof req.body.idProduct == 'default' || typeof req.body.star == 'default') {
             res.status(200).json({ message: 'idUser or idProduct or star null' })
@@ -24,6 +24,7 @@ export const addEvaluate = async (req, res) => {
                 res.status(200).json({ message: 'User or Product not exist' });
             }
             else {
+                // lưu đánh giá
                 const star = req.body.star;
                 let comment = req.body.comment;
                 let title = req.body.title;
@@ -38,6 +39,11 @@ export const addEvaluate = async (req, res) => {
                     title: title,
                 });
                 await newEvaluate.save();
+                //cập nhật sao trung bình và số lượng đánh giá
+                let review_count = product.review_count + 1;
+                let rating_average = (product.rating_average * product.review_count + star)/review_count;
+                rating_average = rating_average.toFixed(1);
+                const updateProduct = await Product.findByIdAndUpdate(idProduct, {review_count: review_count, rating_average: rating_average}, {new: true})
                 res.status(200).json(newEvaluate);
             }
         }
