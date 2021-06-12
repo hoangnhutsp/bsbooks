@@ -105,7 +105,6 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
-          <NotificationConfirm></NotificationConfirm>
           <BackTop></BackTop>
           <InfoTransport />
           <Footer></Footer>

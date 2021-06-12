@@ -1,15 +1,22 @@
-import Reac, { useState } from 'react'
+import React, { useState } from 'react'
 import './Item.css'
 import iconEdit from './icon/edit.png'
 import iconView from './icon/view.png'
 import iconDelete from './icon/delete.png'
 import { Link } from 'react-router-dom'
+import NotifacationConfirm from './../../../components/NotificationConfirm';
 import * as apiProduct from '../../../api/product';
 const Item = (item) => {
-
-    const deleteProduct =async (_id) => {
-        await apiProduct.deleteProduct(_id);
+    const [deleteId, setDeleteId] = useState('')
+    const [open, setOpen] = useState(0)
+    const deleteProduct = async () => {
+        await apiProduct.deleteProduct(deleteId);
         window.location.reload();
+    }
+
+    const setNotificationConfirm = (conf) => {
+        setOpen(0);
+        if (conf) deleteProduct();
     }
     return (
         <div className="control-item">
@@ -30,11 +37,12 @@ const Item = (item) => {
                         <img className="contro-edit-product" src={iconEdit}></img>
                     </Link>
 
-                    <button className='control-product-remove' onClick={(e) => deleteProduct(item.item._id)}>
+                    <button className='control-product-remove' onClick={(e) =>{setDeleteId(item.item._id); setOpen(1); }}>
                         <img className="control-delete-product" src={iconDelete}></img>
                     </button>
                 </div>
             </div>
+            {(open===1)?<NotifacationConfirm title={'Bạn có muốn xản phẩm này không ?'}  setNotificationConfirm={setNotificationConfirm}/>:null}
         </div>
     )
 }
