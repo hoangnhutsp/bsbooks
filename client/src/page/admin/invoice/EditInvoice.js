@@ -3,66 +3,36 @@ import { useState} from 'react'
 import '../../../page/user/account/Profile.css';
 import { useParams} from 'react-router-dom'
 import './EditInvoice.css'
-import { updateInvoice } from '../../../api/invoice';
 
-
-
+import * as apiInvoice from '../../../api/invoice'
 
 function EditInvoice() {
-// userID:
-// items:   
-//  [ _id, String, Number, quantity, 
-//    image, discount_rate: Number ]
-//
-// update: [Date],
-// status_invoice,
-// name
-// phone
-// address,
-// sum_price
-// ship_price
-// total
     const { id } = useParams();
-    const [status_invoice, setSatus_invoice]   = useState('')
-    const [invoice, setInvoice] = useState({
-    
-            _id: 12,
-            status_invoice: 0,
-            name: "la van le thi",
-            phone:"1234567880",
-            date: "24-04-2020",
-            address:"ghghghghghjksdhgu",
-            total: 1000000,
-            items: [
-                {
-                    thumbnail_url: "http://localhost:5000/upload/images/51577b8e7eeb27545e2d5016151793ca.jpg",
-                    name: "sach ABC",
-                    quantity: 1,
-                    price: 100000,
-                },
-                {
-                    thumbnail_url: "http://localhost:5000/upload/images/51577b8e7eeb27545e2d5016151793ca.jpg",
-                    name: "BCND",
-                    quantity: 10,
-                    price: 12123124,
-                }
-            ]
-        
-    })
-    // useEffect(async() => {
-    //     const invoice = await getInvoiceDetail(id)
-    //     console.log(invoice)
 
-    //     if (invoice) {
-    //         invoice.status_invoice = EditStatus_Invoice()      
-    //     }
-
-    // }, [])
-    const submitHanler = e => {
+    const [invoice, setInvoice] = useState({})
+    const submitHanler = async e => {
         e.preventDefault();
-        console.log(invoice);
+        await apiInvoice.updateInvoice(id)
+        .then(res => res.data)
+        .then(data => {
+            if (data.status) {
+               setInvoice(data.invoice)
+            }
+        })
+        .catch(err => console.log(err));
     }
-    return (
+
+
+    useEffect(async () => {
+        await apiInvoice.getInvoiceByID(id)
+        .then(res => res.data)
+        .then(data => {
+            console.log(data.invoice);
+            setInvoice(data.invoice)
+        })
+        .catch(err => console.log(err))
+    }, [])
+    return invoice&&(
         <div className="container-user-profile">
             <div className="user-title">
                 <h1>Chi tiết hóa đơn của mã số hóa đơn {invoice._id}</h1>
@@ -110,18 +80,13 @@ function EditInvoice() {
                                 <tr className="form-group-radio">
                                     <td>Tình trạng</td>
                                     <td>
-                                        <select>
-                                            <option onChange = {()=>{setSatus_invoice(invoice.status_invoice=0)}}>Chờ xác nhận</option>
-                                            <option onChange = {()=>{setSatus_invoice(invoice.status_invoice=1)}}>Đang giao</option>
-                                            <option onChange = {()=>{setSatus_invoice(invoice.status_invoice=2)}}>Đã giao</option>
-                                            <option onChange = {()=>{setSatus_invoice(invoice.status_invoice=3)}}>Đã hủy</option>
-                                        </select>
+                                            {invoice.status_invoice}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Danh sách sản phẩm</td>
                                     <td>
-                                        <div>{invoice.items.map((item)=>{
+                                        <div>{invoice.items&&invoice.items.map((item)=>{
                                             return (
                                             <div className = "View-Invoice-contraiter">
                                                 <img className="control-image" src={item.thumbnail_url}></img>
@@ -145,8 +110,9 @@ function EditInvoice() {
                     </div>
                    
                 </div>
+                <button type="submit" className="button-update-product" >Xac nhan</button>
+
             </form>
-            <button type="submit" className="button-update-product" onClick={() => updateInvoice()}>Cập Nhật</button>
         </div>
 
     )

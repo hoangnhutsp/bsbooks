@@ -3,68 +3,41 @@ import { Link } from 'react-router-dom';
 import { getInvoiceLists } from '../../../api/invoice/invoice_list';
 import './ListInvoice.css'
 
+import * as apiInvoice from '../../../api/invoice'
 
 
 
 export default function ListInvoice() {
 
-    const [dataInvoiceDelete, setDataInvoiceDelete] = useState('');
-    const [dataDataStatus, setDataStatus] = useState('');
-    const Items = [
-        {
-            _id: 12,
-            status_invoice: 0,
-            name: "la van le thi",
-            date: "24-04-2020",
-            total: 1000000,
-            products: [
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "sach ABC",
-                    quantity: 1,
-                    price: 100000,
-                },
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "BCND",
-                    quantity: 10,
-                    price: 12123124,
-                }
-            ]
-        },
-        {
-            _id: 13,
-            status_invoice: 1,
-            name: "la van le",
-            date: "24-04-2020",
-            total: 1000000,
-
-            products: [
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "Sach hihi",
-                    quantity: 1,
-                    price: 100000,
-                },
-
-            ]
-        },
-    ]
     const statusType = (item) =>{
         if (item.status_invoice===0) return ("Chờ xác nhận")
-        if (item.status_invoice===1) return ("Đang giao")
-        if (item.status_invoice===2) return ("Đã giao")
-        if (item.status_invoice===3) return ("Đã hủy")
+        if (item.status_invoice===1) return ("Giao cho DVVC")
+        if (item.status_invoice===2) return ("Đang giao")
+        if (item.status_invoice===3) return ("Đã giao")
+        if (item.status_invoice===4) return ("Đã hủy")
     }
     
     const [listInvoice, setListInvoice] = useState([])
 
     useEffect(async () => {
-        const data = await getInvoiceLists()
-        console.log('data')
-        console.log(data);
-        setListInvoice(data)
+        await apiInvoice.getAllInvoice()
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+            if (data.status)
+                setListInvoice(data.invoice)
+        })
+        .catch(err => console.log(err))
     }, [])
+    const cancleInvoice = async (id) => {
+        console.log('call cancle');
+        await apiInvoice.cancelInvoice(id)
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => console.log(err))
+    }    
     return (
         <div>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -90,7 +63,7 @@ export default function ListInvoice() {
                                 </thead>
 
                                 {
-                                    Items.map((item) => {
+                                    listInvoice.map((item) => {
                                         return (
                                             <tbody>
                                                 <td className="Invoice-id"> {item._id}</td>
@@ -100,20 +73,17 @@ export default function ListInvoice() {
                                                 <td className="Invoice-status">
                                                     {statusType(item)}
                                                 </td>
-                                                <td>
-                                                    <Link to={`invoice/${item._id}`} className="Invoice-View">
-                                                        <span className="Invoice-View">Xem</span>
-                                                    </Link>
-                                                </td>
+                                              
                                                 <td>
                                                     <Link to={`edit-invoice/${item._id}`} className="Invoice-Edit">
                                                         <span className="Invoice-Edit">Sửa</span>
                                                     </Link>
                                                 </td>
                                                 <td>
-                                                    <button className="Invoice-cancel" onClick={() => setDataInvoiceDelete(item._id)}>
+                                                    <button className="Invoice-cancel" onClick={() => cancleInvoice(item._id)}>
                                                         <span className="Invoice-cancel">X</span>
-                                                    </button></td>
+                                                    </button>
+                                                </td>
                                             </tbody>
 
                                         )

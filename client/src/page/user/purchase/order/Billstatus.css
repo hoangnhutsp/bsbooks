@@ -291,6 +291,13 @@
 
 
 
+.billstatus-cancel-bill-component {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
-
+.al-center{
+    text-align: center;
+}

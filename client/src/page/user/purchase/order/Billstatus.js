@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Billstatus.css';
 import * as api from './../../../../api/invoice'
 import { useHistory, useParams } from 'react-router-dom';
-
+import iconCancelBill from './../../../../assets/cancel-bill-icon.png'
 import h1 from './img/2.jpg'
 function Billstatus() {
   const history = useHistory()
@@ -49,6 +49,7 @@ function Billstatus() {
     'Giao DVVC',
     'Dang giao',
     'Nhan hang thanh cong',
+    'Da Huy',
   ]
 
   const icons = {
@@ -62,7 +63,17 @@ function Billstatus() {
       return ((index % 3) ? next : (next + ',')) + prev
     })
   }
+  const CancelBill = () => {
+    return (
+      <div className='billstatus-cancel-bill-component'>
+        <div>
+        <img src={iconCancelBill} alt='Cancel Bill' className="billstatus-cancel-bill-component-img"/>
+        <p className="al-center">HUY</p>
 
+        </div>
+      </div>
+    )
+  }
   return invoice ? (
     <div className="BillstatusContainer">
 
@@ -86,7 +97,9 @@ function Billstatus() {
           </div>
 
           <div className="order-tracking">
-            <ul className="ul-order-tracking">
+            {invoice.status_invoice===4
+            ?<CancelBill />
+            :<ul className="ul-order-tracking">
               {statusInvoice.map((item, key) => {
                 let icon = icons.check;
                 let status_invoice = invoice.status_invoice;
@@ -103,14 +116,14 @@ function Billstatus() {
                 )
               })
               }
-            </ul>
+            </ul>}
           </div>
-          <div className="cart-total-holder">
+          {/* <div className="cart-total-holder">
             <div className="cart-action-button">
               <a href="/">Mua Lại</a>
               <button className="btn-main">Liên Hệ Shop</button>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="ifo-user-and-time-freight-forwarding">
