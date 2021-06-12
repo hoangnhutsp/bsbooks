@@ -15,7 +15,7 @@ import BackTop from './components/BackTop'
 import Home from './page/Home'
 import User from './page/user/User'
 import Admin from './page/admin/Admin'
-
+import NotificationConfirm from './components/NotificationConfirm'
 import Search from './page/Search'
 import TermsPage from './page/TermsPage'
 import SecurityPage from './page/SecurityPage'
@@ -101,6 +101,7 @@ const App = () => {
               <PageNotFound />
             </Route>
           </Switch>
+          <NotificationConfirm></NotificationConfirm>
           <BackTop></BackTop>
           <InfoTransport />
           <Footer></Footer>

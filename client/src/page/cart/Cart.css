@@ -97,6 +97,8 @@
     padding-left: .2rem;
 }
 
+/*dùng cho mấy button*/
+
 .cart-quantity-controls-sm button,
 .cart-quantity-controls button,
 .remove button,
@@ -279,7 +281,6 @@
     }
     
 }
-
 
 .cart-is-empty {
     display: flex;

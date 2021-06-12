@@ -1,0 +1,62 @@
+.NotificationConfirmContainer-join-yes-no{
+    display: flex;
+    justify-content: center;
+}
+
+.NotificationConfirmContainer-join-yes{
+    width: auto;
+    margin-right: 10px;
+}
+
+
+.NotificationConfirmContainer-join-no{
+    width: auto;
+    margin-left: 10px;
+    color: white;
+}
+
+.NotificationConfirmContainer-join-yes input{
+    background: #498374;
+    height: 40px;
+    width: 90px;
+    color: white;
+    cursor: pointer;
+}
+
+.NotificationConfirmContainer-join-no input{
+    background: #333;
+    color: white;
+    height: 40px;
+    width: 125px;
+    cursor: pointer;
+}
+
+.NotificationConfirmContainer-join-yes input:hover{
+    background-color: #559483;
+}
+
+.NotificationConfirmContainer-join-no input:hover{
+    background-color: rgb(75, 75, 75);
+}
+
+.NotificationConfirmContainer-notifi-item-img{
+    width: 80px;
+    height: 80px;
+    margin: 5% 0;
+    margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.NotificationConfirmContainer-text p{
+    font-weight: bold;
+    color: #396459;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.NotificationConfirmContainer-gach-chan-thong-bao-h2{
+    margin-top: 4%;
+    border-bottom: 1px solid rgb(240, 237, 237);
+}
+
