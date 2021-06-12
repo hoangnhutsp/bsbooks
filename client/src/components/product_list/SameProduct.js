@@ -44,6 +44,7 @@ const ProductListSame = ({ category, currentProductName }) => {
 
     return (dataCate) ? (
         <div className='container-recently-view'>
+            
             <div className=''>
                 <div className='title-recently-view'>
                     <h2>SẢN PHẨM TƯƠNG TỰ</h2>
