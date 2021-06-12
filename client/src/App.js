@@ -1,5 +1,5 @@
 import React from 'react'
-import {  useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -35,8 +35,41 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
+import TestSocket from './components/Test_Socket.js';
+import { SocketContext } from './SocketContext.js'
+
+import {
+  useSelector
+} from 'react-redux';
+
+//user socket
+
 
 const App = () => {
+  const [comment, setComment] = useState([])
+  let token = localStorage.getItem('token');
+  const socket = useContext(SocketContext)
+  //tạo room của riêng user khi truy cập
+  useEffect(() => {
+    if(socket)
+    {
+      socket.on('connect', () => {
+        console.log("I'm connected with the back-end");
+        socket.emit('joinRoom', token);
+      })
+    }
+  }, [socket])
+
+  //lắng nghe khi có thông báo mới
+  useEffect(() => {
+    if(socket)
+    {
+      socket.on('ServerSendNotification', id_user => {
+      console.log("newNotification: ", id_user);
+      setComment([id_user, ...comment])
+      })
+    }
+  }, [socket, comment])
 
   return (
     <>
@@ -95,6 +128,9 @@ const App = () => {
             </Route>
             <Route path="/contact">
               <ContactPage />
+            </Route>
+            <Route path="/test-socket">
+              <TestSocket/>
             </Route>
             <Route path="*">
               <PageNotFound />

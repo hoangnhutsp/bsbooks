@@ -4,7 +4,10 @@ import cors from 'cors';
 import session from 'express-session'
 import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 dotenv.config();
 // middleware
@@ -27,6 +30,20 @@ import addressRoutes from './routes/address.js'
 import {breadcrumb} from './controllers/other.js'
 const app = express();
 
+
+import jwt from 'jsonwebtoken';
+const SECRET = 'bsbooksToken';
+//socket
+var server = require('http').Server(app);
+const io = require('socket.io')(server, {
+    /**
+     * Using cors option with the origin field 
+     * The value of the origin field is the domain of client
+     */
+    cors: {
+      origin: "http://localhost:3000",
+    }
+  });
 
 app.use(express.static('./public'));
 app.use('./middleware/upload', express.static('upload'));
@@ -60,6 +77,56 @@ app.use(session({
     }
 }))
 
+
+//socket
+// const httpServer = createServer.Server(app);
+// const io = new Server(httpServer);
+
+//socket
+io.on('connection', socket => {
+    //console.log(socket.id + 'connect');
+    console.log('Socket connect')
+    socket.on('joinRoom', token => {
+        const gettoken = token
+        jwt.verify(gettoken, SECRET, (err, user) => {
+            if(err) socket.emit('accept', {message: "wrong verify token"})
+            else{
+                let userId = user.id
+                //mỗi user thuộc 1 room
+                socket.join(userId);
+                console.log("room")
+                //console.log(io.sockets.adapter.rooms)
+            }
+        })
+        // jwt.verify(token, SECRET, (err, user) => {
+        //     if (err) socket.emit('accept', {message: 'wrong verify token'}); 
+        //     else  {
+        //         socket.join()
+        //         useId = user.id;}
+
+    });
+    socket.on('addNotification', async data => {
+        // const id_user = id;
+        console.log("Hello")
+        console.log(data)
+        const title = data.title;
+        const description = data.description;
+        const id_user = data.id_user;
+        console.log("id_user: ", id_user)
+        // const newNotification = new Notification({
+        //     id_user: id_user,
+        //     title: title,
+        //     description: description
+        // })
+        // await newNotification.save()
+        io.to('60c2668bfb6e0089781ea2b8').emit('ServerSendNotification', id_user)
+    })
+
+    socket.on('disconnect', ()=>{
+        console.log(socket.id + 'disconnect')
+    })
+})
+
 app.use(sessionMiddleware);
 //app.use(refreshTokenMiddleware);
 
@@ -78,7 +145,7 @@ app.use('/notification', notificationRouter);
 
 mongoose.connect(CONNECTION_URL, dbOptions)
     .then(() => {
-        app.listen(PORT, () => {
+        server.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         })
     })
