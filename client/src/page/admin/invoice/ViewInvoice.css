@@ -1,0 +1,10 @@
+.View-Invoice-contraiter {
+    display: flex;
+    padding: 0.5rem;
+}
+.View-Invoice-product-name{
+    width: 170px;
+}
+.View-Invoice-product-price{
+    width: 100px;
+}

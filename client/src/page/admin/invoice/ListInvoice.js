@@ -1,149 +1,100 @@
 import React, { useEffect, useState } from 'react'
-import iconcompeteinvoice from './icon/complete_invoice.png'
-import iconCheck from './icon/check.png'
-import iconTransport from './icon/transport.png'
-
+import { Link } from 'react-router-dom';
+import { getInvoiceLists } from '../../../api/invoice/invoice_list';
 import './ListInvoice.css'
 
+import * as apiInvoice from '../../../api/invoice'
 
 
 
 export default function ListInvoice() {
-    // const [allInvoice, setAllInvoice] = useState([])
-    // useEffect(async () => {
-    //     const data = await getInvoiceLists('')
-    //     console.log(data['Invoice']);
-    //     setAllInvoice(data.Invoice)
-    // }, [])
-    const Items = [
-        {
-            _id: 12,
-            status: 0,
-            date: "24-04-2020",
-            total_amount: 1000000,
-            products: [
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "sach ABC",
-                    quantity: 1,
-                    price: 100000,
-                },
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "BCND",
-                    quantity: 10,
-                    price: 12123124,
-                }
-            ]
-        },
-        {
-            _id: 13,
-            status: 1,
-            date: "24-04-2020",
-            total_amount: 1000000,
 
-            products: [
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "Sach hihi",
-                    quantity: 1,
-                    price: 100000,
-                },
+    const statusType = (item) =>{
+        if (item.status_invoice===0) return ("Chờ xác nhận")
+        if (item.status_invoice===1) return ("Giao cho DVVC")
+        if (item.status_invoice===2) return ("Đang giao")
+        if (item.status_invoice===3) return ("Đã giao")
+        if (item.status_invoice===4) return ("Đã hủy")
+    }
+    
+    const [listInvoice, setListInvoice] = useState([])
 
-            ]
-        },
-    ]
+    useEffect(async () => {
+        await apiInvoice.getAllInvoice()
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+            if (data.status)
+                setListInvoice(data.invoice)
+        })
+        .catch(err => console.log(err))
+    }, [])
+    const cancleInvoice = async (id) => {
+        console.log('call cancle');
+        await apiInvoice.cancelInvoice(id)
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => console.log(err))
+    }    
     return (
         <div>
-
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
             <div className="ListInvoice-header-frist">
-                TỔNG QUAN
+                QUẢN LÝ ĐƠN HÀNG
             </div>
-            <div className="ListInvoice-container">
-                <div className="ListInvoice">
-                    <div className="Invoice-row-1">
-                        <div className="Invoice-row-1-col-1">
-                            <p className="label-special">TỔNG SỐ ĐƠN HÀNG</p>
-                            <p className="number-special">8</p>
-                        </div>
-                        <div className="Invoice-row-1-col-2">
-                            <p className="label-special">TỔNG THU</p>
-                            <p className="number-special">10.000.000 VNĐ</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <table class="mb-0 table">
+                                <thead>
+
+                                    <th>Mã Đơn Hàng</th>
+
+                                    <th>Khách Hàng</th>
+
+                                    <th>Trạng Thái</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Hủy Đơn</th>
+
+                                </thead>
+
+                                {
+                                    listInvoice.map((item) => {
+                                        return (
+                                            <tbody>
+                                                <td className="Invoice-id"> {item._id}</td>
+
+                                                <td className="Invoice-user-name">{item.name}</td>
+
+                                                <td className="Invoice-status">
+                                                    {statusType(item)}
+                                                </td>
+                                              
+                                                <td>
+                                                    <Link to={`edit-invoice/${item._id}`} className="Invoice-Edit">
+                                                        <span className="Invoice-Edit">Sửa</span>
+                                                    </Link>
+                                                </td>
+                                                <td>
+                                                    <button className="Invoice-cancel" onClick={() => cancleInvoice(item._id)}>
+                                                        <span className="Invoice-cancel">X</span>
+                                                    </button>
+                                                </td>
+                                            </tbody>
+
+                                        )
+
+                                    })
+                                }
+                            </table>
+
+
                         </div>
                     </div>
-
-                    <div className="Invoice-row-2">
-                        <div className="Invoice-row-2-col-1">
-                            <div className="label-special label-icon">
-                                <p className="label-special">CHỜ XÁC NHẬN</p>
-                                <span className="icon-compete-invoice">
-                                    <img className="icon-check-invoice" src={iconCheck}></img>
-                                </span>
-                            </div>
-                            <p className="number-special">80</p>
-                        </div>
-                        <div className="Invoice-row-2-col-2">
-                            <div className="label-special label-icon">
-                                <p className="label-special">ĐANG GIAO</p>
-                                <span className="icon-compete-invoice">
-                                    <img className="icon-transport-invoice" src={iconTransport}></img>
-                                </span>
-                            </div>
-                            <p className="number-special">10</p>
-                        </div>
-                        <div className="Invoice-row-2-col-3">
-                            <div className="label-special label-icon">
-                                <p className="label-special">HOÀN THÀNH</p>
-                                <span className="icon-compete-invoice">
-                                    <img className="icon-compete-invoice" src={iconcompeteinvoice}></img>
-                                </span>
-                            </div>
-                            <p className="number-special">90</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="ListInvoice-header-frist">
-                    QUẢN LÝ ĐƠN HÀNG
-            </div>
-                <div className="ListInvoice-2">
-                    <div className="ListInvoice-header">
-                        <p>Mã Đơn Hàng</p>
-                        <p>Thời Gian</p>
-                        <p>Khách Hàng</p>
-                        <p>Tổng Tiền</p>
-                        <p>Trạng Thái</p>
-                        <p>Hủy Đơn</p>
-                    </div>
-                    <div className="ListInvoice-underline"></div>
-                    {
-                        Items.map((item) => {
-                            return (
-
-                                <div className="Invoice-Item">
-                                    <div className="Invoice-Form">
-                                        <div className="Invoice-id"> {item._id}</div>
-                                        <div className="Invoice-date">{item.date}</div>
-                                        <div className="Invoice-user-name">Le van luiuiu</div>
-                                        <div className="Invoice-totalmoney">{item.total_amount}</div>
-                                        <div className="Invoice-status">
-                                            <select className="Invoice-status-select">
-                                                <option className="Invoice-status-option">Chờ xác nhận</option>
-                                                <option className="Invoice-status-option">Đang giao</option>
-                                                <option className="Invoice-status-option">Đã giao</option>
-                                                <option className="Invoice-status-option">Đã hủy</option>
-                                            </select>
-                                        </div>
-                                        <div className="Invoice-cancel">
-                                            X
-                                    </div>
-                                    </div>
-                                </div>
-                            )
-
-                        })
-                    }
-                </div>
-                <div className="ListInvoice-detail" >
                 </div>
             </div>
         </div>
