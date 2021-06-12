@@ -186,7 +186,7 @@ export const forgotPassWord = async (req, res) => {
         const user = await User.findOne({ email });
         console.log(user);
         if (!user)
-            res.status(200).json({ message: 'User not exist' })
+            res.status(200).json({ status: 0, message: 'User not exist' })
         else {
             const token = jwt.sign({ id: user._id }, RESET_PASSWORD, { expiresIn: "20m" })
             console.log(token)
@@ -214,9 +214,9 @@ export const forgotPassWord = async (req, res) => {
             const updateLink = await User.findByIdAndUpdate(user._id, { resetLink: token }, { new: true });
             await mg.messages().send(data, function (error, body) {
                 if (error) {
-                    res.status(200).json({ message: error.message })
+                    res.status(200).json({ status: 0, message: 'api wrong'})
                 }
-                else res.status(200).json({ result: updateLink, token })
+                else res.status(200).json({ status: 1})
             });
         }
     } catch (error) {

@@ -5,33 +5,43 @@ import {
     validateEmail,
 } from './CheckInfo'
 
+import * as apiUser from '../../api';
 function ForgotPassword() {
-    const [forgotpassData, setForgotpassData] = useState({
-        email: '',
-    })
+    const [email, setEmail] = useState('')
 
     const [error, setError] = useState({
         email: '',
     })
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        await apiUser.forgotFassword({email})
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => console.log(err))
+        // post forgot-password
+    }
 
     return (<div className='containner-register'>
         <div className='login-signup-register'>
             <div className='col-sm-6-register'>
                 <div className='article-register'>
                     <h3 className='text-center-register'>QUÊN MẬT KHẨU</h3>
-                    <form className='signup-register'>
+                    <form className='signup-register' onSubmit={submitHandler}>
                         <div className='form-group-register'>
                             <input type='email'
                                 className='form-control-register'
                                 placeholder='Địa chỉ Email'
-                                onChange={(e) => setForgotpassData({ ...forgotpassData, email: e.target.value })}
+                                onChange={(e) => setEmail(e.target.value)}
                                 onBlur={
                                     (e) => {
                                         let err = validateEmail(e.target.value);
                                         setError({ ...error, email: err })
                                     }
                                 }
-                                value={forgotpassData.email}
+                                value={email}
                                 required
                             />
                         </div>
