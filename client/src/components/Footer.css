@@ -85,7 +85,7 @@
 
   .container-footer-col .social-links .fab{
     color: aliceblue;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
   }
   .container-footer-col .social-links .fab:hover{
     color: #333;
@@ -93,10 +93,9 @@
 
 
   
-  /*.container-footer-col .social-links a:hover{
-    color: #24262b;
-    background-color: #a5d8ca;
-  }*/
+  .container-footer-col .social-links a:hover{
+    background-color: #5db8a0;
+  }
   
   /*RESPONSIVE*/
   @media(max-with:767px){

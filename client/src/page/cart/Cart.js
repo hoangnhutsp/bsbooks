@@ -148,7 +148,7 @@ function Cart() {
     return (productCart&&productCart.count) ? (
         <div className='CartContainer'>
             <div className="product-cart">
-                <h4 className="page-banner-sm">Cart</h4>
+                <h4 className="page-banner-sm">Giỏ Hàng</h4>
                 <div className="wrapper">
                     <div className="cart-collection">
                         <div className="cart-header">

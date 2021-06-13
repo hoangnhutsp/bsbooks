@@ -154,8 +154,8 @@ function Checkout() {
                     name="phone" value={dataAddress.phone}
                     onChange={(e) => { setDataAddress({ ...dataAddress, phone: e.target.value }) }} />
                 </div>
-                <label>
-                  <input type="checkbox" name="sameadr" onChange={() => clickShip(payment)} />Giao hàng nhanh trong vòng 2 giờ
+                <label className="distancebetween-inputand-times-lable">
+                  <input className="distancebetween-inputand-times" type="checkbox" name="sameadr" onChange={() => clickShip(payment)} />Giao hàng nhanh trong vòng 2 giờ
                 </label>
               </div>
             </form>

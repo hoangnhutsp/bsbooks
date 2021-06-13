@@ -10,13 +10,42 @@
     font-size: 19px;
 }
 
-.h2-checkout{
+.h2-checkout {
+    text-transform: capitalize;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+    font-size: 1.7rem;
+}
+
+.h2-checkout::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #498374;
+    height: 3px;
+    box-sizing: border-box;
+    width: 80px;
+}
+
+.distancebetween-inputand-times-lable{
+    width: 400px;
+}
+
+.distancebetween-inputand-times{
+    margin-right: 1%;
+}
+
+/*.h2-checkout{
     font-size: 1.2rem;
     color: #333;
     background: rgb(247, 243, 243);
     padding: 1rem;
     margin-bottom: 2%;
-}
+}*/
 
 *{
     box-sizing: border-box;
