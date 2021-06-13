@@ -27,6 +27,7 @@ function Navbar() {
     });
 
     useEffect(() => {
+        console.log('store change');
         if (Store.user.isLogged) {
             let status = Store.user.isLogged;
             let name = Store.user.infoUser.name;

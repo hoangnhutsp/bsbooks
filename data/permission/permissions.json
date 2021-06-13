@@ -163,6 +163,12 @@
         "description" : "POST: Update notification"
     },
     {
+        "name" : "DELETE_NOTIFICATION",
+        "path": "/notification/:id",
+        "method": "DELETE",
+        "description" : "DELETE: Delete notification"
+    },
+    {
         "name" : "GET_ALL_USER",
         "path": "/admin/user",
         "method": "GET",

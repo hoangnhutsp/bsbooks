@@ -88,36 +88,38 @@ io.on('connection', socket => {
                 let userId = user.id
                 //mỗi user thuộc 1 room
                 socket.join(userId);
-                console.log("room")
-                //console.log(io.sockets.adapter.rooms)
+                console.log('room: ' + userId)
             }
         })
-        // jwt.verify(token, SECRET, (err, user) => {
-        //     if (err) socket.emit('accept', {message: 'wrong verify token'}); 
-        //     else  {
-        //         socket.join()
-        //         useId = user.id;}
-
     });
     socket.on('addNotification', async data => {
-        // const id_user = id;
-        console.log("Hello")
-        console.log(data)
-        const title = data.title;
-        const description = data.description;
-        const id_user = data.id_user;
-        console.log("id_user: ", id_user)
-        const newNotification = {
-            id_user: id_user,
-            title: "SOCKET IS OKE",
-            description: description
+
+        console.log("LOG addNotification")
+
+        const token = data.token;
+        console.log(token);
+        try {
+            jwt.verify(token, SECRET, (err, user) => {
+                if (!err) {
+                    console.log('ServerSendNotification');
+                    // check user is ADMIN
+                    const title = data.title;
+                    const description = data.description;
+                    const id_user = data.id_user;
+                    const image = data.image;
+                    const _id = data._id;
+                    console.log('TO');
+                    io.to(id_user).emit('ServerSendNotification', {image, title, description, _id})
+                };
+            })
+        } catch (error) {
+            
         }
-        // await newNotification.save()
-        io.to(id_user).emit('ServerSendNotification', newNotification)
+        
     })
 
     socket.on('disconnect', ()=>{
-        console.log(socket.id + 'disconnect')
+        console.log(socket.id + ' disconnect')
     })
 })
 

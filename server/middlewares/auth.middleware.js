@@ -10,6 +10,7 @@ const Auth = async (req, res, next) => {
         console.log('AUTH');
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.split(' ')[1];
+        console.log(token);
         if (!token) return res.sendStatus(400);
         jwt.verify(token, SECRET, (err, user) => {
             if (err) return res.status(401).json({message: 'WR: Verify Token'}); else

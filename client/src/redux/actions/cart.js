@@ -21,8 +21,7 @@ export const updateCart = (cart) => async (dispatch) => {
 export const getCart = () => async (dispatch) => {
     try {
         const {data} =await api.getCart();
-        console.log(data);
-        //dispatch({type: 'GET_CART', payload: data})
+        dispatch({type: 'GET_CART', payload: data})
     } catch (error) {
         console.log(error.message);
     }

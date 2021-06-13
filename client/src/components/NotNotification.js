@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import './NotNotification.css';
 import iconNotNotification from './../assets/Not-Notification.png';
+import { useHistory } from 'react-router-dom';
 function NotNotification() {
-
+  const history = useHistory();
   const [down, setDown] = useState(false)
   const toggleNotifi = () => {
     setDown(!down)
@@ -18,7 +19,7 @@ function NotNotification() {
                   <img alt="img" src={iconNotNotification} />
                   <div className="NotNotificationContainer-notifi-text">
                       <h4>Không có thông báo nào!!!</h4>
-                      <a href="/">Quay lại</a>
+                      <p onClick={() => history.push('/')}>Quay lại</p>
                   </div>
               </div>
           </div>
