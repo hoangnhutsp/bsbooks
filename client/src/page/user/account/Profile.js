@@ -141,7 +141,7 @@ function Profile() {
                                 <tr className="form-group-radio">
                                     <td>Giới tính</td>
                                     <td>
-                                        <input
+                                       <input
                                             name="gender" type="radio" value="male"
                                             checked={profile.gender === "male"}
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
@@ -160,6 +160,7 @@ function Profile() {
                                             onChange={e => setProfile({ ...profile, gender: e.target.value })}
                                         />
                                         <span>Khác</span>
+                                       
                                     </td>
                                 </tr>
                                 <tr className="form-group">

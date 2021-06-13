@@ -37,7 +37,6 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
-
 const App = () => {
 
   return (
