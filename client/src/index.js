@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import reducers from './redux/reducers'
 
 import App from './App';
+import { SocketProvider } from './SocketContext.js'
 
 const loadState = () => {
     try {
@@ -44,7 +45,9 @@ store.subscribe(() => {
 
 ReactDOM.render(
     <Provider store={store}>
+        <SocketProvider>
         <App />
+        </SocketProvider>
     </Provider>
     , document.getElementById('root')
 );

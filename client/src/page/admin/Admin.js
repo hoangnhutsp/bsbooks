@@ -33,9 +33,7 @@ function Admin() {
             setIsAdmin(user.isAdmin)
         }
     }, [user])
-    return (
-        <div className="container-user">
-        {isAdmin?
+    return isAdmin?(
         <div className="User">
             <div className="user-usersidebar">
                 <UserSidebar />
@@ -84,11 +82,8 @@ function Admin() {
                     </Route>
                 </Switch>
             </div>
-        </div>:<NotAllowed />}
-
         </div>
-
-    )
+    ):<NotAllowed />
 }
 
 export default Admin

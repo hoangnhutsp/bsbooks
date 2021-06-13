@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './NotNotification.css';
-
+import iconNotNotification from './../assets/Not-Notification.png';
 function NotNotification() {
 
   const [down, setDown] = useState(false)
@@ -13,29 +13,12 @@ function NotNotification() {
   }
   return (
     <div className='NotNotificationContainer'>
-        {/*<div className="icon-notifacations">
-          <i class="far fa-bell" onClick={() => toggleNotifi()}></i>
-  </div>*/}
-        {/*
-          down&&(
-            <div className="NotNotificationContainer-notifi-box" id="box">
-            <div className="NotNotificationContainer-notifi-item">
-              <img alt="img" src="./assets/bag-empty.svg" />
-              <div className="NotNotificationContainer-text">
-                <h4>Sách giảm giá 20%</h4>
-                <p>Đây là sách giảm giá rất sâu trong ngày hôm nay</p>
-              </div>
-            </div>
-          </div>
-  
-          )
-          */}
           <div className="NotNotificationContainer-notifi-box" id="box">
               <div className="NotNotificationContainer-notifi-item">
-                  <img alt="img" src="./assets/Not-Notification.png" />
+                  <img alt="img" src={iconNotNotification} />
                   <div className="NotNotificationContainer-notifi-text">
                       <h4>Không có thông báo nào!!!</h4>
-                      <a href="#">Quay lại</a>
+                      <a href="/">Quay lại</a>
                   </div>
               </div>
           </div>

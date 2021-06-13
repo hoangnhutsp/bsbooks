@@ -58,7 +58,7 @@ function Purchase() {
                 <h1>Đơn hàng</h1>
                 <p>Tất cả đơn hàng</p>
             </div>
-            <hr className="break-title-and-info" />
+            
 
             <HeaderPurchase typeOfPurchase={typeOfPurchase} filter={filter} setFilter={setFilter} />
 

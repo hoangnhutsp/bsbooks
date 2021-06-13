@@ -2,45 +2,37 @@
 
 import Address from '../models/address.js';
 import User from '../models/user.js';
+import MESSAGE_ADDRESS from './../constant/messageAddress.js'
 
-//Thêm địa chỉ
 export const addAddress = async (req, res) => {
     try {
-        //kiểm tra address rỗng
-        if (!req.body.address)
-            res.status(200).json({ message: 'Vui lòng nhập địa chỉ' })
+        const data = req.body;
+        let idUser = req.userID;
+        const listAddress = await Address.find({ id_user: idUser })
+        const sameAddress = listAddress.filter(addr => {
+            return (addr['address'] === data.address)
+        })
+        if (sameAddress.length != 0){
+
+            res.status(200).json({ message: 'Địa chỉ đã tồn tại' })}
         else {
-            const idUser = req.userID;
-            const user = await User.findOne({ _id: idUser });
-            if (!user) {
-                res.status(200).json({ message: 'Bạn cần phải đăng nhập' })
-            } else {
-                const data = req.body;
-                //kiểm tra địa chỉ đã tồn tại chưa
-                const listAddress = await Address.find({ id_user: idUser })
-                const sameAddress = listAddress.filter(addr => {
-                    return (addr['address'] === data.address)
-                })
-                if (sameAddress.length != 0)
-                    res.status(200).json({ message: 'Địa chỉ đã tồn tại' })
-                else {
-                    let def = 0;
-                    if (listAddress.length === 0) def = 1; 
-                    const newAddress = new Address({
-                        id_user: idUser,
-                        address: data.address,
-                        is_default: def,
-                        phone: data.phone,
-                        email: data.email,
-                        name: data.name,
-                    })
-                    await newAddress.save()
-                    res.status(200).json(newAddress)
-                }
-            }
+            let def = 0;
+            if (listAddress.length === 0) def = 1;
+            const newAddress = new Address({
+                id_user: idUser,
+                address: data.address,
+                is_default: def,
+                phone: data.phone,
+                // email: data.email,
+                name: data.name,
+            })
+
+            console.log(newAddress);
+            await newAddress.save()
+            res.status(200).json(newAddress)
         }
     } catch (error) {
-        res.status(200).json({ message: error.message })
+        res.sendStatus(400);
     }
 }
 
@@ -61,24 +53,25 @@ export const getAddressById = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(200).json({ message: error.message })
+        res.sendStatus(400);
     }
 
 }
 //Lấy thông tin địa chỉ bằng id_user
 export const getAddressByIdUser = async (req, res) => {
     try {
+        console.log('GET ID USER');
         const idUser = req.userID;
         const user = await User.findOne({ _id: idUser });
         if (!user)
             res.status(200).json({ message: 'Bạn cần phải đăng nhập' });
         else {
-            const address = await Address.find({ id_user: idUser })
+            const address = await Address.find({ id_user: idUser }).sort({is_default: 'desc'})
             const count_address = address.length;
             res.status(200).json({ result: address, count_address })
         }
     } catch (error) {
-        res.status(200).json({ message: error.message })
+        res.sendStatus(400);
     }
 }
 
@@ -102,7 +95,7 @@ export const updateAddress = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(200).json({ message: error.message })
+        res.sendStatus(400);
     }
 }
 //Đặt làm defaul
@@ -129,7 +122,7 @@ export const setAddressDefaul = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(200).json({ message: error.message })
+        res.sendStatus(400);
     }
 }
 
@@ -160,6 +153,6 @@ export const deleteAddress = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(200).json({message: error.message})
+        res.sendStatus(400);
     }
 }

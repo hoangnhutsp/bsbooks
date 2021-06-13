@@ -64,7 +64,7 @@ export const cancelInvoice = (id) => {
 
 export const getInvoice = () => {
     let token = localStorage.getItem('token');
-    const URL = localhost + 'invoice/';
+    const URL = localhost + 'invoice/user';
     return axios.get(
         URL, 
         {headers: {

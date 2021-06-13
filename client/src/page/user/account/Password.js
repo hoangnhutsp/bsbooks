@@ -57,7 +57,7 @@ function Password() {
                 <h1>Đổi mật khẩu</h1>
                 <p>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác </p>
             </div>
-            <hr />
+            <div className="underline-container-user-password"></div>
             {error.error&&<div className="container-error-error">{error.error}</div>}
 
             <form onSubmit={submitHanler}>

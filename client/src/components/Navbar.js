@@ -108,7 +108,7 @@ function Navbar() {
                     <SearchBox />
                 </div>
                 <div className="container-navbar-cart row-center">
-                     <NotificationBox />
+                    <NotificationBox />
                     <Link to="/cart">
                             <img alt="icon-shopping-cart" className="navbar-icon-shopping-cart" src={iconShoppingCart} />
                             {countCart > 0 && <span className="navbar-cart-number">{countCart}</span>}

@@ -5,13 +5,14 @@ import { addNotification,
          updateStatus,
 } from '../controllers/notification.js'
 
-import authMiddleware from '../middlewares/auth.middleware.js'
+import authMiddleware from '../middlewares/auth.middleware.js';
+import Authorization from '../middlewares/Authorization.js'
+
 
 const router = express.Router();
 
-router.post('/', authMiddleware, addNotification);
-router.get('/', authMiddleware, getNotificationByIdUser);
-router.post('/status', authMiddleware, updateStatus);
-// router.post('/delete-nofication', authMiddleware, deletaNotification)
+router.post('/', authMiddleware, Authorization, addNotification);
+router.get('/', authMiddleware, Authorization, getNotificationByIdUser);
+router.post('/status', authMiddleware, Authorization, updateStatus);
 
 export default router;

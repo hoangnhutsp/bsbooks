@@ -93,6 +93,15 @@
     background-color: teal;
     border-radius: 40%;
 }
+
+.navbar-notification-number{
+    font-size: 0.8rem;
+    color: white;
+    vertical-align: top;
+    background-color: teal;
+    border-radius: 40%;    
+}
+
 .container-navbar-cart{
     width: 10vw;
 }

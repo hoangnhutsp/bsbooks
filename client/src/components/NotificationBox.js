@@ -53,7 +53,10 @@ function NotificationBox() {
   return (
     <div className='NotificationContainer'>
         <div className="icon-notifacations">
+          <span className="fa-stack" data-count={1}>
           <i class="far fa-bell" onClick={() => toggleNotifi()}></i>
+
+          </span>
         </div>
         {
           down&&<NotifiForm />

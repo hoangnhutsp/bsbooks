@@ -6,16 +6,19 @@ const ControlUser = () => {
 
     const [listUser, setListUser] = useState([])
 
-    useEffect(async () => {
-        const data = await getUserLists()
-        console.log('data')
-        console.log(data);
-        setListUser(data)
+    useEffect( async () => {
+        const {data} = await getUserLists()
+        if (data !==undefined)
+            setListUser(data)
     }, [])
+
+    useEffect(() => {
+        console.log(listUser);    
+    }, [listUser])
 
     return (
         <div>
-            {listUser.map(item => {
+            {listUser.length>0&&listUser.map(item => {
                 return <Item item={item} ></Item>
             })}
         </div>
