@@ -7,14 +7,14 @@ import MESSAGE_ADDRESS from './../constant/messageAddress.js'
 export const addAddress = async (req, res) => {
     try {
         const data = req.body;
-        console.log(data);
-        //kiểm tra địa chỉ đã tồn tại chưa
+        let idUser = req.userID;
         const listAddress = await Address.find({ id_user: idUser })
         const sameAddress = listAddress.filter(addr => {
             return (addr['address'] === data.address)
         })
-        if (sameAddress.length != 0)
-            res.status(200).json({ message: 'Địa chỉ đã tồn tại' })
+        if (sameAddress.length != 0){
+
+            res.status(200).json({ message: 'Địa chỉ đã tồn tại' })}
         else {
             let def = 0;
             if (listAddress.length === 0) def = 1;
@@ -23,9 +23,11 @@ export const addAddress = async (req, res) => {
                 address: data.address,
                 is_default: def,
                 phone: data.phone,
-                email: data.email,
+                // email: data.email,
                 name: data.name,
             })
+
+            console.log(newAddress);
             await newAddress.save()
             res.status(200).json(newAddress)
         }
@@ -58,12 +60,13 @@ export const getAddressById = async (req, res) => {
 //Lấy thông tin địa chỉ bằng id_user
 export const getAddressByIdUser = async (req, res) => {
     try {
+        console.log('GET ID USER');
         const idUser = req.userID;
         const user = await User.findOne({ _id: idUser });
         if (!user)
             res.status(200).json({ message: 'Bạn cần phải đăng nhập' });
         else {
-            const address = await Address.find({ id_user: idUser })
+            const address = await Address.find({ id_user: idUser }).sort({is_default: 'desc'})
             const count_address = address.length;
             res.status(200).json({ result: address, count_address })
         }
