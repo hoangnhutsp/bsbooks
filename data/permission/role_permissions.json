@@ -75,6 +75,11 @@
         "permission" : "UPDATE_NOTIFICATION"
     },
     {
+        "role" : "USER",
+        "permission" : "DELETE_NOTIFICATION"
+    },
+    
+    {
         "role" : "ADMIN",
         "permission" : "UPDATE_PRODUCT"
     },
@@ -172,6 +177,18 @@
     {
         "role" : "ADMIN",
         "permission" : "UPDATE_NOTIFICATION"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "DELETE_NOTIFICATION"
+    },
+    {
+        "role": "ADMIN",
+        "permission": "GET_ALL_USER"
+    },
+    {
+        "role": "ADMIN",
+        "permission": "GET_ONE_USER_ADMIN"
     }
   
 ]

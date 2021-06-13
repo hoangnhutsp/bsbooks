@@ -1,0 +1,22 @@
+[
+    {
+        "email": "master@bsbooks.com",
+        "name": "Trang Hoang Nhut",
+        "password": "Master123456",
+        "phone": "0905749010" ,
+        "address": "KTXB DH",
+        "gender": "male",
+        "birthday": "04-24-2000",
+        "role": "MASTER"
+    },
+    {
+        "email": "admin@bsbooks.com",
+        "name": "Admin Bsbooks",
+        "password": "Admin123456",
+        "phone": "0905749010" ,
+        "address": "KTXB DH",
+        "gender": "male",
+        "birthday": "04-24-2000",
+        "role": "ADMIN"
+    }
+]

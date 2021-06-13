@@ -35,13 +35,13 @@ function ViewUser() {
     }
     useEffect(async() => {
         //let infoUser = userStore.infoUser;
-        const infoUser = await getUserDetail(id)
-        console.log(infoUser)
+        const {data} = await getUserDetail(id)
+        console.log(data)
 
-        if (infoUser) {
-            infoUser.birthday = convertIOSDateToYMD(new Date(infoUser.birthday))      
-            setCurrentAvatar(infoUser.avatar);      
-            setProfile(infoUser)
+        if (data) {
+            data.birthday = convertIOSDateToYMD(new Date(data.birthday))      
+            setCurrentAvatar(data.avatar);      
+            setProfile(data)
         }
 
     }, [])

@@ -28,7 +28,11 @@ export default function SearchBox() {
     })
     document.addEventListener('click', (event) => {
       console.log('document click');
-      ulRef.current.style.display = 'none'
+      try {
+        ulRef.current.style.display = 'none'        
+      } catch (error) {
+        console.log(error);
+      }
     })
   }, [])
 

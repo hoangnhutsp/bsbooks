@@ -16,6 +16,49 @@ import {
 import * as apiInvoice from '../../api/invoice'
 
 function Checkout() {
+  //data ảo về địa chỉ
+  const addr = [{
+    id_user: "60c2668bfb6e0089781ea2b8",
+    address: "Thành phố Hồ Chí Minh",
+    name: "An Nhiên",
+    email: "annhien@gmail.com",
+    phone: "0945362763",
+    is_default: 1
+  },
+  {
+    id_user: "60c2668bfb6e0089781ea2b8",
+    address: "ĐB",
+    name: "An Nhiên",
+    email: "annhien@gmail.com",
+    phone: "0945362764",
+    is_default: 0
+  },
+  {
+    id_user: "60c2668bfb6e0089781ea2b8",
+    address: "ĐT",
+    name: "An Nhiên",
+    email: "annhien@gmail.com",
+    phone: "0945369765",
+    is_default: 0
+  },
+  {
+    id_user: "60c2668bfb6e0089781ea2b8",
+    address: "ĐN",
+    name: "An Nhiên",
+    email: "annhien@gmail.com",
+    phone: "0945362766",
+    is_default: 0
+  },
+  {
+    id_user: "60c2668bfb6e0089781ea2b8",
+    address: "QT",
+    name: "An Nhiên",
+    email: "annhien@gmail.com",
+    phone: "0945362767",
+    is_default: 0
+  }
+  ]
+
   const store = useSelector(state => state);
   const history = useHistory();
   const dispatch = useDispatch()
@@ -24,12 +67,23 @@ function Checkout() {
   const [cart, setCart] = useState()
   const [isLogged, setIsLogged] = useState(-1)
   const [total, setTotal] = useState(0)
+  const [addressList, setAddressList] = useState(addr)
+  const addressDefaul = addressList.filter(item => item.is_default === 1)
+  const addressNotDefaul = addressList.filter(item => item.is_default === 0)
+  const [dataAddress, setDataAddress] = useState(addressDefaul[0])
+
+//cập nhật lại số điện thoại
+  const changeAddress = (addre) => {
+    let data = addressList.filter(item => item.address === addre)
+    let phone = data[0].phone
+    return phone;
+  }
 
   useEffect(() => {
     setIsLogged(store.user.isLogged);
     setInfoUser(store.user.infoUser);
     if (store.cart.items)
-    setCheckout({ ...store.cart, items: store.cart.items.filter(item => item.checked == 1) })
+      setCheckout({ ...store.cart, items: store.cart.items.filter(item => item.checked == 1) })
     setCart(store.cart)
   }, [store])
 
@@ -73,24 +127,24 @@ function Checkout() {
 
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
-    invoice.items = cart.items.filter(item => item.checked == 1)
-    let newItems = cart.items.filter(item => item.checked == 0)
+    invoice.items = cart.items.filter(item => item.checked === 1)
+    let newItems = cart.items.filter(item => item.checked === 0)
 
-    dispatch(updateCart({items: newItems, count: newItems.length}));
-    
+    dispatch(updateCart({ items: newItems, count: newItems.length }));
+
     console.log('CREATE INVOICE --- ');
     await apiInvoice.createInvoice(invoice)
-    .then(res => res.data)
-    .then(data => {
-      if (data.status) {
-        history.push(`/user/purchase/order/${data._id}`)
-      } else {
-        console.log(data);
-      }
-    })
-    .catch(err => console.log(err))
+      .then(res => res.data)
+      .then(data => {
+        if (data.status) {
+          history.push(`/user/purchase/order/${data._id}`)
+        } else {
+          console.log(data);
+        }
+      })
+      .catch(err => console.log(err))
   }
- 
+
   return (isLogged && infoUser && checkout) ? (
     <div className="CheckoutContainer">
       <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
@@ -109,10 +163,24 @@ function Checkout() {
                   <input className="input-checkout" type="text" id="email" name="email" readOnly value={infoUser.email} />
 
                   <label for="adr"><i className="fa fa-home"></i><span className="icon-kc">Địa chỉ</span></label>
-                  <input className="input-checkout" type="text" id="adr" name="address" value={infoUser.address} />
+                  {/* <input className="input-checkout" type="text" id="adr" name="address" value={infoUser.address} /> */}
+                  <select
+                    name="address"
+                    id="address"
+                    className="input-checkout"
+                    value={dataAddress.address}
+                    onChange={e => {
+                      //changeAddress(e.target.value);
+                      setDataAddress({...dataAddress, address: e.target.value, phone: changeAddress(e.target.value)})}}
+                  >
+                    <option value={addressDefaul[0].address}>{addressDefaul[0].address}</option>
+                    {addressNotDefaul.map(item => {
+                      return <option value={item.address}>{item.address}</option>
+                    })}
+                  </select>
 
                   <label for="city"><i className="fa fa-mobile-alt"></i><span className="icon-kc">Số điện thoại</span></label>
-                  <input className="input-checkout" type="text" id="city" name="city" value={infoUser.phone} readOnly />
+                  <input className="input-checkout" type="text" id="phone" name="phone" value={dataAddress.phone} readOnly />
                 </div>
                 <label>
                   <input type="checkbox" name="sameadr" onChange={() => clickShip(payment)} />Giao hàng nhanh trong vòng 2 giờ
@@ -127,19 +195,19 @@ function Checkout() {
             {checkout.items.map((item, idx) => (
               <div className="cart-item">
                 <div className='form'>
-                    <div className="cart-product">
-                        <div className="cart-image">
-                            <img className="cart-image" src={item.image}></img>
-                        </div>
-                        <div className="cart-product-infor">
-                            <p className="cart-product-name">{item.name}</p>
-                            <p className="cart-price-sm">x {item.quantity}</p>
-                            <p className="cart-price-sm">{formatCash(String(item.price))}<span>đ</span></p>
-                        </div>
+                  <div className="cart-product">
+                    <div className="cart-image">
+                      <img className="cart-image" src={item.image}></img>
                     </div>
-                    <div className="cart-unit-price">
-                        <h4>{formatCash(String(item.price*item.quantity))}<span>đ</span></h4>
+                    <div className="cart-product-infor">
+                      <p className="cart-product-name">{item.name}</p>
+                      <p className="cart-price-sm">x {item.quantity}</p>
+                      <p className="cart-price-sm">{formatCash(String(item.price))}<span>đ</span></p>
                     </div>
+                  </div>
+                  <div className="cart-unit-price">
+                    <h4>{formatCash(String(item.price * item.quantity))}<span>đ</span></h4>
+                  </div>
                 </div>
               </div>
             ))}
@@ -150,7 +218,7 @@ function Checkout() {
             <div className="CheckoutContainer-tong-tien-inline">
               <div className="CheckoutContainer-tong-tien">Tổng tiền: <span className="CheckoutContainer-phi-van-chuyen-span">{formatCash(String(total))}đ</span></div>
             </div>
-            
+
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@
     },
     {
         "name" : "DELETE_PRODUCT",
-        "path": "/product",
+        "path": "/product/:_id",
         "method": "DELETE",
         "description" : "DELETE: Delete product"
     },
@@ -49,25 +49,25 @@
     },
     {
         "name" : "UPDATE_ADDRESS",
-        "path": "/address/update",
+        "path": "/address/update/:id",
         "method": "POST",
         "description" : "POST: Update address"
     },
     {
         "name" : "UPDATE_DEFAULT_ADDRESS",
-        "path": "/address/default",
+        "path": "/address/default/:id",
         "method": "POST",
         "description" : "POST: Update default address of user"
     },
     {
         "name" : "DELETE_ADDRESS_BY_ID",
-        "path": "/address/delete",
+        "path": "/address/delete/:id",
         "method": "DELETE",
         "description" : "DELETE: Delete address of user"
     },
     {
         "name" : "GET_ADDRESS",
-        "path": "/address",
+        "path": "/address/:id",
         "method": "GET",
         "description" : "GET: Address by ID address"
     },
@@ -101,7 +101,7 @@
     },
     {
         "name" : "GET_EVALUATE",
-        "path": "/evaluate",
+        "path": "/evaluate/:idProduct",
         "method": "GET",
         "description" : "GET: Get evaluate"
     },
@@ -115,13 +115,13 @@
     },
     {
         "name" : "UPDATE_INVOICE",
-        "path": "/invoice/update",
+        "path": "/invoice/update/:id",
         "method": "POST",
         "description" : "POST: Update invoice"
     },
     {
         "name" : "CANCEL_INVOICE",
-        "path": "/invoice/cancel",
+        "path": "/invoice/cancel/:id",
         "method": "POST",
         "description" : "POST: Cancel invoice"
     },
@@ -139,7 +139,7 @@
     },
     {
         "name" : "GET_INVOICE",
-        "path": "/",
+        "path": "/invoice/:id",
         "method": "GET",
         "description" : "GET: Get invoice by ID"
     },
@@ -161,5 +161,23 @@
         "path": "/notification/status",
         "method": "POST",
         "description" : "POST: Update notification"
+    },
+    {
+        "name" : "DELETE_NOTIFICATION",
+        "path": "/notification/:id",
+        "method": "DELETE",
+        "description" : "DELETE: Delete notification"
+    },
+    {
+        "name" : "GET_ALL_USER",
+        "path": "/admin/user",
+        "method": "GET",
+        "description" : "GET: Get all user (Admin)"
+    },
+    {
+        "name" : "GET_ONE_USER_ADMIN",
+        "path": "/admin/one_user",
+        "method": "GET",
+        "description" : "GET: Get on detail (Admin)"
     }
 ]

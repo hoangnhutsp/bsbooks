@@ -1,11 +1,11 @@
 import React from 'react'
-import {  useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  
+
 } from "react-router-dom"
 
 import Navbar from './components/Navbar'
@@ -37,8 +37,51 @@ import Checkout from './page/cart/Checkout';
 
 import InfoTransport from './components/InfoTransport';
 
+import TestSocket from './components/Test_Socket.js';
+import { SocketContext } from './SocketContext.js'
+
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
+
+import {addNotification} from './redux/actions/notification'
+import { getCart } from './redux/actions/cart';
+import { getNotificationByIdUser } from './redux/actions/notification.js';
+//user socket
+
 
 const App = () => {
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  useEffect(() => {
+      console.log('get cart && get notification');
+      dispatch(getCart());
+      dispatch(getNotificationByIdUser());
+  }, [user.isLogged])
+  let token = localStorage.getItem('token');
+  
+  const socket = useContext(SocketContext)
+  //tạo room của riêng user khi truy cập
+  useEffect(() => {
+    if (socket) {
+        //tạo room của riêng user khi truy cập
+
+      socket.on('connect', () => {
+        console.log("I'm connected with the back-end");
+        socket.emit('joinRoom', token);
+      })
+
+        //lắng nghe khi có thông báo mới
+
+      socket.on('ServerSendNotification', data => {
+        console.log('???');
+        dispatch(addNotification(data))
+      })
+
+    }
+  }, [socket])
+
 
   return (
     <>
@@ -75,7 +118,7 @@ const App = () => {
               <Signup />
             </Route>
             <Route path='/forgot-password'>
-              <ForgotPassword/>
+              <ForgotPassword />
             </Route>
             <Route path="/reset-password/:token">
               <ResetPassword />
@@ -101,11 +144,14 @@ const App = () => {
             <Route path="/contact">
               <ContactPage />
             </Route>
+            <Route path="/test-socket">
+              <TestSocket />
+            </Route>
             <Route path="*">
               <PageNotFound />
             </Route>
           </Switch>
-          
+
           <BackTop></BackTop>
           <InfoTransport />
           <Footer></Footer>

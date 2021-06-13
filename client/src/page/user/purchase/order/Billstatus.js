@@ -3,7 +3,10 @@ import './Billstatus.css';
 import * as api from './../../../../api/invoice'
 import { useHistory, useParams } from 'react-router-dom';
 import iconCancelBill from './../../../../assets/cancel-bill-icon.png'
-import h1 from './img/2.jpg'
+import iconsImage0 from './img/hoa-don-da-cai-dat.png';
+import iconsImage1 from './img/hoa-don-da-duoc-xac-nhan.png';
+import iconsImage2 from './img/giaocho nhavanchuyen.png';
+import iconsImage3 from './img/giaothanhcong.png'
 function Billstatus() {
   const history = useHistory()
   const [invoice, setInvoice] = useState()
@@ -58,6 +61,8 @@ function Billstatus() {
     sync: "fas fa-sync-alt",
   }
 
+  const imgaesForStatus = [iconsImage0, iconsImage1, iconsImage2, iconsImage3];
+
   function formatCash(str) {
     return str.split('').reverse().reduce((prev, next, index) => {
       return ((index % 3) ? next : (next + ',')) + prev
@@ -109,7 +114,7 @@ function Billstatus() {
                 console.log(icon);
                 return (
                   <li className='li-pass-status'>
-                    <img src={h1} /> <br />
+                    <img src={imgaesForStatus[key]} /> <br />
                     <i className={icon}></i>
                     <p>{item}</p>
                   </li>

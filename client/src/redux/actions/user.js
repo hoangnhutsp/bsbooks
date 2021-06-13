@@ -35,7 +35,7 @@ export const userLogin = (info, setErrorResponse) => async (dispatch) => {
                 }
                 window.localStorage.setItem('token', data.token);
                 dispatch({type: 'LOGIN', payload: profile})
-                getCart()
+                
                 setErrorResponse(data)
             } else {
                 setErrorResponse({status: 0, message: data.message})

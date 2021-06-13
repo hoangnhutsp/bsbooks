@@ -1,4 +1,3 @@
-
 const initUser = {
     infoUser: null,
     isLogged: false,
