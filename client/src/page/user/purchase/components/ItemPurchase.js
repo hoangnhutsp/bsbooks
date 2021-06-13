@@ -9,6 +9,12 @@ import { useHistory } from 'react-router-dom';
 
 function ItemPurchase({ invoiceData }) {
 
+    function formatCash(str) {
+        return str.split('').reverse().reduce((prev, next, index) => {
+          return ((index % 3) ? next : (next + ',')) + prev
+        })
+      }
+
     const history = useHistory();
     const [invoice, setItem] = useState()
     useEffect(() => {
@@ -38,20 +44,18 @@ function ItemPurchase({ invoiceData }) {
                                 <p>{val.name}</p>
                                 <span>x{val.quantity}</span>
                             </div>
-                            <div>
-                                <ComponentPrice price={val.price} />
-                            </div>
+                            <span className="info-product-purchase-price"><ComponentPrice price={formatCash(String(val.price))} /></span>
                         </div>
-                        <hr className="hr-break-items"></hr>
+                        <div className="hr-break-items"></div>
                     </div>
                 )
             })}
             <div className="total-lable">
                 <p >Tổng số tiền:</p>
-                <p className="price">{invoice.total}</p>
+                <p className="price">{formatCash(String(invoice.total))}đ</p>
             </div>
-            <button className="total-lable" onClick={() => history.push(`/user/purchase/order/${invoice._id}`)}>
-                <p >Xem chi tiet</p>
+            <button className="total-lable-button" onClick={() => history.push(`/user/purchase/order/${invoice._id}`)}>
+                <p >Xem chi tiết</p>
             </button>
             <hr className="hr-break-purchase"/>
         </div>

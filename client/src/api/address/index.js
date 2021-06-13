@@ -6,7 +6,7 @@ const localhost = 'http://localhost:5000/';
 
 export const createAddress = (data) => {
     let token = localStorage.getItem('token');
-    const URL = localhost + 'address/'; 
+    const URL = localhost + 'address'; 
     return axios.post(URL, data,
         {
         headers: {

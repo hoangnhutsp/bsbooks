@@ -4,7 +4,6 @@
 .Info-col{
     padding: 1rem;
     width: 20%;
-    margin: 1rem 0rem;
 }
 .Info-col ul li {
     font-size: 1.2rem;
@@ -23,11 +22,11 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-
+    margin-top: 5%;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: #363b49;
+    background-color: #498374;
 }
 
 .InfoBold{

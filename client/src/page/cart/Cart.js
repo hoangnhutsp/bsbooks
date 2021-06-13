@@ -15,7 +15,7 @@ import {
     useHistory,
 } from 'react-router-dom'
 
-import imgEmptyCart from '../../assets/emptycart.png'
+import imgEmptyCart from '../../assets/bag-empty.svg'
 
 function Cart() {
     const dispatch = useDispatch();
@@ -80,10 +80,7 @@ function Cart() {
             <div className="cart-is-empty">
                 <img alt="icon" className="cart-is-empty-icon" src={imgEmptyCart} />
                 <p className="cart-is-empty-content">Không có sản phẩm nào trong giỏ hàng.</p>
-                <p className="cart-is-empty-content">Quay lại cửa hàng để tiếp tục mua sắm.</p>
-
-
-                
+                <a href="/" className="cart-is-empty-content-a">Quay lại trang chủ</a>
             </div>
         )
     }

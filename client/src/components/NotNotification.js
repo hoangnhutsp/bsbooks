@@ -18,7 +18,7 @@ function NotNotification() {
                   <img alt="img" src={iconNotNotification} />
                   <div className="NotNotificationContainer-notifi-text">
                       <h4>Không có thông báo nào!!!</h4>
-                      <a href="#">Quay lại</a>
+                      <a href="/">Quay lại</a>
                   </div>
               </div>
           </div>

@@ -74,7 +74,7 @@ function Address() {
 
                 </div>
             </div>
-            <hr />
+            <div className="underline-container-user-profile"></div>
             {address&&address.length>0?address.map(
                 (val, key) => {
                     return (

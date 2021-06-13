@@ -38,18 +38,18 @@ function Billstatus() {
   }]
 
   const statusInvoice = [
-    "Don hang Đã Đặt",
-    "Cho Xác Nhận",
+    "Đơn hàng Đã Đặt",
+    "Chờ Xác Nhận",
     "Đã Giao ĐVVC",
-    "Nhan dc hang",
+    "Nhận được hàng",
   ]
 
   const statusState = [
-    'Cho xac nhan',
-    'Giao DVVC',
-    'Dang giao',
-    'Nhan hang thanh cong',
-    'Da Huy',
+    'Chờ xác nhận',
+    'Giao ĐVVC',
+    'Đang giao',
+    'Nhận hàng thành công',
+    'Đã hủy',
   ]
 
   const icons = {
@@ -68,7 +68,7 @@ function Billstatus() {
       <div className='billstatus-cancel-bill-component'>
         <div>
         <img src={iconCancelBill} alt='Cancel Bill' className="billstatus-cancel-bill-component-img"/>
-        <p className="al-center">HUY</p>
+        <p className="al-center">HỦY</p>
 
         </div>
       </div>
@@ -136,11 +136,11 @@ function Billstatus() {
             </div>
             <div className="content-and-time-delivery-address">
               <div className="content-delivery-address">
-                <div className="name-user-delivery-address">{invoice.name}</div>
+                <div className="name-user-delivery-address">Họ và tên: {invoice.name}</div>
                 <div className="phone-and-delivery">
-                  <span>{invoice.phone}</span>
+                  <span>Số điện thoại: {invoice.phone}</span>
                   <br />
-                  {invoice.address}
+                  Địa chỉ: {invoice.address}
                 </div>
               </div>
               {/* <div className="detail-time-delivery-address">
@@ -174,12 +174,12 @@ function Billstatus() {
                         </div>
                         <div className="cart-product-infor">
                           <p className="cart-product-name">{item.name}</p>
-                          <p className="cart-price-sm">{item.price}</p>
+                          <p className="cart-price-sm">{formatCash(String(item.price))}đ</p>
                           <span>x {item.quantity}</span>
                         </div>
                       </div>
                       <div className="cart-list-product-details-bill-unit-price">
-                        <h4>{formatCash(String(item.price * item.quantity))}</h4>
+                        <h4>{formatCash(String(item.price * item.quantity))}<span>đ</span></h4>
                       </div>
                     </form>
                   </div>
@@ -187,12 +187,10 @@ function Billstatus() {
               })}
               <div className="cart-total-holder-list-product-details-bill">
                 <div className="cart-total-list-product-details-bill">
-                  <p>Phí vận chuyển </p>
-                  <p>{invoice.ship_price}</p>
+                  <p>Phí vận chuyển: <span>{formatCash(String(invoice.ship_price))}đ</span></p>
                 </div>
                 <div className="cart-total-list-product-details-bill">
-                  <p>Tổng tiền</p>
-                  <p>{invoice.total}</p>
+                  <p>Tổng tiền: {formatCash(String(invoice.total))}<span>đ</span></p>
                 </div>
               </div>
             </div>
