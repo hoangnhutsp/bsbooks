@@ -29,21 +29,20 @@ export default function ListInvoice() {
             })
             .catch(err => console.log(err))
     }, [])
-    const cancleInvoice = async (id) => {
-        console.log('call cancle');
-        await apiInvoice.cancelInvoice(id)
-            .then(res => res.data)
-            .then(data => {
-                console.log(data);
-            })
-            .catch(err => console.log(err))
+    const InvoiceIsEmpty = () => {
+        return(
+            <div className="row-center-50vh">
+                <div>Chưa có đơn hàng...</div>
+            </div>
+        )
     }
     return (
         <div>
             <div className="ListInvoice-header-frist">
                 QUẢN LÝ ĐƠN HÀNG
             </div>
-            <div class="row">
+            {(listInvoice.length===0)?<InvoiceIsEmpty />
+            :<div class="row">
                 <div class="col-lg-6">
                     <div class="main-card mb-3 card">
                         <div class="card-body">
@@ -65,7 +64,7 @@ export default function ListInvoice() {
                                                 </td>
                                                 <td>
                                                     <Link to={`edit-invoice/${item._id}`} className="Invoice-Edit">
-                                                        <span className="Invoice-Edit">Sửa</span>
+                                                        <span className="Invoice-Edit">Cập nhật</span>
                                                     </Link>
                                                 </td>
                                             </tbody>
@@ -76,7 +75,7 @@ export default function ListInvoice() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 

@@ -11,39 +11,42 @@ const checkUserID = userID => {
 }
 export const addToCart = async (req, res) => {
     try {
+        console.log('ADD TO CART');
         let infoCart = req.body;
         let userID = req.userID;
 
         if (!checkUserID(userID) || !checkInfoCart(infoCart)) {
-            res.status(200).json({
-                status: 0,
-                message: 'wr userID, or info cart'
-            });
+            res.status(400).json({status: 0});
         }
         else {
-            let count = 1;
             const cart = await Cart.findOne({ userID });
             if (!cart) {
                 const newCart = new Cart({
                     userID,
                     items: infoCart,
-                    count,
+                    count: 1,
                     status: 0,
                 });
                 await newCart.save();
             }
             else {
                 const items = cart["items"];
-                console.log(items);
+                let count = cart.count;
+
                 let indexItem = items.findIndex(q => q["_id"] == infoCart["_id"]);
-                console.log(indexItem);
                 if (indexItem !== -1) {
                     items[indexItem]["quantity"] += infoCart["quantity"];
-                } else items.push(infoCart)
+                } else {
+                    items.push(infoCart)
+                    count++;
+                }
 
-                await Cart.findByIdAndUpdate(cart["_id"], { items }, { new: true });
+                let newcart = {};
+                newcart.items = items;
+                newcart.count = count;
+                await Cart.findByIdAndUpdate(cart["_id"], newcart, { new: true });
             }
-            res.status(200).json({ message: 'Add cart successful' });
+            res.status(200).json({ status: 1 });
         }
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -56,10 +59,11 @@ const resDataCart = {
 }
 export const getCartItem = async (req, res) => {
     try {
+        console.log('get CART ITEM');
         let userID = req.userID;
+        console.log(userID);
         const filter = {
             userID: {$eq : userID},
-            status: {$eq : 0},
         }
 
         let cart = await Cart.findOne(filter);
@@ -69,6 +73,7 @@ export const getCartItem = async (req, res) => {
             resDataCart.count = cart.count;
         }
 
+        console.log(resDataCart);
         res.status(200).json(resDataCart)
     } catch (error) {
         res.status(404).json({ message: error.message })

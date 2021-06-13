@@ -37,7 +37,14 @@ function Checkout() {
     .then(res => res.data)
     .then(data => {
         setAddressList(data.result)
-        setDataAddress(data.result[0])
+        if (data.result.length === 0) {
+          setDataAddress({
+            address: '',
+            phone: '',
+            name: '',
+          })
+        }
+        else setDataAddress(data.result[0])
     })
     .catch(err => console.log(err))
 }, [])
@@ -95,8 +102,8 @@ function Checkout() {
     invoice.total = total;
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
-    invoice.items = cart.items.filter(item => item.checked === 1)
-    let newItems = cart.items.filter(item => item.checked === 0)
+    invoice.items = cart.items.filter(item => item.checked == 1)
+    let newItems = cart.items.filter(item => item.checked == 0)
 
     dispatch(updateCart({ items: newItems, count: newItems.length }));
 
@@ -136,7 +143,7 @@ function Checkout() {
                       setDataAddress({ ...dataAddress, address: e.target.value, phone: changeAddress(e.target.value).phone, name: changeAddress(e.target.value).name })
                     }}
                   >
-                    {addressList.length>0&&<option value={addressList[0].address}>{addressList[0].address}</option>}
+                    {/* {addressList.length>0&&<option value={addressList[0].address}>{addressList[0].address}</option>} */}
                     {(addressList.length>0)&&addressList.map(item => {
                       return <option value={item.address}>{item.address}</option>
                     })}
