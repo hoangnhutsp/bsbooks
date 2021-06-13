@@ -128,6 +128,7 @@ export const loginFacebook = async (req, res) => {
     console.log('LONGIN FACEBOOK');
     const userID = req.body.userID;
     const accessToken = req.body.accessToken;
+    console.log(userID);
     let urlGraphFaceBook = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`
     let email, name;
     await axios.get(urlGraphFaceBook)
