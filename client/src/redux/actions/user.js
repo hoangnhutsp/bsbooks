@@ -36,11 +36,6 @@ export const userLogin = (info, setErrorResponse) => async (dispatch) => {
                 window.localStorage.setItem('token', data.token);
                 dispatch({type: 'LOGIN', payload: profile})
                 getCart()
-                .then(res => res.data)
-                .then(data => {
-                    dispatch({type: 'GET_CART', payload: data})
-                })
-
                 setErrorResponse(data)
             } else {
                 setErrorResponse({status: 0, message: data.message})

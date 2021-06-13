@@ -1,91 +1,103 @@
 import React, { useEffect, useState } from 'react'
-import iconcompeteinvoice from './icon/complete_invoice.png'
-import iconCheck from './icon/check.png'
-import iconTransport from './icon/transport.png'
-
+import { Link } from 'react-router-dom';
+import { getInvoiceLists } from '../../../api/invoice/invoice_list';
 import './ListInvoice.css'
 
+import * as apiInvoice from '../../../api/invoice'
+
+
+
 export default function ListInvoice() {
-    const Items = [
-        {
-            _id: 12,
-            status: 0,
-            date: "24-04-2020",
-            total_amount: 1000000,
-            products: [
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "sach ABC",
-                    quantity: 1,
-                    price: 100000,
-                },
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "BCND",
-                    quantity: 10,
-                    price: 12123124,
-                }
-            ]
-        },
-        {
-            _id: 13,
-            status: 1,
-            date: "24-04-2020",
-            total_amount: 1000000,
 
-            products: [
-                {
-                    url: "http://localhost:5000/upload/images/00000_thumbnail_url.png",
-                    name: "Sach hihi",
-                    quantity: 1,
-                    price: 100000,
-                },
+    const statusType = (item) => {
+        if (item.status_invoice === 0) return ("Chờ xác nhận")
+        if (item.status_invoice === 1) return ("Giao cho DVVC")
+        if (item.status_invoice === 2) return ("Đang giao")
+        if (item.status_invoice === 3) return ("Đã giao")
+        if (item.status_invoice === 4) return ("Đã hủy")
+    }
 
-            ]
-        },
-    ]
+    const [listInvoice, setListInvoice] = useState([])
+
+    useEffect(async () => {
+        await apiInvoice.getAllInvoice()
+            .then(res => res.data)
+            .then(data => {
+                console.log(data);
+                if (data.status)
+                    setListInvoice(data.invoice)
+            })
+            .catch(err => console.log(err))
+    }, [])
+    const cancleInvoice = async (id) => {
+        console.log('call cancle');
+        await apiInvoice.cancelInvoice(id)
+            .then(res => res.data)
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => console.log(err))
+    }
     return (
         <div>
-                <div className="ListInvoice-header-frist">
-                    QUẢN LÝ ĐƠN HÀNG
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+            <div className="ListInvoice-header-frist">
+                QUẢN LÝ ĐƠN HÀNG
             </div>
-                <div className="ListInvoice-2">
-                    <div className="ListInvoice-header">
-                        <p>Mã Đơn Hàng</p>
-                        <p>Thời Gian</p>
-                        <p>Khách Hàng</p>
-                        <p>Tổng Tiền</p>
-                        <p>Trạng Thái</p>
-                        <p>Hủy Đơn</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <table class="mb-0 table">
+                                <thead>
+
+                                    <th>Mã Đơn Hàng</th>
+
+                                    <th>Khách Hàng</th>
+
+                                    <th>Trạng Thái</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Hủy Đơn</th>
+
+                                </thead>
+
+                                {
+                                    listInvoice.map((item) => {
+                                        return (
+                                            <tbody>
+                                                <td className="Invoice-id"> {item._id}</td>
+
+                                                <td className="Invoice-user-name">{item.name}</td>
+
+                                                <td className="Invoice-status">
+                                                    {statusType(item)}
+                                                </td>
+
+                                                <td>
+                                                    <Link to={`edit-invoice/${item._id}`} className="Invoice-Edit">
+                                                        <span className="Invoice-Edit">Sửa</span>
+                                                    </Link>
+                                                </td>
+                                                <td>
+                                                    <button className="Invoice-cancel" onClick={() => cancleInvoice(item._id)}>
+                                                        <span className="Invoice-cancel">X</span>
+                                                    </button>
+                                                </td>
+                                            </tbody>
+
+                                        )
+
+                                    })
+                                }
+                            </table>
+
+
+                        </div>
                     </div>
-                    <div className="ListInvoice-underline"></div>
-                    {
-                        Items.map((item) => {
-                            return (
-
-                                <div className="Invoice-Item">
-                                    <div className="Invoice-Form">
-                                        <div className="Invoice-id"> {item._id}</div>
-                                        <div className="Invoice-date">{item.date}</div>
-                                        <div className="Invoice-user-name">Le van luiuiu</div>
-                                        <div className="Invoice-totalmoney">{item.total_amount}</div>
-                                        <div className="Invoice-status">
-                                            {item.status}
-                                        </div>
-                                        <div className="Invoice-cancel">
-                                            X
-                                    </div>
-                                    </div>
-                                </div>
-                            )
-
-                        })
-                    }
-                </div>
-                <div className="ListInvoice-detail" >
                 </div>
             </div>
-       
+        </div>
     )
 
 }

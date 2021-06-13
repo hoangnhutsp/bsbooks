@@ -61,7 +61,7 @@ function Checkout() {
     }
   }, [payment, infoUser])
 
-  const btnCheckout = () => {
+  const btnCheckout = async () => {
     console.log('btn checkout');
 
     let invoice = {}
@@ -70,23 +70,36 @@ function Checkout() {
     invoice.email = infoUser.email;
     invoice.phone = infoUser.phone;
     invoice.total = total;
+
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
     invoice.items = cart.items.filter(item => item.checked == 1)
     let newItems = cart.items.filter(item => item.checked == 0)
+
     dispatch(updateCart({items: newItems, count: newItems.length}));
-    apiInvoice.createInvoice(invoice);
+    
+    console.log('CREATE INVOICE --- ');
+    await apiInvoice.createInvoice(invoice)
+    .then(res => res.data)
+    .then(data => {
+      if (data.status) {
+        history.push(`/user/purchase/order/${data._id}`)
+      } else {
+        console.log(data);
+      }
+    })
+    .catch(err => console.log(err))
   }
  
   return (isLogged && infoUser && checkout) ? (
     <div className="CheckoutContainer">
       <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
       <h2 className="h2-checkout">Chi Tiết Hóa Đơn</h2>
-      <div className="row">
+      <div className="CheckoutContainer-row">
         <div className="col-75">
-          <div className="container">
+          <div className="CheckoutContainer-container">
             <form action="">
-              <div className="row">
+              <div className="CheckoutContainer-row">
                 <div className="col-58">
                   <h3 className="h3-checkout">Thông tin địa chỉ</h3>
                   <label for="fname"><i className="fa fa-user"></i><span className="icon-kc">Họ và Tên</span></label>
@@ -109,30 +122,35 @@ function Checkout() {
           </div>
         </div>
         <div className="col-25">
-          <div className="container">
+          <div className="CheckoutContainer-container">
             <h3 className="h3-checkout">Giỏ hàng</h3>
             {checkout.items.map((item, idx) => (
               <div className="cart-item">
-                <form action="">
-                  <div className="cart-product">
-                    <div className="cart-image">
-                      <img className="cart-image" src={item.image}></img>
+                <div className='form'>
+                    <div className="cart-product">
+                        <div className="cart-image">
+                            <img className="cart-image" src={item.image}></img>
+                        </div>
+                        <div className="cart-product-infor">
+                            <p className="cart-product-name">{item.name}</p>
+                            <p className="cart-price-sm">x {item.quantity}</p>
+                            <p className="cart-price-sm">{formatCash(String(item.price))}<span>đ</span></p>
+                        </div>
                     </div>
-                    <div className="cart-product-infor">
-                      <p className="cart-product-name">{item.name}</p>
-                      <p className="cart-price-sm">{item.price}</p>
-                      <span>x {item.quantity}</span>
+                    <div className="cart-unit-price">
+                        <h4>{formatCash(String(item.price*item.quantity))}<span>đ</span></h4>
                     </div>
-                  </div>
-                  <div className="cart-unit-price">
-                    <h4>{formatCash(String(item.price * item.quantity))}</h4>
-                  </div>
-                </form>
+                </div>
               </div>
             ))}
-            <div>Phí vận chuyển <span>{formatCash(String(payment ? 30000 : 12000))}</span></div>
+            <div className="CheckoutContainer-phi-van-chuyen-inline">
+              <div className="CheckoutContainer-phi-van-chuyen">Phí vận chuyển: <span className="CheckoutContainer-phi-van-chuyen-span">{formatCash(String(payment ? 30000 : 12000))}đ</span></div>
+            </div>
             <br />
-            <div>Tổng tiền <span>{formatCash(String(total))}</span></div>
+            <div className="CheckoutContainer-tong-tien-inline">
+              <div className="CheckoutContainer-tong-tien">Tổng tiền: <span className="CheckoutContainer-phi-van-chuyen-span">{formatCash(String(total))}đ</span></div>
+            </div>
+            
           </div>
         </div>
       </div>

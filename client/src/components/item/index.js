@@ -1,6 +1,6 @@
 import './styles.css'
 import Rate from '../rate'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 //cắt tên
 export const trimProductName = prodName => {
@@ -14,9 +14,15 @@ export const trimProductName = prodName => {
 };
 
 const Item = (props) => {
+    const history = useHistory()
     const { data } = props
     if (!data) return null
     return (
+        <div onClick={() => {
+            history.push(`/product-details/${data._id}`)
+            window.location.reload()
+        }}>
+         
         <div className='class-product-detail-for-unline-link-tag'>
             <Link to={`/product-details/${data._id}`}>
                 <div className="item hover" >
@@ -37,6 +43,7 @@ const Item = (props) => {
 
             </Link>
         </div>
+    </div>
     )
 }
 

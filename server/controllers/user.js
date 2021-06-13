@@ -15,7 +15,7 @@ const API_KEY_MAIL_GUN = process.env.API_KEY_MAIL_GUN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const RESET_PASSWORD = process.env.RESET_PASSWORD;
-const SECRET = process.env.RESET_PASSWORD;
+const SECRET = process.env.SECRET;
 
 
 const mg = mailgun({ apiKey: API_KEY_MAIL_GUN, domain: DOMAIN_MAIL_GUN });
@@ -125,7 +125,7 @@ const getAvatarFacebook = async (userID, accessToken) => {
 }
 
 export const loginFacebook = async (req, res) => {
-
+    console.log('LONGIN FACEBOOK');
     const userID = req.body.userID;
     const accessToken = req.body.accessToken;
     let urlGraphFaceBook = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`
@@ -183,7 +183,7 @@ export const forgotPassWord = async (req, res) => {
                     Bạn hãy Nhấn vào đây để đổi mật khẩu.
                 </p>
                 
-                <a href="https://www.facebook.com/" style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">Clickme</a>
+                <a href="http://localhost:3000/reset-password/${token}" style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">DOI MAT KHAU</a>
             
                 <p>Nếu không nhấn vào bên trên vì một số lỗi kĩ thuật được thì bạn hãy truy cập vào đường dẫn này: 
                 </p>
@@ -195,6 +195,7 @@ export const forgotPassWord = async (req, res) => {
 
             const updateLink = await User.findByIdAndUpdate(user._id, { resetLink: token }, { new: true });
             await mg.messages().send(data, function (error, body) {
+                console.log(error, body);
                 if (error) {
                     res.status(200).json({ status: 0, message: MESSAGE_USER.MAIL_GUN_WR })
                 }

@@ -36,7 +36,6 @@ const ProductPage = (props) => {
     }, [])
 
     useEffect(() => {
-    
         getData();
     }, [sortType, page, id_cate, fromValue, toValue, rating])
 

@@ -5,7 +5,6 @@ import Category from '../models/category.js'
 import ProductDetail from '../models/product_detail.js'
 import Config from '../models/config.js';
 
-const DEFAULT_Q = "";
 const DEFAULT_PAGE = 1;
 const DEFAULT_SIZE_PAGE = 20;
 const DEFAULT_PRICE = "0,100000000";
@@ -14,14 +13,12 @@ const DEFAULT_SORT = "review_count,desc";
 const DEFAULT_CRITERIA = "desc";
 const DEFAULT_CATEGORY = 1;
 const SIZE_OF_SUGGESTION = 6;
-const DEFAULT_MAX_PRICE = 10000000;
+const DEFAULT_MAX_PRICE = 100000000;
 
 const getListCate = async (query) => {
-
     try {
         let id = query.category || DEFAULT_CATEGORY;
 
-        console.log(id);
         if (id > 40) id = DEFAULT_CATEGORY;
         const category = await Category.find({ id: id })
         if (category === []) {
@@ -34,22 +31,18 @@ const getListCate = async (query) => {
         return arrCate;
 
     } catch (error) {
-        console.log(error.message);
+        console.log('WR: getListCate');
+        return [];
     }
 }
 
-
 const getBreadcrumbCategory = async (query) => {
     let category = query.category || DEFAULT_CATEGORY;
-
-    console.log(category);
     let cate = await Category.findOne({ id: category })
     let breadcrumb = [];
 
     if (cate) {
         let id_path = cate.id_path.split('-');
-
-
         for (let i = 0; i < id_path.length; i++) {
             if (id_path[i] == 0) continue;
             let { name } = await Category.findOne({ id: id_path[i] })
@@ -71,7 +64,8 @@ const initQuery = async (query) => {
     const queryString = {
         price: { $gt: minPrice, $lt: maxPrice },
         rating_average: { $gt: rating - 1 },
-        id_category: { $in: category }
+        id_category: { $in: category },
+        deletedAt: null
     }
 
     if (q) {
@@ -83,7 +77,6 @@ const initQuery = async (query) => {
 }
 
 const initSort = (query) => {
-    console.log(query.sort);
     let sort = String(query.sort || DEFAULT_SORT).split(',');
     let type = sort[0];
     let criteria = sort[1] || DEFAULT_CRITERIA;
@@ -126,7 +119,6 @@ export const getProduct = async (req, res) => {
 
         let page = query.page || DEFAULT_PAGE;
         const pageMax = Math.floor((size - 1) / DEFAULT_SIZE_PAGE) + 1;
-        console.log("pageMax", pageMax);
         page = Math.max(page, 1);
         page = Math.min(page, pageMax)
         product = slicePage(page, product)
@@ -134,7 +126,6 @@ export const getProduct = async (req, res) => {
 
         let breadcrumb = await getBreadcrumbCategory(query);
 
-        console.log(queryString);
         let minPrice = queryString.price.$gt;
         let maxPrice = queryString.price.$lt;
 
@@ -178,31 +169,34 @@ export const getProductByID = async (req, res) => {
     try {
         let _id = req.params.id;
 
-        let product = await Product.findOne({ _id });
-        let id = product["id"];
-        let productDetail = await ProductDetail.findOne({ id });
+        let product = await Product.findOne({ _id, deletedAt: null });
 
-        console.log(product);
-        console.log(productDetail);
-        let data = {};
-        for (let x of attributeProductDetails) {
-            if (x in product) {
-                data[x] = product[x];
-            } else
-                if (x in productDetail) {
-                    data[x] = productDetail[x];
-                }
+        if (product !== null) {
+            let id = product["id"];
+            let productDetail = await ProductDetail.findOne({ id, deletedAt: null });
+    
+            let data = {};
+            for (let x of attributeProductDetails) {
+                if (x in product) {
+                    data[x] = product[x];
+                } else
+                    if (x in productDetail) {
+                        data[x] = productDetail[x];
+                    }
+            }
+    
+            let x = {};
+            x.category = data.id_category;
+            let breadcrumb = await getBreadcrumbCategory(x);
+    
+            res.status(200).json({ data, breadcrumb });
+        
+        } else {
+            res.status(400).json({ message: 'Khong tim thay san pham' });
+
         }
-
-        let x = {};
-        x.category = data.id_category;
-        let breadcrumb = await getBreadcrumbCategory(x);
-
-        res.status(200).json({ data, breadcrumb });
-
-
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 }
 
@@ -222,7 +216,6 @@ function removeVietnameseAccent (str) {
 }
 export const createProduct = async (req, res) => {
     try {
-        console.log('create product');
         let { newProduct, newProductDetail, image } = req.body;
         if (!newProduct || !newProductDetail || !image) {
             return res.status(500).json({ message: "Info not valid!!!" })
@@ -252,22 +245,17 @@ export const createProduct = async (req, res) => {
             const newP = new Product(newProduct);
             const newPD= new ProductDetail(newProductDetail);
 
-            console.log(newP);
-
-            console.log(newPD);
             await newP.save();
             await newPD.save();
         }
         res.status(201).json({ status: 1});
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({ message: error.message })
     }
 }
 
 export const updateProduct = async (req, res) => {
-    console.log('UPDATE PRODUCT');
     const product = req.body;
     if (!product) {
         return res.status(400).send({ message: "Data update can not empty" })
@@ -276,7 +264,6 @@ export const updateProduct = async (req, res) => {
     let id = product.id;
     try {
         await Product.findByIdAndUpdate(_id, product, { useFindAndModify: true });
-        console.log(product);
         let { specifications, description } = product
         await ProductDetail.findOneAndUpdate({ id }, { specifications, description }, { useFindAndModify: true })
         res.status(201).json({ message: "sussessfully!!!" })
@@ -314,7 +301,7 @@ export const suggestionProduct = async (req, res) => {
     try {
         let q = req.query.q;
         let regex = new RegExp(q, 'i');
-        const product = await Product.find({ idx_name: regex }, { name: 1 }).limit(SIZE_OF_SUGGESTION);
+        const product = await Product.find({ idx_name: regex, deletedAt: null }, { name: 1 }).limit(SIZE_OF_SUGGESTION);
         res.status(200).json({ size: product.length, product })
 
     } catch (error) {
@@ -328,7 +315,8 @@ export const getProductByCategoryLimit = async (req, res) => {
         let category = await getListCate(query);
        
         const queryString = {
-            id_category: { $in: category }
+            id_category: { $in: category },
+            deletedAt: null,
         }
         let product = await Product.find(queryString);
 
@@ -338,4 +326,17 @@ export const getProductByCategoryLimit = async (req, res) => {
     } catch (error) {
         res.status(400).json(error)
     }
+}
+
+export const deleteProductByID = async (req, res) => {
+    try {
+        let _id = req.params._id;
+
+        const {id} = await Product.findOneAndUpdate({_id}, {deletedAt: Date.now()}, { useFindAndModify: true });
+        await ProductDetail.findOneAndUpdate({id}, {deletedAt: Date.now()})
+        res.status(200).json({status: 1, message: 'remove success'});
+    } catch (error) {   
+        res.sendStatus(400);
+    }
+
 }

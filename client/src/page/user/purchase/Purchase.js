@@ -64,7 +64,7 @@ function Purchase() {
 
             <div className="list-item-purchase">
                 {
-                    currData?currData.map((val, key) => <ItemPurchase invoiceData={val} />):
+                    (currData&&currData.length)>0?currData.map((val, key) => <ItemPurchase invoiceData={val} />):
                     <ListItemPurchaseIsEmpty />
                 }
             </div>

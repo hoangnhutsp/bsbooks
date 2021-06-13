@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Item from '../item/index.js'
 import './RecentlyView.css'
 import { Link } from 'react-router-dom'
-
 import * as apiProduct from '../../api/product'
 
 const ProductListCategory = ({category}) => {

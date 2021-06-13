@@ -86,3 +86,8 @@ export const resetPassword = async ({token, password}) => {
     return await axios.post(URL, {password})
 }
 
+
+export const forgotFassword = async (email) => {
+    const URL = localhost + `user/forgot-password`;
+    return axios.post(URL, email)
+}

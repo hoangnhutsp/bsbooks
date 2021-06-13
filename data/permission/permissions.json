@@ -1,0 +1,177 @@
+[
+    {
+        "name" : "UPDATE_PRODUCT",
+        "path": "/product/update",
+        "method": "POST",
+        "description" : "POST: Update product"
+    },
+    {
+        "name" : "CREATE_PRODUCT",
+        "path": "/product",
+        "method": "POST",
+        "description" : "POST: Create product"
+    },
+    {
+        "name" : "DELETE_PRODUCT",
+        "path": "/product/:_id",
+        "method": "DELETE",
+        "description" : "DELETE: Delete product"
+    },
+    {
+        "name" : "GET_ACCOUNT",
+        "path": "/user/profile",
+        "method": "GET",
+        "description" : "GET: Get profile of account"
+    },
+    {
+        "name" : "UPDATE_ACCOUNT",
+        "path": "/user/update",
+        "method": "POST",
+        "description" : "POST: Update account"
+    },
+    {
+        "name" : "UPDATE_PASSWORD_ACCOUNT",
+        "path": "/user/change-password",
+        "method": "POST",
+        "description" : "POST: Change password of account"
+    },
+    {
+        "name" : "CREATE_ADDRESS",
+        "path": "/address",
+        "method": "POST",
+        "description" : "POST: Create new address"
+    },
+    {
+        "name" : "GET_ADDRESS_BY_USER_ID",
+        "path": "/address/user",
+        "method": "GET",
+        "description" : "GET: Get address of user"
+    },
+    {
+        "name" : "UPDATE_ADDRESS",
+        "path": "/address/update/:id",
+        "method": "POST",
+        "description" : "POST: Update address"
+    },
+    {
+        "name" : "UPDATE_DEFAULT_ADDRESS",
+        "path": "/address/default/:id",
+        "method": "POST",
+        "description" : "POST: Update default address of user"
+    },
+    {
+        "name" : "DELETE_ADDRESS_BY_ID",
+        "path": "/address/delete/:id",
+        "method": "DELETE",
+        "description" : "DELETE: Delete address of user"
+    },
+    {
+        "name" : "GET_ADDRESS",
+        "path": "/address/:id",
+        "method": "GET",
+        "description" : "GET: Address by ID address"
+    },
+    
+    
+    {
+        "name" : "UPDATE_CART",
+        "path": "/cart/update",
+        "method": "POST",
+        "description" : "POST: Update shopping cart"
+    },
+    {
+        "name" : "ADD_TO_CART",
+        "path": "/cart",
+        "method": "POST",
+        "description" : "POST: Add items to shopping cart"
+    },
+    {
+        "name" : "GET_CART",
+        "path": "/cart",
+        "method": "GET",
+        "description" : "GET: Items in shopping cart"
+    },
+    
+    
+    {
+        "name" : "CREATE_EVALUATE",
+        "path": "/evaluate",
+        "method": "POST",
+        "description" : "POST: Create new evaluate"
+    },
+    {
+        "name" : "GET_EVALUATE",
+        "path": "/evaluate/:idProduct",
+        "method": "GET",
+        "description" : "GET: Get evaluate"
+    },
+    
+    
+    {
+        "name" : "CREATE_INVOICE",
+        "path": "/invoice/create",
+        "method": "POST",
+        "description" : "POST: Create invoice"
+    },
+    {
+        "name" : "UPDATE_INVOICE",
+        "path": "/invoice/update/:id",
+        "method": "POST",
+        "description" : "POST: Update invoice"
+    },
+    {
+        "name" : "CANCEL_INVOICE",
+        "path": "/invoice/cancel/:id",
+        "method": "POST",
+        "description" : "POST: Cancel invoice"
+    },
+    {
+        "name" : "GET_ALL_INVOICE",
+        "path": "/invoice/getall",
+        "method": "GET",
+        "description" : "GET: Get all invoice of USER"
+    },
+    {
+        "name" : "GET_INVOICE_BY_USER_ID",
+        "path": "/invoice/user",
+        "method": "GET",
+        "description" : "GET: Get invoice of USER"
+    },
+    {
+        "name" : "GET_INVOICE",
+        "path": "/:id",
+        "method": "GET",
+        "description" : "GET: Get invoice by ID"
+    },
+
+    {
+        "name" : "CREATE_NOTIFICATION",
+        "path": "/notification",
+        "method": "POST",
+        "description" : "POST: Create notifications to USER"
+    },
+    {
+        "name" : "GET_NOTIFICATION",
+        "path": "/notification",
+        "method": "GET",
+        "description" : "GET: Get notification of USER"
+    },
+    {
+        "name" : "UPDATE_NOTIFICATION",
+        "path": "/notification/status",
+        "method": "POST",
+        "description" : "POST: Update notification"
+    },
+    {
+        "name" : "GET_ALL_USER",
+        "path": "/admin/user",
+        "method": "GET",
+        "description" : "GET: Get all user (Admin)"
+    },
+    {
+        "name" : "GET_ONE_USER_ADMIN",
+        "path": "/admin/one_user",
+        "method": "GET",
+        "description" : "GET: Get on detail (Admin)"
+    }
+]
