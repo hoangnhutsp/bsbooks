@@ -14,50 +14,10 @@ import {
 } from '../../redux/actions/cart';
 
 import * as apiInvoice from '../../api/invoice'
+import * as apiAddress from '../../api/address'
 
 function Checkout() {
-  //data ảo về địa chỉ
-  const addr = [{
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "Thành phố Hồ Chí Minh",
-    name: "An Nhiên 1",
-    email: "annhien@gmail.com",
-    phone: "0945362763",
-    is_default: 1
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "ĐB",
-    name: "An Nhiên 2",
-    email: "annhien@gmail.com",
-    phone: "0945362764",
-    is_default: 0
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "ĐT",
-    name: "An Nhiên 3",
-    email: "annhien@gmail.com",
-    phone: "0945369765",
-    is_default: 0
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "ĐN",
-    name: "An Nhiên 4",
-    email: "annhien@gmail.com",
-    phone: "0945362766",
-    is_default: 0
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "QT",
-    name: "An Nhiên 5",
-    email: "annhien@gmail.com",
-    phone: "0945362767",
-    is_default: 0
-  }
-  ]
+  
 
   const store = useSelector(state => state);
   const history = useHistory();
@@ -67,11 +27,20 @@ function Checkout() {
   const [cart, setCart] = useState()
   const [isLogged, setIsLogged] = useState(-1)
   const [total, setTotal] = useState(0)
-  const [addressList, setAddressList] = useState(addr)
-  const addressDefaul = addressList.filter(item => item.is_default === 1)
-  const addressNotDefaul = addressList.filter(item => item.is_default === 0)
-  const [dataAddress, setDataAddress] = useState(addressDefaul[0])
+  const [addressList, setAddressList] = useState([])
+  // const addressDefaul = addressList.filter(item => item.is_default === 1)
+  // const addressNotDefaul = addressList.filter(item => item.is_default === 0)
+  const [dataAddress, setDataAddress] = useState([])
 
+  useEffect(() => {
+    apiAddress.getAddress()
+    .then(res => res.data)
+    .then(data => {
+        setAddressList(data.result)
+        setDataAddress(data.result[0])
+    })
+    .catch(err => console.log(err))
+}, [])
   //cập nhật lại số điện thoại
   const changeAddress = (addre) => {
     let data = addressList.filter(item => item.address === addre)
@@ -119,12 +88,11 @@ function Checkout() {
     console.log('btn checkout');
 
     let invoice = {}
-    invoice.name = infoUser.name;
-    invoice.address = infoUser.address;
-    invoice.email = infoUser.email;
-    invoice.phone = infoUser.phone;
+    invoice.name = dataAddress.name;
+    invoice.address = dataAddress.address;
+    invoice.email = dataAddress.email;
+    invoice.phone = dataAddress.phone;
     invoice.total = total;
-
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
     invoice.items = cart.items.filter(item => item.checked === 1)
@@ -168,8 +136,8 @@ function Checkout() {
                       setDataAddress({ ...dataAddress, address: e.target.value, phone: changeAddress(e.target.value).phone, name: changeAddress(e.target.value).name })
                     }}
                   >
-                    <option value={addressDefaul[0].address}>{addressDefaul[0].address}</option>
-                    {addressNotDefaul.map(item => {
+                    {addressList.length>0&&<option value={addressList[0].address}>{addressList[0].address}</option>}
+                    {(addressList.length>0)&&addressList.map(item => {
                       return <option value={item.address}>{item.address}</option>
                     })}
                   </select>
