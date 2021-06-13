@@ -1,0 +1,51 @@
+.View-Invoice-product-price{
+    padding-left: 3rem;
+}
+.View-Invoice-product-quantity{
+    padding-left: 2rem;
+}
+
+.color-green{
+    background-color: #498374;
+    border: #498374;
+}
+.color-red{
+    background-color: #c5113e;
+    border: #c5113e;
+}
+.color-red:hover{
+    background-color: #d64066;
+
+}
+.button-update-product:hover{
+    background-color: #559483;
+}
+tr td {
+    padding: 1rem 0;
+}
+.admin-invoice-status-label{
+    padding-right: 20%;
+}
+.admin-invoice-status-button{
+    background-color: #498374;
+    border: 1px solid #498374;
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: #fff;
+}
+.admin-invoice-status-button:hover {
+    background-color: #559483;
+}
+
+
+.form-notification-admin-invoice-contrainer{
+    
+    width: 100%;
+}
+
+.button-final{
+    display: flex;
+    justify-content: center;
+   width: 80%;
+   padding-left: 20%;
+}

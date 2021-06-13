@@ -65,6 +65,7 @@
 
 .BackTop-backtop .fas {
     font-weight: 900;
+    transition: all 1.5s ease;
 }
 
 .BackTop-backtop .fas:hover {

@@ -44,17 +44,18 @@ const ProductListSame = ({ category, currentProductName }) => {
 
     return (dataCate) ? (
         <div className='container-recently-view'>
+            <link rel="https://cdnjs.cloudflare.com/ajax/libs/font-aweson/4.7.0/css/font-aweson.min.css" />
             <div className=''>
                 <div className='title-recently-view'>
                     <h2>SẢN PHẨM TƯƠNG TỰ</h2>
                 </div>
                 <div className='class-container-same-product-list'>
                     <div className='container-product-recently-view'>
-                        {(count === 0)? null: <img className="class-icon-back-in-same-product-list" src={iconBack} onClick={() => ClickBack()}></img>}
+                        {(count === 0)? null:<div className="class-icon-back-in-same-product-list"><i class="fas fa-chevron-circle-left" onClick={() => ClickBack()}></i></div>}
                         {dataCate && dataCate.map((item, idx) => {
                             return (idx >= count && idx <= count + number - 1) ? (<Item data={item}></Item>) : null
                         })}
-                        {(count === indexMax)? null:<img className="class-icon-next-in-same-product-list" src={iconNext} onClick={() => ClickNext()}></img>}
+                        {(count === indexMax)? null: <div className="class-icon-next-in-same-product-list"> <i class="fas fa-chevron-circle-right" onClick={() => ClickNext()}></i></div>}
                     </div>
                 </div>
             </div>

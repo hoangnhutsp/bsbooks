@@ -1,7 +1,8 @@
 .status-item-purchase {
     text-align: right;
     text-transform: uppercase;
-    color: lightcoral;
+    font-weight: bold;
+    color: #498374;
 }
 
 .date-item-purchase {
@@ -11,30 +12,35 @@
 }
 .container-product-purchase {
     display: flex;
+    border: none;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
 .container-item-purchase .hr-break-purchase{
-    border: solid 2px #228999;
+    border: solid 2px #3b6b5e;
 }
 
 .hr-break-items{
-    background-color: mintcream;
-    border: solid 1px #F5F5F5;
+    
+    border-bottom: 1px solid #e9e6e6;
 }
 
 .container-product-purchase img{
     object-fit: cover;
     height: 4rem;
     width: 4rem;
-    border: solid 1px rgb(206, 206, 206);
+    border: none;
     margin: 1rem
 }
 
 .container-product-purchase .price-product-purchase{
     color: #228999;
+}
+
+.info-product-purchase-price{
+    width: 100px;
 }
 
 .total-price{
@@ -44,8 +50,7 @@
 
 .price {
     margin-left: 0.3rem;
-    color: #228999;
-
+    
 }
 
 
@@ -63,11 +68,26 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    border: none;
+}
+
+.container-item-purchase .total-lable-button{
+    border: none;
+    background-color: #498374;
+    height: 50px;
+    width: 120px;
+}
+
+.container-item-purchase .total-lable-button:hover{
+    background-color: #559483;
+}
+
+.container-item-purchase .total-lable-button p{
+    color: white;
 }
 
 .container-item-purchase .total-lable .price{
-    color: #228999;
-    font-size: 1.6rem;
+    font-size: 17px;
     margin-left: 1rem;
 }
 

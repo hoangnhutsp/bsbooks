@@ -3,7 +3,7 @@ from random import randint
 import json
 
 
-_key = ['role_permissions']
+_key = ['role_permissions', 'roles', 'permissions']
 
 
 client = MongoClient(port=27017)

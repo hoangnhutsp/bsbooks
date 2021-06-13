@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { getInvoiceLists } from '../../../api/invoice/invoice_list';
+
 import './ListInvoice.css'
 
 import * as apiInvoice from '../../../api/invoice'
@@ -40,7 +40,6 @@ export default function ListInvoice() {
     }
     return (
         <div>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
             <div className="ListInvoice-header-frist">
                 QUẢN LÝ ĐƠN HÀNG
             </div>
@@ -50,49 +49,30 @@ export default function ListInvoice() {
                         <div class="card-body">
                             <table class="mb-0 table">
                                 <thead>
-
                                     <th>Mã Đơn Hàng</th>
-
                                     <th>Khách Hàng</th>
-
                                     <th>Trạng Thái</th>
                                     <th></th>
-                                    <th></th>
-                                    <th>Hủy Đơn</th>
-
                                 </thead>
-
                                 {
                                     listInvoice.map((item) => {
                                         return (
                                             <tbody>
                                                 <td className="Invoice-id"> {item._id}</td>
-
                                                 <td className="Invoice-user-name">{item.name}</td>
-
                                                 <td className="Invoice-status">
                                                     {statusType(item)}
                                                 </td>
-
                                                 <td>
                                                     <Link to={`edit-invoice/${item._id}`} className="Invoice-Edit">
                                                         <span className="Invoice-Edit">Sửa</span>
                                                     </Link>
                                                 </td>
-                                                <td>
-                                                    <button className="Invoice-cancel" onClick={() => cancleInvoice(item._id)}>
-                                                        <span className="Invoice-cancel">X</span>
-                                                    </button>
-                                                </td>
                                             </tbody>
-
                                         )
-
                                     })
                                 }
                             </table>
-
-
                         </div>
                     </div>
                 </div>

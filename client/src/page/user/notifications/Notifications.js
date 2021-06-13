@@ -1,39 +1,23 @@
 import React from 'react'
 import './Notifications.css'
-const data = [
-    {
-        title: 'Thong bao 1',
-        descriptiion: 'thông báo: idUser, hình, title, descriptiion',
-        image: 'http://localhost:5000/default/images/default-avatar-profile.jpg',
-        status: 1,
-    },
-    {
-        title: 'Thong bao 2',
-        descriptiion: 'thông báo: idUser, hình, title, descriptiion',
-        image: 'http://localhost:5000/default/images/default-avatar-profile.jpg',
-        status: 0,
-    },
-    {
-        title: 'Thong bao 3',
-        descriptiion: 'thông báo: idUser, hình, title, descriptiion',
-        image: 'http://localhost:5000/default/images/default-avatar-profile.jpg',
-        status: 1,
-    },
-    {
-        title: 'Thong bao 4',
-        descriptiion: 'thông báo: idUser, hình, title, descriptiion',
-        img: 'http://localhost:5000/default/images/default-avatar-profile.jpg',
-        status: 0,
-    }
-]
+import { 
+    useDispatch,
+    useSelector, 
+} from 'react-redux';
+import {deleteNotification} from './../../../redux/actions/notification';
+
 function Notifications() {
-    const deleteNotification = () => {
-        
+    const notification = useSelector(state => state.notification)
+    const dispatch = useDispatch();
+    const deleteNoti = (_id) => {
+        console.log(_id);
+        dispatch(deleteNotification(_id));
     }
     return (
         <div>
+            <p>{`Thong bao: ${notification.notis.length}`}</p>
             {
-                data.map((item) => {
+                notification&&notification.notis.map((item) => {
                     return (
                         <div className="Notification-user-container">
                             <div className="Notification-user-img">
@@ -41,10 +25,10 @@ function Notifications() {
                             </div>
                             <div className="Notification-user-text">
                                 <h1 className="Notification-user-text-title">{item.title}</h1>
-                                <div className="Notification-user-text-description">{item.descriptiion}</div>
+                                <div className="Notification-user-text-description">{item.description}</div>
                             </div>
                             <div className="Notification-user-delete">
-                                <button className="Notification-user-delete-button" onClick={deleteNotification()}>Xóa</button>
+                                <button className="Notification-user-delete-button" onClick={() => deleteNoti(item._id)}>Xóa</button>
                             </div>
                         </div>
                     )
