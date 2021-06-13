@@ -172,6 +172,14 @@
     {
         "role" : "ADMIN",
         "permission" : "UPDATE_NOTIFICATION"
+    },
+    {
+        "role": "ADMIN",
+        "permission": "GET_ALL_USER"
+    },
+    {
+        "role": "ADMIN",
+        "permission": "GET_ONE_USER_ADMIN"
     }
   
 ]
