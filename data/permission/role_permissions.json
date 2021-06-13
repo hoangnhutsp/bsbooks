@@ -1,0 +1,185 @@
+[
+    {
+        "role" : "USER",
+        "permission" : "GET_ACCOUNT"
+    },
+    {
+        "role" : "USER",
+        "permission" : "UPDATE_ACCOUNT"
+    },
+    {
+        "role" : "USER",
+        "permission" : "UPDATE_PASSWORD_ACCOUNT"
+    },
+    {
+        "role" : "USER",
+        "permission" : "CREATE_ADDRESS"
+    },
+    {
+        "role" : "USER",
+        "permission" : "GET_ADDRESS_BY_USER_ID"
+    },
+    {
+        "role" : "USER",
+        "permission" : "UPDATE_ADDRESS"
+    },
+    {
+        "role" : "USER",
+        "permission" : "UPDATE_DEFAULT_ADDRESS"
+    },
+    {
+        "role" : "USER",
+        "permission" : "DELETE_ADDRESS_BY_ID"
+    },
+    {
+        "role" : "USER",
+        "permission" : "GET_ADDRESS"
+    },
+    {
+        "role" : "USER",
+        "permission" : "UPDATE_CART"
+    },
+    {
+        "role" : "USER",
+        "permission" : "ADD_TO_CART"
+    },
+    {
+        "role" : "USER",
+        "permission" : "GET_CART"
+    },
+    {
+        "role" : "USER",
+        "permission" : "CREATE_EVALUATE"
+    },    {
+        "role" : "USER",
+        "permission" : "GET_EVALUATE"
+    },
+
+    {
+        "role" : "USER",
+        "permission" : "CREATE_INVOICE"
+    },    {
+        "role" : "USER",
+        "permission" : "GET_INVOICE_BY_USER_ID"
+    },
+    {
+        "role" : "USER",
+        "permission" : "GET_INVOICE"
+    },
+    {
+        "role" : "USER",
+        "permission" : "GET_NOTIFICATION"
+    },
+    {
+        "role" : "USER",
+        "permission" : "UPDATE_NOTIFICATION"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "UPDATE_PRODUCT"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "CREATE_PRODUCT"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "DELETE_PRODUCT"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_ACCOUNT"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "UPDATE_ACCOUNT"
+    },{
+        "role" : "ADMIN",
+        "permission" : "UPDATE_PASSWORD_ACCOUNT"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "CREATE_ADDRESS"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_ADDRESS_BY_USER_ID"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "UPDATE_ADDRESS"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "UPDATE_DEFAULT_ADDRESS"
+    },{
+        "role" : "ADMIN",
+        "permission" : "DELETE_ADDRESS_BY_ID"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_ADDRESS"
+    },{
+        "role" : "ADMIN",
+        "permission" : "UPDATE_CART"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "ADD_TO_CART"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_CART"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "CREATE_EVALUATE"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_EVALUATE"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "CREATE_INVOICE"
+    },{
+        "role" : "ADMIN",
+        "permission" : "UPDATE_INVOICE"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "CANCEL_INVOICE"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_ALL_INVOICE"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_INVOICE_BY_USER_ID"
+    },{
+        "role" : "ADMIN",
+        "permission" : "GET_INVOICE"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "CREATE_NOTIFICATION"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "GET_NOTIFICATION"
+    },
+    {
+        "role" : "ADMIN",
+        "permission" : "UPDATE_NOTIFICATION"
+    },
+    {
+        "role": "ADMIN",
+        "permission": "GET_ALL_USER"
+    },
+    {
+        "role": "ADMIN",
+        "permission": "GET_ONE_USER_ADMIN"
+    }
+  
+]

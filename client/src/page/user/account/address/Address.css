@@ -36,14 +36,12 @@
 }
 
 .btn-add-new-address button {
-    background-color: #228999;
+    background-color: #498374;
     border: none;
     padding: 0.5rem 1rem;
     color: #fff;
-    font-size: 1.2rem;
-    
 }
 .btn-add-new-address button:hover {
-    background-color: #00ddff;
+    background-color: #559483;
     color: azure;
 }

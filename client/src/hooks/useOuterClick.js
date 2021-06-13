@@ -1,10 +1,9 @@
 
 import {useEffect, useRef} from 'react'
 export default function useOuterClick(callback) {
-    const callbackRef = useRef(); // initialize mutable callback ref
-    const innerRef = useRef(); // returned to client, who sets the "border" element
+    const callbackRef = useRef(); 
+    const innerRef = useRef(); 
   
-    // update callback on each render, so second useEffect has most recent callback
     useEffect(() => { callbackRef.current = callback; });
     useEffect(() => {
       document.addEventListener("click", handleClick);
@@ -14,7 +13,7 @@ export default function useOuterClick(callback) {
           !innerRef.current.contains(e.target)
         ) callbackRef.current(e);
       }
-    }, []); // no dependencies -> stable click listener
+    }, []); 
         
-    return innerRef; // convenience for client (doesn't need to init ref himself) 
+    return innerRef;
   }

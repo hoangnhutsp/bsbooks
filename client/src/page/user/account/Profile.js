@@ -99,7 +99,7 @@ function Profile() {
                 <h1>Hồ Sơ Của Tôi</h1>
                 <p>Quản lý thông tin hồ sơ để bảo mật tài khoản </p>
             </div>
-            <hr />
+            <div className="underline-container-user-profile"></div>
 
             <form onSubmit={submitHanler} className="form-display-user-profile">
                 <div className="form-user-profile">
@@ -190,7 +190,7 @@ function Profile() {
                     </div>
 
                 </div>
-                <button type="submit" id="submit-profile">Lưu</button>
+                <button type="submit" id="submit-profile-button-save">Lưu</button>
             </form>
         </div>
 

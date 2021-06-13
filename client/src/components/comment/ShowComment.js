@@ -29,6 +29,9 @@ function ShowComment({comment}) {
                             <div className="flex-grow-review-comment__rating-title">
                                 <div className="review-comment__rating-title">
                                     <div className="Stars__StyledStars-sc-15olgy-0 dYhelp review-comment__rating">
+                                        <span className={comment.star >= 0 ? "yellow" : ""}>
+                                            <i class="fas fa-star"></i>
+                                        </span>
                                         <span className={comment.star >= 1 ? "yellow" : ""}>
                                             <i class="fas fa-star"></i>
                                         </span>
@@ -39,9 +42,6 @@ function ShowComment({comment}) {
                                             <i class="fas fa-star"></i>
                                         </span>
                                         <span className={comment.star >= 4 ? "yellow" : ""}>
-                                            <i class="fas fa-star"></i>
-                                        </span>
-                                        <span className={comment.star >= 5 ? "yellow" : ""}>
                                             <i class="fas fa-star"></i>
                                         </span>
 

@@ -23,6 +23,14 @@
 
 .icon-fas-fa-chevron-left{
     padding-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+.icon-fas-fa-chevron-left:hover{
+    color: #559483;
+    font-weight: bold;
 }
 
 .bulkhead{
@@ -51,14 +59,26 @@
     position: relative;
 }
 
-.ul-order-tracking .fa,
-.ul-order-tracking .fas{
-    background: #ccc;
+.ul-order-tracking .fa {
+    background: #60aa97;
+
     width: 25px;
     height: 25px;
     color: #fff;
     border-radius: 50%;
     padding: 5px;
+}
+.ul-order-tracking .fas{
+    background: #75ce4c ;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.ul-order-tracking .fa-times{
+    background: #ccc;
 }
 
 .ul-order-tracking .fa,
@@ -79,23 +99,7 @@
     z-index: -1;
 }
 
-.ul-order-tracking li:nth-child(3) .fas{
-    background: #148e14;
-}
 
-.ul-order-tracking li:nth-child(3) .fas::after{
-    background: #148e14;
-}
-
-.ul-order-tracking li:nth-child(1) .fa,
-.ul-order-tracking li:nth-child(2) .fa{
-    background: #60aa97;
-}
-
-.ul-order-tracking li:nth-child(1) .fa::after,
-.ul-order-tracking li:nth-child(2) .fa::after{
-    background: #60aa97;
-}
 
 .ul-order-tracking li:first-child .fa::after{
     width: 105px;
@@ -106,13 +110,17 @@
     width: 105px;
 }
 
-.underline{
+/*.underline{
     height: .1875rem;
     width: 100%;
     background-position-x: -1.875rem;
     background-size: 7.25rem 1.875rem;
     background-image: repeating-linear-gradient(45deg, #6fa6d6,#6fa6d6 33px,transparent 0,transparent 41px,#f18d9b 0, #f18d9b 74px,transparent 0,transparent 82px);
     margin-bottom: 30px;
+}*/
+
+.underline{
+    border-bottom: 1px solid #e6e9e8;
 }
 
 /*Phần địa chỉ nhận hàng*/
@@ -295,6 +303,13 @@
 
 
 
+.billstatus-cancel-bill-component {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
-
+.al-center{
+    text-align: center;
+}

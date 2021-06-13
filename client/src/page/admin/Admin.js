@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router';
 import "./User.css";
+import {
+    useSelector
+} from 'react-redux';
+
 
 import UserSidebar from './UserSidebar'
 
@@ -14,15 +18,22 @@ import AddProduct from './products/AddProduct'
 import Profile from './account/Profile';
 import Product from '../../page/Product'
 import Order from './notifications/Order';
-import Dashboad from './dashboad'
+import Dashboad from './dashboad/Dashboard'
 import ListInvoice from './invoice/ListInvoice'
-
+import ViewInvoice from './invoice/ViewInvoice';
+import EditInvoice from './invoice/EditInvoice';
+import NotAllowed from './components/NotAllowed'
 function Admin() {
+
+    const user = useSelector(state => state.user);
     let { path } = useRouteMatch();
-
-    return (
-        <div className="container-user">
-
+    const [isAdmin, setIsAdmin] = useState(0)
+    useEffect(() => {
+        if (user.isLogged){
+            setIsAdmin(user.isAdmin)
+        }
+    }, [user])
+    return isAdmin?(
         <div className="User">
             <div className="user-usersidebar">
                 <UserSidebar />
@@ -63,14 +74,16 @@ function Admin() {
                     <Route exact path={`${path}/invoice`}>
                         <ListInvoice />
                     </Route>
-                    
+                    <Route exact path={`${path}/invoice/:id`}> 
+                        <ViewInvoice/>
+                    </Route>
+                    <Route exact path={`${path}/edit-invoice/:id`}>
+                        <EditInvoice/>
+                    </Route>
                 </Switch>
             </div>
         </div>
-
-        </div>
-
-    )
+    ):<NotAllowed />
 }
 
 export default Admin

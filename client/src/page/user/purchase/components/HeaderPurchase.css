@@ -26,10 +26,11 @@
 }
 
 .seleted {
-    color: #ee4d2d;
-    border-color: #ee4d2d;
+    color: #437a6c;
+    font-weight: bold;
+    border-color: #407063;
 }
 
 .item-in-row:hover {
-    color: #ee4d2d;
+    color: #57aa94;
 }

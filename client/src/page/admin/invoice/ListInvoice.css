@@ -1,168 +1,60 @@
-.ListInvoice-container{
-    width: 889.01px;
-}
-/*Header*/
-.ListInvoice-header-frist{
-    background-color: rgb(186, 221, 252);
-    color: #000000;
-    width: 100%;
-    padding: 1.5rem;
-    font-size: 2rem;
+.Invoice-row{
+    display:flex;
+    flex-wrap:wrap;
+   
 }
 
-.ListInvoice-inside{
-    margin-top: 1rem;
+.col-lg-6{
+    position:relative;
+    width:100%;
+    padding-right:15px;
+    padding-left:15px
 }
-.ListInvoice{
-    background-color: #f3f3f3;
-    padding: 3rem;
-    margin: 1rem;
-    display: grid;
-}
-/*box1*/
-/*Hàng thứ 1*/
-.Invoice-row-1{
-    display: flex;
-    padding: 1rem 0rem;
-    justify-content: space-between; 
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 15px;
-}
-.Invoice-row-1-col-1{
-    padding: 2.5rem 0;
-    width: 45%;
-    border-radius: 10px;
-    background-color: #72b0f7;
-}
-.Invoice-row-1-col-2{
-    padding: 2.5rem 0;
-    width: 45%;
-    border-radius: 10px;
-    background-color: #b379f5;
+.mb-3{
+    margin-bottom:1rem !important
 }
 
-
-/*Hàng thứ 2*/
-.Invoice-row-2{
-    display: flex;
-    padding: 1rem 0rem;
-    justify-content: space-between; 
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 15px;
+.card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+    word-wrap:break-word;
+    background-color:#fff;
+    background-clip:border-box;
+    border:1px solid rgba(26,54,126,0.125);
+    border-radius:.25rem
 }
-.Invoice-row-2-col-1{
-    padding: 1.5rem 0;
-    width: 30%;
-    border-radius: 10px;
-    background-color: #c8a2d1;
-}
-.Invoice-row-2-col-2{
-    padding: 1.5rem 0;
-    width: 30%;
-    border-radius: 10px;
-    background-color: #c77c86;
-}
-.Invoice-row-2-col-3{
-    padding: 1.5rem 0;
-    width: 30%;
-    border-radius: 10px;
-    background-color: #f88787;
-}
-/*Định dạng nội dung từng ô*/
-.label-special {
-    font-size: 0.95rem;
-    color: #ffffff;
-    padding: 0.5rem;
-}
-
-.number-special{
-    font-size: 2.5rem;
-    color: #eee7e7;
-    font-weight: 1000;
-    padding: 0.5rem;
-}
-
-/*box2*/
-.ListInvoice-2{
-    display: grid;
-    grid-template-columns: 1fc ;
-    grid-template-rows: 25% 1fr;
-    background-color: #f3f3f3;
-    padding: 1rem 0.6rem 1rem 2.5rem;
-    margin: 0.5rem;
-}
-/*header*/
-.ListInvoice-header {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: left;
-}
-.ListInvoice-header p {
-    width: 100px;
-}
-
-.ListInvoice-detail{
-    background-color: #f4f4c7;
-    
-}
-
-
-/*InvoiceItem*/
-
-.Invoice-Form {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 0rem;
-}
-.Invoice-id, 
-.Invoice-date, 
-.Invoice-user-name, 
-.Invoice-totalmoney, 
-.Invoice-cancel
-{
-    width: 100px;
-}
-.Invoice-status{
-    width: 120px;
-}
-.Invoice-user-name{
-    margin-left: 1rem;
-}
-.Invoice-totalmoney{
-    padding-left: 0.6rem;
-}
-/*Select*/
-.Invoice-status-select{
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-.Invoice-cancel{
-    
-    padding-left: 1.6rem;
-    font-weight: 1000;
-}
-.Invoice-cancel:hover{
-    color: red;
-}
-.ListInvoice-underline{
+.invoice-underline{
     border-bottom: 1px solid #5f5f5f;
-    width: 96%;
+    width: 100%;
+}
+.card-body{
+    flex:1 1 auto;
+    padding:1.25rem
 }
 
-.icon-compete-invoice, 
-.icon-check-invoice{
-    width: 40%;
-    text-align: center;
+.table {
+    width: 100%;
+    text-align: left;
+   
 }
-.icon-transport-invoice{
-    width: 50%;
-    text-align: center;
+.table th, .table td {
+    padding:0.4rem 0;
 }
-.label-icon{
-    display: flex;
-    justify-content: space-between;
+
+
+.Invoice-cancel{
+    border: none;
+    background-color: #fff;
+    padding-left: 19%;
+}
+
+.Invoice-cancel span {
+    font-weight: 1000;
+}
+.Invoice-cancel:hover, .Invoice-View:hover, .Invoice-Edit:hover  {
+    font-weight: 1000;
+    color: red;
+   
 }

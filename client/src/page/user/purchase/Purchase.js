@@ -32,7 +32,7 @@ function Purchase() {
     }, [])
 
     useEffect(() => {
-        if (fullData.length) {
+        if (fullData&&fullData.length) {
             if (filter === 0){
                 setCurrData(fullData);
             }else{
@@ -58,13 +58,13 @@ function Purchase() {
                 <h1>Đơn hàng</h1>
                 <p>Tất cả đơn hàng</p>
             </div>
-            <hr className="break-title-and-info" />
+            
 
             <HeaderPurchase typeOfPurchase={typeOfPurchase} filter={filter} setFilter={setFilter} />
 
             <div className="list-item-purchase">
                 {
-                    currData.length?currData.map((val, key) => <ItemPurchase invoiceData={val} />):
+                    (currData&&currData.length)>0?currData.map((val, key) => <ItemPurchase invoiceData={val} />):
                     <ListItemPurchaseIsEmpty />
                 }
             </div>

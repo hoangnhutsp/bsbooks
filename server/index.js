@@ -26,20 +26,17 @@ import notificationRouter from './routes/notification.js'
 import recentlyViewd from './routes/recently_viewed.js'
 import uploadImageRoutes from './routes/upload_image.js'
 import addressRoutes from './routes/address.js'
+import jwt from 'jsonwebtoken';
 
-import {breadcrumb} from './controllers/other.js'
+
 const app = express();
 
 
-import jwt from 'jsonwebtoken';
 const SECRET = 'bsbooksToken';
-//socket
+
+
 var server = require('http').Server(app);
 const io = require('socket.io')(server, {
-    /**
-     * Using cors option with the origin field 
-     * The value of the origin field is the domain of client
-     */
     cors: {
       origin: "http://localhost:3000",
     }
@@ -63,9 +60,6 @@ const dbOptions = {
     useUnifiedTopology: true,
     useFindAndModify: false,
 }
-
-
-console.log(`MONGO URL: ${CONNECTION_URL}`);
 
 app.use(session({
     secret: 'some secrec',
@@ -113,13 +107,13 @@ io.on('connection', socket => {
         const description = data.description;
         const id_user = data.id_user;
         console.log("id_user: ", id_user)
-        // const newNotification = new Notification({
-        //     id_user: id_user,
-        //     title: title,
-        //     description: description
-        // })
+        const newNotification = {
+            id_user: id_user,
+            title: "SOCKET IS OKE",
+            description: description
+        }
         // await newNotification.save()
-        io.to('60c2668bfb6e0089781ea2b8').emit('ServerSendNotification', id_user)
+        io.to(id_user).emit('ServerSendNotification', newNotification)
     })
 
     socket.on('disconnect', ()=>{
@@ -128,7 +122,6 @@ io.on('connection', socket => {
 })
 
 app.use(sessionMiddleware);
-//app.use(refreshTokenMiddleware);
 
 app.use('/user', userRouters)
 app.use('/cart', cartRoutes)
@@ -139,7 +132,6 @@ app.use('/recently_viewd', recentlyViewd)
 app.use('/upload_image', uploadImageRoutes);
 app.use('/address', addressRoutes);
 app.use('/invoice', invoiceRoutes);
-app.use('/breadcrumb' , breadcrumb);
 app.use('/admin', adminRouter);
 app.use('/notification', notificationRouter);
 
@@ -151,6 +143,6 @@ mongoose.connect(CONNECTION_URL, dbOptions)
     })
     .catch((error) => {
         console.log(error.message)
-    });
+});
 
 

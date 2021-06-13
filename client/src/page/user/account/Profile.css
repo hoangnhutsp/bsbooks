@@ -92,33 +92,37 @@
 input#upload-image{
     display: none;
 }
-input#upload-image + label{
-    background-color: #4d8cf2;
+
+/*nội dung sửa ở file user*/
+/*vì một nguyên nhân gì đó mà ở phần account admin có phần chọn ảnh như vậy và phần 
+điều chỉnh css cũng tương tựa nhau tuy nhiên khác nhau ở trước lable có dấu "+" ở phần account admin còn đối
+với user account thì không có dấu cộng phần lable mới hiện button chọn ảnh*/
+.avatar-user-profile  label{
+    background-color: #498374;
     margin: 1rem;
     padding: 0.6rem;
-    color: #FFFF;   
-    border: 0.1rem solid #9ec3ff;
+    color: #FFFF; 
 }
 
-input#upload-image + label:hover{
-    background-color: #3b73ce;
-    border-color: #729fe7;  
+.underline-container-user-profile{
+    margin-top: 10px;
+    border-bottom: 1px solid rgb(233, 230, 230);
+}
+
+.avatar-user-profile  label:hover{
+    background-color: #559483; 
     cursor: pointer;
 }
 
-
-
-button#submit-profile{
+#submit-profile-button-save{
     width: 80px;
-    background-color: #4d8cf2;
+    background-color: #498374;
     margin: 16px;
     padding: 10px;
-    color: #FFFF;   
-    border: 2px solid #9ec3ff;
+    color: #FFFF;
 }
 
-button#submit-profile:hover{
-    background-color: #3b73ce;
-    border-color: #729fe7;  
+#submit-profile-button-save:hover{
+    background-color: #559483; 
     cursor: pointer;
 }

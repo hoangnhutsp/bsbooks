@@ -1,7 +1,6 @@
 import fs from 'fs';
 
 const saveBase64ToImg = (folder, nameImg, base64Data) => {
-    //Folder exist
     if (!fs.existsSync(folder))
         fs.mkdirSync(folder);
     const ext = base64Data.substring(base64Data.indexOf("/") + 1, base64Data.indexOf(";base64"));

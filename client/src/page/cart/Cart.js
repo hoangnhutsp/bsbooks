@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Cart.css';
 import {formatCash} from './functionCart.js'
+
 import {
     addToCart,
     updateCart,
@@ -13,6 +14,8 @@ import {
 import {
     useHistory,
 } from 'react-router-dom'
+
+import imgEmptyCart from '../../assets/bag-empty.svg'
 
 function Cart() {
     const dispatch = useDispatch();
@@ -71,6 +74,17 @@ function Cart() {
             alert("Ban chua dang nhap ...")
         }
     }
+
+    function CartIsEmpty() {
+        return (
+            <div className="cart-is-empty">
+                <img alt="icon" className="cart-is-empty-icon" src={imgEmptyCart} />
+                <p className="cart-is-empty-content">Không có sản phẩm nào trong giỏ hàng.</p>
+                <a href="/" className="cart-is-empty-content-a">Quay lại trang chủ</a>
+            </div>
+        )
+    }
+    
     
     const Item = ({item, idx}) => {
         return (
@@ -82,8 +96,8 @@ function Cart() {
                         </div>
                         <div className="cart-product-infor">
                             <p className="cart-product-name">{item.name}</p>
-                            <p className="cart-price-sm">{item.price}</p>
-                            <small>x {item.count}</small>
+                            <p className="cart-price-sm">x {item.quantity}</p>
+                            {/*<p className="cart-price-sm">{item.price}</p>*/}
                         </div>
                     </div>
                     <div className="cart-quantity-md">
@@ -101,7 +115,7 @@ function Cart() {
                         </div>
                     </div>
                     <div className="cart-unit-price">
-                        <h4>{formatCash(String(item.price))}</h4>
+                        <h4>{formatCash(String(item.price))}<span>đ</span></h4>
                     </div>
                     <div className="cart-product-join">
                         <input
@@ -131,7 +145,7 @@ function Cart() {
         )
     }
 
-    return productCart ? (
+    return (productCart&&productCart.count) ? (
         <div className='CartContainer'>
             <div className="product-cart">
                 <h4 className="page-banner-sm">Cart</h4>
@@ -154,7 +168,7 @@ function Cart() {
                     <div className="cart-total-holder">
                         <div className="cart-total">
                             <p>Tổng cộng</p>
-                            <p>{sumPrice}</p>
+                            <p>{formatCash(String(sumPrice))}<span>đ</span></p>
                         </div>
                         <div className="cart-action-button">
                             <a href="/">Tiếp tục mua sắm</a>
@@ -164,7 +178,7 @@ function Cart() {
                 </div>
             </div>
         </div>
-    ):null;
+    ): <CartIsEmpty />;
 }
 
 export default Cart;

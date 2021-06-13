@@ -9,7 +9,7 @@ import Profile from './account/Profile';
 import AddressController from './account/address/';
 import Password from './account/Password';
 import Order from './notifications/Order';
-import Promotion from './notifications/Promotion';
+import Notifications from './notifications/Notifications';
 import Billstatus from './purchase/order/Billstatus'
 import PurchaseController from './purchase/PurchaseController'
 function User() {
@@ -37,8 +37,8 @@ function User() {
                     <Route exact path={`${path}/password`}>
                         <Password />
                     </Route>
-                    <Route exact path={`${path}/promotion`}>
-                        <Promotion />
+                    <Route exact path={`${path}/notifications`}>
+                        <Notifications />
                     </Route>
                     <Route path={`${path}/purchase`}>
                         <PurchaseController />

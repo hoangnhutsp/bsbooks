@@ -9,6 +9,7 @@
     flex-direction: row;
     padding-left: 1%;
     padding-right: 10%;
+    min-height: 90vh !important;
 }
 
 .user-usersidebar {

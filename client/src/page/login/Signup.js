@@ -40,7 +40,6 @@ function Register() {
     })
 
     const [error, setError] = useState({
-        error: '',
         phone: '',
         name: '',
         email: '',
@@ -50,12 +49,16 @@ function Register() {
         password: '',
         confirmPassWord: '',
         birthday: '',
-        test: '',
     })
 
-    const setErrRes = err => {
+    const [errResponse, setErrResponse] = useState('')
+
+
+    const setErrorResponse = err => {
+        console.log('ERROR');
+        console.log(err);
         if (err.status) history.push('/'); else
-            setError({ ...error, error: err.message });
+        setErrResponse(err.message);
     }
 
     const submitHandler = (e) => {
@@ -66,31 +69,29 @@ function Register() {
             wr = wr || error[x] !== ''
         }
         if (!wr) {
-            dispatch(userSignup(registerData, setErrRes))
+            dispatch(userSignup(registerData, setErrorResponse))
         }
     }
     const responseFacebook = (res) => {
         let accessToken = res.accessToken;
         let userID = res.userID;
-        dispatch(userLoginFacebook({ accessToken, userID }, setErrRes))
+        dispatch(userLoginFacebook({ accessToken, userID }, setErrorResponse))
     }
     const responseSuccessGoogle = (res) => {
         let tokenId = res.tokenId
-        dispatch(userLoginGoogle(tokenId, setErrRes))
+        dispatch(userLoginGoogle(tokenId, setErrorResponse))
     }
 
     const responseErrorGoogle = (res) => {
-        console.log(res);
+        setErrResponse({message: res });
     }
-
-
 
     return (
         <div className='containner-register'>
             <div className='login-signup-register'>
                 <div className='col-sm-6-register'>
                     <div className='article-register'>
-                        <h3 className='text-center-register'>ĐĂNG KÍ</h3>
+                        <h3 className='text-center-register'>ĐĂNG KÝ</h3>
                         {(error.error === '') ? null :
                             <div>{error.error}</div>
                         }
@@ -224,7 +225,7 @@ function Register() {
                                         setError({ ...error, password: err })
                                         if (registerData.confirmPassWord !== '') {
                                             err = validateConfPassWord(registerData.confirmPassWord, e.target.value);
-                                            setError({ ...error, password: err })
+                                            setError({ ...error, confirmPassWord: err })
                                         }
                                     }}>
 
@@ -246,7 +247,7 @@ function Register() {
 
                                     onBlur={(e) => {
                                         let err = validateConfPassWord(e.target.value, registerData.password);
-                                        if (err !== '') setError({ ...error, confirmPassWord: err }); else {
+                                        if (err === '') setError({ ...error, confirmPassWord: err }); else {
                                             setError({ ...error, confirmPassWord: '' })
                                             setError({ ...error, password: '' })
 
@@ -277,6 +278,9 @@ function Register() {
                             </div>
                             {(error.gender == '') ? null :
                                 <div className='error-text-register'>{error.gender}</div>
+                            }
+                             {(errResponse === '') ? null :
+                                <div className='error-text-register'>{errResponse}</div>
                             }
 
                             <div className='form-group-register'>
