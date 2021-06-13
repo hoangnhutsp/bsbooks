@@ -34,8 +34,10 @@ import ProductPage from './page/productPage'
 
 import Cart from './page/cart/Cart';
 import Checkout from './page/cart/Checkout';
+import NotificationEmptyInUser from './components/NotificationEmptyInUser';
 
 import InfoTransport from './components/InfoTransport';
+
 
 import TestSocket from './components/Test_Socket.js';
 import { SocketContext } from './SocketContext.js'
@@ -153,6 +155,7 @@ const App = () => {
           </Switch>
 
           <BackTop></BackTop>
+          <NotificationEmptyInUser></NotificationEmptyInUser>
           <InfoTransport />
           <Footer></Footer>
         </div>

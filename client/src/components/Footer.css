@@ -79,14 +79,24 @@
     text-align: center;
     line-height: 40px;
     border-radius: 50%;
-    color: #333;
+    color: rgb(247, 243, 243);
     transition: all 0.5s ease;
   }
+
+  .container-footer-col .social-links .fab{
+    color: aliceblue;
+    transition: all 1s ease;
+  }
+  .container-footer-col .social-links .fab:hover{
+    color: #333;
+  }
+
+
   
-  .container-footer-col .social-links a:hover{
+  /*.container-footer-col .social-links a:hover{
     color: #24262b;
     background-color: #a5d8ca;
-  }
+  }*/
   
   /*RESPONSIVE*/
   @media(max-with:767px){
