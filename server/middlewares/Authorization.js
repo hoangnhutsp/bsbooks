@@ -11,12 +11,12 @@ const Authorization = async (req, res, next) => {
         const {role} = await User.findOne({_id: req.userID});
         const checkRole = await Role.findOne({name: role});
         if (checkRole === null) return res.sendStatus(403);
-        
-        const findPermission = await Permission.findOne({method: req.method, path}, {name: 1})
-        const name =findPermission.name;
-        const rolePermission = await RolePermission.findOne({role, permission: name})
 
+        
+        const findPermission = await Permission.findOne({method: req.method, path}, {name: 1})        
+        const rolePermission = await RolePermission.findOne({role, permission: findPermission.name})
         if (rolePermission !== null) {
+            console.log('PASS');
             next();
         }
         else res.sendStatus(403);

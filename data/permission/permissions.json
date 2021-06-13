@@ -139,7 +139,7 @@
     },
     {
         "name" : "GET_INVOICE",
-        "path": "/:id",
+        "path": "/invoice/:id",
         "method": "GET",
         "description" : "GET: Get invoice by ID"
     },
