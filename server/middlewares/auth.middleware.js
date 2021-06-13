@@ -7,6 +7,7 @@ const SECRET = process.env.SECRET
 
 const Auth = async (req, res, next) => {
     try {
+        console.log('AUTH');
         const authHeader = req.headers['authorization']
         const token = authHeader && authHeader.split(' ')[1];
         if (!token) return res.sendStatus(400);

@@ -6,18 +6,19 @@ import {
     getInvoice,
     getInvoiceByID,
     getAllInvoice,
-    cancelInvoice
+    cancelInvoice,
 } from '../controllers/invoice.js'
 
 import authMiddleware from '../middlewares/auth.middleware.js';
+import Authorization from '../middlewares/Authorization.js'
 
 const router = express.Router();
 
-router.post('/create',authMiddleware, createInvoice);
-router.post('/update/:id',authMiddleware, updateInvoice);
-router.post('/cancel/:id', authMiddleware, cancelInvoice)
-router.get('/getall', getAllInvoice)
-router.get('/user',authMiddleware, getInvoice);
-router.get('/:id', authMiddleware, getInvoiceByID)
+router.post('/create',authMiddleware, Authorization, createInvoice);
+router.post('/update/:id',authMiddleware, Authorization, updateInvoice);
+router.post('/cancel/:id', authMiddleware, Authorization, cancelInvoice)
+router.get('/getall',authMiddleware, Authorization,  getAllInvoice)
+router.get('/user',authMiddleware, Authorization, getInvoice);
+router.get('/:id', authMiddleware, Authorization, getInvoiceByID)
 
 export default router;

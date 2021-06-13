@@ -2,12 +2,18 @@ import axios from 'axios';
 axios.defaults.withCredentials = true
 
 
-const localhost = 'http://localhost:5000/admin/user/';
+const localhost = 'http://localhost:5000/admin/one_user';
 
 export const getUserDetail = async (id) => {
-    let URL = localhost + id
-    console.log(URL);
-    let {data} = await axios.get(URL)
-
-    return data;
+    let URL = localhost +`?id=${id}`
+    let token = localStorage.getItem('token');
+    if (token) {
+        return axios.get(
+            URL,
+            {headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }}
+        )
+    }
 }

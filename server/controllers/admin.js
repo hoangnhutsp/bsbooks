@@ -12,9 +12,8 @@ export const getAllUser = async(req, res) => {
 
 export const getProfileUserById = async (req, res) => {
     try {
-        //console.log(req.params.id);
-        const id = req.params.id;
-        const user = await User.findOne({ id: req.userID });
+        const _id = req.query.id;
+        const user = await User.findOne({ _id });
 
         if (user.length !== 0) {
             res.status(200).json(user);

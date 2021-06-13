@@ -3,13 +3,11 @@ from random import randint
 import json
 
 
-_key = ['role_permissions', 'roles', 'permissions']
+_key = ['users']
 
 
 client = MongoClient(port=27017)
 db=client["bsbooks"]
-
-
 for key in _key:
     with open(key + '.json') as json_file:
         data = json.load(json_file)
