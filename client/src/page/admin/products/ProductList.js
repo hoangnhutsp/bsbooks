@@ -46,7 +46,6 @@ const ControlProduct = () => {
             {allProduct.map(item => {
                 return <Item item={item} ></Item>
             })}
-
             <div className="pagination-row-flex-end">
                 {page&&<Pagination setPage={setPage} page={page} pageMax={pageMax}/>}
             </div>

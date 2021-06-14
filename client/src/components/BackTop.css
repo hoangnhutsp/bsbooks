@@ -65,11 +65,11 @@
 
 .BackTop-backtop .fas {
     font-weight: 900;
-    transition: all 1.5s ease;
+    transition: all 0.7s ease;
 }
 
 .BackTop-backtop .fas:hover {
-    color: rgb(26, 24, 24);
+    color: #333;
 }
 
 

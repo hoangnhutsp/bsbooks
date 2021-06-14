@@ -26,6 +26,7 @@ function Navbar() {
         name : '',
         url : '',
         isAdmin: 0,
+        isMaster: 0,
     });
 
     useEffect(() => {
@@ -35,7 +36,8 @@ function Navbar() {
             let name = Store.user.infoUser.name;
             let url = Store.user.infoUser.avatar;
             let isAdmin = Store.user.isAdmin;
-            setUserNavbar({ status, name, url, isAdmin})
+            let isMaster = Store.user.isMaster;
+            setUserNavbar({ status, name, url, isAdmin, isMaster})
         }
 
         if (Store.cart) {
@@ -49,7 +51,8 @@ function Navbar() {
     }
 
     const getName = (name, isAdmin) => {
-        if (isAdmin) return `${name} (Admin)`;
+        if (userNavbar.isMaster) return `${name} (Master)`;
+        if (userNavbar.isAdmin) return `${name} (Admin)`;
         return name;
     }
     const UserIsLogin = () => {
@@ -57,10 +60,10 @@ function Navbar() {
                 <div className='dropdown'>
                     <div className='navbar-user'>
                         <img alt="avatar user" className="navbar-user-avatar" src={userNavbar.url} />
-                        <span className="navbar-user-name">{getName(userNavbar.name, userNavbar.isAdmin)}</span>
+                        <span className="navbar-user-name">{getName(userNavbar.name)}</span>
                     </div>
                     <div className='dropdown-content'>
-                        {userNavbar.isAdmin&&
+                        {(userNavbar.isAdmin||userNavbar.isMaster)&&
                         <div className='dropdown-content-item'>
                             <Link to='/admin'>Admin</Link><br/>
                         </div>}

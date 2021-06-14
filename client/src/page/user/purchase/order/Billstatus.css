@@ -18,7 +18,8 @@
 }*/
 
 .status-order{
-    color: rgb(245, 42, 42);
+    color: #498374;
+    font-weight: bold;
 }
 
 .icon-fas-fa-chevron-left{
@@ -69,7 +70,7 @@
     padding: 5px;
 }
 .ul-order-tracking .fas{
-    background: #75ce4c ;
+    background: #048860 ;
     width: 25px;
     height: 25px;
     color: #fff;
@@ -173,8 +174,8 @@
 }
 
 .phone-and-delivery{
-    color: rgba(0,0,0,.54);
-    font-size: 12px;
+    
+    font-size: 16px;
 }
 
 .detail-time-delivery-address{

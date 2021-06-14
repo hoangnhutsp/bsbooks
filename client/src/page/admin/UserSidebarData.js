@@ -1,10 +1,10 @@
 
 export const SidebarData = [
-    {
-        title: "Tổng Quan",
-        link: "dashboad",
-        cName: 'sidebar-text'
-    },
+    // {
+    //     title: "Tổng Quan",
+    //     link: "dashboad",
+    //     cName: 'sidebar-text'
+    // },
     {
         title: "Quản Lý Sản Phẩm",
         link: "products",

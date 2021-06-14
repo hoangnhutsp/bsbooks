@@ -5,20 +5,6 @@ import iconView from '../products/icon/view.png'
 import iconDelete from '../products/icon/delete.png'
 import { Link } from 'react-router-dom'
 
-const datatest = {
-    "birthday": null,
-    "avatar": "http://localhost:5000/default/images/default-avatar-profile.jpg",
-    "role": "USER",
-    "_id": "60ba52dd39a4485ed4f6f475",
-    "resetLink": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYmE1MmRkMzlhNDQ4NWVkNGY2ZjQ3NSIsImlhdCI6MTYyMjk5MTc1MywiZXhwIjoxNjIyOTkyOTUzfQ.MorhdbabHtY77r4AMhUMNAX8KHI7MPA2mZObTcJh-_c",
-    "name": "Như Minh",
-    "phone": "",
-    "email": "phuong322184@gmail.com",
-    "password": "$2a$12$M4FVZXAQfCxt0XA.LFTTx.Z7TGsV6dLU7mcVImr70fDxJkNpplFE.",
-    "address": "",
-    "gender": "",
-    "__v": 0
-}
 
 const Item = (item) => {
     const [dataUserDelete, setDataUserDelete] = useState('');

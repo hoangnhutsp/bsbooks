@@ -4,9 +4,11 @@ import './UserList.css'
 import { getUserLists } from '../../../api/other/user_list.js'
 import { Link } from 'react-router-dom'
 import iconAdd from '../products/icon/add.png'
-
+import {
+    useSelector
+} from 'react-redux';
 const ControlUser = () => {
-
+    const user = useSelector(state => state.user)
     const [listUser, setListUser] = useState([])
 
     useEffect(async () => {
@@ -23,12 +25,12 @@ const ControlUser = () => {
         <div>
             <div className='class-include-title-and-icon-add-admin'>
                 <div className='class-for-title-control-user bold'>QUẢN LÝ NGƯỜI DÙNG</div>
-                <Link to={`new-user`}>
+                {user.isMaster&& <Link to={`new-user`}>
                     <div className='class-include-add-icon'>
                         <img className="class-icon-add-product" src={iconAdd}></img>
                         <h4 className='class-text-form-product'>Thêm Admin</h4>
                     </div>
-                </Link>
+                </Link>}
             </div>
             <div className='class-collection-user-list'>
             {listUser.length > 0 && listUser.map(item => {

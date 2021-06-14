@@ -31,6 +31,8 @@ export const userLogin = (info, setErrorResponse) => async (dispatch) => {
                     infoUser: data.user,
                     isLogged: true,
                     isAdmin: data.user.role==='ADMIN',
+                    isMaster: data.user.role==='MASTER',
+
                     token: data.token,
                 }
                 window.localStorage.setItem('token', data.token);
@@ -69,6 +71,8 @@ export const userSignup = (info, setErrorResponse) => async (dispatch) =>{
                 infoUser: data.user,
                 isLogged: true,
                 isAdmin: data.user.role==='ADMIN',
+                isMaster: data.user.role==='MASTER',
+
                 token: data.token,
             }
             window.localStorage.setItem('token', data.token);
@@ -93,6 +97,8 @@ export const userLoginGoogle = (tokenId, setErrorResponse) => async (dispatch) =
                 infoUser: data.user,
                 isLogged: true,
                 isAdmin: data.user.role==='ADMIN',
+                isMaster: data.user.role==='MASTER',
+
                 token: data.token,
             }
             window.localStorage.setItem('token', data.token);
@@ -116,6 +122,8 @@ export const userLoginFacebook = ({accessToken, userID}, setErrorResponse) => as
                 infoUser: data.user,
                 isLogged: true,
                 isAdmin: data.user.role==='ADMIN',
+                isMaster: data.user.role==='MASTER',
+
                 token: data.token,
             }
             window.localStorage.setItem('token', data.token);

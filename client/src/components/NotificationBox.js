@@ -56,7 +56,7 @@ function NotificationBox() {
                   </div>
                 )
               })}
-              <div className="viewmore-notification" onClick={() => {setDown(0); history.push('/user/notifications')}}>Xem them</div>
+              <div className="viewmore-notification" onClick={() => {setDown(0); history.push('/user/notifications')}}>Xem thêm</div>
             </div> : <NotNotification down={down} setDown={setDown} />
         }
       </div>

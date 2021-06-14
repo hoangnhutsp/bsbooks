@@ -1,0 +1,26 @@
+.NotificationEmptyInUserContainer-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(56,56,56);
+}
+
+.NotificationEmptyInUserContainer-Container-p{
+    margin-top: 2%;
+    background: #498374;
+    height: 50px;
+    width: 170px;
+    color: aliceblue;
+    font-weight: bold;
+    padding-top: 15px;
+    padding-left: 18px;
+    cursor: pointer;
+    transition: all 1s ease;
+}
+
+.NotificationEmptyInUserContainer-Container-p:hover{
+    background: #7cc0ae;
+}
+
+

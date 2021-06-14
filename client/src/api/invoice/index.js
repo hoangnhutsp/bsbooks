@@ -49,6 +49,7 @@ export const updateInvoice = (id) => {
 
 
 export const cancelInvoice = (id) => {
+    console.log(id);
     console.log('api - cancle');
     let token = localStorage.getItem('token');
     console.log('token');

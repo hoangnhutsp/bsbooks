@@ -20,7 +20,7 @@ const checkInfo = (info) => {
 
 export const getAllUser = async(req, res) => {
     try {
-        const allUser = await User.find();
+        const allUser = await User.find({role: [ "USER", "ADMIN" ]}).sort({role: 1});
         res.status(200).json(allUser)
     } catch (error) {
         res.status(200).json({message: error.message})
@@ -36,7 +36,7 @@ export const getProfileUserById = async (req, res) => {
             res.status(200).json(user);
         }
         else
-            res.sentS(400)
+            res.sentStatus(400)
     } catch (error) {
         res.status(200).json({ message: error.message })
     }
@@ -44,10 +44,12 @@ export const getProfileUserById = async (req, res) => {
 
 export const addAdmin = async (req, res) => {
     try {
+
         let info = req.body;
         if (!checkInfo(info)) {
             res.status(200).json({ status: 0, message: 'Thong tin khong hop le' })
         }
+
         let email = info.email;
 
         const find_user = await User.find({ email })
@@ -59,10 +61,7 @@ export const addAdmin = async (req, res) => {
             info.password = hashPassword;
             const newUser = new User(info);
             await newUser.save();
-
-            const token = createToken(newUser._id);
-            console.log(token)
-            res.status(200).json({ status: 1, user: newUser, token });
+            res.status(200).json({ status: 1 });
         }
     } catch (error) {
         res.sendStatus(400)

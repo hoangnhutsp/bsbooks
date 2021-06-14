@@ -78,11 +78,23 @@
     text-align: center;
     line-height: 40px;
     border-radius: 50%;
-    color: #fff;
+    color: rgb(247, 243, 243);
     transition: all 0.5s ease;
   }
+
+  .container-footer-col .social-links .fab{
+    color: aliceblue;
+
+    transition: all 0.5s ease;
+  }
+  .container-footer-col .social-links .fab:hover{
+    color: #333;
+  }
+
+
   
   .container-footer-col .social-links a:hover{
+    background-color: #5db8a0;
     color: #fff;
     background-color: #a5d8ca;
   }

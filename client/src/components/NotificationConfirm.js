@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import './NotificationConfirm.css';
 
-
+import imageNotif from './../assets/891012.png';
 
 function NotificationConfirm({title, setNotificationConfirm}) {
     const open = 1;
@@ -24,7 +24,7 @@ function NotificationConfirm({title, setNotificationConfirm}) {
                                     <h2>{title}</h2>
                                     <div className="NotificationConfirmContainer-gach-chan-thong-bao-h2"></div>
                                     <div className="NotificationConfirmContainer-notifi-item">
-                                        <img className="NotificationConfirmContainer-notifi-item-img" alt="img" src="./../assets/891012.png" />
+                                        <img className="NotificationConfirmContainer-notifi-item-img" alt="img" src={imageNotif}/>
                                         <div className="NotificationConfirmContainer-text">
                                             <p>Bạn có muốn thực hiện tao tác trên?</p>
                                         </div>
