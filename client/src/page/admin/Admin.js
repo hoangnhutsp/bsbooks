@@ -28,12 +28,14 @@ function Admin() {
     const user = useSelector(state => state.user);
     let { path } = useRouteMatch();
     const [isAdmin, setIsAdmin] = useState(0)
+    const [isMaster, setIsMaster] = useState(0)
     useEffect(() => {
         if (user.isLogged){
-            setIsAdmin(user.isAdmin)
+            setIsAdmin(user.isAdmin);
+            setIsMaster(user.isMaster);
         }
     }, [user])
-    return isAdmin?(
+    return (isAdmin||isMaster)?(
         <div className="User">
             <div className="user-usersidebar">
                 <UserSidebar />
@@ -43,9 +45,9 @@ function Admin() {
                     <Route exact path={path}>
                         <Dashboad />
                     </Route>
-                    <Route exact path={`${path}/dashboad`}>
+                    {/* <Route exact path={`${path}/dashboad`}>
                         <Dashboad />
-                    </Route>
+                    </Route> */}
 
                     <Route exact path={`${path}/products`}>
                         <ControlProduct />

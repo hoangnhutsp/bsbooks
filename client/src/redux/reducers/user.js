@@ -2,6 +2,7 @@ const initUser = {
     infoUser: null,
     isLogged: false,
     isAdmin: false,
+    isMaster: false,
     token: null || localStorage.getItem('token'),
 }
 
@@ -17,6 +18,7 @@ const User = (user = initUser, action) => {
                 infoUser: data,
                 isLogged: true,
                 isAdmin: data.role === 'ADMIN',
+                isMaster: data.role === 'MASTER',
             }
             return newProfile;
         case 'SIGNUP':

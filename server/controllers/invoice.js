@@ -87,6 +87,7 @@ export const cancelInvoice = async (req, res) => {
     console.log('CANCEL INVOICE');
     try {
         let _id = req.params.id;
+        console.log(_id);
         const invoice =await Invoice.findOneAndUpdate({_id}, {status_invoice: 4}, {new: true})
         res.status(200).json({status: 1, invoice});
     } catch (error) {

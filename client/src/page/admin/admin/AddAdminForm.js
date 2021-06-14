@@ -11,6 +11,10 @@ import {
 import {
     useHistory,
 } from 'react-router-dom'
+//api add admin
+import * as apiAdmin from '../../../api/admin'
+
+import './AddAdminForm.css'
 
 function AddAdmin() {
     const newPass = generator.generate({
@@ -23,11 +27,12 @@ function AddAdmin() {
     const [displayPass, setDisplayPass] = useState(0) 
     const [passwordInForm, setPasswordInForm] = useState('')
     const [registerData, setRegisterData] = useState({
-        phone: '',
-        name: '',
-        email: '',
+        error: '',
+        phone: '0905749010',
+        name: 'NHUTNHUT',
+        email: 'adddmiin@gmail.com',
         gender: 'male',
-        birthday: '',
+        birthday: '2000-04-04',
         password: newPass,
         role: 'ADMIN',
     })
@@ -42,24 +47,32 @@ function AddAdmin() {
         password: '',
     })
 
-    const submitHandler = (e) => {
+
+    const submitHandler = async (e) => {
         e.preventDefault();
         console.log(registerData);
-        let wr = 0;
-        for (let x in error) {
-            wr = wr || error[x] !== ''
-        }
-        if (!wr) {
-            //dispatch(userSignup(registerData, setErrRes))
-        }
+        await apiAdmin.addAdmin(registerData)
+        .then(res => res.data)
+        .then(data => {
+            console.log(data);
+            if (data.status) history.push('/admin/users');
+            else {
+                setError({...error, error: data.message})
+            }
+        })
+        .catch(err => console.log(err))
     }
 
+
     return (
+        <div className="container-register-admin-add">
+
+      
         <div className='containner-register'>
             <div className='login-signup-register'>
-                <div className='col-sm-6-register'>
+                <div className='col-sm-6-register-add-admin'>
                     <div className='article-register'>
-                        <h3 className='text-center-register'>THÊM MỚI</h3>
+                        <h3 className='text-center-register'>THÊM ADMIN</h3>
                         {(error.error === '') ? null :
                             <div>{error.error}</div>
                         }
@@ -147,23 +160,7 @@ function AddAdmin() {
                             {(displayPass == 0) ? null :
                                 <p className='error-text-register'>password: {registerData.password}</p>
                             }
-                            <div className='form-group-register'>
-                                <input name='role'
-                                    type='radio' value='ADMIN'
-                                    checked={registerData.role === 'ADMIN'}
-                                    className='gender-user'
-                                    onChange={(e) => {
-                                        setRegisterData({ ...registerData, role: e.target.value })
-                                    }} />Admin
-                                <input name='role'
-                                    type='radio'
-                                    value='SUPERADMIN'
-                                    checked={registerData.role === 'SUPERADMIN'}
-                                    className='gender-user'
-                                    onChange={(e) => {
-                                        setRegisterData({ ...registerData, role: e.target.value })
-                                    }} />SuperAdmin
-                            </div>
+                       
                             {(error.gender == '') ? null :
                                 <div className='error-text-register'>{error.gender}</div>
                             }
@@ -198,6 +195,7 @@ function AddAdmin() {
                 </div>
 
             </div>
+        </div>
         </div>
     )
 };

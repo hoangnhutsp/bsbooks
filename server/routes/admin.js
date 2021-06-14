@@ -4,11 +4,14 @@ import Authorization from '../middlewares/Authorization.js'
 
 import { 
     getAllUser, 
-    getProfileUserById
+    getProfileUserById,
+    addAdmin
 } from '../controllers/admin.js'
 
 const router = express.Router();
 
 router.get('/user', authMiddleware, Authorization, getAllUser);
-router.get('/one_user', authMiddleware, Authorization, getProfileUserById)
+router.get('/one_user', authMiddleware, Authorization, getProfileUserById);
+router.post('/add-admin', authMiddleware, Authorization, addAdmin);
+
 export default router;

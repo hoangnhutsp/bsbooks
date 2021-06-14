@@ -39,8 +39,8 @@ function EditUser() {
         console.log(infoUser)
 
         if (infoUser) {
-            infoUser.birthday = convertIOSDateToYMD(new Date(infoUser.birthday))      
-            setCurrentAvatar(infoUser.avatar);      
+            infoUser.birthday = convertIOSDateToYMD(new Date(infoUser.data.birthday))      
+            setCurrentAvatar(infoUser.data.avatar);      
             setProfile(infoUser)
         }
 
