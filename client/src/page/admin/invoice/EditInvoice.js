@@ -8,7 +8,7 @@ import * as apiInvoice from '../../../api/invoice'
 import { SocketContext } from '../../../SocketContext.js'
 
 import * as apiNotification from '../../../api/notification'
-
+import dataNotification from './dataNotification';
 function EditInvoice() {
     const socket = useContext(SocketContext)
     const [isOpenNoConfirm, setIsOpenNoConfirm] = useState(0)
@@ -30,8 +30,6 @@ function EditInvoice() {
     const [noti, setNoti] = useState({})
 
     const addNotificationSocket = async (noti) => {
-    
-        console.log(noti);
         let token = localStorage.getItem('token');
  
         await apiNotification.addNotification(noti)
@@ -52,7 +50,6 @@ function EditInvoice() {
             .then(data => {
                 if (data.status) {
                     setInvoice(data.invoice)
-
                 }
             })
             .catch(err => console.log(err));
@@ -60,16 +57,27 @@ function EditInvoice() {
 
 
     useEffect(async () => {
-        console.log('sdfasd');
         await apiInvoice.getInvoiceByID(id)
             .then(res => res.data)
             .then(data => {
                 console.log(data.invoice);
                 setInvoice(data.invoice)
-                setNoti({...noti, id_user: data.invoice.userID})
+            
             })
             .catch(err => console.log(err))
     }, [])
+
+    useEffect(() => {
+        if (invoice.userID){
+            console.log(dataNotification[invoice.status_invoice]);
+            setNoti({...noti, id_user: invoice.userID})
+            setNoti({...noti, 
+                title: dataNotification[invoice.status_invoice].title, 
+                description: dataNotification[invoice.status_invoice].description
+            })
+        }
+
+    }, [invoice])
 
     const cancelInvoicePEO = async () => {
         if (noti.title&&noti.description) {
@@ -89,7 +97,6 @@ function EditInvoice() {
     const setNotificationConfirm = val => {
         console.log(val);
         if (val === 1) {
-            console.log('ok');
             cancelInvoicePEO();
         }
         setIsOpenNoConfirm(0);

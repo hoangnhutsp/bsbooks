@@ -1,7 +1,6 @@
 //đây là thông báo khi xác nhận đơn
 
-export const dataNotification = () => {
-    const data = [{
+ const dataNotification = [{
         title: "Đơn hàng đã được xác nhận",
         description: "Đơn hàng của bạn đã được xác nhận, cảm ơn bạn đã tin tưởng và chọn BsBooks. Chúng tôi sẽ cố gắng giao hàng sớm nhất cho bạn"
     },
@@ -18,5 +17,4 @@ export const dataNotification = () => {
         description: "Đơn hàng của bạn đã bị hủy. Cảm ơn bạn đã chọn BsBooks, mong được phục vụ bạn trong thời gian tới."
     }
     ]
-    return data
-}
+    export default dataNotification
