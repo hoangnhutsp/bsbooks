@@ -43,9 +43,9 @@ function Admin() {
                     <Route exact path={path}>
                         <Dashboad />
                     </Route>
-                    <Route exact path={`${path}/dashboad`}>
+                    {/* <Route exact path={`${path}/dashboad`}>
                         <Dashboad />
-                    </Route>
+                    </Route> */}
 
                     <Route exact path={`${path}/products`}>
                         <ControlProduct />
