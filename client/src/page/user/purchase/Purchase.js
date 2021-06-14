@@ -36,7 +36,7 @@ function Purchase() {
             if (filter === 0){
                 setCurrData(fullData);
             }else{
-                let fil = filter;
+                let fil = filter - 1;
                 // if (filter<=1) {
                 //     fil = 1;
                 //     setCurrData(fullData.filter(item => item.status_invoice <= fil))

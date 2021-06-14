@@ -28,11 +28,11 @@ function AddAdmin() {
     const [passwordInForm, setPasswordInForm] = useState('')
     const [registerData, setRegisterData] = useState({
         error: '',
-        phone: '0905749010',
-        name: 'NHUTNHUT',
-        email: 'adddmiin@gmail.com',
-        gender: 'male',
-        birthday: '2000-04-04',
+        phone: '',
+        name: '',
+        email: '',
+        gender: '',
+        birthday: '',
         password: newPass,
         role: 'ADMIN',
     })
