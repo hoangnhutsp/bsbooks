@@ -5,7 +5,7 @@ import {
     useSelector, 
 } from 'react-redux';
 import {deleteNotification} from './../../../redux/actions/notification';
-
+import NotificationEmptyInUser from './../../../components/NotificationEmptyInUser';
 function Notifications() {
     const notification = useSelector(state => state.notification)
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function Notifications() {
     }
     return (
         <div>
-            <p>{`Thong bao: ${notification.notis.length}`}</p>
+            {(notification&&notification.notis.length===0)&&<NotificationEmptyInUser />}
             {
                 notification&&notification.notis.map((item) => {
                     return (

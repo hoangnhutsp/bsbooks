@@ -1,9 +1,11 @@
 import React from 'react'
 import './NotificationEmptyInUser.css';
 import iconNotificationEmptyInUser from './../assets/appointment-reminders.png';
+import { useHistory } from 'react-router-dom';
 
 
 function NotificationEmptyInUser() {
+    const history = useHistory();
     return (
     <div className='NotificationEmptyInUserContainer'>
         <div className="NotificationEmptyInUserContainer-Container">
@@ -11,7 +13,9 @@ function NotificationEmptyInUser() {
             <div className="NotificationEmptyInUserContainer-Container-wrapper">
                 <h1>Không Có Thông Báo Nào!!!</h1>
             </div>
-            <p className="NotificationEmptyInUserContainer-Container-p">Quay lại trang chủ</p>
+            <p className="NotificationEmptyInUserContainer-Container-p"
+                onClick={() => {history.push('/')}}
+            >Quay lại trang chủ</p>
         </div>
     </div>
     )

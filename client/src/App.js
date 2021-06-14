@@ -155,7 +155,7 @@ const App = () => {
           </Switch>
 
           <BackTop></BackTop>
-          <NotificationEmptyInUser></NotificationEmptyInUser>
+          {/* <NotificationEmptyInUser></NotificationEmptyInUser> */}
           <InfoTransport />
           <Footer></Footer>
         </div>
