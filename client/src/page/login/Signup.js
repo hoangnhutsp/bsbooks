@@ -83,7 +83,7 @@ function Register() {
     }
 
     const responseErrorGoogle = (res) => {
-        setErrResponse({message: res });
+        console.log(res);
     }
 
     return (

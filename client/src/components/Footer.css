@@ -60,7 +60,6 @@
     color: #333;
     text-decoration: none;
     font-weight: 300;
-    color: #333;
     display: block;
     transition: all 0.3s ease;
   }
@@ -79,12 +78,12 @@
     text-align: center;
     line-height: 40px;
     border-radius: 50%;
-    color: #333;
+    color: #fff;
     transition: all 0.5s ease;
   }
   
   .container-footer-col .social-links a:hover{
-    color: #24262b;
+    color: #fff;
     background-color: #a5d8ca;
   }
   
