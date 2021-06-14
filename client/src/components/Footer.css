@@ -60,7 +60,6 @@
     color: #333;
     text-decoration: none;
     font-weight: 300;
-    color: #333;
     display: block;
     transition: all 0.3s ease;
   }
@@ -85,6 +84,7 @@
 
   .container-footer-col .social-links .fab{
     color: aliceblue;
+
     transition: all 0.5s ease;
   }
   .container-footer-col .social-links .fab:hover{
@@ -95,6 +95,8 @@
   
   .container-footer-col .social-links a:hover{
     background-color: #5db8a0;
+    color: #fff;
+    background-color: #a5d8ca;
   }
   
   /*RESPONSIVE*/

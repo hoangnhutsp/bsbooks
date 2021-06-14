@@ -6,7 +6,7 @@ import iconCancelBill from './../../../../assets/cancel-bill-icon.png'
 import iconsImage0 from './img/hoa-don-da-cai-dat.png';
 import iconsImage1 from './img/hoa-don-da-duoc-xac-nhan.png';
 import iconsImage2 from './img/giaocho nhavanchuyen.png';
-import iconsImage3 from './img/giaothanhcong.png'
+import iconsImage3 from './img/h4.png'
 function Billstatus() {
   const history = useHistory()
   const [invoice, setInvoice] = useState()

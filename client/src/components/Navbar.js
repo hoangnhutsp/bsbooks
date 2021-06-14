@@ -14,6 +14,8 @@ import {
 import iconShoppingCart from './../icons/shopping-cart.svg'
 import NotificationBox from './NotificationBox'
 import AllCategories from './all_categories';
+
+import LogoBsBooks from './assets/logo-bsbooks.png'
 function Navbar() {
 
     const Store = useSelector(state => state);
@@ -102,7 +104,7 @@ function Navbar() {
             <div className="container-main-navbar">
                 <div className="container-navbar-brand">
                     <Link className="narbar-brand" to="/">
-                        Bsbooks
+                        BSBooks
                     </Link >
                 </div>
                 <div>

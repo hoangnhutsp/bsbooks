@@ -1,26 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,  useContext} from 'react';
 import { useState } from 'react'
 import '../../../page/user/account/Profile.css';
 import { useParams } from 'react-router-dom'
 import './EditInvoice.css'
 
 import * as apiInvoice from '../../../api/invoice'
+import { SocketContext } from '../../../SocketContext.js'
 
+import * as apiNotification from '../../../api/notification'
 
 function EditInvoice() {
-    // const statusType = (item) => {
-    //     if (item.status_invoice === 0) return ("Chờ xác nhận")
-    //     if (item.status_invoice === 1) return ("Giao cho DVVC")
-    //     if (item.status_invoice === 2) return ("Đang giao")
-    //     if (item.status_invoice === 3) return ("Đã giao")
-    //     if (item.status_invoice === 4) return ("Đã hủy")
-    // }
+    const socket = useContext(SocketContext)
+
+    const statusType = (status_invoice) => {
+        if (status_invoice === 0) return ("Chờ xác nhận")
+        if (status_invoice === 1) return ("Giao cho DVVC")
+        if (status_invoice === 2) return ("Đang giao")
+        if (status_invoice === 3) return ("Đã giao thành công")
+        if (status_invoice === 4) return ("Đã hủy")
+    }
+    const statusButton = (status_invoice) => {
+        if (status_invoice === 0) return ("Xác nhận")
+        if (status_invoice === 1) return ("Đã giao cho DVVC")
+        if (status_invoice === 2) return ("Xác nhận giao thành công")
+    }
     const { id } = useParams();
 
     const [invoice, setInvoice] = useState({})
+    const [noti, setNoti] = useState({})
+
+    const addNotificationSocket = async (noti) => {
+    
+        console.log(noti);
+        let token = localStorage.getItem('token');
+ 
+        await apiNotification.addNotification(noti)
+        .then(res => res.data)
+        .then(data => {
+             data.token = token;
+             console.log('socket addNotification');
+             socket.emit('addNotification', data)
+        })
+        .catch(err => console.log(err))
+     }
 
     const submitHanler = async e => {
         e.preventDefault();
+        await addNotificationSocket(noti)
         await apiInvoice.updateInvoice(id)
             .then(res => res.data)
             .then(data => {
@@ -32,40 +58,14 @@ function EditInvoice() {
             .catch(err => console.log(err));
     }
 
-    const [status_invoice, setStatus_invoice] = useState(0)
-    // const changeStatus = (newstatus) => {
-    //     setStatus_invoice(newstatus)
-    // }
-    const changeStatus = (item) => {
-        if (item.status_invoice === 0) {
-            return (
-                <div >
-                    <label className="admin-invoice-status-label">Giao cho DVVC</label>
-                </div>
-            )
-        }
-        if (item.status_invoice === 1) {
-            return (
-                <div >
-                    <label className="admin-invoice-status-label">Đang giao</label>
-                </div>
-            )
-        }
-        if (item.status_invoice === 2) {
-            return (
-                <div >
-                    <label className="admin-invoice-status-label">Đã giao</label>
-                </div>
-            )
-        }
-    }
+
     useEffect(async () => {
         await apiInvoice.getInvoiceByID(id)
             .then(res => res.data)
             .then(data => {
                 console.log(data.invoice);
                 setInvoice(data.invoice)
-                setStatus_invoice(data.invoice.status_invoice)
+                setNoti({...noti, id_user: data.invoice.userID})
             })
             .catch(err => console.log(err))
     }, [])
@@ -82,7 +82,12 @@ function EditInvoice() {
                     <div className="container-info-user-invoicee">
                         <table id="table-info-user-invoicee">
                             <tbody>
-
+                                <tr className="form-group-radio">
+                                    <td className="bold">Tình trạng</td>
+                                    <td>
+                                        <div className=" color-status-invoice">{statusType(invoice.status_invoice)}</div>
+                                    </td>
+                                </tr>
                                 <tr className="form-group-text">
                                     <td>Mã số hóa đơn</td>
                                     <td>
@@ -114,25 +119,27 @@ function EditInvoice() {
                                         <p>{invoice.createdAt}</p>
                                     </td>
                                 </tr>
-                                <tr className="form-group-radio">
-                                    <td>Tình trạng</td>
-                                    <td>
-                                        <div>{changeStatus(invoice)}</div>
-                                    </td>
-                                </tr>
+
                                 <tr>
-                                    <td>Danh sách sản phẩm</td>
+                                    <td>Sản phẩm</td>
                                     <td>
                                         <div>{invoice.items && invoice.items.map((item) => {
                                             return (
                                                 <div className="View-Invoice-contraiter">
                                                     <img className="control-image" src={item.image}></img>
                                                     <div className="View-Invoice-product-name">{item.name}</div>
+                                                    <div className="View-Invoice-product-quantity">x{item.quantity}</div>
+
                                                     <div className="View-Invoice-product-price">{item.price}</div>
-                                                    <div className="View-Invoice-product-quantity">{item.quantity}</div>
                                                 </div>
                                             )
                                         })}</div>
+                                    </td>
+                                </tr>
+                                <tr className="form-group-radio">
+                                    <td>Phí ship</td>
+                                    <td>
+                                        <p>{invoice.ship_price}</p>
                                     </td>
                                 </tr>
                                 <tr className="form-group-radio">
@@ -148,25 +155,43 @@ function EditInvoice() {
 
                     </div>
                 </div>
-                <div className="form-group-radio">
-                    <div>Thông báo</div>
-                    <div className="form-notification-admin-invoice-contrainer">
-                        <form>
-                            <label for="fname">Tiêu đề: </label>
-                            <input type="text" id="fname"  name="tieu de" placeholder="Nhập tiêu đề.."></input>
-                            <label for="lname">Nội dung: </label>
-                            <input type="text" id="lname" name="lastname" placeholder="Nhập nội dung.."></input>
-                        </form>
-                    </div>
-                </div>
-                <div className="button-final">
-                <button 
-                type="submit" 
-                className="button-update-product color-green" 
-                >Xác nhận</button>
-                <button type="submit" className="button-update-product color-red">Hủy đơn</button>
-                </div>
-                
+                {invoice.status_invoice < 3 &&
+                    <div>
+
+                        <div className="form-group-radio">
+                            <div className="notification-for-user">Thông báo đến người dùng</div>
+
+                            <div className="form-notification-admin-invoice-contrainer">
+                                <table>
+                                    <tr>
+
+                                        <td><label >Tiêu đề: </label></td>
+                                        <td>
+                                            <input required placeholder="Nhập tiêu đề.." className="input-notificaion-user"
+                                            onChange={(e) => setNoti({...noti, title: e.target.value})}
+                                            value={noti.title}
+
+                                        ></input></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><label>Nội dung: </label></td>
+                                        <td><input required placeholder="Nhập nội dung.." className="input-notificaion-user"
+                                        onChange={(e) => setNoti({...noti, description: e.target.value})}
+                                        value={noti.description}
+                                        ></input></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="button-final">
+                            <button
+                                type="submit"
+                                className="button-update-product color-green">{statusButton(invoice.status_invoice)}</button>
+                            <button className="button-update-product color-green-0-2 left4rem">Hủy đơn</button>
+                        </div>
+                    </div>}
 
             </form>
         </div>

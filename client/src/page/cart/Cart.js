@@ -16,7 +16,7 @@ import {
 } from 'react-router-dom'
 
 import imgEmptyCart from '../../assets/bag-empty.svg'
-
+import Breadcrumb from '../../components/Breadcrumb'
 function Cart() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -145,40 +145,54 @@ function Cart() {
         )
     }
 
-    return (productCart&&productCart.count) ? (
-        <div className='CartContainer'>
-            <div className="product-cart">
-                <h4 className="page-banner-sm">Giỏ Hàng</h4>
-                <div className="wrapper">
-                    <div className="cart-collection">
-                        <div className="cart-header">
-                            <p>Sản Phẩm</p>
-                            <p>Số Lượng</p>
-                            <p>Số Tiền</p>
-                            <p>Chọn</p>
-                            <p>Xóa</p>
+    const dataBreadcrump = [
+        {
+            name: 'Trang chủ',
+            path: '/'
+        }
+    ]
+
+    return (
+        <div>
+            <Breadcrumb breadcrumb={dataBreadcrump} title={'Giỏ hàng'}/>
+        {(productCart&&productCart.count) ? (
+            <div className='CartContainer'>
+                <div className="product-cart">
+                    <h4 className="page-banner-sm">Giỏ hàng</h4>
+                    <div className="wrapper">
+                        <div className="cart-collection">
+                            <div className="cart-header">
+                                <p>Sản Phẩm</p>
+                                <p>Số Lượng</p>
+                                <p>Số Tiền</p>
+                                <p>Chọn</p>
+                                <p>Xóa</p>
+                            </div>
+                            {
+                            productCart.items.map((item, idx) => {
+                                return (
+                                    <Item item={item} idx={idx}></Item>
+                                )
+                            })}
                         </div>
-                        {
-                        productCart.items.map((item, idx) => {
-                            return (
-                                <Item item={item} idx={idx}></Item>
-                            )
-                        })}
-                    </div>
-                    <div className="cart-total-holder">
-                        <div className="cart-total">
-                            <p>Tổng cộng</p>
-                            <p>{formatCash(String(sumPrice))}<span>đ</span></p>
-                        </div>
-                        <div className="cart-action-button">
-                            <a href="/">Tiếp tục mua sắm</a>
-                            <button className="btn-main" onClick={() => buttonCheckout()}>Thanh toán giỏ hàng</button>
+                        <div className="cart-total-holder">
+                            <div className="cart-total">
+                                <p>Tổng cộng</p>
+                                <p>{formatCash(String(sumPrice))}<span>đ</span></p>
+                            </div>
+                            <div className="cart-action-button">
+                                <a href="/">Tiếp tục mua sắm</a>
+                                <button className="btn-main" onClick={() => buttonCheckout()}>Thanh toán giỏ hàng</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        ): <CartIsEmpty />}
+
         </div>
-    ): <CartIsEmpty />;
+
+    )
 }
 
 export default Cart;

@@ -1,34 +1,32 @@
 
 import { useEffect, useState } from 'react'
-import data from './data.json' /// Data preprocessing
+import data from './data.json' 
 import _ from 'lodash'
 import './styles.css'
 import { Link, useLocation } from 'react-router-dom'
 import useOuterClick from '../../hooks/useOuterClick'
 const AllCategories = () => {
-    const [list, setList] = useState([]) // List data after clean and combine
-    const [isOpened, setIsOpened] = useState(false) // default is close
-    const [details, setDetails] = useState([])  // List detail data
+    const [list, setList] = useState([]) 
+    const [isOpened, setIsOpened] = useState(false) 
+    const [details, setDetails] = useState([])  
     const [pathname, setPathname] = useState()
     const innerRef = useOuterClick(e => {
-        setIsOpened(false) // close menu when click outside        
+        setIsOpened(false)      
     });
 
     const location = useLocation()
     useEffect(() => {
-        const combinedData = listToTree(data) // convert flat array to tree arry :D. It acttually 
-        // difficult for me :D 
-        // console.log(combinedData);
+        const combinedData = listToTree(data)  
         setList(combinedData)
     }, [])
 
     useEffect(() => {
-        setPathname(location.pathname) // Update pathname on change
+        setPathname(location.pathname) 
     }, [location.pathname])
 
     useEffect(() => {
         if (!isOpened) {
-            setDetails([]) // close details at the time close menu
+            setDetails([]) 
         }
     }, [isOpened])
 
@@ -45,11 +43,19 @@ const AllCategories = () => {
                         isOpened && <div className="item-view">
                             {
                                 list[0].children.map(item => {
+                                    console.log(item);
                                     return (
+
+                                        <div className="dddddddd">
+
+                                        <Link to={`/product/${item.id}`}>
                                         <div className="item" onMouseMove={() => { item.children && setDetails(item.children) }}>
                                             <div className="icon" />
                                             <span className={item.children ? "arrow" : ""}>{item.name}</span>
                                         </div>
+                                        </Link>
+                                        </div>
+
                                     )
                                 })
                             }
@@ -73,16 +79,11 @@ const AllCategories = () => {
 
             <div className="pull-left row">
                 <Link to='/product/1' className={pathname === "/product/1" ? "green link" : "link"}> Tất cả sách</Link>
-                {/* <Link to='/New-arrivals' className={pathname === "/New-arrivals" ? "green link" : "link"}> Sách mới</Link> */}
                 <Link to='/faq' className={pathname === "/faq" ? "green link" : "link"}> Câu hỏi</Link>
                 <Link to='/about-us' className={pathname === "/about-us" ? "green link" : "link"}> Về chúng tôi</Link>
                 <Link to='/Contact' className={pathname === "/contact" ? "green link" : "link"}>Liên hệ</Link>
             </div>
 
-            {/* <div className="phone-number pointer">
-                <i className="fas fa-phone"></i>
-                <a href="tel:0905749999">0905 749 999</a>
-            </div> */}
         </div>
     )
 }

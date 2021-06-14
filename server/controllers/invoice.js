@@ -34,7 +34,7 @@ export const updateInvoice = async (req, res) => {
         if (invoice) {
             let {status_invoice, update} = invoice;
 
-            if (status_invoice === 2){
+            if (status_invoice === 3){
                 return res.status(200).json({status: 1, invoice})
             }
             status_invoice++;
