@@ -54,7 +54,7 @@ function AddAdmin() {
                         {(error.error === '') ? null :
                             <div>{error.error}</div>
                         }
-                        <form className='signup-register' onSubmit={submitHandler}>
+                        <form className='signup-register'>
                             <div className='form-group-register'>
                                 <input
                                     type='text'
