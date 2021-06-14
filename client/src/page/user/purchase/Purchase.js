@@ -36,9 +36,15 @@ function Purchase() {
             if (filter === 0){
                 setCurrData(fullData);
             }else{
-                let fil = 0;
-                if (filter===1) fil = 0; else fil = filter;
-                setCurrData(fullData.filter(item => item.status_invoice === fil))
+                let fil = filter;
+                // if (filter<=1) {
+                //     fil = 1;
+                //     setCurrData(fullData.filter(item => item.status_invoice <= fil))
+
+                // } else {
+                    setCurrData(fullData.filter(item => item.status_invoice === fil))
+                    fil = filter;
+                // }
             }
         }
     }, [filter])

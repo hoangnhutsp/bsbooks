@@ -3,7 +3,7 @@ import { useState } from 'react'
 import '../../../page/user/account/Profile.css';
 import { useParams } from 'react-router-dom'
 import './EditInvoice.css'
-
+import NotificationConfirm from '../../../components/NotificationConfirm'
 import * as apiInvoice from '../../../api/invoice'
 import { SocketContext } from '../../../SocketContext.js'
 
@@ -11,7 +11,7 @@ import * as apiNotification from '../../../api/notification'
 
 function EditInvoice() {
     const socket = useContext(SocketContext)
-
+    const [isOpenNoConfirm, setIsOpenNoConfirm] = useState(0)
     const statusType = (status_invoice) => {
         if (status_invoice === 0) return ("Chờ xác nhận")
         if (status_invoice === 1) return ("Giao cho DVVC")
@@ -60,6 +60,7 @@ function EditInvoice() {
 
 
     useEffect(async () => {
+        console.log('sdfasd');
         await apiInvoice.getInvoiceByID(id)
             .then(res => res.data)
             .then(data => {
@@ -69,8 +70,33 @@ function EditInvoice() {
             })
             .catch(err => console.log(err))
     }, [])
+
+    const cancelInvoicePEO = async () => {
+        if (noti.title&&noti.description) {
+            console.log('HUY DON HANG');
+            await addNotificationSocket(noti);
+            await apiInvoice.cancelInvoice(invoice._id)
+            .then(res => res.data)
+            .then(data => {
+                console.log('data - huuy don hang');
+                setInvoice(data.invoice)
+            })
+            .catch(er => console.log(er))
+
+        }
+    }
+
+    const setNotificationConfirm = val => {
+        console.log(val);
+        if (val === 1) {
+            console.log('ok');
+            cancelInvoicePEO();
+        }
+        setIsOpenNoConfirm(0);
+    }
     return invoice && (
         <div className="container-user-invoicee">
+            {isOpenNoConfirm===1&& <NotificationConfirm title={'Bạn có muốn hủy đơn hàng?'} setNotificationConfirm={setNotificationConfirm}/>}
             <div className="user-title">
                 <h1>Chi tiết hóa đơn của mã số hóa đơn {invoice._id}</h1>
                 <p>Quản lý thông tin hóa đơn để bảo mật tài khoản </p>
@@ -189,11 +215,12 @@ function EditInvoice() {
                             <button
                                 type="submit"
                                 className="button-update-product color-green">{statusButton(invoice.status_invoice)}</button>
-                            <button className="button-update-product color-green-0-2 left4rem">Hủy đơn</button>
                         </div>
                     </div>}
 
             </form>
+            {invoice.status_invoice < 3&&<button className="button-update-product color-green-0-2 left4rem" onClick={() => setIsOpenNoConfirm(1)}>Hủy đơn</button>}
+
         </div>
 
     )

@@ -32,7 +32,8 @@ function ItemPurchase({ invoiceData }) {
         <div className="container-item-purchase">
          
                 <div className="status-item-purchase">
-                    {typeOfPurchase[invoice.status_invoice]}
+                    {typeOfPurchase[Math.max(invoice.status_invoice, 1)]}
+                   
                 </div>
             <br />
             {invoice.items.map((val, key) => {
