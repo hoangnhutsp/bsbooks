@@ -122,3 +122,22 @@
     border-radius: 50%;
     margin-right: 0.5rem;
 }
+
+.control-role-user-in-control-admin{
+    width: 15%;
+}
+.control-email-user-admin-user{
+    width: 40%;
+}
+
+.contro-edit-view-user-in-admin{
+    width: 20%;
+    justify-content: right;
+    float: right;
+}
+
+.contro-edit-user-in-admin{
+    width: 20%;
+    justify-content: right;
+    float: right;
+}

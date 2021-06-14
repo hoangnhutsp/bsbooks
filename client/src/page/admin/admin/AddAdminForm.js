@@ -11,6 +11,8 @@ import {
 import {
     useHistory,
 } from 'react-router-dom'
+//api add admin
+import * as apiAdmin from '../../../api/admin'
 
 function AddAdmin() {
     const newPass = generator.generate({
@@ -42,17 +44,6 @@ function AddAdmin() {
         password: '',
     })
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        console.log(registerData);
-        let wr = 0;
-        for (let x in error) {
-            wr = wr || error[x] !== ''
-        }
-        if (!wr) {
-            //dispatch(userSignup(registerData, setErrRes))
-        }
-    }
 
     return (
         <div className='containner-register'>

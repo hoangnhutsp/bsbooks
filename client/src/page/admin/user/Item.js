@@ -30,21 +30,19 @@ const Item = (item) => {
                     <img alt="avatar user" className="admin-user-avatar" src={item.item.avatar} />
                 </div>
                 <p className="control-name-admin-user">{item.item.name}</p>
-                <p className="control-price-sm-admin-user">{item.item.email}</p>
+                <p className="control-email-user-admin-user">{item.item.email}</p>
+                <p className='control-role-user-in-control-admin'>{item.item.role}</p>
                 {/* <small>x {item.count}</small> */}
                 <div className="control-edit-container-admin-user">
 
                     <Link to={`users/${item.item._id}`}>
-                        <img className="contro-edit-admin-user" src={iconView}></img>
+                        <img className="contro-edit-view-user-in-admin" src={iconView}></img>
                     </Link>
 
                     <Link to={`edit-users/${item.item._id}`}>
-                        <img className="contro-edit-admin-user" src={iconEdit}></img>
+                        <img className="contro-edit-user-in-admin" src={iconEdit}></img>
                     </Link>
 
-                    <button className='control-remove-admin-user' onClick={() => setDataUserDelete(item.item._id)}>
-                        <img className="control-delete-admin-user" src={iconDelete}></img>
-                    </button>
                 </div>
             </div>
         </div>
