@@ -42,9 +42,9 @@ const Item = (item) => {
                         <img className="contro-edit-admin-user" src={iconEdit}></img>
                     </Link>
 
-                    <button className='control-remove-admin-user' onClick={() => setDataUserDelete(item.item._id)}>
+                    {/* <button className='control-remove-admin-user' onClick={() => setDataUserDelete(item.item._id)}>
                         <img className="control-delete-admin-user" src={iconDelete}></img>
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>
