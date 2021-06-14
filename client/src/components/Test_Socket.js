@@ -22,7 +22,7 @@ function TestSocket() {
     const Submit = async () => {
        // console.log(data);
        const noti = {
-        id_user : user.infoUser._id,
+        id_user : '60c63cc27a891942862ace57',
         title: "NHUTNHUT la socket HIHI",
         description: "Day la noi dung socket",
        }

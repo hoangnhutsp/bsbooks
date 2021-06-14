@@ -9,19 +9,12 @@
     background-color: #498374;
     border: #498374;
 }
-.color-red{
-    background-color: #c5113e;
-    border: #c5113e;
-}
-.color-red:hover{
-    background-color: #d64066;
 
-}
 .button-update-product:hover{
     background-color: #559483;
 }
 tr td {
-    padding: 1rem 0;
+    padding: 1rem 0rem;
 }
 .admin-invoice-status-label{
     padding-right: 20%;
@@ -48,4 +41,31 @@ tr td {
     justify-content: center;
    width: 80%;
    padding-left: 20%;
+}
+
+.notification-for-user{
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.input-notificaion-user {
+    outline: none;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+}
+
+.margtop-1rem{
+    margin-top: 0rem !important;
+}
+.color-green-0-2{
+    background-color: #254b41d5;
+    border: none;
+}
+.left4rem{
+    margin-left: 6rem;
+}
+
+.color-status-invoice{
+    color: #498374;
+    font-size: 1.2rem;
 }

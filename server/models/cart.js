@@ -10,7 +10,6 @@ const cartSchema = mongoose.Schema({
             quantity: Number,
             name: String,
             price: Number,
-            checked: Boolean,
             image: String,
             checked: {
                 type: Boolean,

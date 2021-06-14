@@ -51,13 +51,13 @@ function NotificationBox() {
                     <img alt="img" src={val.image} />
                     <div className="NotificationContainer-text">
                       <h4>{val.title}</h4>
-                      <p>{val.description}</p>
+                      <p >{val.description}</p>
                     </div>
                   </div>
                 )
               })}
               <div className="viewmore-notification" onClick={() => {setDown(0); history.push('/user/notifications')}}>Xem them</div>
-            </div> : <NotNotification />
+            </div> : <NotNotification down={down} setDown={setDown} />
         }
       </div>
     )

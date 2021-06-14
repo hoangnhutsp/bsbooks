@@ -14,50 +14,10 @@ import {
 } from '../../redux/actions/cart';
 
 import * as apiInvoice from '../../api/invoice'
+import * as apiAddress from '../../api/address'
 
 function Checkout() {
-  //data ảo về địa chỉ
-  const addr = [{
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "Thành phố Hồ Chí Minh",
-    name: "An Nhiên",
-    email: "annhien@gmail.com",
-    phone: "0945362763",
-    is_default: 1
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "ĐB",
-    name: "An Nhiên",
-    email: "annhien@gmail.com",
-    phone: "0945362764",
-    is_default: 0
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "ĐT",
-    name: "An Nhiên",
-    email: "annhien@gmail.com",
-    phone: "0945369765",
-    is_default: 0
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "ĐN",
-    name: "An Nhiên",
-    email: "annhien@gmail.com",
-    phone: "0945362766",
-    is_default: 0
-  },
-  {
-    id_user: "60c2668bfb6e0089781ea2b8",
-    address: "QT",
-    name: "An Nhiên",
-    email: "annhien@gmail.com",
-    phone: "0945362767",
-    is_default: 0
-  }
-  ]
+  
 
   const store = useSelector(state => state);
   const history = useHistory();
@@ -67,16 +27,32 @@ function Checkout() {
   const [cart, setCart] = useState()
   const [isLogged, setIsLogged] = useState(-1)
   const [total, setTotal] = useState(0)
-  const [addressList, setAddressList] = useState(addr)
-  const addressDefaul = addressList.filter(item => item.is_default === 1)
-  const addressNotDefaul = addressList.filter(item => item.is_default === 0)
-  const [dataAddress, setDataAddress] = useState(addressDefaul[0])
+  const [addressList, setAddressList] = useState([])
+  // const addressDefaul = addressList.filter(item => item.is_default === 1)
+  // const addressNotDefaul = addressList.filter(item => item.is_default === 0)
+  const [dataAddress, setDataAddress] = useState([])
 
-//cập nhật lại số điện thoại
+  useEffect(() => {
+    apiAddress.getAddress()
+    .then(res => res.data)
+    .then(data => {
+        setAddressList(data.result)
+        if (data.result.length === 0) {
+          setDataAddress({
+            address: '',
+            phone: '',
+            name: '',
+          })
+        }
+        else setDataAddress(data.result[0])
+    })
+    .catch(err => console.log(err))
+}, [])
+  //cập nhật lại số điện thoại
   const changeAddress = (addre) => {
     let data = addressList.filter(item => item.address === addre)
-    let phone = data[0].phone
-    return phone;
+    let dataUpdate = data[0]
+    return dataUpdate;
   }
 
   useEffect(() => {
@@ -119,16 +95,15 @@ function Checkout() {
     console.log('btn checkout');
 
     let invoice = {}
-    invoice.name = infoUser.name;
-    invoice.address = infoUser.address;
-    invoice.email = infoUser.email;
-    invoice.phone = infoUser.phone;
+    invoice.name = dataAddress.name;
+    invoice.address = dataAddress.address;
+    invoice.email = dataAddress.email;
+    invoice.phone = dataAddress.phone;
     invoice.total = total;
-
     if (payment) invoice.ship_price = 30000; else invoice.ship_price = 12000
     invoice.sum_price = invoice.total - invoice.ship_price;
-    invoice.items = cart.items.filter(item => item.checked === 1)
-    let newItems = cart.items.filter(item => item.checked === 0)
+    invoice.items = cart.items.filter(item => item.checked == 1)
+    let newItems = cart.items.filter(item => item.checked == 0)
 
     dispatch(updateCart({ items: newItems, count: newItems.length }));
 
@@ -156,12 +131,6 @@ function Checkout() {
               <div className="CheckoutContainer-row">
                 <div className="col-58">
                   <h3 className="h3-checkout">Thông tin địa chỉ</h3>
-                  <label for="fname"><i className="fa fa-user"></i><span className="icon-kc">Họ và Tên</span></label>
-                  <input className="input-checkout" type="text" id="fname" name="firstname" readOnly value={infoUser.name} />
-
-                  <label for="email"><i className="fa fa-envelope"></i><span className="icon-kc">Email</span></label>
-                  <input className="input-checkout" type="text" id="email" name="email" readOnly value={infoUser.email} />
-
                   <label for="adr"><i className="fa fa-home"></i><span className="icon-kc">Địa chỉ</span></label>
                   {/* <input className="input-checkout" type="text" id="adr" name="address" value={infoUser.address} /> */}
                   <select
@@ -171,16 +140,26 @@ function Checkout() {
                     value={dataAddress.address}
                     onChange={e => {
                       //changeAddress(e.target.value);
-                      setDataAddress({...dataAddress, address: e.target.value, phone: changeAddress(e.target.value)})}}
+                      setDataAddress({ ...dataAddress, address: e.target.value, phone: changeAddress(e.target.value).phone, name: changeAddress(e.target.value).name })
+                    }}
                   >
-                    <option value={addressDefaul[0].address}>{addressDefaul[0].address}</option>
-                    {addressNotDefaul.map(item => {
+                    {/* {addressList.length>0&&<option value={addressList[0].address}>{addressList[0].address}</option>} */}
+                    {(addressList.length>0)&&addressList.map(item => {
                       return <option value={item.address}>{item.address}</option>
                     })}
                   </select>
+                  <label for="fname"><i className="fa fa-user"></i><span className="icon-kc">Họ và Tên</span></label>
+                  <input className="input-checkout"
+                    type="text" id="fname"
+                    name="firstname"
+                    value={dataAddress.name}
+                    onChange={(e) => { setDataAddress({ ...dataAddress, name: e.target.value }) }} />
 
                   <label for="city"><i className="fa fa-mobile-alt"></i><span className="icon-kc">Số điện thoại</span></label>
-                  <input className="input-checkout" type="text" id="phone" name="phone" value={dataAddress.phone} readOnly />
+                  <input className="input-checkout"
+                    type="text" id="phone"
+                    name="phone" value={dataAddress.phone}
+                    onChange={(e) => { setDataAddress({ ...dataAddress, phone: e.target.value }) }} />
                 </div>
                 <label>
                   <input type="checkbox" name="sameadr" onChange={() => clickShip(payment)} />Giao hàng nhanh trong vòng 2 giờ

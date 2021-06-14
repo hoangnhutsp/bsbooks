@@ -5,9 +5,6 @@ import './Home.css'
 // api
 import  {getProductLists} from '../api/product/product_list'
 // custom component
-import Rate from '../components/rate'
-import Item from '../components/item'
-
 
 import ProductListCategory from '../components/product_list/ProductListCategory'
 //

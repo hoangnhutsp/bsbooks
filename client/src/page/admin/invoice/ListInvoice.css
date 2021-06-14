@@ -55,11 +55,14 @@
     padding-left: 19%;
 }
 
-.Invoice-cancel span {
-    font-weight: 1000;
-}
 .Invoice-cancel:hover, .Invoice-View:hover, .Invoice-Edit:hover  {
-    font-weight: 1000;
     color: red;
    
+}
+.row-center-50vh {
+    display: flex;
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
 }

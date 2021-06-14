@@ -8,18 +8,21 @@ import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumb.css'
 import iconHomepage from './../icons/home_page.svg'
 function Breadcrumb( {breadcrumb, title}) {
-
     const [data, setData] = useState([]);
     useEffect(() => {
         setData(breadcrumb)
     }, [breadcrumb])
 
-    return data?(
+    const nameTitle = (text) => {
+        if (text.length > 30) return text.slice(0, 30) + ' ...';
+        return text;
+    }
+    return breadcrumb?(
         <div className='breadcrumb-block'>
             {/* <img src={iconHomepage} className="img-size-icons-home"/> */}
 
             <ul className='mz-breadcrumb-block__list'>
-                {data.map((pa, idx) => {
+                {breadcrumb.map((pa, idx) => {
                     let name = pa.name + '  /'
 
                     console.log(pa.path);
@@ -30,7 +33,7 @@ function Breadcrumb( {breadcrumb, title}) {
                         </div>
                     </li>)
                 })}
-                <li className="title-breadcrum">{title}</li>
+                <li className="title-breadcrum">{nameTitle(title)}</li>
 
             </ul>
         </div>
