@@ -90,7 +90,7 @@ function Product() {
                     <div className="col-12">
                         <br></br>
                         <p className="big-text bold">Thông tin chung:</p>
-                        {data.specifications[0].attributes&&data.specifications[0].attributes.map(item => {
+                        {data.specifications.length>0&&data.specifications[0].attributes&&data.specifications[0].attributes.map(item => {
                             return (
                                 <div>
                                     <p>{item.name} : {item.value}</p>
