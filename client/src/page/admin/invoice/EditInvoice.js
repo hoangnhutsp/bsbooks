@@ -75,7 +75,7 @@ function EditInvoice() {
                 <h1>Chi tiết hóa đơn của mã số hóa đơn {invoice._id}</h1>
                 <p>Quản lý thông tin hóa đơn để bảo mật tài khoản </p>
             </div>
-            <hr />
+            <div className="underline-container-user-invoicee"></div>
 
             <form onSubmit={submitHanler} className="form-display-user-invoicee">
                 <div className="form-user-invoicee">

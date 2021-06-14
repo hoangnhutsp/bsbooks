@@ -52,5 +52,17 @@
 }
 
 .text-alllllll{
-    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    padding-top: 14px;
+    padding-left: 19px;
+    background: #498374;
+    height: 45px;
+    width: 100px;
+    margin-left: 33%;
+    transition: all 1s ease;
+}
+
+.text-alllllll:hover{
+    background-color: #6ec7af;
 }

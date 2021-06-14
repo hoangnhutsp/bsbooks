@@ -55,9 +55,20 @@
     padding-left: 19%;
 }
 
-.Invoice-cancel:hover, .Invoice-View:hover, .Invoice-Edit:hover  {
+.Invoice-cancel:hover, .Invoice-View:hover  {
     color: red;
    
+}
+
+.Invoice-Edit{
+    font-weight: bold;
+    text-decoration: none;
+    color: #387263;
+    transition: all 0.7s ease;
+}
+
+.Invoice-Edit:hover{
+    color: #6fccb3;
 }
 .row-center-50vh {
     display: flex;

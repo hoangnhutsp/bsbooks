@@ -15,7 +15,7 @@
     color: white;
 }
 
-.NotificationConfirmContainer-join-yes input{
+.NotificationConfirmContainer-join-yes input[type="button"]{
     background: #498374;
     height: 40px;
     width: 90px;
@@ -23,7 +23,7 @@
     cursor: pointer;
 }
 
-.NotificationConfirmContainer-join-no input{
+.NotificationConfirmContainer-join-no input[type="button"]{
     background: #333;
     color: white;
     height: 40px;
@@ -31,11 +31,11 @@
     cursor: pointer;
 }
 
-.NotificationConfirmContainer-join-yes input:hover{
+.NotificationConfirmContainer-join-yes input[type="button"]:hover{
     background-color: #559483;
 }
 
-.NotificationConfirmContainer-join-no input:hover{
+.NotificationConfirmContainer-join-no input[type="button"]:hover{
     background-color: rgb(75, 75, 75);
 }
 

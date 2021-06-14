@@ -144,7 +144,7 @@ const AddProduct = () => {
                         <div className='main-img-view'>
                             <img alt='product' className="main-img" src={image} />
                             <br></br>
-                            <div className='button-upload-image-product'>
+                            <div className='button-upload-image-product-add-product'>
                                 <input type="file" id="upload-image" name="upload-image" onChange={uploadImage} />
                                 <label htmlFor="upload-image">Chọn Ảnh</label>
                             </div>
