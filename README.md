@@ -51,5 +51,11 @@ Chú ý: Front chạy trên : http://localhost:3000/
    ```shell
    py insert_data.py
    ```
+6. Thêm dữ liệu vào database tại /bsbooks/data/permission chạy command sau:  
+   ```shell
+   py install_permission.py
+   ```
+
+
 
 
