@@ -43,7 +43,7 @@ function Admin() {
             <div className="user-content">
                 <Switch>
                     <Route exact path={path}>
-                        <Dashboad />
+                        <ControlProduct />
                     </Route>
                     {/* <Route exact path={`${path}/dashboad`}>
                         <Dashboad />

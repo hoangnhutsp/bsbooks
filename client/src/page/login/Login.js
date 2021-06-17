@@ -34,6 +34,7 @@ function Login() {
 
 
     const setErrorResponse = err => {
+        console.log(err);
         if (err.status) history.push('/'); else
             setErrResponse(err.message);
     }
@@ -92,6 +93,7 @@ function Login() {
                         <form className='signup-register' onSubmit={submitHandler}>
                             <div className='form-group-register'>
                                 <input type='email'
+                                    id='email_login'
                                     className='form-control-register'
                                     placeholder='Địa chỉ Email'
                                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
@@ -113,6 +115,7 @@ function Login() {
 
                             <div className='form-group-register'>
                                 <input type='password'
+                                    id='password_login'
                                     className='form-control-register'
                                     placeholder='Mật khẩu'
                                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}

@@ -31,11 +31,21 @@ function NotificationBox() {
 
   const [needUpdate, setNeedUpdate] = useState(0)
   useEffect(() => {
-    if (needUpdate === 2) dispatch(updateStatus())
+    console.log(needUpdate);
+    if (needUpdate == 2) {
+      dispatch(updateStatus())
+      setNeedUpdate(0);
+    }
   }, [needUpdate])
   useEffect(() => {
+    console.log(down);
     if (down || needUpdate) setNeedUpdate(needUpdate+1);
   }, [down])
+
+  const sliceDes = (text) => {
+      if (text.length < 50) return text;
+      return text.slice(0, 50) + ' ...';
+  }
 
   const NotifiForm = () => {
 
@@ -51,7 +61,7 @@ function NotificationBox() {
                     <img alt="img" src={val.image} />
                     <div className="NotificationContainer-text">
                       <h4>{val.title}</h4>
-                      <p >{val.description}</p>
+                      <p >{sliceDes(val.description)}</p>
                     </div>
                   </div>
                 )

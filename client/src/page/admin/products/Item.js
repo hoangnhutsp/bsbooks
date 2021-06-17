@@ -42,7 +42,7 @@ const Item = (item) => {
                     </button>
                 </div>
             </div>
-            {(open===1)?<NotifacationConfirm title={'Bạn có muốn xóa xản phẩm này không ?'}  setNotificationConfirm={setNotificationConfirm}/>:null}
+            {(open===1)?<NotifacationConfirm title={'Bạn có muốn xóa sản phẩm ?'}  setNotificationConfirm={setNotificationConfirm}/>:null}
         </div>
     )
 }
