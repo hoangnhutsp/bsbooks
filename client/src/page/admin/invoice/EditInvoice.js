@@ -233,7 +233,7 @@ function EditInvoice() {
                     </div>}
 
             </form>
-            {invoice.status_invoice < 3&&<button className="button-update-product color-green-0-2 left4rem" onClick={() => setIsOpenNoConfirm(1)}>Hủy đơn</button>}
+            {invoice.status_invoice < 3&&<button className="button-update-product-edit-invoice" onClick={() => setIsOpenNoConfirm(1)}>Hủy đơn</button>}
 
         </div>
 
